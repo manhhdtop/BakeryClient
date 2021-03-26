@@ -4,7 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry, timeout } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UrlConstant } from '../constants/url.class';
-import { AppConfigService } from '../../../app-config.service';
+import { AppConfigService } from '../../service/app-config.service';
 
 export const DEFAULT_TIMEOUT = new InjectionToken<number>('Value default time-out');
 
@@ -38,6 +38,10 @@ export class ErrorInterceptor implements HttpInterceptor {
           return throwError(error);
         } else if (error.status === 404) {
           this.router.navigate([UrlConstant.PAGE_NOT_FOUND]);
+          return throwError(error);
+        } else if (error.status === 500) {
+          this.router.navigate([UrlConstant.INTERNAL_SERVER_ERROR]);
+          return throwError(error);
         }
         return throwError(error);
       })

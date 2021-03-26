@@ -7,8 +7,7 @@ import { PageNotFoundComponent } from './components/error/page-not-found/page-no
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/',
-    pathMatch: 'full'
+    loadChildren: () => import('./components/master-page/master-page.module').then(m => m.MasterPageModule),
   },
   // Error handler
   {path: 'internal-server-error', component: InternalServerErrorComponent},

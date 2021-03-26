@@ -1,16 +1,16 @@
 import {Component, OnInit} from '@angular/core';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
-  templateUrl: './page-not-found.component.html',
-  styleUrls: ['./page-not-found.component.css']
+  templateUrl: './internal-server-error.component.html',
+  styleUrls: ['./internal-server-error.component.css']
 })
-export class PageNotFoundComponent implements OnInit {
+export class InternalServerErrorComponent implements OnInit {
 
-  constructor() {
+  constructor(private routerLink: Router) {
   }
 
   ngOnInit(): void {
   }
-
 }

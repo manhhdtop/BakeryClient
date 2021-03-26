@@ -1,16 +1,17 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
-import {AppConfigService} from '../../../app-config.service';
 import {Constant} from '../constants/constant.class';
+import {AppConfigService} from '../../service/app-config.service';
 
 @Injectable()
 export class BaseService {
 
-  constructor(
-    public httpClient: HttpClient,
-    protected configService: AppConfigService
-  ) {
+  constructor(public httpClient: HttpClient, protected configService: AppConfigService) {
+  }
+
+  private static getToken(): string {
+    return localStorage.getItem(Constant.TOKEN);
   }
 
   get(url: string, params?: {}, responseType?: string, timeout?: number): Observable<any> {
@@ -41,7 +42,7 @@ export class BaseService {
     }
   }
 
-  async getWithAsync(url: string, params?: {}, responseType?: string) {
+  async getWithAsync(url: string, params?: {}, responseType?: string): Promise<any> {
     switch (responseType) {
       case 'text':
         return await this.httpClient.get(this.configService.getConfig().api.baseUrl + url, {
@@ -144,17 +145,13 @@ export class BaseService {
     }
   }
 
-  public createHeaders(timeout?: number) {
+  public createHeaders(timeout?: number): HttpHeaders {
     // Why "authorization": see CustomLogoutSuccessHandler on server
     if (timeout) {
-      return new HttpHeaders().set('Authorization', 'Bearer ' + this.getToken()).set('timeout', timeout.toString());
+      return new HttpHeaders().set('Authorization', 'Bearer ' + BaseService.getToken()).set('timeout', timeout.toString());
     } else {
-      return new HttpHeaders().set('Authorization', 'Bearer ' + this.getToken());
+      return new HttpHeaders().set('Authorization', 'Bearer ' + BaseService.getToken());
     }
-  }
-
-  private getToken() {
-    return localStorage.getItem(Constant.TOKEN);
   }
 
 }
