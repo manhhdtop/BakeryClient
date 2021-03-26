@@ -1,0 +1,13 @@
+{
+  "api": {
+    "baseUrl": "http://localhost:8080"
+  },
+  "pageSize": [
+    10,
+    50,
+    100
+  ],
+  "page": 1,
+  "defaultPage": 10,
+  "timeoutApi": 60000
+}

@@ -1,0 +1,8 @@
+{
+  "username_login": "Username...",
+  "username_login_required": "Username can not blank",
+  "password_login": "Password...",
+  "password_login_required": "Password can not blank",
+  "sign_in": "Login",
+  "login_failed": "Username or password is incorrect"
+}

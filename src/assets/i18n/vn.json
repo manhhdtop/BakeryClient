@@ -1,0 +1,8 @@
+{
+  "username_login": "Tên đăng nhập...",
+  "username_login_required": "Tên đăng nhập không được để trống",
+  "password_login": "Mật khẩu...",
+  "password_login_required": "Mật khẩu không được để trống",
+  "sign_in": "Đăng nhập",
+  "login_failed": "Tên đăng nhập hoặc mật khẩu không chính xác"
+}
