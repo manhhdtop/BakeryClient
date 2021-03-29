@@ -1,8 +1,18 @@
 {
-  "username_login": "Username...",
-  "username_login_required": "Username can not blank",
-  "password_login": "Password...",
-  "password_login_required": "Password can not blank",
-  "sign_in": "Login",
-  "login_failed": "Username or password is incorrect"
+  "logo_text": "ThaoThao' Bakery",
+  "address": "Ngo Xuan Quang, Trau Quy, Gia Lam, Ha Noi",
+  "login_page": {
+    "username": "Username...",
+    "username_required": "Username can not be blank",
+    "password": "Password...",
+    "password_required": "Password can not be blank",
+    "sign_in": "Login",
+    "login_failed": "Username or password is incorrect"
+  },
+  "menu": {
+    "home": {
+      "title": "ThaoThao' Bakery",
+      "name": "Home"
+    }
+  }
 }

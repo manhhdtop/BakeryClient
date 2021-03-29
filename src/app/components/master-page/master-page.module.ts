@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { MasterPageRoutingModule } from './master-page-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -13,11 +14,12 @@ import { MasterPageRoutingModule } from './master-page-routing.module';
     MasterPageComponent,
     FooterComponent,
   ],
-  imports: [
-    CommonModule,
-    MasterPageRoutingModule,
-    RouterModule,
-  ],
+    imports: [
+        CommonModule,
+        MasterPageRoutingModule,
+        RouterModule,
+        TranslateModule,
+    ],
 })
 export class MasterPageModule {
 }

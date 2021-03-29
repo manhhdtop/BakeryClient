@@ -11,6 +11,7 @@ import { MasterPageModule } from './components/master-page/master-page.module';
 import { AuthComponent } from './components/auth/auth.component';
 import { HeaderComponent } from './components/master-page/header/header.component';
 import { AdminMasterPageComponent } from './components/admin/admin-master-page/admin-master-page.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AdminMasterPageComponent } from './components/admin/admin-master-page/a
     InternalServerErrorComponent,
     PageNotFoundComponent,
     AdminMasterPageComponent,
+    HomeComponent,
   ],
   imports: [
     AppRoutingModule,

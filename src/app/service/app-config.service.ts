@@ -1,9 +1,9 @@
-import {platformBrowserDynamic} from '@angular/platform-browser-dynamic';
-import {CompilerOptions, Injectable, NgModuleRef, Type} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {throwError} from 'rxjs';
-import {AppConsts} from '../shared/appConsts';
-import {environment} from '../../environments/environment';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { CompilerOptions, Injectable, NgModuleRef, Type } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
+import { AppConsts } from '../shared/appConsts';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AppConfigService {
@@ -22,13 +22,13 @@ export class AppConfigService {
   * Loads the environment config file first. Reads the environment variable from the file
   * and based on that loads the appropriate configuration file - development or production
   */
-  load() {
+  load(): Promise<any> {
     return new Promise((resolve, reject) => {
       const options = {
-        headers: {Accept: 'application/json', 'Content-Type': 'application/json', DataType: 'application/json'}
+        headers: {Accept: 'application/json', 'Content-Type': 'application/json', DataType: 'application/json'},
       };
       this.env = {
-        env: environment.env
+        env: environment.env,
       };
       this.http.get(`./assets/config/${environment.env}.json`, options)
         .subscribe((data: any) => {
@@ -55,7 +55,7 @@ export class AppConfigService {
   /**
    * Returns environment variable based on given key
    *
-   * @param key
+   * @param key key
    */
   getEnv = (key: any) => {
     return this.env[key];

@@ -1,8 +1,18 @@
 {
-  "username_login": "Tên đăng nhập...",
-  "username_login_required": "Tên đăng nhập không được để trống",
-  "password_login": "Mật khẩu...",
-  "password_login_required": "Mật khẩu không được để trống",
-  "sign_in": "Đăng nhập",
-  "login_failed": "Tên đăng nhập hoặc mật khẩu không chính xác"
+  "logo_text": "Thảo Thảo Bakery",
+  "address": "Ngô Xuân Quảng, Trâu Quỳ, Gia Lâm, Hà Nội",
+  "login_page": {
+    "username": "Tên đăng nhập...",
+    "username_required": "Tên đăng nhập không được để trống",
+    "password": "Mật khẩu...",
+    "password_required": "Mật khẩu không được để trống",
+    "sign_in": "Đăng nhập",
+    "login_failed": "Tên đăng nhập hoặc mật khẩu không chính xác"
+  },
+  "menu": {
+    "home": {
+      "title": "Thảo Thảo Bakery",
+      "name": "Trang chủ"
+    }
+  }
 }

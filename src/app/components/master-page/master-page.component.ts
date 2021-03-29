@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Title } from '@angular/platform-browser';
+import { TranslateService } from '@ngx-translate/core';
+import { Utils } from '../../shared/util/utils';
 
 @Component({
   selector: 'app-master-page',
@@ -7,10 +11,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MasterPageComponent implements OnInit {
 
-  constructor() {
+  pageName: string;
+
+  constructor(
+    private activeRoute: ActivatedRoute,
+    private titleService: Title,
+    private translate: TranslateService,
+  ) {
+
   }
 
   ngOnInit(): void {
+    this.translate.get(Utils.getPageTitle(this.activeRoute)).subscribe(e => {
+      this.titleService.setTitle(e);
+    });
   }
 
 }
