@@ -1,5 +1,5 @@
 {
-  "logo_text": "Thảo Thảo Bakery",
+  "logo_text": "Bakery",
   "address": "Ngô Xuân Quảng, Trâu Quỳ, Gia Lâm, Hà Nội",
   "login_page": {
     "username": "Tên đăng nhập...",
@@ -9,9 +9,16 @@
     "sign_in": "Đăng nhập",
     "login_failed": "Tên đăng nhập hoặc mật khẩu không chính xác"
   },
+  "cart": {
+    "title": "Giỏ hàng",
+    "amount": " sản phẩm trong giỏ hàng",
+    "total": "Tổng cộng",
+    "btn_view_cart": "Xem giỏ hàng",
+    "btn_checkout": "Thanh toán"
+  },
   "menu": {
     "home": {
-      "title": "Thảo Thảo Bakery",
+      "title": "Bakery",
       "name": "Trang chủ"
     }
   }

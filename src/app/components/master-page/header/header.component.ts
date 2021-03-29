@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-header',
@@ -9,19 +10,43 @@ import { FormGroup } from '@angular/forms';
 })
 export class HeaderComponent implements OnInit {
   formSearch: FormGroup;
+  fb: FormBuilder;
+  searching: boolean;
+  itemAmount: number;
 
-  constructor() {
+  constructor(private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
+    this.searching = false;
+    this.itemAmount = 2;
+    this.formSearch = this.fb.group({
+      keyword: new FormControl(),
+    });
+  }
+
+  open(content): void {
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+      console.log('Closed with: ', result);
+    }, (reason) => {
+      console.log('Dismissed: ', reason);
+    });
   }
 
   openSearch(): void {
-    $('body').toggleClass('search__box__show__hide');
+    this.searching = !this.searching;
   }
 
-  toggleCart(): void {
-    $('.shopping__cart').toggleClass('shopping__cart__on');
-    $('.body__overlay').toggleClass('is-visible');
+  onSearch($event): void {
+    $event.preventDefault();
+    console.log($event);
+  }
+
+  viewCart(): void {
+    console.log('View Cart');
+  }
+
+  checkout(): void {
+    console.log('Checkout');
   }
 }

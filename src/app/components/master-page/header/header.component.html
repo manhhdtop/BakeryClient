@@ -117,8 +117,10 @@
         <!-- End MAinmenu Ares -->
         <div class="col-md-2 col-sm-4 col-xs-3">
           <ul class="menu-extra">
-            <li class="search d-sm-block" (click)="openSearch()"><span class="ti-search"></span></li>
-            <li class="cart__menu" (click)="toggleCart()"><span class="ti-shopping-cart"></span></li>
+            <li class="search d-sm-block" (click)="openSearch()">
+              <span class="ti-search"></span>
+            </li>
+            <li class="cart__menu" (click)="open(cart_modal)"><span class="ti-shopping-cart"></span></li>
           </ul>
         </div>
       </div>
@@ -128,32 +130,40 @@
   <!-- End Mainmenu Area -->
 </header>
 <div class="body__overlay"></div>
-<div class="offset__wrapper">
-  <!-- Start Search Popap -->
+<div class="offset__wrapper" [ngClass]="{'search__box__show__hide': searching}">
+  <!-- Start Search Popup -->
   <div class="search__area">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
           <div class="search__inner">
-            <form>
+            <form formGroup="formSearch" (submit)="onSearch($event)">
               <input placeholder="Search here... " type="text">
               <button type="submit"></button>
             </form>
             <div class="search__close__btn">
-              <span class="search__close__btn_icon"><i class="zmdi zmdi-close"></i></span>
+              <span class="search__close__btn_icon" (click)="openSearch()"><i class="zmdi zmdi-close"></i></span>
             </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- End Search Popap -->
+  <!-- End Search Popup -->
   <!-- Start Cart Panel -->
-  <div class="shopping__cart">
-    <div class="shopping__cart__inner">
-      <div class="offsetmenu__close__btn" (click)="toggleCart()">
-        <a href="#"><i class="zmdi zmdi-close"></i></a>
+  <ng-template #cart_modal let-modal>
+    <div class="modal-header">
+      <div class="w-100">
+        <h4 class="modal-title">{{'cart.title' | translate}}</h4>
+        <h5 class="modal-sub-title">
+          <span class="text-primary">{{itemAmount}}</span> {{'cart.amount' | translate}}
+        </h5>
       </div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
       <div class="shp__cart__wrap">
         <div class="shp__single__product">
           <div class="shp__pro__thumb">
@@ -187,14 +197,18 @@
         </div>
       </div>
       <ul class="shoping__total">
-        <li class="subtotal">Subtotal:</li>
+        <li class="subtotal">{{'cart.total' | translate}}</li>
         <li class="total__price">$130.00</li>
       </ul>
-      <ul class="shopping__btn">
-        <li><a href="cart.html">View Cart</a></li>
-        <li class="shp__checkout"><a href="checkout.html">Checkout</a></li>
-      </ul>
     </div>
-  </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-info" (click)="viewCart()">
+        {{'cart.btn_view_cart' | translate}}
+      </button>
+      <button type="button" class="btn btn-outline-primary" (click)="checkout()">
+        {{'cart.btn_checkout' | translate}}
+      </button>
+    </div>
+  </ng-template>
   <!-- End Cart Panel -->
 </div>

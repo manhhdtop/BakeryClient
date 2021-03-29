@@ -6,6 +6,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { MasterPageRoutingModule } from './master-page-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
         MasterPageRoutingModule,
         RouterModule,
         TranslateModule,
+        FormsModule,
     ],
 })
 export class MasterPageModule {

@@ -9,6 +9,13 @@
     "sign_in": "Login",
     "login_failed": "Username or password is incorrect"
   },
+  "cart": {
+    "title": "Shopping Cart",
+    "amount": " item in your cart",
+    "total": "Total",
+    "btn_view_cart": "View cart",
+    "btn_checkout": "Checkout"
+  },
   "menu": {
     "home": {
       "title": "ThaoThao' Bakery",
