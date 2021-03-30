@@ -14,7 +14,8 @@
     "amount": " sản phẩm trong giỏ hàng",
     "total": "Tổng cộng",
     "btn_view_cart": "Xem giỏ hàng",
-    "btn_checkout": "Thanh toán"
+    "btn_checkout": "Thanh toán",
+    "empty_cart": "Không có sản phẩm nào trong giỏ hàng"
   },
   "menu": {
     "home": {

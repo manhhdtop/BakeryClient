@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import * as $ from 'jquery';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CartService } from '../../../service/cart.service';
+import { Item } from '../../../shared/model/item';
 
 @Component({
   selector: 'app-header',
@@ -13,16 +14,20 @@ export class HeaderComponent implements OnInit {
   fb: FormBuilder;
   searching: boolean;
   itemAmount: number;
+  totalAmount: number;
+  items: Item[];
 
-  constructor(private modalService: NgbModal) {
+  constructor(private modalService: NgbModal, private cartService: CartService) {
   }
 
   ngOnInit(): void {
     this.searching = false;
-    this.itemAmount = 2;
-    this.formSearch = this.fb.group({
-      keyword: new FormControl(),
+    this.formSearch = new FormGroup({
+      name: new FormControl('', Validators.required),
     });
+    this.items = this.cartService.getItems();
+    this.itemAmount = this.items.length;
+    this.totalAmount = this.cartService.getTotalAmount();
   }
 
   open(content): void {
@@ -39,7 +44,6 @@ export class HeaderComponent implements OnInit {
 
   onSearch($event): void {
     $event.preventDefault();
-    console.log($event);
   }
 
   viewCart(): void {
@@ -48,5 +52,11 @@ export class HeaderComponent implements OnInit {
 
   checkout(): void {
     console.log('Checkout');
+  }
+
+  removeItem(id): void {
+    this.cartService.removeItem(id);
+    this.itemAmount = this.items.length;
+    this.totalAmount = this.cartService.getTotalAmount();
   }
 }

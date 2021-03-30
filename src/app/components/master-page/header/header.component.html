@@ -164,41 +164,29 @@
       </button>
     </div>
     <div class="modal-body">
-      <div class="shp__cart__wrap">
-        <div class="shp__single__product">
+      <div *ngIf="items && items.length > 0" class="shp__cart__wrap">
+        <div *ngFor="let item of items" class="shp__single__product">
           <div class="shp__pro__thumb">
             <a href="#">
-              <img src="/assets/image/product/big-img/1.jpg" alt="product images">
+              <img src="{{item.image}}" alt="product images">
             </a>
           </div>
           <div class="shp__pro__details">
-            <h2><a href="product-details.html">BO&Play Wireless Speaker</a></h2>
-            <span class="quantity">QTY: 1</span>
-            <span class="shp__price">$105.00</span>
+            <h2><a href="product-details.html">{{item.name}}</a></h2>
+            <span class="quantity">QTY: {{item.quantity}}</span>
+            <span class="shp__price">${{item.amount}}</span>
           </div>
           <div class="remove__btn">
-            <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
-          </div>
-        </div>
-        <div class="shp__single__product">
-          <div class="shp__pro__thumb">
-            <a href="#">
-              <img src="/assets/image/product/big-img/1.jpg" alt="product images">
-            </a>
-          </div>
-          <div class="shp__pro__details">
-            <h2><a href="product-details.html">Brone Candle</a></h2>
-            <span class="quantity">QTY: 1</span>
-            <span class="shp__price">$25.00</span>
-          </div>
-          <div class="remove__btn">
-            <a href="#" title="Remove this item"><i class="zmdi zmdi-close"></i></a>
+            <a href="#" title="Remove this item" data-id="{{item.id}}" (click)="removeItem(item.id)"><i class="zmdi zmdi-close"></i></a>
           </div>
         </div>
       </div>
-      <ul class="shoping__total">
+      <div *ngIf="items && items.length == 0" class="m-3">
+        <p class="w-100 text-center font-italic">{{'cart.empty_cart'|translate}}</p>
+      </div>
+      <ul *ngIf="items && items.length > 0" class="shoping__total">
         <li class="subtotal">{{'cart.total' | translate}}</li>
-        <li class="total__price">$130.00</li>
+        <li class="total__price">${{totalAmount}}</li>
       </ul>
     </div>
     <div class="modal-footer">

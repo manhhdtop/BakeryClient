@@ -12,6 +12,7 @@ import { AuthComponent } from './components/auth/auth.component';
 import { HeaderComponent } from './components/master-page/header/header.component';
 import { AdminMasterPageComponent } from './components/admin/admin-master-page/admin-master-page.component';
 import { HomeComponent } from './components/home/home.component';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -23,12 +24,13 @@ import { HomeComponent } from './components/home/home.component';
     AdminMasterPageComponent,
     HomeComponent,
   ],
-  imports: [
-    AppRoutingModule,
-    BrowserModule,
-    MasterPageModule,
-    SharedModule,
-  ],
+    imports: [
+        AppRoutingModule,
+        BrowserModule,
+        MasterPageModule,
+        SharedModule,
+        NgbCarouselModule,
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })
