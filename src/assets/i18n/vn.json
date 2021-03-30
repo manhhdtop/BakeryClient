@@ -15,12 +15,21 @@
     "total": "Tổng cộng",
     "btn_view_cart": "Xem giỏ hàng",
     "btn_checkout": "Thanh toán",
-    "empty_cart": "Không có sản phẩm nào trong giỏ hàng"
+    "empty_cart": "Không có sản phẩm nào trong giỏ hàng",
+    "image": "Hình ảnh",
+    "product": "Sản phẩm",
+    "price": "Giá",
+    "quantity": "Số lượng",
+    "text_more": "Còn nữa..."
   },
   "menu": {
     "home": {
       "title": "Bakery",
       "name": "Trang chủ"
+    },
+    "cart": {
+      "title": "Giỏ hàng",
+      "name": "Giỏ hàng"
     }
   }
 }

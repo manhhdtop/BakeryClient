@@ -31,11 +31,7 @@ export class HeaderComponent implements OnInit {
   }
 
   open(content): void {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-      console.log('Closed with: ', result);
-    }, (reason) => {
-      console.log('Dismissed: ', reason);
-    });
+    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
   openSearch(): void {
@@ -46,16 +42,12 @@ export class HeaderComponent implements OnInit {
     $event.preventDefault();
   }
 
-  viewCart(): void {
-    console.log('View Cart');
-  }
-
   checkout(): void {
     console.log('Checkout');
   }
 
   removeItem(id): void {
-    this.cartService.removeItem(id);
+    this.items = this.cartService.removeItem(id);
     this.itemAmount = this.items.length;
     this.totalAmount = this.cartService.getTotalAmount();
   }

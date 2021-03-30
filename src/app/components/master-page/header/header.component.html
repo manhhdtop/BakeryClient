@@ -120,7 +120,9 @@
             <li class="search d-sm-block" (click)="openSearch()">
               <span class="ti-search"></span>
             </li>
-            <li class="cart__menu" (click)="open(cart_modal)"><span class="ti-shopping-cart"></span></li>
+            <li class="cart__menu" (click)="open(cart_modal)">
+              <span class="ti-shopping-cart"></span>
+            </li>
           </ul>
         </div>
       </div>
@@ -165,7 +167,7 @@
     </div>
     <div class="modal-body">
       <div *ngIf="items && items.length > 0" class="shp__cart__wrap">
-        <div *ngFor="let item of items" class="shp__single__product">
+        <div *ngFor="let item of items | slice:0:2" class="shp__single__product">
           <div class="shp__pro__thumb">
             <a href="#">
               <img src="{{item.image}}" alt="product images">
@@ -174,11 +176,15 @@
           <div class="shp__pro__details">
             <h2><a href="product-details.html">{{item.name}}</a></h2>
             <span class="quantity">QTY: {{item.quantity}}</span>
-            <span class="shp__price">${{item.amount}}</span>
+            <span class="shp__price">${{item.price}}</span>
           </div>
           <div class="remove__btn">
-            <a href="#" title="Remove this item" data-id="{{item.id}}" (click)="removeItem(item.id)"><i class="zmdi zmdi-close"></i></a>
+            <a href="#" title="Remove this item" (click)="removeItem(item.id)"><i
+              class="zmdi zmdi-close"></i></a>
           </div>
+        </div>
+        <div *ngIf="items && items.length > 2">
+          <p class="ps-1 fst-italic">{{'cart.text_more' | translate}}</p>
         </div>
       </div>
       <div *ngIf="items && items.length == 0" class="m-3">
@@ -190,9 +196,9 @@
       </ul>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-info" (click)="viewCart()">
+      <a class="btn btn-outline-info" routerLink="/cart" (click)="modal.dismiss()">
         {{'cart.btn_view_cart' | translate}}
-      </button>
+      </a>
       <button type="button" class="btn btn-outline-primary" (click)="checkout()">
         {{'cart.btn_checkout' | translate}}
       </button>

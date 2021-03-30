@@ -5,7 +5,7 @@ import { Item } from '../shared/model/item';
   providedIn: 'root',
 })
 export class CartService {
-  items: Array<Item>;
+  items: Item[];
 
   constructor() {
     this.items = [];
@@ -14,28 +14,28 @@ export class CartService {
       name: 'BO&Play Wireless Speaker',
       image: 'assets/image/product/big-img/1.jpg',
       quantity: 2,
-      amount: 105,
+      price: 105,
     });
     this.items.push({
       id: 2,
       name: 'Brone Candle',
       image: 'assets/image/product/big-img/1.jpg',
       quantity: 1,
-      amount: 25,
+      price: 25,
     });
     this.items.push({
       id: 3,
       name: 'Brone Candle 3',
       image: 'assets/image/product/big-img/1.jpg',
       quantity: 13,
-      amount: 25,
+      price: 25,
     });
     this.items.push({
       id: 4,
       name: 'Brone Candle 4 ',
       image: 'assets/image/product/big-img/1.jpg',
       quantity: 11,
-      amount: 25,
+      price: 25,
     });
   }
 
@@ -49,12 +49,12 @@ export class CartService {
   }
 
   getItems(): any[] {
-    return this.items;
+    return this.items.map(x => Object.assign({}, x));
   }
 
   clearCart(): any[] {
     this.items = [];
-    return this.items;
+    return this.getItems();
   }
 
   removeItem(itemId): any[] {
@@ -62,13 +62,13 @@ export class CartService {
     if (index !== -1) {
       this.items.splice(index, 1);
     }
-    return this.items;
+    return this.getItems();
   }
 
   getTotalAmount(): number {
     let sum = 0;
     for (const item of this.items) {
-      sum += item.amount;
+      sum += item.price;
     }
     return sum;
   }
