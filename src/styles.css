@@ -4092,8 +4092,15 @@ blockquote::before {
   font-weight: bold;
   padding: 20px 10px;
   text-align: center;
-  text-transform: uppercase;
   vertical-align: middle;
+  white-space: nowrap;
+}
+
+.table-content table th.product-action {
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+  width: 1%;
   white-space: nowrap;
 }
 
@@ -4108,6 +4115,14 @@ blockquote::before {
   padding: 20px 10px;
   vertical-align: middle;
   font-size: 13px;
+}
+
+.table-content table td .product-action {
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+  width: 1%;
+  white-space: nowrap;
 }
 
 .table-content table td input {

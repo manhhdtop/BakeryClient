@@ -14,12 +14,22 @@
     "amount": " item in your cart",
     "total": "Total",
     "btn_view_cart": "View cart",
-    "btn_checkout": "Checkout"
+    "btn_checkout": "Checkout",
+    "empty_cart": "The shopping cart is empty",
+    "image": "Image",
+    "product": "Product",
+    "price": "Price",
+    "quantity": "Quantity",
+    "text_more": "More..."
   },
   "menu": {
     "home": {
       "title": "ThaoThao' Bakery",
       "name": "Home"
+    },
+    "cart": {
+      "title": "Shopping Cart",
+      "name": "Cart"
     }
   }
 }

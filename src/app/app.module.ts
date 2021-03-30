@@ -13,6 +13,7 @@ import { HeaderComponent } from './components/master-page/header/header.componen
 import { AdminMasterPageComponent } from './components/admin/admin-master-page/admin-master-page.component';
 import { HomeComponent } from './components/home/home.component';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { CartComponent } from './components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
     PageNotFoundComponent,
     AdminMasterPageComponent,
     HomeComponent,
+    CartComponent,
   ],
     imports: [
         AppRoutingModule,
