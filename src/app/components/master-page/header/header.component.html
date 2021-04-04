@@ -14,102 +14,35 @@
         <div class="col-md-8 col-lg-8 col-sm-6 col-xs-6">
           <nav class="mainmenu__nav d-sm-none d-md-block">
             <ul class="main__menu">
-              <li class="drop"><a routerLink="/">Home</a></li>
-              <li class="drop"><a href="portfolio-card-box-2.html">portfolio</a>
-                <ul class="dropdown">
-                  <li><a href="portfolio-card-box-2.html">portfolio</a></li>
-                  <li><a href="single-portfolio.html">Single portfolio</a></li>
-                </ul>
+              <li class="drop">
+                <a routerLink="{{'menu.home.href' | translate}}">{{'menu.home.name' | translate}}</a>
               </li>
-              <li class="drop"><a href="blog.html">Blog</a>
-                <ul class="dropdown">
-                  <li><a href="blog.html">blog 3 column</a></li>
-                  <li><a href="blog-details.html">Blog details</a></li>
-                </ul>
+              <li class="drop">
+                <a routerLink="{{'menu.about.href' | translate}}">{{'menu.about.name' | translate}}</a>
               </li>
-              <li class="drop"><a href="shop.html">Shop</a>
-                <ul class="dropdown mega_dropdown">
-                  <!-- Start Single Mega MEnu -->
-                  <li><a class="mega__title" href="shop.html">shop layout</a>
-                    <ul class="mega__item">
-                      <li><a href="shop.html">default shop</a></li>
-                    </ul>
-                  </li>
-                  <!-- End Single Mega MEnu -->
-                  <!-- Start Single Mega MEnu -->
-                  <li><a class="mega__title" href="shop.html">product details layout</a>
-                    <ul class="mega__item">
-                      <li><a href="product-details.html">tab style 1</a></li>
-                    </ul>
-                  </li>
-                  <!-- End Single Mega MEnu -->
-                  <!-- Start Single Mega MEnu -->
-                  <li>
-                    <ul class="mega__item">
-                      <li>
-                        <div class="mega-item-img">
-                          <a href="shop.html">
-                            <img src="/assets/image/feature-img/3.png" alt="">
-                          </a>
-                        </div>
-                      </li>
-                    </ul>
-                  </li>
-                  <!-- End Single Mega MEnu -->
-                </ul>
+              <li class="drop">
+                <a routerLink="{{'menu.category.href' | translate}}">{{'menu.category.name' | translate}}</a>
               </li>
-              <li class="drop"><a href="#">pages</a>
-                <ul class="dropdown">
-                  <li><a href="about.html">about</a></li>
-                  <li><a href="#">testimonials <span><i class="zmdi zmdi-chevron-right"></i></span></a>
-                    <ul class="lavel-dropdown">
-                      <li><a href="customer-review.html">customer review</a></li>
-                    </ul>
-                  </li>
-                  <li><a href="shop.html">shop</a></li>
-                  <li><a href="shop-sidebar.html">shop sidebar</a></li>
-                  <li><a href="product-details.html">product details</a></li>
-                  <li><a href="cart.html">cart</a></li>
-                  <li><a href="wishlist.html">wishlist</a></li>
-                  <li><a href="checkout.html">checkout</a></li>
-                  <li><a href="team.html">team</a></li>
-                  <li><a href="login-register.html">login & register</a></li>
-                </ul>
+              <li class="drop">
+                <a routerLink="{{'menu.product.href' | translate}}">{{'menu.product.name' | translate}}</a>
               </li>
-              <li><a href="contact.html">contact</a></li>
+              <li class="drop">
+                <a routerLink="{{'menu.new.href' | translate}}">{{'menu.new.name' | translate}}</a>
+              </li>
+              <li class="drop">
+                <a routerLink="{{'menu.contact.href' | translate}}">{{'menu.contact.name' | translate}}</a>
+              </li>
             </ul>
           </nav>
           <div class="mobile-menu clearfix d-none d-sm-block d-md-none">
             <nav id="mobile_dropdown">
               <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="#">portfolio</a>
-                  <ul>
-                    <li><a href="portfolio-card-box-2.html">portfolio</a></li>
-                    <li><a href="single-portfolio.html">Single portfolio</a></li>
-                  </ul>
-                </li>
-                <li><a href="blog.html">blog</a>
-                  <ul>
-                    <li><a href="blog.html">blog 3 column</a></li>
-                    <li><a href="blog-details.html">Blog details</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">pages</a>
-                  <ul>
-                    <li><a href="about.html">about</a></li>
-                    <li><a href="customer-review.html">customer review</a></li>
-                    <li><a href="shop.html">shop</a></li>
-                    <li><a href="shop-sidebar.html">shop sidebar</a></li>
-                    <li><a href="product-details.html">product details</a></li>
-                    <li><a href="cart.html">cart</a></li>
-                    <li><a href="wishlist.html">wishlist</a></li>
-                    <li><a href="checkout.html">checkout</a></li>
-                    <li><a href="team.html">team</a></li>
-                    <li><a href="login-register.html">login & register</a></li>
-                  </ul>
-                </li>
-                <li><a href="contact.html">contact</a></li>
+                <li><a routerLink="{{'menu.home.href' | translate}}">{{'menu.home.name' | translate}}</a></li>
+                <li><a routerLink="{{'menu.about.href' | translate}}">{{'menu.about.name' | translate}}</a></li>
+                <li><a routerLink="{{'menu.product.href' | translate}}">{{'menu.product.name' | translate}}</a></li>
+                <li><a routerLink="{{'menu.category.href' | translate}}">{{'menu.category.name' | translate}}</a></li>
+                <li><a routerLink="{{'menu.new.href' | translate}}">{{'menu.new.name' | translate}}</a></li>
+                <li><a routerLink="{{'menu.contact.href' | translate}}">{{'menu.contact.name' | translate}}</a></li>
               </ul>
             </nav>
           </div>
@@ -117,6 +50,20 @@
         <!-- End MAinmenu Ares -->
         <div class="col-md-2 col-sm-4 col-xs-3">
           <ul class="menu-extra">
+            <li class="dropdown-toggle d-sm-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="fa fa-globe"></span>
+              <div class="dropdown-menu">
+                <a class="dropdown-item" href="#" [ngClass]="{'active': lang === 'vn'}"
+                   (click)="changeLanguage($event, 'vn')">
+                  {{'language.vn.name' | translate}}
+                </a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#" [ngClass]="{'active': lang === 'en'}"
+                   (click)="changeLanguage($event, 'en')">
+                  {{'language.en.name' | translate}}
+                </a>
+              </div>
+            </li>
             <li class="search d-sm-block" (click)="openSearch()">
               <span class="ti-search"></span>
             </li>
@@ -196,12 +143,12 @@
       </ul>
     </div>
     <div class="modal-footer">
-      <a class="btn btn-outline-info" routerLink="/cart" (click)="modal.dismiss()">
+      <a class="btn btn-outline-info" routerLink="{{'menu.cart.href' | translate}}" (click)="modal.dismiss()">
         {{'cart.btn_view_cart' | translate}}
       </a>
-      <button type="button" class="btn btn-outline-primary" (click)="checkout()">
+      <a class="btn btn-outline-info" routerLink="{{'menu.checkout.href' | translate}}" (click)="modal.dismiss()">
         {{'cart.btn_checkout' | translate}}
-      </button>
+      </a>
     </div>
   </ng-template>
   <!-- End Cart Panel -->

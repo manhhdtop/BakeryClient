@@ -23,6 +23,13 @@ const routes: Routes = [
           page_title: 'menu.cart.title',
         },
       },
+      {
+        path: 'gio-hang',
+        component: CartComponent,
+        data: {
+          page_title: 'menu.cart.title',
+        },
+      },
     ],
   },
 ];

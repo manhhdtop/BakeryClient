@@ -20,7 +20,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 export class I18nModule {
   constructor(translate: TranslateService) {
     translate.addLangs(['en', 'vn']);
-    translate.setDefaultLang('vn');
+    const defaultLang = 'vn';
+    let lang = localStorage.getItem('language');
+    if (!lang || lang.trim() === '') {
+      lang = defaultLang;
+    }
+    translate.setDefaultLang(defaultLang);
+    translate.use(lang);
   }
 }
 

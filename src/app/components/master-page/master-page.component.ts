@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { TranslateService } from '@ngx-translate/core';
 import { Utils } from '../../shared/util/utils';
@@ -15,16 +15,22 @@ export class MasterPageComponent implements OnInit {
 
   constructor(
     private activeRoute: ActivatedRoute,
+    private router: Router,
     private titleService: Title,
     private translate: TranslateService,
   ) {
-
-  }
-
-  ngOnInit(): void {
-    this.translate.get(Utils.getPageTitle(this.activeRoute)).subscribe(e => {
-      this.titleService.setTitle(e);
+    router.events.subscribe((val) => {
+      this.translateTitle();
     });
   }
 
+  ngOnInit(): void {
+    this.translateTitle();
+  }
+
+  private translateTitle(): void {
+    this.translate.get(this.activeRoute.firstChild.snapshot.data.page_title).subscribe(e => {
+      this.titleService.setTitle(e);
+    });
+  }
 }

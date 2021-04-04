@@ -1,6 +1,17 @@
 {
   "logo_text": "ThaoThao' Bakery",
   "address": "Ngo Xuan Quang, Trau Quy, Gia Lam, Ha Noi",
+  "language": {
+    "vn": {
+      "code": "vn",
+      "name": "Viet Nam"
+    },
+    "en": {
+      "code": "en",
+      "name": "English"
+    }
+  },
+  "language_en": "English",
   "login_page": {
     "username": "Username...",
     "username_required": "Username can not be blank",
@@ -19,17 +30,50 @@
     "image": "Image",
     "product": "Product",
     "price": "Price",
+    "shipping": "Shipping",
     "quantity": "Quantity",
     "text_more": "More..."
   },
   "menu": {
     "home": {
+      "href": "/",
       "title": "ThaoThao' Bakery",
       "name": "Home"
     },
     "cart": {
+      "href": "/cart",
       "title": "Shopping Cart",
       "name": "Cart"
+    },
+    "checkout": {
+      "href": "/checkout",
+      "title": "Process to checkout",
+      "name": "Checkout"
+    },
+    "about": {
+      "href": "about",
+      "title": "About us",
+      "name": "About"
+    },
+    "product": {
+      "href": "product",
+      "title": "My product",
+      "name": "Product"
+    },
+    "category": {
+      "href": "category",
+      "title": "Category",
+      "name": "Category"
+    },
+    "new": {
+      "href": "new",
+      "title": "New product, Coupon, and more...",
+      "name": "New"
+    },
+    "contact": {
+      "href": "contact",
+      "title": "Contact us",
+      "name": "Contact"
     }
   }
 }

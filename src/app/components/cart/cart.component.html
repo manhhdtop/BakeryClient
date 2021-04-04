@@ -43,7 +43,8 @@
                 </td>
                 <td class="product-subtotal">${{item.quantity * item.price}}</td>
                 <td class="product-remove">
-                  <a (click)="removeItem($event, item.id)" class="pointer-event"><i class="fa fa-times-circle text-danger"></i></a>
+                  <a (click)="removeItem($event, item.id)" class="pointer-event"><i
+                    class="fa fa-times-circle text-danger"></i></a>
                 </td>
               </tr>
             </tbody>
@@ -53,7 +54,7 @@
           <div class="col-md-8 col-sm-7 col-xs-12">
             <div class="buttons-cart">
               <input type="submit" value="Update Cart"/>
-              <a href="#">Continue Shopping</a>
+              <a routerLink="/san-pham">Continue Shopping</a>
             </div>
             <div class="coupon">
               <h3>Coupon</h3>
@@ -63,17 +64,17 @@
             </div>
           </div>
           <div class="col-md-4 col-sm-5 col-xs-12">
-            <div class="cart_totals">
-              <h2>Cart Totals</h2>
-              <table>
-                <tbody>
-                  <tr class="cart-subtotal">
-                    <th>Subtotal</th>
-                    <td><span class="amount">£215.00</span></td>
-                  </tr>
-                  <tr class="shipping">
-                    <th>Shipping</th>
-                    <td>
+            <div class="row">
+              <div class="col-12 text-end text-uppercase">
+                <h2>{{'cart.total' | translate}}</h2>
+                <div class="row">
+                  <div class="col-12 d-flex justify-content-between">
+                    <div>{{'cart.price' | translate}}</div>
+                    <div><span class="amount">${{totalAmount}}</span></div>
+                  </div>
+                  <div class="col-12 shipping d-flex justify-content-between">
+                    <div>{{'cart.shipping' | translate}}</div>
+                    <div>
                       <ul id="shipping_method">
                         <li>
                           <input type="radio"/>
@@ -90,18 +91,18 @@
                         <li></li>
                       </ul>
                       <p><a class="shipping-calculator-button" href="#">Calculate Shipping</a></p>
-                    </td>
-                  </tr>
-                  <tr class="order-total">
-                    <th>Total</th>
-                    <td>
+                    </div>
+                  </div>
+                  <div class="order-total">
+                    <p>Total</p>
+                    <p>
                       <strong><span class="amount">£215.00</span></strong>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="wc-proceed-to-checkout">
-                <a href="checkout.html">Proceed to Checkout</a>
+                    </p>
+                  </div>
+                </div>
+                <div class="wc-proceed-to-checkout">
+                  <a routerLink="/thanh-toan">{{'cart.btn_checkout' | translate}}</a>
+                </div>
               </div>
             </div>
           </div>

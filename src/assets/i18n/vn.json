@@ -1,6 +1,17 @@
 {
   "logo_text": "Bakery",
   "address": "Ngô Xuân Quảng, Trâu Quỳ, Gia Lâm, Hà Nội",
+  "language": {
+    "vn": {
+      "code": "vn",
+      "name": "Việt Nam"
+    },
+    "en": {
+      "code": "en",
+      "name": "English"
+    }
+  },
+  "language_en": "English",
   "login_page": {
     "username": "Tên đăng nhập...",
     "username_required": "Tên đăng nhập không được để trống",
@@ -19,17 +30,65 @@
     "image": "Hình ảnh",
     "product": "Sản phẩm",
     "price": "Giá",
+    "shipping": "Phí vận chuyển",
     "quantity": "Số lượng",
     "text_more": "Còn nữa..."
   },
   "menu": {
     "home": {
+      "href": "/",
       "title": "Bakery",
       "name": "Trang chủ"
     },
+    "page_not_found": {
+      "href": "/page_not_found",
+      "title": "Trang không tồn tại",
+      "name": "Trang không tồn tại"
+    },
+    "server_error": {
+      "href": "/server_error",
+      "title": "Opp... Có lỗi xảy ra",
+      "name": "Server error"
+    },
+    "access_denied": {
+      "href": "/access_denied",
+      "title": "Access denied",
+      "name": "Access denied"
+    },
     "cart": {
+      "href": "gio-hang",
       "title": "Giỏ hàng",
       "name": "Giỏ hàng"
+    },
+    "checkout": {
+      "href": "thanh-toan",
+      "title": "Thanh toán đơn hàng",
+      "name": "Thanh toán"
+    },
+    "about": {
+      "href": "gioi-thieu",
+      "title": "Giới thiệu",
+      "name": "Giới thiệu"
+    },
+    "product": {
+      "href": "san-pham",
+      "title": "Sản phẩm",
+      "name": "Sản phẩm"
+    },
+    "category": {
+      "href": "danh-muc",
+      "title": "Danh mục sản phẩm",
+      "name": "Danh mục"
+    },
+    "new": {
+      "href": "tin-tuc",
+      "title": "Tin tức",
+      "name": "Tin tức"
+    },
+    "contact": {
+      "href": "lien-he",
+      "title": "Liên hệ",
+      "name": "Liên hệ"
     }
   }
 }
