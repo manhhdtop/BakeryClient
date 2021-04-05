@@ -38,4 +38,5 @@ export class Constant {
   public static readonly DEFAULT_IMG_NAME = 'image';
   public static readonly DEFAULT_IMG_LABEL = 'image_label';
   public static readonly VALID_FILE = 'Vui lòng chọn file upload';
+  static HEADER_APPLICATION = 'Authorization';
 }

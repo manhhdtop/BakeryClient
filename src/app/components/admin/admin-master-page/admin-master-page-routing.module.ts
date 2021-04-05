@@ -4,6 +4,8 @@ import { AdminMasterPageComponent } from './admin-master-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from '../category/category.component';
 import { ProductComponent } from '../product/product.component';
+import { AuthGuard } from '../../../shared/guards/guards.class';
+import { LoginComponent } from '../login/login.component';
 
 const routes: Routes = [
   {
@@ -16,6 +18,15 @@ const routes: Routes = [
         data: {
           page_title: 'menu.admin.home.title',
         },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'danh-muc',
+        component: CategoryComponent,
+        data: {
+          page_title: 'menu.admin.category.title',
+        },
+        canActivate: [AuthGuard],
       },
       {
         path: 'category',
@@ -23,6 +34,15 @@ const routes: Routes = [
         data: {
           page_title: 'menu.admin.category.title',
         },
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'san-pham',
+        component: ProductComponent,
+        data: {
+          page_title: 'menu.admin.product.title',
+        },
+        canActivate: [AuthGuard],
       },
       {
         path: 'product',
@@ -30,8 +50,16 @@ const routes: Routes = [
         data: {
           page_title: 'menu.admin.product.title',
         },
+        canActivate: [AuthGuard],
       },
     ],
+  },
+  {
+    path: 'login',
+    component: LoginComponent,
+    data: {
+      page_title: 'menu.admin.login.title',
+    },
   },
 ];
 

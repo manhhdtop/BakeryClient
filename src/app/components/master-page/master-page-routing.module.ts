@@ -17,6 +17,13 @@ const routes: Routes = [
         },
       },
       {
+        path: '',
+        component: HomeComponent,
+        data: {
+          page_title: 'menu.home.title',
+        },
+      },
+      {
         path: 'cart',
         component: CartComponent,
         data: {

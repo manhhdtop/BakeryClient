@@ -51,30 +51,30 @@
         <div class="col-md-2 col-sm-4 col-xs-3 navbar navbar-expand navbar-light bg-white topbar mb-3">
           <ul class="navbar-nav">
             <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="language" role="button"
+              <a class="nav-link dropdown-toggle" id="language" role="button"
                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fa fa-globe"></i>
               </a>
               <div class="language-popup dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                    aria-labelledby="language">
-                <a class="dropdown-item" href="#" [ngClass]="{'active': lang === 'vn'}"
+                <a class="dropdown-item" role="button" [ngClass]="{'active': lang === 'vn'}"
                    (click)="changeLanguage($event, 'vn')">
                   {{'language.vn.name' | translate}}
                 </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" [ngClass]="{'active': lang === 'en'}"
+                <a class="dropdown-item" role="button" [ngClass]="{'active': lang === 'en'}"
                    (click)="changeLanguage($event, 'en')">
                   {{'language.en.name' | translate}}
                 </a>
               </div>
             </li>
             <li class="nav-item dropdown no-arrow mx-1" (click)="toggleSearch()">
-              <a class="nav-link" href="#" id="search">
+              <a class="nav-link" id="search" role="button">
                 <i class="fas fa-search"></i>
               </a>
             </li>
             <li class="nav-item dropdown no-arrow mx-1">
-              <a class="nav-link dropdown-toggle" href="#" id="cart" role="button" (click)="open(cart_modal)">
+              <a class="nav-link dropdown-toggle" id="cart" role="button" (click)="open(cart_modal)">
                 <i class="fas fa-shopping-cart"></i>
                 <span class="badge badge-danger badge-counter">{{itemAmount > 3 ? '3+' : itemAmount}}</span>
               </a>

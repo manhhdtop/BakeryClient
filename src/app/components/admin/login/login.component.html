@@ -1,0 +1,34 @@
+<div class="page_login ">
+  <div class="container">
+    <div class="login_main">
+      <form [formGroup]="loginForm" (ngSubmit)="submitForm($event)">
+        <div class="login_content">
+          <div class="logo-login">
+            <img src="assets/image/logo.svg" width="200px" height="85px" alt="VNPT PAY"/>
+          </div>
+          <div class="login-text">
+            <div class="login-text-input">
+              <input type="text" autofocus="autofocus" formControlName="username"
+                     placeholder="{{ 'login_page.username' | translate }}"/>
+            </div>
+          </div>
+          <div class="login-pass">
+            <input type="password" formControlName="password"
+                   placeholder="{{ 'login_page.password' | translate }}"/>
+          </div>
+          <div *ngIf="messageError">
+            <div class="alert alert-danger" role="alert">
+              {{messageError}}
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-primary">{{ "login_page.sign_in" | translate }}</button>
+          </div>
+          <div class="forget-password" style="margin-top: 20px">
+            <a style="float: right; color: #187EFB" routerLink="/admin/forget-password">Quên mật khẩu?</a>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

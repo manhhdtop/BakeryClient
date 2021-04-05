@@ -1,23 +1,36 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, CanLoad, Route, Router, RouterStateSnapshot } from '@angular/router';
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  CanLoad,
+  Router,
+  Route,
+} from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Constant } from '../constants/constant.class';
-import { UrlConstant } from '../constants/url.class';
 
-@Injectable()
-export class AuthGuard implements CanLoad, CanActivate {
-  constructor(private router: Router) {
+@Injectable({
+  providedIn: 'root',
+})
+export class AuthGuard implements CanActivate, CanLoad {
+  loginUrl: string;
+
+  constructor(
+    private router: Router,
+  ) {
+    this.loginUrl = '/admin/login';
   }
 
   canLoad(route: Route): boolean {
     if (this.isLoggedIn()) {
       return true;
     }
-    this.router.navigate([UrlConstant.LOGIN]);
+    this.router.navigate([this.loginUrl]);
     return false;
   }
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
-    // check authentication
     return this.isLoggedIn(state.url);
   }
 
@@ -27,8 +40,7 @@ export class AuthGuard implements CanLoad, CanActivate {
     if (currentUser && token) {
       return true;
     }
-    // not logged in so redirect to login page with the return url
-    this.router.navigate([UrlConstant.LOGIN], {queryParams: {returnUrl: url}});
+    this.router.navigate([this.loginUrl], {queryParams: {returnUrl: url}});
     return false;
   }
 }

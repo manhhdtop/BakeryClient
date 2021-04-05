@@ -11,7 +11,6 @@
       "name": "English"
     }
   },
-  "language_en": "English",
   "login_page": {
     "username": "Tên đăng nhập...",
     "username_required": "Tên đăng nhập không được để trống",
@@ -91,20 +90,25 @@
       "name": "Liên hệ"
     },
     "admin": {
+      "login": {
+        "href": "login",
+        "title": "Đăng nhập để vào trang quản trị",
+        "name": "Đăng nhập"
+      },
       "home": {
         "href": "/admin",
         "title": "Dashboard",
         "name": "Dashboard"
       },
       "category": {
-        "href": "category",
-        "title": "Category",
-        "name": "Category"
+        "href": "danh-muc",
+        "title": "Quản lý danh mục",
+        "name": "Danh mục"
       },
       "product": {
-        "href": "product",
-        "title": "Product",
-        "name": "Product"
+        "href": "san-pham",
+        "title": "Quản lý sản phẩm",
+        "name": "Sản phẩm"
       }
     }
   }
