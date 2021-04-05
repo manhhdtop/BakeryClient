@@ -1,6 +1,6 @@
 <header id="header" class="htc-header header--3 bg__white">
   <!-- Start Mainmenu Area -->
-  <div id="sticky-header-with-topbar" class="mainmenu__area sticky__header">
+  <div id="sticky-header-with-topbar" class="mainmenu__area sticky__header shadow">
     <div class="container">
       <div class="row">
         <div class="col-md-2 col-lg-2 col-sm-3 col-xs-3">
@@ -48,11 +48,15 @@
           </div>
         </div>
         <!-- End MAinmenu Ares -->
-        <div class="col-md-2 col-sm-4 col-xs-3">
-          <ul class="menu-extra">
-            <li class="dropdown-toggle d-sm-block" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <span class="fa fa-globe"></span>
-              <div class="dropdown-menu">
+        <div class="col-md-2 col-sm-4 col-xs-3 navbar navbar-expand navbar-light bg-white topbar mb-3">
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="language" role="button"
+                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-globe"></i>
+              </a>
+              <div class="language-popup dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                   aria-labelledby="language">
                 <a class="dropdown-item" href="#" [ngClass]="{'active': lang === 'vn'}"
                    (click)="changeLanguage($event, 'vn')">
                   {{'language.vn.name' | translate}}
@@ -64,11 +68,16 @@
                 </a>
               </div>
             </li>
-            <li class="search d-sm-block" (click)="openSearch()">
-              <span class="ti-search"></span>
+            <li class="nav-item dropdown no-arrow mx-1" (click)="toggleSearch()">
+              <a class="nav-link" href="#" id="search">
+                <i class="fas fa-search"></i>
+              </a>
             </li>
-            <li class="cart__menu" (click)="open(cart_modal)">
-              <span class="ti-shopping-cart"></span>
+            <li class="nav-item dropdown no-arrow mx-1">
+              <a class="nav-link dropdown-toggle" href="#" id="cart" role="button" (click)="open(cart_modal)">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="badge badge-danger badge-counter">{{itemAmount > 3 ? '3+' : itemAmount}}</span>
+              </a>
             </li>
           </ul>
         </div>
@@ -84,16 +93,21 @@
   <div class="search__area">
     <div class="container">
       <div class="row">
-        <div class="col-md-12">
-          <div class="search__inner">
-            <form formGroup="formSearch" (submit)="onSearch($event)">
-              <input placeholder="Search here... " type="text">
-              <button type="submit"></button>
-            </form>
-            <div class="search__close__btn">
-              <span class="search__close__btn_icon" (click)="openSearch()"><i class="zmdi zmdi-close"></i></span>
+        <div class="col-md-12 my-5">
+          <form class="form-inline mr-auto mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group col">
+              <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
+                     aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
             </div>
-          </div>
+            <div class="search__close__btn" role="button">
+              <span class="search__close__btn_icon" (click)="toggleSearch()"><i class="zmdi zmdi-close"></i></span>
+            </div>
+          </form>
         </div>
       </div>
     </div>

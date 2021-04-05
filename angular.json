@@ -41,10 +41,12 @@
               "src/assets/css/core.css",
               "src/assets/css/responsive.css",
               "src/assets/css/shortcode/shortcodes.css",
+              "src/assets/css/sb-admin-2.css",
               "src/styles.css"
             ],
             "scripts": [
-              "node_modules/jquery/dist/jquery.min.js"
+              "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/js/bootstrap.min.js"
             ]
           },
           "configurations": {

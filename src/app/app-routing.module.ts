@@ -9,6 +9,10 @@ const routes: Routes = [
     path: '',
     loadChildren: () => import('./components/master-page/master-page.module').then(m => m.MasterPageModule),
   },
+  {
+    path: 'admin',
+    loadChildren: () => import('./components/admin/admin-master-page/admin-master-page.module').then(m => m.AdminMasterPageModule),
+  },
   // Error handler
   {path: 'internal-server-error', component: InternalServerErrorComponent},
   {path: 'unauthorized', component: AccessDeniedComponent},

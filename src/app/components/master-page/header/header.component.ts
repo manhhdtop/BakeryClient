@@ -5,7 +5,6 @@ import { CartService } from '../../../service/cart.service';
 import { Item } from '../../../shared/model/item';
 import { TranslateService } from '@ngx-translate/core';
 import { Title } from '@angular/platform-browser';
-import { Utils } from '../../../shared/util/utils';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -46,7 +45,7 @@ export class HeaderComponent implements OnInit {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
-  openSearch(): void {
+  toggleSearch(): void {
     this.searching = !this.searching;
   }
 

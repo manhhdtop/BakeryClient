@@ -89,6 +89,23 @@
       "href": "lien-he",
       "title": "Liên hệ",
       "name": "Liên hệ"
+    },
+    "admin": {
+      "home": {
+        "href": "/admin",
+        "title": "Dashboard",
+        "name": "Dashboard"
+      },
+      "category": {
+        "href": "category",
+        "title": "Category",
+        "name": "Category"
+      },
+      "product": {
+        "href": "product",
+        "title": "Product",
+        "name": "Product"
+      }
     }
   }
 }

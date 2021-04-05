@@ -11,8 +11,6 @@ import { Utils } from '../../shared/util/utils';
 })
 export class MasterPageComponent implements OnInit {
 
-  pageName: string;
-
   constructor(
     private activeRoute: ActivatedRoute,
     private router: Router,
