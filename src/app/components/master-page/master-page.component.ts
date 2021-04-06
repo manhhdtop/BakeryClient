@@ -27,7 +27,7 @@ export class MasterPageComponent implements OnInit {
   }
 
   private translateTitle(): void {
-    this.translate.get(this.activeRoute.firstChild.snapshot.data.page_title).subscribe(e => {
+    this.translate.get(Utils.getPageTitle(this.activeRoute)).subscribe(e => {
       this.titleService.setTitle(e);
     });
   }

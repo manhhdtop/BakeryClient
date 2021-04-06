@@ -1,12 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MasterPageComponent } from './master-page.component';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { CartComponent } from '../cart/cart.component';
+import { HomeComponent } from '../home/home.component';
 import { FooterComponent } from './footer/footer.component';
 import { HeaderComponent } from './header/header.component';
 import { MasterPageRoutingModule } from './master-page-routing.module';
-import { TranslateModule } from '@ngx-translate/core';
-import { FormsModule } from '@angular/forms';
+import { MasterPageComponent } from './master-page.component';
 
 
 @NgModule({
@@ -14,14 +17,17 @@ import { FormsModule } from '@angular/forms';
     HeaderComponent,
     MasterPageComponent,
     FooterComponent,
+    HomeComponent,
+    CartComponent,
   ],
-    imports: [
-        CommonModule,
-        MasterPageRoutingModule,
-        RouterModule,
-        TranslateModule,
-        FormsModule,
-    ],
+  imports: [
+    CommonModule,
+    MasterPageRoutingModule,
+    RouterModule,
+    TranslateModule,
+    FormsModule,
+    NgbCarouselModule,
+  ],
 })
 export class MasterPageModule {
 }

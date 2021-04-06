@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { Title } from '@angular/platform-browser';
+import { AdminService } from '../../../../service/admin.service';
+import { Utils } from '../../../../shared/util/utils';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +15,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private activeRoute: ActivatedRoute,
+    private adminService: AdminService,
     private titleService: Title,
     private translate: TranslateService,
   ) {
@@ -31,8 +34,12 @@ export class HeaderComponent implements OnInit {
   }
 
   private translateTitle(): void {
-    this.translate.get(this.activeRoute.firstChild.snapshot.data.page_title).subscribe(e => {
+    this.translate.get(Utils.getPageTitle(this.activeRoute)).subscribe(e => {
       this.titleService.setTitle(e);
     });
+  }
+
+  toggleSidebar(): void {
+    this.adminService.toggleSidebar();
   }
 }

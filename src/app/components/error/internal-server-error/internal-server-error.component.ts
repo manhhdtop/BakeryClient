@@ -8,9 +8,19 @@ import {Router, RouterLink} from '@angular/router';
 })
 export class InternalServerErrorComponent implements OnInit {
 
-  constructor(private routerLink: Router) {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
+  }
+
+  backHome(event): void {
+    event.preventDefault();
+    const url = this.router.url;
+    if (url && url.trim() !== '' && url.trim().startsWith('/admin')) {
+      this.router.navigate(['/admin']);
+      return;
+    }
+    this.router.navigate(['/']);
   }
 }

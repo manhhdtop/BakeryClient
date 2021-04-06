@@ -1,7 +1,7 @@
 export class Utils {
   static getPageTitle(activeRoute): string {
     const pageTitle = 'page_title';
-    if (activeRoute.hasChildren) {
+    if (activeRoute.firstChild) {
       if (activeRoute.firstChild.snapshot.data[pageTitle]) {
         return activeRoute.firstChild.snapshot.data[pageTitle];
       }

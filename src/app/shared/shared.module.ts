@@ -1,7 +1,8 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { I18nModule } from '../i18n/i18n.module';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { I18nModule } from '../i18n/i18n.module';
+import { DateFormatPipe } from './pipe/format-date.pipe';
 
 @NgModule({
   imports: [
@@ -10,10 +11,13 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgbModule,
   ],
   exports: [
+    DateFormatPipe,
     HttpClientModule,
     I18nModule,
   ],
-  declarations: [],
+  declarations: [
+    DateFormatPipe,
+  ],
   providers: [
     // {
     //   provide: HTTP_INTERCEPTORS,

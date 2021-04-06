@@ -6,6 +6,7 @@ import { Item } from '../../../shared/model/item';
 import { TranslateService } from '@ngx-translate/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Utils } from '../../../shared/util/utils';
 
 @Component({
   selector: 'app-header',
@@ -73,7 +74,7 @@ export class HeaderComponent implements OnInit {
   }
 
   private translateTitle(): void {
-    this.translate.get(this.activeRoute.firstChild.snapshot.data.page_title).subscribe(e => {
+    this.translate.get(Utils.getPageTitle(this.activeRoute)).subscribe(e => {
       this.titleService.setTitle(e);
     });
   }

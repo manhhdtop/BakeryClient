@@ -2,7 +2,7 @@ import { Injectable, TemplateRef } from '@angular/core';
 
 @Injectable({providedIn: 'root'})
 export class ToastService {
-  static DELAY = 5000;
+  static DELAY = 7000;
   static SUCCESS_CONFIG = {classname: 'bg-success text-light shadow', delay: ToastService.DELAY};
   static DANGER_CONFIG = {classname: 'bg-danger  text-light', delay: ToastService.DELAY};
   toasts: any[] = [];

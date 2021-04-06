@@ -1,5 +1,5 @@
 {
-  "logo_text": "ThaoThao' Bakery",
+  "logo_text": "Bakery",
   "address": "Ngo Xuan Quang, Trau Quy, Gia Lam, Ha Noi",
   "language": {
     "vn": {
@@ -95,6 +95,32 @@
         "title": "Product",
         "name": "Product"
       }
+    }
+  },
+  "category": {
+    "header": "Category management",
+    "table_name": "Category",
+    "table_search": "Search for category...",
+    "no": "No",
+    "name": "Category name",
+    "name_placeholder": "Category name...",
+    "name_not_blank": "Category name can not blank",
+    "description": "Description",
+    "description_placeholder": "Description...",
+    "parent_name": "Parent",
+    "created_date": "Created date",
+    "created_by": "Created by",
+    "updated_date": "Updated date",
+    "updated_by": "Updated by",
+    "status": "Status",
+    "status_error": "Status can not blank",
+    "modal": {
+      "title_add": "Adding a category",
+      "title_update": "Update category",
+      "title_delete": "Delete category",
+      "btn_cancel": "Cancel",
+      "btn_submit": "Submit",
+      "btn_delete": "Delete"
     }
   }
 }
