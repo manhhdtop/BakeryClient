@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
-import { AuthComponent } from '../auth/auth.component';
 import { CategoryComponent } from '../category/category.component';
 import { LoginComponent } from '../login/login.component';
 import { ProductComponent } from '../product/product.component';
@@ -18,7 +17,6 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 
 @NgModule({
   declarations: [
-    AuthComponent,
     AdminMasterPageComponent,
     HeaderComponent,
     FooterComponent,

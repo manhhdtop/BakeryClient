@@ -1,11 +1,7 @@
 <div class="container-fluid">
 
   <!-- Page Heading -->
-  <h1 class="h3 mb-2 text-gray-800">{{'category.header' | translate}}</h1>
-  <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
-    For more information about DataTables, please visit the
-    <a target="_blank" href="https://datatables.net">official DataTables
-      documentation</a>.</p>
+  <h1 class="h3 mb-3 text-gray-800">{{'category.header' | translate}}</h1>
 
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
@@ -18,14 +14,14 @@
           <button class="btn btn-primary" (click)="openModal(category)">{{'category.btn_new' | translate}}</button>
         </div>
         <div class="col-auto px-0">
-          <form
-            class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100">
+          <form [formGroup]="formSearch" (submit)="search($event)"
+                class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100">
             <div class="input-group">
-              <input type="text" class="form-control bg-light small"
+              <input type="text" class="form-control bg-light small" formControlName="keyword"
                      placeholder="{{'category.table_search' | translate}}"
                      aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
+                <button class="btn btn-primary">
                   <i class="fas fa-search fa-sm"></i>
                 </button>
               </div>
@@ -34,7 +30,7 @@
         </div>
       </div>
       <div class="table-responsive">
-        <table class="table table-bordered w-100">
+        <table class="table table-hover table-bordered">
           <thead>
             <tr>
               <th>{{'category.no' | translate}}</th>
@@ -51,7 +47,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let c of categories, let i = index">
-              <td>{{i}}</td>
+              <td>{{i + 1}}</td>
               <td>{{c.name}}</td>
               <td>{{c.description}}</td>
               <td>{{c.parent?.name}}</td>
@@ -59,7 +55,7 @@
               <td>{{c.createdBy}}</td>
               <td>{{c.updatedDate | dateFormat: dateDdmmyyHhmmss}}</td>
               <td>{{c.updatedBy}}</td>
-              <td>{{c.statusName}}</td>
+              <td>{{getStatusName(c.status)}}</td>
               <td class="min">
                 <a role="button" class="mr-2" (click)="delete(deleteCategory, c)"><i class="fa fa-trash-alt"></i></a>
                 <a role="button" class="mr-2" (click)="openModal(category, c)"><i
@@ -83,14 +79,14 @@
       </button>
     </div>
     <div class="modal-body">
-      <form [formGroup]="formGroup">
+      <form [formGroup]="formUpdate">
         <div class="row">
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
               <label>{{'category.name' | translate}}</label>
               <input type="text" class="form-control" placeholder="{{'category.name_placeholder' | translate}}"
                      formControlName="name">
-              <small class="form-text text-danger" *ngIf="submitted && formGroup.controls.name.invalid">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid">
                 {{'category.name_not_blank' | translate}}
               </small>
             </div>
@@ -105,8 +101,9 @@
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
               <label>{{'category.parent_name' | translate}}</label>
-              <select class="form-control" formControlName="parent">
-                <option [ngValue]="null">Chọn</option>
+              <select class="form-control" formControlName="parentId">
+                <option [value]="null">Chọn</option>
+                <option *ngFor="let c of parentCategories" [value]="c.id">{{c.name}}</option>
               </select>
             </div>
           </div>
@@ -114,10 +111,10 @@
             <div class="form-group">
               <label>{{'category.status' | translate}}</label>
               <select class="form-control" formControlName="status">
-                <option [ngValue]="null" [disabled]="true">Chọn</option>
+                <option [value]="null">Chọn</option>
                 <option *ngFor="let s of statuses" [value]="s.value">{{s.name}}</option>
               </select>
-              <small class="form-text text-danger" *ngIf="submitted && formGroup.controls.status.invalid">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.status.invalid">
                 {{'category.status_error' | translate}}
               </small>
             </div>

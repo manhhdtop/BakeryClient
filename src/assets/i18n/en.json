@@ -101,6 +101,7 @@
     "header": "Category management",
     "table_name": "Category",
     "table_search": "Search for category...",
+    "btn_new": "Add",
     "no": "No",
     "name": "Category name",
     "name_placeholder": "Category name...",
@@ -113,11 +114,12 @@
     "updated_date": "Updated date",
     "updated_by": "Updated by",
     "status": "Status",
-    "status_error": "Status can not blank",
+    "status_error": "Status is required",
     "modal": {
       "title_add": "Adding a category",
       "title_update": "Update category",
       "title_delete": "Delete category",
+      "message_delete": "<p><strong>Are you sure you want to delete category <span class=\"text-primary\">\"{{name}}\"</span>?</strong></p><p>All information associated to this category will be permanently deleted.<span class=\"text-danger\">This operation can not be undone.</span></p>",
       "btn_cancel": "Cancel",
       "btn_submit": "Submit",
       "btn_delete": "Delete"

@@ -5,25 +5,7 @@ export class Constant {
   public static readonly MESSAGE_ADD_SUCCESS = 'Success';
   public static readonly MESSAGE_UPDATE_SUCCESS = 'Success';
   public static readonly TOKEN = 'token';
-  public static readonly USER_TOKEN = 'user_token';
   public static readonly USER_INFO = 'user_info';
-  public static readonly LOGIN_FAIL = 'login_failed';
-  public static readonly ACTION = {
-    VIEW: 'VIEW',
-    ADD: 'ADD',
-    EDIT: 'EDIT',
-    DELETE: 'DELETE',
-  };
-  public static readonly SCREEN = {
-    MENU: 'menu',
-    ROLE: 'role',
-    USER: 'user',
-    GROUP: 'group',
-    CATEGORY: 'category',
-    MERCHANT: 'merchant',
-    TERMINAL: 'terminal',
-  };
-
   // Upload Image
   public static readonly DEFAULT_IMG_WIDTH = 500;
   public static readonly DEFAULT_IMG_HEIGHT = 500;

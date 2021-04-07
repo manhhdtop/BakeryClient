@@ -1,9 +1,9 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { CompilerOptions, Injectable, NgModuleRef, Type } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { CompilerOptions, Injectable, NgModuleRef, Type } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { throwError } from 'rxjs';
-import { AppConsts } from '../shared/appConsts';
 import { environment } from '../../environments/environment';
+import { AppConsts } from '../shared/appConsts';
 
 @Injectable()
 export class AppConfigService {

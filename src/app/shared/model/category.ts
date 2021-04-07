@@ -10,5 +10,4 @@ export interface Category {
   updatedDate: Date;
   updatedBy: User;
   status: number;
-  statusName: string;
 }

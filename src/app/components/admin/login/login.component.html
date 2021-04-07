@@ -8,13 +8,27 @@
           </div>
           <div class="login-text">
             <div class="login-text-input">
-              <input type="text" autofocus="autofocus" formControlName="username"
+              <input type="text" autofocus="autofocus" formControlName="username" class="form-control"
+                     [ngClass]="{'is-invalid': submitted && loginForm.controls.username.invalid}"
                      placeholder="{{ 'login_page.username' | translate }}"/>
             </div>
+            <div>
+              <small class="form-text text-danger text-left" *ngIf="submitted && loginForm.controls.username.invalid">
+                {{'login_page.username_required' | translate}}
+              </small>
+            </div>
           </div>
-          <div class="login-pass">
-            <input type="password" formControlName="password"
-                   placeholder="{{ 'login_page.password' | translate }}"/>
+          <div class="login-text">
+            <div class="login-text-input">
+              <input type="password" formControlName="password" class="form-control"
+                     [ngClass]="{'is-invalid': submitted && loginForm.controls.password.invalid}"
+                     placeholder="{{ 'login_page.password' | translate }}"/>
+            </div>
+            <div>
+              <small class="form-text text-danger text-left" *ngIf="submitted && loginForm.controls.password.invalid">
+                {{'login_page.password_required' | translate}}
+              </small>
+            </div>
           </div>
           <div *ngIf="messageError">
             <div class="alert alert-danger" role="alert">

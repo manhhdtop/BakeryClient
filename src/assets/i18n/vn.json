@@ -129,7 +129,7 @@
     "updated_date": "Ngày cập nhật",
     "updated_by": "Người cập nhật",
     "status": "Trạng thái",
-    "status_error": "Trạng thái không được để trống",
+    "status_error": "Trạng thái bắt buộc chọn",
     "modal": {
       "title_add": "Thêm mới danh mục",
       "title_update": "Cập nhật danh mục",
