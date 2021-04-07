@@ -52,9 +52,9 @@
               <td>{{c.description}}</td>
               <td>{{c.parent?.name}}</td>
               <td>{{c.createdDate | dateFormat: dateDdmmyyHhmmss}}</td>
-              <td>{{c.createdBy}}</td>
+              <td>{{c.createdBy?.name}}</td>
               <td>{{c.updatedDate | dateFormat: dateDdmmyyHhmmss}}</td>
-              <td>{{c.updatedBy}}</td>
+              <td>{{c.updatedBy?.name}}</td>
               <td>{{getStatusName(c.status)}}</td>
               <td class="min">
                 <a role="button" class="mr-2" (click)="delete(deleteCategory, c)"><i class="fa fa-trash-alt"></i></a>
@@ -102,7 +102,7 @@
             <div class="form-group">
               <label>{{'category.parent_name' | translate}}</label>
               <select class="form-control" formControlName="parentId">
-                <option [value]="null">Chọn</option>
+                <option value="">Chọn</option>
                 <option *ngFor="let c of parentCategories" [value]="c.id">{{c.name}}</option>
               </select>
             </div>
@@ -111,11 +111,14 @@
             <div class="form-group">
               <label>{{'category.status' | translate}}</label>
               <select class="form-control" formControlName="status">
-                <option [value]="null">Chọn</option>
+                <option value="">Chọn</option>
                 <option *ngFor="let s of statuses" [value]="s.value">{{s.name}}</option>
               </select>
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.status.invalid">
                 {{'category.status_error' | translate}}
+              </small>
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.status.valid">
+                {{'value:' + formUpdate.controls.status.value}}
               </small>
             </div>
           </div>

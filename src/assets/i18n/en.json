@@ -15,7 +15,7 @@
     "username": "Username...",
     "username_required": "Username can not be blank",
     "password": "Password...",
-    "password_required": "Password can not be blank",
+    "password_required": "Password can not be blank",cate
     "sign_in": "Login",
     "login_failed": "Username or password is incorrect"
   },

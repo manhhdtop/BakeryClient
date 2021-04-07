@@ -128,8 +128,8 @@ export class CategoryComponent implements OnInit {
       id: [null],
       name: [null, Validators.required],
       description: [null],
-      parentId: [null],
-      status: [null, Validators.required],
+      parentId: [''],
+      status: ['', Validators.required],
     });
   }
 
