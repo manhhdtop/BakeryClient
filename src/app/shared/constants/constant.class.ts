@@ -22,3 +22,9 @@ export class Constant {
   public static readonly VALID_FILE = 'Vui lòng chọn file upload';
   static HEADER_APPLICATION = 'Authorization';
 }
+
+export const Status = [
+  {value: 0, name: 'Chưa kích hoạt'},
+  {value: 1, name: 'Hoạt động'},
+  {value: -1, name: 'Khóa'},
+];

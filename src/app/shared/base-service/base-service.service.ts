@@ -19,25 +19,25 @@ export class BaseService {
     switch (responseType) {
       case 'text':
         return this.httpClient.get(url, {
-          headers: this.createHeaders(timeout).set('skipLoading', 'true') || {},
+          headers: this.createHeaders(timeout) || {},
           params,
           responseType: 'text',
         });
       case 'blob':
         return this.httpClient.get(url, {
-          headers: this.createHeaders(timeout).set('skipLoading', 'true') || {},
+          headers: this.createHeaders(timeout) || {},
           params,
           responseType: 'blob',
         });
       case 'arraybuffer':
-        return this.httpClient.post(url, {
+        return this.httpClient.get(url, {
           headers: this.createHeaders(timeout) || {},
           responseType: 'arraybuffer',
           params,
         });
       default:
         return this.httpClient.get(url, {
-          headers: this.createHeaders(timeout).set('skipLoading', 'true') || {},
+          headers: this.createHeaders(timeout) || {},
           params,
         });
     }
@@ -59,7 +59,7 @@ export class BaseService {
           responseType: 'blob',
         }).toPromise();
       case 'arraybuffer':
-        return await this.httpClient.post(url, {
+        return await this.httpClient.get(url, {
           headers: this.createHeaders() || {},
           responseType: 'arraybuffer',
           params,

@@ -10,4 +10,6 @@ export class UrlConstant {
   public static readonly UPLOAD = '/upload';
   public static readonly CATEGORY = UrlConstant.ADMIN + '/category';
   public static readonly PARENT_CATEGORIES = UrlConstant.CATEGORY + '/parents';
+  public static readonly ACTIVE_CATEGORIES = UrlConstant.CATEGORY + '/active';
+  public static readonly PRODUCT = UrlConstant.ADMIN + '/product';
 }

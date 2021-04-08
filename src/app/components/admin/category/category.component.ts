@@ -4,14 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService } from '../../../service/category.service';
 import { ToastService } from '../../../service/toast.service';
-import { Constant } from '../../../shared/constants/constant.class';
+import { Constant, Status } from '../../../shared/constants/constant.class';
 import { Category } from '../../../shared/model/category';
-
-export const Status = [
-  {value: 0, name: 'Chưa kích hoạt'},
-  {value: 1, name: 'Hoạt động'},
-  {value: -1, name: 'Khóa'},
-];
 
 @Component({
   selector: 'app-category',
@@ -27,12 +21,16 @@ export class CategoryComponent implements OnInit {
   submitted: boolean;
   formUpdate: FormGroup;
   formSearch: FormGroup;
+  page: number;
+  size: number;
+  totalItem: number;
+  currentItems: number;
 
   constructor(
     private activatedRoute: ActivatedRoute,
     private categoryService: CategoryService,
-    private modalService: NgbModal,
     private fb: FormBuilder,
+    private modalService: NgbModal,
     private router: Router,
     private toast: ToastService,
   ) {
@@ -41,12 +39,15 @@ export class CategoryComponent implements OnInit {
   ngOnInit(): void {
     this.dateDdmmyyHhmmss = Constant.DATE_DDMMYY_HHMMSS;
     this.selectedCategory = undefined;
-    const nameParam = this.activatedRoute.snapshot.queryParams.name;
-    this.getCategory(nameParam);
-    this.getParentCategories();
+    this.page = 1;
+    this.size = 20;
     this.formSearch = this.fb.group({
-      keyword: [null],
+      keyword: [''],
+      page: this.page,
+      size: this.size,
     });
+    this.getCategory();
+    this.getParentCategories();
   }
 
   openModal(content, category?: Category): void {
@@ -141,9 +142,13 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  private getCategory(nameParam?): void {
-    this.categoryService.getCategories(nameParam).subscribe(res => {
-      this.categories = res.data;
+  private getCategory(): void {
+    this.categoryService.getCategories(this.formSearch.value).subscribe(res => {
+      this.categories = res.data.content;
+      this.page = res.data.pageable.pageNumber + 1;
+      this.size = res.data.pageable.pageSize;
+      this.totalItem = res.data.totalElements;
+      this.currentItems = res.data.numberOfElements;
     }, error => {
       this.toast.showDanger(error.error.message);
     });
@@ -151,25 +156,16 @@ export class CategoryComponent implements OnInit {
 
   search(event): void {
     event.preventDefault();
-    const keyword = this.formSearch.controls.keyword.value?.trim();
-    if (keyword) {
-      this.router.navigate([], {
-        relativeTo: this.activatedRoute,
-        queryParams: {
-          name: keyword,
-        },
-        queryParamsHandling: 'merge',
-      });
-    } else {
-      this.router.navigate(
-        ['.'],
-        {relativeTo: this.activatedRoute, queryParams: {}},
-      );
-    }
-    this.getCategory(keyword);
+    this.getCategory();
   }
 
   getStatusName(status: number): string {
     return this.statuses.filter(e => e.value === status)[0].name;
+  }
+
+  onPageChange(): void {
+    this.toast.show('' + this.page);
+    this.formSearch.controls.page.setValue(this.page);
+    this.getCategory();
   }
 }

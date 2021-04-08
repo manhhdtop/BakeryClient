@@ -1,3 +1,4 @@
+import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseService } from '../shared/base-service/base-service.service';
@@ -25,12 +26,12 @@ export class CategoryService {
     return this.baseService.post(UrlConstant.CATEGORY, data);
   }
 
-  getCategories(nameParam): Observable<any> {
-    let param = '';
-    if (nameParam && nameParam !== '') {
-      param = '?name=' + nameParam;
-    }
-    return this.baseService.get(UrlConstant.CATEGORY + param);
+  getCategories(params): Observable<any> {
+    return this.baseService.get(UrlConstant.CATEGORY, params);
+  }
+
+  getActiveCategories(): Observable<any> {
+    return this.baseService.get(UrlConstant.ACTIVE_CATEGORIES);
   }
 
   delete(id): Observable<any> {

@@ -77,6 +77,15 @@ table th.min, td.min {
   white-space: nowrap;
 }
 
+table.table th, td {
+  width: auto;
+  white-space: nowrap;
+}
+
+table.table th.wrap, td.wrap {
+  width: auto;
+}
+
 hr {
   box-sizing: content-box;
   height: 0;

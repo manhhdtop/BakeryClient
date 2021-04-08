@@ -1,1 +1,172 @@
-<p>product works!</p>
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-3 text-gray-800">{{'product.header' | translate}}</h1>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="my-2 font-weight-bold text-primary">{{'product.table_name' | translate}}</h6>
+    </div>
+    <div class="card-body">
+      <div class="card-header py-3 d-flex justify-content-between">
+        <div class="col-auto px-0">
+          <button class="btn btn-primary" (click)="openModal(product)">{{'product.btn_new' | translate}}</button>
+        </div>
+        <div class="col-auto px-0">
+          <form [formGroup]="formSearch" (submit)="search($event)"
+                class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light small" formControlName="keyword"
+                     placeholder="{{'product.table_search' | translate}}"
+                     aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>{{'product.no' | translate}}</th>
+              <th>{{'product.name' | translate}}</th>
+              <th>{{'product.description' | translate}}</th>
+              <th>{{'product.category' | translate}}</th>
+              <th>{{'product.image' | translate}}</th>
+              <th>{{'product.created_date' | translate}}</th>
+              <th>{{'product.created_by' | translate}}</th>
+              <th>{{'product.updated_date' | translate}}</th>
+              <th>{{'product.updated_by' | translate}}</th>
+              <th>{{'product.status' | translate}}</th>
+              <th class="min"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let p of products, let i = index">
+              <td>{{i + 1}}</td>
+              <td>{{p.name}}</td>
+              <td>{{p.description}}</td>
+              <td>{{p.category.name}}</td>
+              <td>{{p.createdDate | dateFormat: dateDdmmyyHhmmss}}</td>
+              <td>{{p.createdBy?.name}}</td>
+              <td>{{p.updatedDate | dateFormat: dateDdmmyyHhmmss}}</td>
+              <td>{{p.updatedBy?.name}}</td>
+              <td>{{getStatusName(p.status)}}</td>
+              <td class="min">
+                <a role="button" class="mr-2" (click)="delete(deleteProduct, p)"><i class="fa fa-trash-alt"></i></a>
+                <a role="button" class="mr-2" (click)="openModal(product, p)"><i
+                  class="fa fa-edit"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-md-between mt-3" *ngIf="totalItem >= currentItems">
+        <div>
+          Showing {{(page - 1) * size + 1}} - {{(page - 1) * size + currentItems}} of {{totalItem}} items
+        </div>
+        <div>
+          <ngb-pagination
+            [(page)]="page"
+            [pageSize]="size"
+            [maxSize]="5"
+            [collectionSize]="totalItem"
+            [ellipses]="true"
+            (pageChange)="onPageChange()"
+          >
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #product let-modal class="modal-lg">
+    <div class="modal-header">
+      <div class="w-100">
+        <h4
+          class="modal-title">{{(selectedProduct ? 'product.modal.title_update' : 'product.modal.title_add') | translate}}</h4>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formUpdate">
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'product.name' | translate}}</label>
+              <input type="text" class="form-control" placeholder="{{'product.name_placeholder' | translate}}"
+                     formControlName="name">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid">
+                {{'product.name_not_blank' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'product.description' | translate}}</label>
+              <input type="text" class="form-control" placeholder="{{'product.description_placeholder' | translate}}"
+                     formControlName="description">
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'product.category' | translate}}</label>
+              <select class="form-control" formControlName="parentId">
+                <option value="">Chọn</option>
+                <option *ngFor="let c of categories" [value]="c.id">{{c.name}}</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'product.status' | translate}}</label>
+              <select class="form-control" formControlName="status">
+                <option value="">Chọn</option>
+                <option *ngFor="let s of statuses" [value]="s.value">{{s.name}}</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.status.invalid">
+                {{'product.status_error' | translate}}
+              </small>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()">
+        {{'product.modal.btn_cancel' | translate}}
+      </button>
+      <button class="btn btn-outline-primary" (click)="submit(modal)">
+        {{'product.modal.btn_submit' | translate}}
+      </button>
+    </div>
+  </ng-template>
+  <ng-template #deleteProduct let-modalDelete>
+    <div class="modal-header">
+      <div class="w-100">
+        <h4 class="modal-title text-left font-weight-bold">{{'product.modal.title_delete' | translate}}</h4>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="modalDelete.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body"
+         innerHtml="{{'product.modal.message_delete' | translate : {name: selectedProduct?.name} }}">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-secondary" (click)="modalDelete.dismiss()">
+        {{'product.modal.btn_cancel' | translate}}
+      </button>
+      <button class="btn btn-outline-danger" (click)="modalDelete.close('ok')">
+        {{'product.modal.btn_delete' | translate}}
+      </button>
+    </div>
+  </ng-template>
+</div>

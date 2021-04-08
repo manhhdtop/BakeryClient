@@ -139,5 +139,34 @@
       "btn_submit": "Lưu",
       "btn_delete": "Xóa"
     }
+  },
+  "product": {
+    "header": "Quản lý sản phẩm",
+    "table_name": "Sản phẩm",
+    "table_search": "Tìm kiếm sản phẩm...",
+    "btn_new": "Thêm mới",
+    "no": "STT",
+    "name": "Tên sản phẩm",
+    "name_placeholder": "Tên sản phẩm...",
+    "name_not_blank": "Tên sản phẩm không được để trống",
+    "description": "Mô tả",
+    "description_placeholder": "Mô tả...",
+    "image": "Hình ảnh",
+    "category": "Danh mục",
+    "created_date": "Ngày tạo",
+    "created_by": "Người tạo",
+    "updated_date": "Ngày cập nhật",
+    "updated_by": "Người cập nhật",
+    "status": "Trạng thái",
+    "status_error": "Trạng thái bắt buộc chọn",
+    "modal": {
+      "title_add": "Thêm mới sản phẩm",
+      "title_update": "Cập nhật sản phẩm",
+      "title_delete": "Xóa sản phẩm",
+      "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa sản phẩm <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><p> Tất cả thông tin liên quan đến sản phẩm này sẽ bị xóa vĩnh viễn. <span class=\"text-danger\">Không thể hoàn tác thao tác này.</span></p>",
+      "btn_cancel": "Hủy",
+      "btn_submit": "Lưu",
+      "btn_delete": "Xóa"
+    }
   }
 }
