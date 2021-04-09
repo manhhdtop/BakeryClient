@@ -8,6 +8,7 @@ import { UserService } from '../../../service/user.service';
 import { Constant, Status } from '../../../shared/constants/constant.class';
 import { Role } from '../../../shared/model/role';
 import { User } from '../../../shared/model/user';
+import { Utils } from '../../../shared/util/utils';
 
 @Component({
   selector: 'app-user',
@@ -164,7 +165,7 @@ export class UserComponent implements OnInit {
   }
 
   getStatusName(status: number): string {
-    return this.statuses.filter(e => e.value === status)[0].name;
+    return Utils.getStatusName(status);
   }
 
   onPageChange(): void {

@@ -12,6 +12,12 @@
       "name": "English"
     }
   },
+  "status": {
+    "deactive": "Chưa kích hoạt",
+    "active": "Hoạt động",
+    "locked": "Khóa",
+    "locked_by_admin": "Khóa do Admin"
+  },
   "login_page": {
     "username": "Tên đăng nhập...",
     "username_required": "Tên đăng nhập không được để trống",
@@ -96,6 +102,11 @@
         "title": "Đăng nhập để vào trang quản trị",
         "name": "Đăng nhập"
       },
+      "management": {
+        "href": "/admin/dashboard",
+        "title": "Quản trị",
+        "name": "Quản trị"
+      },
       "home": {
         "href": "/admin/dashboard",
         "title": "Dashboard",
@@ -111,10 +122,25 @@
         "title": "Quản lý sản phẩm",
         "name": "Sản phẩm"
       },
+      "user_role": {
+        "href": "tai-khoan",
+        "title": "Phân quyền và Người dùng",
+        "name": "Phân quyền và Người dùng"
+      },
       "user": {
         "href": "tai-khoan",
         "title": "Quản lý Tài khoản",
         "name": "Tài khoản"
+      },
+      "role": {
+        "href": "phan-quyen",
+        "title": "Quản lý Phân quyền",
+        "name": "Phân quyền"
+      },
+      "action": {
+        "href": "action",
+        "title": "Quản lý Action",
+        "name": "Action"
       }
     }
   },
@@ -183,12 +209,12 @@
     "table_search": "Tìm kiếm tài khoản...",
     "btn_new": "Thêm mới",
     "no": "STT",
-    "username": "Tên người dùng",
+    "username": "Tên tài khoản",
     "username_placeholder": "Tên tài khoản...",
     "username_not_blank": "Tên tài khoản không được để trống",
-    "name": "Tên tài khoản",
-    "name_placeholder": "Tên tài khoản...",
-    "name_not_blank": "Tên tài khoản không được để trống",
+    "name": "Tên người dùng",
+    "name_placeholder": "Tên người dùng...",
+    "name_not_blank": "Tên người dùng không được để trống",
     "email": "Email",
     "email_placeholder": "Email...",
     "email_error": "Email không được để trống",
@@ -203,6 +229,34 @@
       "title_update": "Cập nhật Tài khoản",
       "title_delete": "Xóa Tài khoản",
       "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa Tài khoản <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><span class=\"text-danger\">Không thể hoàn tác thao tác này.</span></p>",
+      "btn_cancel": "Hủy",
+      "btn_submit": "Lưu",
+      "btn_delete": "Xóa"
+    }
+  },
+  "action": {
+    "header": "Quản lý Action",
+    "table_name": "Action",
+    "table_search": "Tìm kiếm Action...",
+    "btn_new": "Thêm mới",
+    "no": "STT",
+    "code": "Mã Action",
+    "code_placeholder": "Mã Action...",
+    "code_not_blank": "Mã Action không được để trống",
+    "name": "Tên Action",
+    "name_placeholder": "Tên Action...",
+    "name_not_blank": "Tên Action không được để trống",
+    "description": "Mô tả",
+    "description_placeholder": "Mô tả...",
+    "created_date": "Ngày tạo",
+    "updated_date": "Ngày cập nhật",
+    "status": "Trạng thái",
+    "status_error": "Trạng thái bắt buộc chọn",
+    "modal": {
+      "title_add": "Thêm mới Action",
+      "title_update": "Cập nhật Action",
+      "title_delete": "Xóa Action",
+      "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa Action <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><span class=\"text-danger\">Không thể hoàn tác thao tác này.</span></p>",
       "btn_cancel": "Hủy",
       "btn_submit": "Lưu",
       "btn_delete": "Xóa"

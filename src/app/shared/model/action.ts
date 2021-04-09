@@ -4,4 +4,6 @@ export interface Action {
   name: string;
   description: string;
   status: number;
+  createdDate: Date;
+  updatedDate: Date;
 }

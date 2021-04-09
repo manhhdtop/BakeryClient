@@ -7,6 +7,7 @@ import { ProductComponent } from '../product/product.component';
 import { UserComponent } from '../user/user.component';
 import { AdminMasterPageComponent } from './admin-master-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { ActionComponent } from '../action/action.component';
 
 const routes: Routes = [
   {
@@ -72,6 +73,15 @@ const routes: Routes = [
         component: UserComponent,
         data: {
           page_title: 'menu.admin.user.title',
+        },
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
+      },
+      {
+        path: 'action',
+        component: ActionComponent,
+        data: {
+          page_title: 'menu.admin.action.title',
         },
         canActivate: [AuthGuard],
         canLoad: [AuthGuard],

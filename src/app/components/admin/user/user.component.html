@@ -51,7 +51,7 @@
               <td>{{u.email}}</td>
               <td>{{u.createdDate | dateFormat: dateDdmmyyHhmmss}}</td>
               <td>{{u.updatedDate | dateFormat: dateDdmmyyHhmmss}}</td>
-              <td>{{getStatusName(u.status)}}</td>
+              <td>{{getStatusName(u.status) | translate}}</td>
               <td class="min">
                 <a role="button" class="mr-2" (click)="delete(deleteUser, u)"><i class="fa fa-trash-alt"></i></a>
                 <a role="button" class="mr-2" (click)="openModal(user, u)"><i
@@ -137,7 +137,7 @@
               <label>{{'user.status' | translate}}</label>
               <select class="form-control" formControlName="status">
                 <option value="">{{'choose' | translate}}</option>
-                <option *ngFor="let s of statuses" [value]="s.value">{{s.name}}</option>
+                <option *ngFor="let s of statuses" [value]="s.value">{{s.name | translate}}</option>
               </select>
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.status.invalid">
                 {{'user.status_error' | translate}}

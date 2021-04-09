@@ -12,6 +12,12 @@
       "name": "English"
     }
   },
+  "status": {
+    "deactive": "Deactive",
+    "active": "Active",
+    "locked": "Locked",
+    "locked_by_admin": "Locked by Admin"
+  },
   "login_page": {
     "username": "Username...",
     "username_required": "Username can not be blank",
@@ -81,6 +87,11 @@
         "title": "Dashboard",
         "name": "Dashboard"
       },
+      "management": {
+        "href": "/admin/dashboard",
+        "title": "Management",
+        "name": "Management"
+      },
       "login": {
         "href": "login",
         "title": "Login to management page",
@@ -96,10 +107,25 @@
         "title": "Product Management",
         "name": "Product"
       },
+      "user_role": {
+        "href": "user",
+        "title": "User & Role",
+        "name": "User & Role"
+      },
       "user": {
         "href": "user",
         "title": "User Management",
         "name": "User"
+      },
+      "role": {
+        "href": "role",
+        "title": "Role Management",
+        "name": "Role"
+      },
+      "action": {
+        "href": "action",
+        "title": "Action Management",
+        "name": "Action"
       }
     }
   },
@@ -163,10 +189,10 @@
     }
   },
   "user": {
-    "header": "Quản lý User",
+    "header": "User Management",
     "table_name": "Users",
-    "table_search": "Tìm kiếm user...",
-    "btn_new": "Thêm mới",
+    "table_search": "Searching user...",
+    "btn_new": "New",
     "no": "STT",
     "username": "Username",
     "username_placeholder": "Username...",
@@ -188,9 +214,37 @@
       "title_update": "Update User",
       "title_delete": "Delete User",
       "message_delete": "<p><strong>Are you sure you want to delete this user <span class=\"text-primary\">\"{{name}}\"</span>?</strong></p><span class=\"text-danger\">This operation can not be undone.</span></p>",
-      "btn_cancel": "Hủy",
-      "btn_submit": "Lưu",
-      "btn_delete": "Xóa"
+      "btn_cancel": "Cancel",
+      "btn_submit": "Save",
+      "btn_delete": "Delete"
+    }
+  },
+  "action": {
+    "header": "Action Management",
+    "table_name": "Actions",
+    "table_search": "Searching action...",
+    "btn_new": "New",
+    "no": "STT",
+    "code": "Action code",
+    "code_placeholder": "Action code...",
+    "code_not_blank": "Action code can not blank",
+    "name": "Name",
+    "name_placeholder": "Name...",
+    "name_not_blank": "Name can not blank",
+    "description": "Description",
+    "description_placeholder": "Description...",
+    "created_date": "Created date",
+    "updated_date": "Updated date",
+    "status": "Status",
+    "status_error": "Status is required",
+    "modal": {
+      "title_add": "New User",
+      "title_update": "Update User",
+      "title_delete": "Delete User",
+      "message_delete": "<p><strong>Are you sure you want to delete this Action <span class=\"text-primary\">\"{{name}}\"</span>?</strong></p><span class=\"text-danger\">This operation can not be undone.</span></p>",
+      "btn_cancel": "Cancel",
+      "btn_submit": "Save",
+      "btn_delete": "Delete"
     }
   }
 }

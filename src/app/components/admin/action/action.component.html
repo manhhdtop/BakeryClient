@@ -1,24 +1,24 @@
 <div class="container-fluid">
 
   <!-- Page Heading -->
-  <h1 class="h3 mb-3 text-gray-800">{{'category.header' | translate}}</h1>
+  <h1 class="h3 mb-3 text-gray-800">{{'action.header' | translate}}</h1>
 
   <!-- DataTales Example -->
   <div class="card shadow mb-4">
     <div class="card-header py-3">
-      <h6 class="my-2 font-weight-bold text-primary">{{'category.table_name' | translate}}</h6>
+      <h6 class="my-2 font-weight-bold text-primary">{{'action.table_name' | translate}}</h6>
     </div>
     <div class="card-body">
       <div class="card-header py-3 d-flex justify-content-between">
         <div class="col-auto px-0">
-          <button class="btn btn-primary" (click)="openModal(category)">{{'category.btn_new' | translate}}</button>
+          <button class="btn btn-primary" (click)="openModal(action)">{{'action.btn_new' | translate}}</button>
         </div>
         <div class="col-auto px-0">
           <form [formGroup]="formSearch" (submit)="search($event)"
                 class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100">
             <div class="input-group">
               <input type="text" class="form-control bg-light small" formControlName="keyword"
-                     placeholder="{{'category.table_search' | translate}}"
+                     placeholder="{{'action.table_search' | translate}}"
                      aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-primary">
@@ -33,32 +33,28 @@
         <table class="table table-hover table-bordered">
           <thead>
             <tr>
-              <th>{{'category.no' | translate}}</th>
-              <th>{{'category.name' | translate}}</th>
-              <th>{{'category.description' | translate}}</th>
-              <th>{{'category.parent_name' | translate}}</th>
-              <th>{{'category.created_date' | translate}}</th>
-              <th>{{'category.created_by' | translate}}</th>
-              <th>{{'category.updated_date' | translate}}</th>
-              <th>{{'category.updated_by' | translate}}</th>
-              <th>{{'category.status' | translate}}</th>
+              <th>{{'action.no' | translate}}</th>
+              <th>{{'action.code' | translate}}</th>
+              <th>{{'action.name' | translate}}</th>
+              <th>{{'action.description' | translate}}</th>
+              <th>{{'action.created_date' | translate}}</th>
+              <th>{{'action.updated_date' | translate}}</th>
+              <th>{{'action.status' | translate}}</th>
               <th class="min"></th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let c of categories, let i = index">
+            <tr *ngFor="let a of actions, let i = index">
               <td>{{i + 1}}</td>
-              <td>{{c.name}}</td>
-              <td>{{c.description}}</td>
-              <td>{{c.parent?.name}}</td>
-              <td>{{c.createdDate | dateFormat: dateDdmmyyHhmmss}}</td>
-              <td>{{c.createdBy?.name}}</td>
-              <td>{{c.updatedDate | dateFormat: dateDdmmyyHhmmss}}</td>
-              <td>{{c.updatedBy?.name}}</td>
-              <td>{{getStatusName(c.status) | translate}}</td>
+              <td>{{a.code}}</td>
+              <td>{{a.name}}</td>
+              <td>{{a.description}}</td>
+              <td>{{a.createdDate | dateFormat: dateDdmmyyHhmmss}}</td>
+              <td>{{a.updatedDate | dateFormat: dateDdmmyyHhmmss}}</td>
+              <td>{{getStatusName(a.status) | translate}}</td>
               <td class="min">
-                <a role="button" class="mr-2" (click)="delete(deleteCategory, c)"><i class="fa fa-trash-alt"></i></a>
-                <a role="button" class="mr-2" (click)="openModal(category, c)"><i
+                <a role="button" class="mr-2" (click)="delete(deleteAction, a)"><i class="fa fa-trash-alt"></i></a>
+                <a role="button" class="mr-2" (click)="openModal(action, a)"><i
                   class="fa fa-edit"></i></a>
               </td>
             </tr>
@@ -84,11 +80,11 @@
     </div>
   </div>
 
-  <ng-template #category let-modal>
+  <ng-template #action let-modal>
     <div class="modal-header">
       <div class="w-100">
         <h4
-          class="modal-title">{{(selectedCategory ? 'category.modal.title_update' : 'category.modal.title_add') | translate}}</h4>
+          class="modal-title">{{(selectedAction ? 'action.modal.title_update' : 'action.modal.title_add') | translate}}</h4>
       </div>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
         <span aria-hidden="true">&times;</span>
@@ -99,39 +95,40 @@
         <div class="row">
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
-              <label>{{'category.name' | translate}}</label>
-              <input type="text" class="form-control" placeholder="{{'category.name_placeholder' | translate}}"
-                     formControlName="name">
-              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid">
-                {{'category.name_not_blank' | translate}}
+              <label>{{'action.code' | translate}}</label>
+              <input type="text" class="form-control" placeholder="{{'action.code_placeholder' | translate}}"
+                     formControlName="code">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.code.invalid">
+                {{'action.code_not_blank' | translate}}
               </small>
             </div>
           </div>
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
-              <label>{{'category.description' | translate}}</label>
-              <input type="text" class="form-control" placeholder="{{'category.description_placeholder' | translate}}"
+              <label>{{'action.name' | translate}}</label>
+              <input type="text" class="form-control" placeholder="{{'action.name_placeholder' | translate}}"
+                     formControlName="name">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid">
+                {{'action.name_not_blank' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'action.description' | translate}}</label>
+              <input type="email" class="form-control" placeholder="{{'action.description_placeholder' | translate}}"
                      formControlName="description">
             </div>
           </div>
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
-              <label>{{'category.parent_name' | translate}}</label>
-              <select class="form-control" formControlName="parentId">
-                <option value="">{{'choose' | translate}}</option>
-                <option *ngFor="let c of parentCategories" [value]="c.id">{{c.name}}</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <div class="form-group">
-              <label>{{'category.status' | translate}}</label>
+              <label>{{'action.status' | translate}}</label>
               <select class="form-control" formControlName="status">
                 <option value="">{{'choose' | translate}}</option>
                 <option *ngFor="let s of statuses" [value]="s.value">{{s.name | translate}}</option>
               </select>
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.status.invalid">
-                {{'category.status_error' | translate}}
+                {{'action.status_error' | translate}}
               </small>
             </div>
           </div>
@@ -140,31 +137,31 @@
     </div>
     <div class="modal-footer">
       <button class="btn btn-outline-secondary" (click)="modal.dismiss()">
-        {{'category.modal.btn_cancel' | translate}}
+        {{'action.modal.btn_cancel' | translate}}
       </button>
       <button class="btn btn-outline-primary" (click)="submit(modal)">
-        {{'category.modal.btn_submit' | translate}}
+        {{'action.modal.btn_submit' | translate}}
       </button>
     </div>
   </ng-template>
-  <ng-template #deleteCategory let-modalDelete>
+  <ng-template #deleteAction let-modal>
     <div class="modal-header">
       <div class="w-100">
-        <h4 class="modal-title text-left font-weight-bold">{{'category.modal.title_delete' | translate}}</h4>
+        <h4 class="modal-title text-left font-weight-bold">{{'action.modal.title_delete' | translate}}</h4>
       </div>
-      <button type="button" class="close" aria-label="Close" (click)="modalDelete.dismiss()">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     <div class="modal-body"
-         innerHtml="{{'category.modal.message_delete' | translate : {name: selectedCategory?.name} }}">
+         innerHtml="{{'action.modal.message_delete' | translate : {name: selectedAction?.name} }}">
     </div>
     <div class="modal-footer">
-      <button class="btn btn-outline-secondary" (click)="modalDelete.dismiss()">
-        {{'category.modal.btn_cancel' | translate}}
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()">
+        {{'action.modal.btn_cancel' | translate}}
       </button>
-      <button class="btn btn-outline-danger" (click)="modalDelete.close('ok')">
-        {{'category.modal.btn_delete' | translate}}
+      <button class="btn btn-outline-danger" (click)="modal.close('ok')">
+        {{'action.modal.btn_delete' | translate}}
       </button>
     </div>
   </ng-template>

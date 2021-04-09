@@ -24,7 +24,7 @@ export class Constant {
 }
 
 export const Status = [
-  {value: 0, name: 'Chưa kích hoạt'},
-  {value: 1, name: 'Hoạt động'},
-  {value: -1, name: 'Khóa'},
+  {value: 0, name: 'status.deactive'},
+  {value: 1, name: 'status.active'},
+  {value: -1, name: 'status.locked'},
 ];

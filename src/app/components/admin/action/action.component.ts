@@ -1,23 +1,23 @@
 import { Component, OnInit } from '@angular/core';
+import { Constant, Status } from '../../../shared/constants/constant.class';
+import { Utils } from '../../../shared/util/utils';
+import { Action } from '../../../shared/model/action';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CategoryService } from '../../../service/category.service';
+import { RoleService } from '../../../service/role.service';
 import { ToastService } from '../../../service/toast.service';
-import { Constant, Status } from '../../../shared/constants/constant.class';
-import { Category } from '../../../shared/model/category';
-import { Utils } from '../../../shared/util/utils';
+import { ActionService } from '../../../service/action.service';
 
 @Component({
-  selector: 'app-category',
-  templateUrl: './category.component.html',
-  styleUrls: ['./category.component.css'],
+  selector: 'app-action',
+  templateUrl: './action.component.html',
+  styleUrls: ['./action.component.css'],
 })
-export class CategoryComponent implements OnInit {
+export class ActionComponent implements OnInit {
   readonly statuses = Status;
-  selectedCategory: Category;
-  categories: Category[];
-  parentCategories: Category[];
+  selectedAction: Action;
+  actions: Action[];
   dateDdmmyyHhmmss: string;
   submitted: boolean;
   formUpdate: FormGroup;
@@ -29,17 +29,18 @@ export class CategoryComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private categoryService: CategoryService,
     private fb: FormBuilder,
     private modalService: NgbModal,
+    private roleService: RoleService,
     private router: Router,
     private toast: ToastService,
+    private actionService: ActionService,
   ) {
   }
 
   ngOnInit(): void {
     this.dateDdmmyyHhmmss = Constant.DATE_DDMMYY_HHMMSS;
-    this.selectedCategory = undefined;
+    this.selectedAction = undefined;
     this.page = 1;
     this.size = 20;
     this.formSearch = this.fb.group({
@@ -47,25 +48,23 @@ export class CategoryComponent implements OnInit {
       page: this.page,
       size: this.size,
     });
-    this.getCategory();
-    this.getParentCategories();
+    this.getActions();
   }
 
-  openModal(content, category?: Category): void {
-    this.selectedCategory = category;
-    this.formUpdate = this.initForm(category);
+  openModal(content, action?: Action): void {
+    this.selectedAction = action;
+    this.formUpdate = this.initForm(action);
     this.submitted = false;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
-  delete(content, category: Category): void {
-    this.selectedCategory = category;
+  delete(content, action: Action): void {
+    this.selectedAction = action;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       if (result && result.trim() === 'ok') {
-        this.categoryService.delete(this.selectedCategory.id).subscribe(res => {
+        this.actionService.delete(this.selectedAction.id).subscribe(res => {
           if (res.errorCode === '200') {
-            this.getCategory();
-            this.getParentCategories();
+            this.getActions();
             this.toast.showSuccess(res.errorDescription);
           } else {
             this.toast.showDanger(res.errorDescription);
@@ -84,11 +83,10 @@ export class CategoryComponent implements OnInit {
     if (this.formUpdate.invalid) {
       return;
     }
-    if (this.selectedCategory) {
-      this.categoryService.update(this.formUpdate.value).subscribe(res => {
+    if (this.selectedAction) {
+      this.actionService.update(this.formUpdate.value).subscribe(res => {
         if (res.errorCode === '200') {
-          this.getCategory();
-          this.getParentCategories();
+          this.getActions();
           this.toast.showSuccess(res.errorDescription);
           modal.dismiss();
         } else {
@@ -101,10 +99,9 @@ export class CategoryComponent implements OnInit {
       return;
     }
 
-    this.categoryService.save(this.formUpdate.value).subscribe(res => {
+    this.actionService.save(this.formUpdate.value).subscribe(res => {
       if (res.errorCode === '200') {
-        this.getCategory();
-        this.getParentCategories();
+        this.getActions();
         this.toast.showSuccess(res.errorDescription);
         modal.dismiss();
       } else {
@@ -116,36 +113,28 @@ export class CategoryComponent implements OnInit {
     });
   }
 
-  initForm(category): FormGroup {
-    if (category) {
+  initForm(action): FormGroup {
+    if (action) {
       return this.fb.group({
-        id: [category.id, Validators.required],
-        name: [category.name, Validators.required],
-        description: [category.description],
-        parentId: [category.parent?.id],
-        status: [category.status, Validators.required],
+        id: [action.id, Validators.required],
+        code: [action.code, Validators.required],
+        name: [action.name, Validators.required],
+        description: [action.description],
+        status: [action.status, Validators.required],
       });
     }
     return this.fb.group({
       id: [null],
+      code: [null, Validators.required],
       name: [null, Validators.required],
       description: [null],
-      parentId: [''],
       status: ['', Validators.required],
     });
   }
 
-  private getParentCategories(): void {
-    this.categoryService.getParentCategories().subscribe(res => {
-      this.parentCategories = res.data;
-    }, error => {
-      this.toast.showDanger(error.error.message);
-    });
-  }
-
-  private getCategory(): void {
-    this.categoryService.getCategories(this.formSearch.value).subscribe(res => {
-      this.categories = res.data.content;
+  private getActions(): void {
+    this.actionService.getActions(this.formSearch.value).subscribe(res => {
+      this.actions = res.data.content;
       this.page = res.data.pageable.pageNumber + 1;
       this.size = res.data.pageable.pageSize;
       this.totalItem = res.data.totalElements;
@@ -157,7 +146,7 @@ export class CategoryComponent implements OnInit {
 
   search(event): void {
     event.preventDefault();
-    this.getCategory();
+    this.getActions();
   }
 
   getStatusName(status: number): string {
@@ -167,6 +156,6 @@ export class CategoryComponent implements OnInit {
   onPageChange(): void {
     this.toast.show('' + this.page);
     this.formSearch.controls.page.setValue(this.page);
-    this.getCategory();
+    this.getActions();
   }
 }

@@ -17,6 +17,8 @@ import { ToastComponent } from './shared/component/toast/toast.component';
 import { AuthGuard } from './shared/guards/auth-guard.class';
 import { SharedModule } from './shared/shared.module';
 import { UserComponent } from './components/admin/user/user.component';
+import { RoleComponent } from './components/admin/role/role.component';
+import { ActionComponent } from './components/admin/action/action.component';
 
 export function configServiceFactory(config: AppConfigService) {
   return () => config.load();
@@ -30,6 +32,8 @@ export function configServiceFactory(config: AppConfigService) {
     PageNotFoundComponent,
     ToastComponent,
     UserComponent,
+    RoleComponent,
+    ActionComponent,
   ],
   imports: [
     AppRoutingModule,

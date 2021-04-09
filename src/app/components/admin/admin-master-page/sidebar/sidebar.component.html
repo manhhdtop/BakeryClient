@@ -21,7 +21,7 @@
   <hr class="sidebar-divider">
 
   <div class="sidebar-heading">
-    Management
+    {{'menu.admin.management.name' | translate}}
   </div>
   <li class="nav-item" [routerLinkActive]="'active'">
     <a class="nav-link" routerLink="{{'menu.admin.category.href' | translate}}">
@@ -35,11 +35,27 @@
       <span>{{'menu.admin.product.name' | translate}}</span>
     </a>
   </li>
+
+  <div class="sidebar-heading">
+    {{'menu.admin.user_role.name' | translate}}
+  </div>
   <hr class="sidebar-divider">
   <li class="nav-item" [routerLinkActive]="'active'">
     <a class="nav-link" routerLink="{{'menu.admin.user.href' | translate}}">
       <i class="fas fa-fw fa-birthday-cake"></i>
       <span>{{'menu.admin.user.name' | translate}}</span>
+    </a>
+  </li>
+  <li class="nav-item" [routerLinkActive]="'active'">
+    <a class="nav-link" routerLink="{{'menu.admin.role.href' | translate}}">
+      <i class="fas fa-fw fa-birthday-cake"></i>
+      <span>{{'menu.admin.role.name' | translate}}</span>
+    </a>
+  </li>
+  <li class="nav-item" [routerLinkActive]="'active'">
+    <a class="nav-link" routerLink="{{'menu.admin.action.href' | translate}}">
+      <i class="fas fa-fw fa-birthday-cake"></i>
+      <span>{{'menu.admin.action.name' | translate}}</span>
     </a>
   </li>
 

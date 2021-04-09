@@ -11,6 +11,7 @@ import { Constant, Status } from '../../../shared/constants/constant.class';
 import { Category } from '../../../shared/model/category';
 import { Product } from '../../../shared/model/product';
 import { UploadResponse } from '../../../shared/model/upload-response';
+import { Utils } from '../../../shared/util/utils';
 
 @Component({
   selector: 'app-product',
@@ -188,7 +189,7 @@ export class ProductComponent implements OnInit {
   }
 
   getStatusName(status: number): string {
-    return this.statuses.filter(e => e.value === status)[0].name;
+    return Utils.getStatusName(status);
   }
 
   onPageChange(): void {
