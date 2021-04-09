@@ -1,5 +1,6 @@
 {
   "logo_text": "Bakery",
+  "choose": "Chọn",
   "address": "Ngô Xuân Quảng, Trâu Quỳ, Gia Lâm, Hà Nội",
   "language": {
     "vn": {
@@ -109,6 +110,11 @@
         "href": "san-pham",
         "title": "Quản lý sản phẩm",
         "name": "Sản phẩm"
+      },
+      "user": {
+        "href": "tai-khoan",
+        "title": "Quản lý Tài khoản",
+        "name": "Tài khoản"
       }
     }
   },
@@ -152,6 +158,8 @@
     "description": "Mô tả",
     "description_placeholder": "Mô tả...",
     "image": "Hình ảnh",
+    "image_placeholder": "Chọn hình ảnh...",
+    "image_error": "Hình ảnh không được để trống",
     "category": "Danh mục",
     "created_date": "Ngày tạo",
     "created_by": "Người tạo",
@@ -164,6 +172,37 @@
       "title_update": "Cập nhật sản phẩm",
       "title_delete": "Xóa sản phẩm",
       "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa sản phẩm <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><p> Tất cả thông tin liên quan đến sản phẩm này sẽ bị xóa vĩnh viễn. <span class=\"text-danger\">Không thể hoàn tác thao tác này.</span></p>",
+      "btn_cancel": "Hủy",
+      "btn_submit": "Lưu",
+      "btn_delete": "Xóa"
+    }
+  },
+  "user": {
+    "header": "Quản lý Tài khoản",
+    "table_name": "Tài khoản",
+    "table_search": "Tìm kiếm tài khoản...",
+    "btn_new": "Thêm mới",
+    "no": "STT",
+    "username": "Tên người dùng",
+    "username_placeholder": "Tên tài khoản...",
+    "username_not_blank": "Tên tài khoản không được để trống",
+    "name": "Tên tài khoản",
+    "name_placeholder": "Tên tài khoản...",
+    "name_not_blank": "Tên tài khoản không được để trống",
+    "email": "Email",
+    "email_placeholder": "Email...",
+    "email_error": "Email không được để trống",
+    "role": "Quyền",
+    "role_error": "Quyền không được để trống",
+    "created_date": "Ngày tạo",
+    "updated_date": "Ngày cập nhật",
+    "status": "Trạng thái",
+    "status_error": "Trạng thái bắt buộc chọn",
+    "modal": {
+      "title_add": "Thêm mới Tài khoản",
+      "title_update": "Cập nhật Tài khoản",
+      "title_delete": "Xóa Tài khoản",
+      "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa Tài khoản <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><span class=\"text-danger\">Không thể hoàn tác thao tác này.</span></p>",
       "btn_cancel": "Hủy",
       "btn_submit": "Lưu",
       "btn_delete": "Xóa"

@@ -52,6 +52,7 @@
               <td>{{p.name}}</td>
               <td>{{p.description}}</td>
               <td>{{p.category.name}}</td>
+              <td></td>
               <td>{{p.createdDate | dateFormat: dateDdmmyyHhmmss}}</td>
               <td>{{p.createdBy?.name}}</td>
               <td>{{p.updatedDate | dateFormat: dateDdmmyyHhmmss}}</td>
@@ -118,8 +119,8 @@
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
               <label>{{'product.category' | translate}}</label>
-              <select class="form-control" formControlName="parentId">
-                <option value="">Chọn</option>
+              <select class="form-control" formControlName="categoryId">
+                <option value="">{{'choose' | translate}}</option>
                 <option *ngFor="let c of categories" [value]="c.id">{{c.name}}</option>
               </select>
             </div>
@@ -128,13 +129,34 @@
             <div class="form-group">
               <label>{{'product.status' | translate}}</label>
               <select class="form-control" formControlName="status">
-                <option value="">Chọn</option>
+                <option value="">{{'choose' | translate}}</option>
                 <option *ngFor="let s of statuses" [value]="s.value">{{s.name}}</option>
               </select>
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.status.invalid">
                 {{'product.status_error' | translate}}
               </small>
             </div>
+          </div>
+          <div class="col-md-12" [ngClass]="{'col-lg-6': files && files.length > 0}">
+            <div class="form-group">
+              <label>{{'product.image' | translate}}</label>
+              <input class="form-control" (click)="imageInput.click()" [value]="images" readonly>
+              <input #imageInput type="file" class="d-none" placeholder="{{'product.image_placeholder' | translate}}"
+                     accept="image/*" multiple (change)="processFile(imageInput)"/>
+              <small class="form-text text-danger" *ngIf="submitted && (!files || files.length === 0)">
+                {{'product.image_error' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-6" *ngIf="files && files.length > 0">
+            <label>{{'product.image' | translate}}</label>
+            <ul class="list-group list-group-horizontal list-image">
+              <li class="list-group-item d-flex justify-content-between align-items-start"
+                  *ngFor="let f of files">
+                <img [src]="baseUrl + f.uri" class="img img-responsive" (click)="openImage(imageModal, f)">
+                <span class="badge bg-primary rounded-pill" role="button" (click)="removeImage(f)">x</span>
+              </li>
+            </ul>
           </div>
         </div>
       </form>
@@ -167,6 +189,16 @@
       <button class="btn btn-outline-danger" (click)="modalDelete.close('ok')">
         {{'product.modal.btn_delete' | translate}}
       </button>
+    </div>
+  </ng-template>
+  <ng-template #imageModal let-modal>
+    <div class="modal-header">
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <img class="img w-100" [src]="baseUrl + selectedImage.uri"/>
     </div>
   </ng-template>
 </div>

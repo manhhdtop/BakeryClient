@@ -16,6 +16,7 @@ import { BaseService } from './shared/base-service/base-service.service';
 import { ToastComponent } from './shared/component/toast/toast.component';
 import { AuthGuard } from './shared/guards/auth-guard.class';
 import { SharedModule } from './shared/shared.module';
+import { UserComponent } from './components/admin/user/user.component';
 
 export function configServiceFactory(config: AppConfigService) {
   return () => config.load();
@@ -28,6 +29,7 @@ export function configServiceFactory(config: AppConfigService) {
     InternalServerErrorComponent,
     PageNotFoundComponent,
     ToastComponent,
+    UserComponent,
   ],
   imports: [
     AppRoutingModule,

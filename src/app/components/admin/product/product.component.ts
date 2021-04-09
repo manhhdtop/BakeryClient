@@ -2,12 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AppConfigService } from '../../../service/app-config.service';
 import { CategoryService } from '../../../service/category.service';
 import { ProductService } from '../../../service/product.service';
 import { ToastService } from '../../../service/toast.service';
+import { UploadService } from '../../../service/upload.service';
 import { Constant, Status } from '../../../shared/constants/constant.class';
 import { Category } from '../../../shared/model/category';
 import { Product } from '../../../shared/model/product';
+import { UploadResponse } from '../../../shared/model/upload-response';
 
 @Component({
   selector: 'app-product',
@@ -17,6 +20,7 @@ import { Product } from '../../../shared/model/product';
 export class ProductComponent implements OnInit {
   readonly statuses = Status;
   selectedProduct: Product;
+  selectedImage: UploadResponse;
   products: Product[];
   categories: Category[];
   dateDdmmyyHhmmss: string;
@@ -27,19 +31,25 @@ export class ProductComponent implements OnInit {
   size: number;
   totalItem: number;
   currentItems: number;
+  images: string;
+  baseUrl: string;
+  files: UploadResponse[];
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private appConfigService: AppConfigService,
     private categoryService: CategoryService,
     private fb: FormBuilder,
     private productService: ProductService,
     private modalService: NgbModal,
     private router: Router,
     private toast: ToastService,
+    private uploadService: UploadService,
   ) {
   }
 
   ngOnInit(): void {
+    this.baseUrl = this.appConfigService.getConfig().api.baseUrl;
     this.dateDdmmyyHhmmss = Constant.DATE_DDMMYY_HHMMSS;
     this.selectedProduct = undefined;
     this.page = 1;
@@ -60,6 +70,14 @@ export class ProductComponent implements OnInit {
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'xl',
+    });
+  }
+
+  openImage(content, image: UploadResponse): void {
+    this.selectedImage = image;
+    this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'lg',
     });
   }
 
@@ -85,11 +103,12 @@ export class ProductComponent implements OnInit {
 
   submit(modal): void {
     this.submitted = true;
-    if (this.formUpdate.invalid) {
+    if (this.formUpdate.invalid || !this.files || this.files.length === 0) {
       return;
     }
+    this.formUpdate.controls.imageUploads.setValue(this.files);
     if (this.selectedProduct) {
-      this.categoryService.update(this.formUpdate.value).subscribe(res => {
+      this.productService.update(this.formUpdate.value).subscribe(res => {
         if (res.errorCode === '200') {
           this.getProducts();
           this.toast.showSuccess(res.errorDescription);
@@ -104,7 +123,7 @@ export class ProductComponent implements OnInit {
       return;
     }
 
-    this.categoryService.save(this.formUpdate.value).subscribe(res => {
+    this.productService.save(this.formUpdate.value).subscribe(res => {
       if (res.errorCode === '200') {
         this.getProducts();
         this.toast.showSuccess(res.errorDescription);
@@ -118,21 +137,27 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  initForm(category): FormGroup {
-    if (category) {
+  initForm(product): FormGroup {
+    if (product) {
+      this.files = product.images;
+      this.getListFileName(this.files);
       return this.fb.group({
-        id: [category.id, Validators.required],
-        name: [category.name, Validators.required],
-        description: [category.description],
-        parentId: [category.parent?.id],
-        status: [category.status, Validators.required],
+        id: [product.id, Validators.required],
+        name: [product.name, Validators.required],
+        description: [product.description],
+        categoryId: [product.category.id],
+        imageUploads: [null],
+        status: [product.status, Validators.required],
       });
     }
+    this.images = '';
+    this.files = [];
     return this.fb.group({
       id: [null],
       name: [null, Validators.required],
       description: [null],
-      parentId: [''],
+      categoryId: [''],
+      imageUploads: [null],
       status: ['', Validators.required],
     });
   }
@@ -147,7 +172,7 @@ export class ProductComponent implements OnInit {
 
   private getProducts(): void {
     this.productService.getProducts(this.formSearch.value).subscribe(res => {
-      this.categories = res.data.content;
+      this.products = res.data.content;
       this.page = res.data.pageable.pageNumber + 1;
       this.size = res.data.pageable.pageSize;
       this.totalItem = res.data.totalElements;
@@ -170,5 +195,39 @@ export class ProductComponent implements OnInit {
     this.toast.show('' + this.page);
     this.formSearch.controls.page.setValue(this.page);
     this.getProducts();
+  }
+
+  processFile(imageInput: any): void {
+    const formData: FormData = new FormData();
+    const fileArray: File[] = Array.from(imageInput.files);
+    for (const f of fileArray) {
+      formData.append('files', f);
+    }
+    this.uploadService.uploadImages(formData).subscribe(res => {
+      console.log();
+      this.files = this.files.concat(res);
+      this.getListFileName(res);
+    }, error => {
+      this.toast.showDanger(error.error.message);
+    });
+  }
+
+  private getListFileName(uploadFileResponses): void {
+    let s = '';
+    this.files.forEach(e => {
+      console.log('file: ', e);
+      if (s === '') {
+        s += e.fileName;
+      } else {
+        s += '; ' + e.fileName;
+      }
+    });
+    this.images = s;
+  }
+
+  removeImage(file): void {
+    this.files = this.files.filter(e => {
+      return e !== file;
+    });
   }
 }

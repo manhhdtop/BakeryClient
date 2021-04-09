@@ -4,6 +4,7 @@ import { AuthGuard } from '../../../shared/guards/auth-guard.class';
 import { CategoryComponent } from '../category/category.component';
 import { LoginComponent } from '../login/login.component';
 import { ProductComponent } from '../product/product.component';
+import { UserComponent } from '../user/user.component';
 import { AdminMasterPageComponent } from './admin-master-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
@@ -56,6 +57,24 @@ const routes: Routes = [
           page_title: 'menu.admin.product.title',
         },
         canActivate: [AuthGuard],
+      },
+      {
+        path: 'tai-khoan',
+        component: UserComponent,
+        data: {
+          page_title: 'menu.admin.user.title',
+        },
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
+      },
+      {
+        path: 'user',
+        component: UserComponent,
+        data: {
+          page_title: 'menu.admin.user.title',
+        },
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
       },
     ],
   },
