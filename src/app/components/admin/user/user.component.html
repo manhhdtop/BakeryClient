@@ -125,7 +125,7 @@
               <label>{{'user.role' | translate}}</label>
               <select class="form-control" formControlName="roleId">
                 <option value="">{{'choose' | translate}}</option>
-                <option *ngFor="let c of roles" [value]="c.id">{{c.name}}</option>
+                <option *ngFor="let r of roles" [value]="r.id">{{r.name}}</option>
               </select>
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.roleId.invalid">
                 {{'user.role_error' | translate}}

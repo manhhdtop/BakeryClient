@@ -261,5 +261,33 @@
       "btn_submit": "Lưu",
       "btn_delete": "Xóa"
     }
+  },
+  "role": {
+    "header": "Quản lý Phân quyền",
+    "table_name": "Phân quyền",
+    "table_search": "Tìm kiếm quyền...",
+    "btn_new": "Thêm mới",
+    "no": "STT",
+    "code": "Mã quyền",
+    "code_placeholder": "Mã quyền...",
+    "code_not_blank": "Mã quyền không được để trống",
+    "name": "Tên quyền",
+    "name_placeholder": "Tên quyền...",
+    "name_not_blank": "Tên quyền không được để trống",
+    "description": "Mô tả",
+    "description_placeholder": "Mô tả...",
+    "actions": "Actions",
+    "actions_required": "Actions bắt buộc chọn",
+    "status": "Trạng thái",
+    "status_error": "Trạng thái bắt buộc chọn",
+    "modal": {
+      "title_add": "Thêm mới Quyền",
+      "title_update": "Cập nhật Quyền",
+      "title_delete": "Xóa Quyền",
+      "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa Quyền <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><span class=\"text-danger\">Không thể hoàn tác thao tác này.</span></p>",
+      "btn_cancel": "Hủy",
+      "btn_submit": "Lưu",
+      "btn_delete": "Xóa"
+    }
   }
 }

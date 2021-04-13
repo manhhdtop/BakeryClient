@@ -1,1 +1,184 @@
-<p>role works!</p>
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-3 text-gray-800">{{'role.header' | translate}}</h1>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="my-2 font-weight-bold text-primary">{{'role.table_name' | translate}}</h6>
+    </div>
+    <div class="card-body">
+      <div class="card-header py-3 d-flex justify-content-between">
+        <div class="col-auto px-0">
+          <button class="btn btn-primary" (click)="openModal(role)">{{'role.btn_new' | translate}}</button>
+        </div>
+        <div class="col-auto px-0">
+          <form [formGroup]="formSearch" (submit)="search($event)"
+                class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light small" formControlName="keyword"
+                     placeholder="{{'role.table_search' | translate}}"
+                     aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>{{'role.no' | translate}}</th>
+              <th>{{'role.code' | translate}}</th>
+              <th>{{'role.name' | translate}}</th>
+              <th>{{'role.description' | translate}}</th>
+              <th>{{'role.actions' | translate}}</th>
+              <th>{{'role.status' | translate}}</th>
+              <th class="min"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let a of roles, let i = index">
+              <td>{{i + 1}}</td>
+              <td>{{a.code}}</td>
+              <td>{{a.name}}</td>
+              <td>{{a.description}}</td>
+              <td class="col-action">{{getActionCode(a.actions)}}</td>
+              <td>{{getStatusName(a.status) | translate}}</td>
+              <td class="min">
+                <a role="button" class="mr-2" (click)="delete(deleteRole, a)"><i class="fa fa-trash-alt"></i></a>
+                <a role="button" class="mr-2" (click)="openModal(role, a)"><i
+                  class="fa fa-edit"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-md-between mt-3" *ngIf="totalItem >= currentItems">
+        <div>
+          Showing {{(page - 1) * size + 1}} - {{(page - 1) * size + currentItems}} of {{totalItem}} items
+        </div>
+        <div>
+          <ngb-pagination
+            [(page)]="page"
+            [pageSize]="size"
+            [maxSize]="5"
+            [collectionSize]="totalItem"
+            [ellipses]="true"
+            (pageChange)="onPageChange()"
+          >
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #role let-modal>
+    <div class="modal-header">
+      <div class="w-100">
+        <h4
+          class="modal-title">{{(selectedRole ? 'role.modal.title_update' : 'role.modal.title_add') | translate}}</h4>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formUpdate">
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'role.code' | translate}}</label>
+              <input type="text" class="form-control" placeholder="{{'role.code_placeholder' | translate}}"
+                     formControlName="code">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.code.invalid">
+                {{'role.code_not_blank' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'role.name' | translate}}</label>
+              <input type="text" class="form-control" placeholder="{{'role.name_placeholder' | translate}}"
+                     formControlName="name">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid">
+                {{'role.name_not_blank' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'role.description' | translate}}</label>
+              <input type="email" class="form-control" placeholder="{{'role.description_placeholder' | translate}}"
+                     formControlName="description">
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'role.status' | translate}}</label>
+              <select class="form-control" formControlName="status">
+                <option value="">{{'choose' | translate}}</option>
+                <option *ngFor="let s of statuses" [value]="s.value">{{s.name | translate}}</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.status.invalid">
+                {{'role.status_error' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <div class="form-group">
+              <label>{{'role.actions' | translate}}</label>
+              <div ngbDropdown class="d-inline-block w-100">
+                <input class="form-control" [value]="selectedActionNames" readonly ngbDropdownToggle/>
+                <div ngbDropdownMenu class="w-100">
+                  <div class="border-1 p-2 w-100 text--black pointer-event" *ngFor="let a of actions"
+                       (click)="toggleAction($event, a.id)">
+                    <input type="checkbox" [checked]="selectedActionIds.includes(a.id)"
+                           (change)="toggleAction($event, a.id)"> {{a.code + ' - ' + a.name}}
+                  </div>
+                </div>
+              </div>
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.actionIds.invalid">
+                {{'role.actions_required' | translate}}
+              </small>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()">
+        {{'role.modal.btn_cancel' | translate}}
+      </button>
+      <button class="btn btn-outline-primary" (click)="submit(modal)">
+        {{'role.modal.btn_submit' | translate}}
+      </button>
+    </div>
+  </ng-template>
+  <ng-template #deleteRole let-modal>
+    <div class="modal-header">
+      <div class="w-100">
+        <h4 class="modal-title text-left font-weight-bold">{{'role.modal.title_delete' | translate}}</h4>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body"
+         innerHtml="{{'role.modal.message_delete' | translate : {name: selectedRole?.name} }}">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()">
+        {{'role.modal.btn_cancel' | translate}}
+      </button>
+      <button class="btn btn-outline-danger" (click)="modal.close('ok')">
+        {{'role.modal.btn_delete' | translate}}
+      </button>
+    </div>
+  </ng-template>
+</div>

@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../../shared/guards/auth-guard.class';
+import { ActionComponent } from '../action/action.component';
 import { CategoryComponent } from '../category/category.component';
 import { LoginComponent } from '../login/login.component';
 import { ProductComponent } from '../product/product.component';
+import { RoleComponent } from '../role/role.component';
 import { UserComponent } from '../user/user.component';
 import { AdminMasterPageComponent } from './admin-master-page.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { ActionComponent } from '../action/action.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,24 @@ const routes: Routes = [
         component: ActionComponent,
         data: {
           page_title: 'menu.admin.action.title',
+        },
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
+      },
+      {
+        path: 'phan-quyen',
+        component: RoleComponent,
+        data: {
+          page_title: 'menu.admin.role.title',
+        },
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
+      },
+      {
+        path: 'role',
+        component: RoleComponent,
+        data: {
+          page_title: 'menu.admin.role.title',
         },
         canActivate: [AuthGuard],
         canLoad: [AuthGuard],
