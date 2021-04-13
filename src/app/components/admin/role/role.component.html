@@ -136,7 +136,7 @@
               <div ngbDropdown class="d-inline-block w-100">
                 <input class="form-control" [value]="selectedActionNames" readonly ngbDropdownToggle/>
                 <div ngbDropdownMenu class="w-100">
-                  <div class="border-1 p-2 w-100 text--black pointer-event" *ngFor="let a of actions"
+                  <div class="border-1 p-2 w-100 text--black" *ngFor="let a of actions" role="button"
                        (click)="toggleAction($event, a.id)">
                     <input type="checkbox" [checked]="selectedActionIds.includes(a.id)"
                            (change)="toggleAction($event, a.id)"> {{a.code + ' - ' + a.name}}

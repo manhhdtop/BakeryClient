@@ -28,6 +28,8 @@ export class UserComponent implements OnInit {
   size: number;
   totalItem: number;
   currentItems: number;
+  selectedRoleIds: number[];
+  selectedRoleNames: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -118,23 +120,27 @@ export class UserComponent implements OnInit {
 
   initForm(user): FormGroup {
     if (user) {
+      this.selectedRoleIds = user.roles.map(({id}) => id);
+      this.selectedRoleNames = user.roles.map(({name}) => name).join(', ');
       return this.fb.group({
         id: [user.id, Validators.required],
         username: [user.username, Validators.required],
         password: [null],
         name: [user.name, Validators.required],
         email: [user.email],
-        roleId: [user.role?.id],
+        roleIds: ['', Validators.required],
         status: [user.status, Validators.required],
       });
     }
+    this.selectedRoleIds = [];
+    this.selectedRoleNames = '';
     return this.fb.group({
       id: [null],
       username: [null, Validators.required],
       password: [null, Validators.required],
       name: [null, Validators.required],
       email: [null],
-      roleId: ['', Validators.required],
+      roleIds: ['', Validators.required],
       status: ['', Validators.required],
     });
   }
@@ -172,5 +178,18 @@ export class UserComponent implements OnInit {
     this.toast.show('' + this.page);
     this.formSearch.controls.page.setValue(this.page);
     this.getUsers();
+  }
+
+  toggleRole(event, id: number): void {
+    event.preventDefault();
+    const index: number = this.selectedRoleIds.findIndex(value => value === id);
+    if (index === -1) {
+      this.selectedRoleIds.push(id);
+    } else {
+      this.selectedRoleIds.splice(index, 1);
+    }
+    const roles: Role[] = this.roles.filter(e => this.selectedRoleIds.includes(e.id));
+    this.selectedRoleNames = roles.map(({name}) => name).join(', ');
+    this.formUpdate.controls.roleIds.setValue(this.selectedRoleIds);
   }
 }
