@@ -20,7 +20,7 @@ import { UserComponent } from './components/admin/user/user.component';
 import { RoleComponent } from './components/admin/role/role.component';
 import { ActionComponent } from './components/admin/action/action.component';
 
-export function configServiceFactory(config: AppConfigService) {
+export function configServiceFactory(config: AppConfigService): any {
   return () => config.load();
 }
 

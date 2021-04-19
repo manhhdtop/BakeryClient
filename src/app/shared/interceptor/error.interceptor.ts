@@ -5,18 +5,19 @@ import { catchError, retry, timeout } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { UrlConstant } from '../constants/url.class';
 import { AppConfigService } from '../../service/app-config.service';
+import { AuthService } from '../../service/auth.service';
 
 export const DEFAULT_TIMEOUT = new InjectionToken<number>('Value default time-out');
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(private router: Router,
               private appConfigService: AppConfigService,
+              private authService: AuthService,
               @Inject(DEFAULT_TIMEOUT) protected defaultTimeout: number) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     let timeoutValue: number;
     if (req.headers.get('timeout')) {
       timeoutValue = Number(req.headers.get('timeout'));
@@ -44,7 +45,7 @@ export class ErrorInterceptor implements HttpInterceptor {
           return throwError(error);
         }
         return throwError(error);
-      })
+      }),
     );
   }
 }

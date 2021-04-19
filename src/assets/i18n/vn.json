@@ -103,12 +103,12 @@
         "name": "Đăng nhập"
       },
       "management": {
-        "href": "/admin/dashboard",
+        "href": "/admin",
         "title": "Quản trị",
         "name": "Quản trị"
       },
       "home": {
-        "href": "/admin/dashboard",
+        "href": "/admin",
         "title": "Dashboard",
         "name": "Dashboard"
       },

@@ -1,8 +1,9 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { I18nModule } from '../i18n/i18n.module';
 import { DateFormatPipe } from './pipe/format-date.pipe';
+import { DEFAULT_TIMEOUT, ErrorInterceptor } from './interceptor/error.interceptor';
 
 @NgModule({
   imports: [
@@ -19,15 +20,15 @@ import { DateFormatPipe } from './pipe/format-date.pipe';
     DateFormatPipe,
   ],
   providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: ErrorInterceptor,
-    //   multi: true
-    // },
-    // {
-    //   provide: DEFAULT_TIMEOUT,
-    //   useValue: 10000
-    // }
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ErrorInterceptor,
+      multi: true,
+    },
+    {
+      provide: DEFAULT_TIMEOUT,
+      useValue: 10000,
+    },
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })

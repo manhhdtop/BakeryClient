@@ -15,13 +15,13 @@ const routes: Routes = [
     path: '',
     component: AdminMasterPageComponent,
     children: [
+      // {
+      //   path: '',
+      //   redirectTo: 'dashboard',
+      //   pathMatch: 'full',
+      // },
       {
         path: '',
-        redirectTo: 'dashboard',
-        pathMatch: 'full',
-      },
-      {
-        path: 'dashboard',
         component: DashboardComponent,
         data: {
           page_title: 'menu.admin.home.title',
