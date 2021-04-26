@@ -101,10 +101,17 @@
             <div class="form-group">
               <label>{{'category.name' | translate}}</label>
               <input type="text" class="form-control" placeholder="{{'category.name_placeholder' | translate}}"
-                     formControlName="name">
+                     formControlName="name" (change)="getSlug()">
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid">
                 {{'category.name_not_blank' | translate}}
               </small>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'category.slug' | translate}}</label>
+              <input class="form-control" placeholder="{{'category.slug_placeholder' | translate}}"
+                     formControlName="slug" readonly>
             </div>
           </div>
           <div class="col-md-6 col-sm-12">

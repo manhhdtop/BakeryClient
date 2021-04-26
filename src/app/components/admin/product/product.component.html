@@ -37,11 +37,7 @@
               <th>{{'product.name' | translate}}</th>
               <th>{{'product.description' | translate}}</th>
               <th>{{'product.category' | translate}}</th>
-              <th>{{'product.image' | translate}}</th>
-              <th>{{'product.created_date' | translate}}</th>
-              <th>{{'product.created_by' | translate}}</th>
-              <th>{{'product.updated_date' | translate}}</th>
-              <th>{{'product.updated_by' | translate}}</th>
+              <th>{{'product.slug' | translate}}</th>
               <th>{{'product.status' | translate}}</th>
               <th class="min"></th>
             </tr>
@@ -52,13 +48,10 @@
               <td>{{p.name}}</td>
               <td>{{p.description}}</td>
               <td>{{p.category.name}}</td>
-              <td></td>
-              <td>{{p.createdDate | dateFormat: dateDdmmyyHhmmss}}</td>
-              <td>{{p.createdBy?.name}}</td>
-              <td>{{p.updatedDate | dateFormat: dateDdmmyyHhmmss}}</td>
-              <td>{{p.updatedBy?.name}}</td>
+              <td>{{p.slug}}</td>
               <td>{{getStatusName(p.status) | translate}}</td>
               <td class="min">
+                <a role="button" class="mr-2" routerLink="/product/{{p.slug}}"> <i class="fa fa-external-link"></i> </a>
                 <a role="button" class="mr-2" (click)="delete(deleteProduct, p)"><i class="fa fa-trash-alt"></i></a>
                 <a role="button" class="mr-2" (click)="openModal(product, p)"><i
                   class="fa fa-edit"></i></a>
@@ -90,7 +83,7 @@
     <div class="modal-header">
       <div class="w-100">
         <h4
-          class="modal-title">{{(selectedProduct ? 'product.modal.title_update' : 'product.modal.title_add') | translate}}</h4>
+          class="modal-title">{{(currentProduct ? 'product.modal.title_update' : 'product.modal.title_add') | translate}}</h4>
       </div>
       <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
         <span aria-hidden="true">&times;</span>
@@ -103,7 +96,7 @@
             <div class="form-group">
               <label>{{'product.name' | translate}}</label>
               <input type="text" class="form-control" placeholder="{{'product.name_placeholder' | translate}}"
-                     formControlName="name">
+                     formControlName="name" (change)="getSlug()">
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid">
                 {{'product.name_not_blank' | translate}}
               </small>
@@ -111,9 +104,18 @@
           </div>
           <div class="col-md-6 col-sm-12">
             <div class="form-group">
-              <label>{{'product.description' | translate}}</label>
-              <input type="text" class="form-control" placeholder="{{'product.description_placeholder' | translate}}"
-                     formControlName="description">
+              <label>{{'product.slug' | translate}}</label>
+              <input class="form-control" placeholder="{{'product.slug_placeholder' | translate}}"
+                     formControlName="slug" readonly>
+            </div>
+          </div>
+          <div class="col-md-12 col-sm-12">
+            <div class="form-group">
+              <label>{{'product.description' | translate}}
+                <em>({{'product.using' |translate}} <a href="#" (click)="openCkeditor($event)">Editor</a>)</em>
+              </label>
+              <textarea type="text" class="form-control" placeholder="{{'product.description_placeholder' | translate}}"
+                        formControlName="description" rows="3"></textarea>
             </div>
           </div>
           <div class="col-md-6 col-sm-12">
@@ -180,7 +182,7 @@
       </button>
     </div>
     <div class="modal-body"
-         innerHtml="{{'product.modal.message_delete' | translate : {name: selectedProduct?.name} }}">
+         innerHtml="{{'product.modal.message_delete' | translate : {name: currentProduct?.name} }}">
     </div>
     <div class="modal-footer">
       <button class="btn btn-outline-secondary" (click)="modalDelete.dismiss()">
@@ -200,3 +202,4 @@
     </div>
   </ng-template>
 </div>
+<app-ckeditor [title]="'product.description'"></app-ckeditor>

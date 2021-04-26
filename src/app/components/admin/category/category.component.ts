@@ -55,7 +55,10 @@ export class CategoryComponent implements OnInit {
     this.selectedCategory = category;
     this.formUpdate = this.initForm(category);
     this.submitted = false;
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      size: 'lg'
+    });
   }
 
   delete(content, category: Category): void {
@@ -121,6 +124,7 @@ export class CategoryComponent implements OnInit {
       return this.fb.group({
         id: [category.id, Validators.required],
         name: [category.name, Validators.required],
+        slug: [category.slug, Validators.required],
         description: [category.description],
         parentId: [category.parent?.id],
         status: [category.status, Validators.required],
@@ -129,6 +133,7 @@ export class CategoryComponent implements OnInit {
     return this.fb.group({
       id: [null],
       name: [null, Validators.required],
+      slug: [null, Validators.required],
       description: [null],
       parentId: [''],
       status: ['', Validators.required],
@@ -168,5 +173,13 @@ export class CategoryComponent implements OnInit {
     this.toast.show('' + this.page);
     this.formSearch.controls.page.setValue(this.page);
     this.getCategory();
+  }
+
+  getSlug(): void {
+    this.categoryService.createSlug(this.formUpdate.controls.name.value).subscribe(res => {
+      this.formUpdate.controls.slug.setValue(res.data);
+    }, error => {
+      this.toast.showDanger(error.error.message);
+    });
   }
 }

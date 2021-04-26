@@ -13,10 +13,12 @@ export class UrlConstant {
   public static readonly UPLOADS = '/uploads';
   public static readonly UPLOAD_IMAGE = '/upload-image';
   public static readonly UPLOAD_IMAGES = '/upload-images';
+  public static readonly CK_UPLOAD_IMAGES = '/ck-upload-images';
   // Category
   public static readonly CATEGORY = UrlConstant.ADMIN + '/category';
   public static readonly PARENT_CATEGORIES = UrlConstant.CATEGORY + '/parents';
   public static readonly ACTIVE_CATEGORIES = UrlConstant.CATEGORY + '/active';
+  public static readonly CREATE_CATEGORY_SLUG = UrlConstant.CATEGORY + '/create-slug';
   // Action
   public static readonly ACTION = UrlConstant.ADMIN + '/action';
   public static readonly ACTIVE_ACTIONS = UrlConstant.ACTION + '/actives';
@@ -27,4 +29,5 @@ export class UrlConstant {
   public static readonly USER = UrlConstant.ADMIN + '/user';
   // Product
   public static readonly PRODUCT = UrlConstant.ADMIN + '/product';
+  public static readonly CREATE_PRODUCT_SLUG = UrlConstant.PRODUCT + '/create-slug';
 }

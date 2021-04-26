@@ -153,6 +153,8 @@
     "name": "Tên danh mục",
     "name_placeholder": "Tên danh mục...",
     "name_not_blank": "Tên danh mục không được để trống",
+    "slug": "Slug",
+    "slug_placeholder": "Slug...",
     "description": "Mô tả",
     "description_placeholder": "Mô tả...",
     "parent_name": "Danh mục cha",
@@ -181,8 +183,12 @@
     "name": "Tên sản phẩm",
     "name_placeholder": "Tên sản phẩm...",
     "name_not_blank": "Tên sản phẩm không được để trống",
+    "slug": "Slug",
+    "slug_placeholder": "Slug...",
     "description": "Mô tả",
     "description_placeholder": "Mô tả...",
+    "using": "hoặc sử dụng",
+
     "image": "Hình ảnh",
     "image_placeholder": "Chọn hình ảnh...",
     "image_error": "Hình ảnh không được để trống",
@@ -198,6 +204,8 @@
       "title_update": "Cập nhật sản phẩm",
       "title_delete": "Xóa sản phẩm",
       "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa sản phẩm <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><p> Tất cả thông tin liên quan đến sản phẩm này sẽ bị xóa vĩnh viễn. <span class=\"text-danger\">Không thể hoàn tác thao tác này.</span></p>",
+      "message_save": "<p><strong>Bạn có muốn lưu thay đổi không?</strong></p>",
+      "btn_dont_save": "Không lưu",
       "btn_cancel": "Hủy",
       "btn_submit": "Lưu",
       "btn_delete": "Xóa"
@@ -292,5 +300,9 @@
       "btn_submit": "Lưu",
       "btn_delete": "Xóa"
     }
+  },
+  "ckeditor": {
+    "btn_cancel": "Hủy",
+    "btn_submit": "Lưu"
   }
 }

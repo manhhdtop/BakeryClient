@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -7,7 +7,8 @@ import { CategoryService } from '../../../service/category.service';
 import { ProductService } from '../../../service/product.service';
 import { ToastService } from '../../../service/toast.service';
 import { UploadService } from '../../../service/upload.service';
-import { Constant, Status } from '../../../shared/constants/constant.class';
+import { CkeditorComponent } from '../../../shared/component/ckeditor/ckeditor.component';
+import { Status } from '../../../shared/constants/constant.class';
 import { Category } from '../../../shared/model/category';
 import { Product } from '../../../shared/model/product';
 import { UploadResponse } from '../../../shared/model/upload-response';
@@ -19,12 +20,14 @@ import { Utils } from '../../../shared/util/utils';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
+
+  @ViewChild(CkeditorComponent) ckeditorModal;
+
   readonly statuses = Status;
-  selectedProduct: Product;
+  currentProduct: Product;
   selectedImage: UploadResponse;
   products: Product[];
   categories: Category[];
-  dateDdmmyyHhmmss: string;
   submitted: boolean;
   formUpdate: FormGroup;
   formSearch: FormGroup;
@@ -51,8 +54,7 @@ export class ProductComponent implements OnInit {
 
   ngOnInit(): void {
     this.baseUrl = this.appConfigService.getConfig().api.baseUrl;
-    this.dateDdmmyyHhmmss = Constant.DATE_DDMMYY_HHMMSS;
-    this.selectedProduct = undefined;
+    this.currentProduct = undefined;
     this.page = 1;
     this.size = 20;
     this.formSearch = this.fb.group({
@@ -64,13 +66,14 @@ export class ProductComponent implements OnInit {
     this.getCategories();
   }
 
-  openModal(content, category?: Product): void {
-    this.selectedProduct = category;
-    this.formUpdate = this.initForm(category);
+  openModal(content, product?: Product): void {
+    this.currentProduct = product;
+    this.formUpdate = this.initForm(product);
     this.submitted = false;
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'xl',
+      backdrop: false,
     });
   }
 
@@ -83,10 +86,10 @@ export class ProductComponent implements OnInit {
   }
 
   delete(content, category: Product): void {
-    this.selectedProduct = category;
+    this.currentProduct = category;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       if (result && result.trim() === 'ok') {
-        this.categoryService.delete(this.selectedProduct.id).subscribe(res => {
+        this.categoryService.delete(this.currentProduct.id).subscribe(res => {
           if (res.errorCode === '200') {
             this.getProducts();
             this.toast.showSuccess(res.errorDescription);
@@ -108,7 +111,7 @@ export class ProductComponent implements OnInit {
       return;
     }
     this.formUpdate.controls.imageUploads.setValue(this.files);
-    if (this.selectedProduct) {
+    if (this.currentProduct) {
       this.productService.update(this.formUpdate.value).subscribe(res => {
         if (res.errorCode === '200') {
           this.getProducts();
@@ -141,10 +144,11 @@ export class ProductComponent implements OnInit {
   initForm(product): FormGroup {
     if (product) {
       this.files = product.images;
-      this.getListFileName(this.files);
+      this.getListFileName();
       return this.fb.group({
         id: [product.id, Validators.required],
         name: [product.name, Validators.required],
+        slug: [product.slug, Validators.required],
         description: [product.description],
         categoryId: [product.category.id],
         imageUploads: [null],
@@ -156,6 +160,7 @@ export class ProductComponent implements OnInit {
     return this.fb.group({
       id: [null],
       name: [null, Validators.required],
+      slug: [null, Validators.required],
       description: [null],
       categoryId: [''],
       imageUploads: [null],
@@ -205,30 +210,35 @@ export class ProductComponent implements OnInit {
       formData.append('files', f);
     }
     this.uploadService.uploadImages(formData).subscribe(res => {
-      console.log();
       this.files = this.files.concat(res);
-      this.getListFileName(res);
+      this.getListFileName();
     }, error => {
       this.toast.showDanger(error.error.message);
     });
   }
 
-  private getListFileName(uploadFileResponses): void {
-    let s = '';
-    this.files.forEach(e => {
-      console.log('file: ', e);
-      if (s === '') {
-        s += e.fileName;
-      } else {
-        s += '; ' + e.fileName;
-      }
-    });
-    this.images = s;
+  private getListFileName(): void {
+    this.images = this.files.map(({fileName}) => fileName).join(', ');
   }
 
   removeImage(file): void {
     this.files = this.files.filter(e => {
       return e !== file;
+    });
+  }
+
+  getSlug(): void {
+    this.productService.createSlug(this.formUpdate.controls.name.value).subscribe(res => {
+      this.formUpdate.controls.slug.setValue(res.data);
+    }, error => {
+      this.toast.showDanger(error.error.message);
+    });
+  }
+
+  openCkeditor(event): void {
+    event.preventDefault();
+    this.ckeditorModal.open(this.formUpdate.controls.description.value).then(() => {
+      this.formUpdate.controls.description.setValue(this.ckeditorModal.changedData);
     });
   }
 }

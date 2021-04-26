@@ -28,4 +28,8 @@ export class ProductService {
   delete(id): Observable<any> {
     return this.baseService.delete(UrlConstant.PRODUCT, id);
   }
+
+  createSlug(name: string): Observable<any> {
+    return this.baseService.get(UrlConstant.CREATE_PRODUCT_SLUG + '?productName=' + name);
+  }
 }

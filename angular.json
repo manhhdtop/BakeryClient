@@ -52,7 +52,9 @@
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "src/assets/js/bootstrap.min.js"
+              "src/assets/js/bootstrap.min.js",
+              "src/assets/js/ckfinder.js",
+              "src/assets/js/config.js"
             ]
           },
           "configurations": {

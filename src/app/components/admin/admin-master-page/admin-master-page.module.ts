@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NgbCarouselModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
@@ -32,16 +33,17 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     HeaderComponent,
     FooterComponent,
   ],
-  imports: [
-    CommonModule,
-    AdminMasterPageRoutingModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    SharedModule,
-    NgbPaginationModule,
-    FormsModule,
-    NgbCarouselModule,
-  ],
+    imports: [
+        CommonModule,
+        AdminMasterPageRoutingModule,
+        TranslateModule,
+        ReactiveFormsModule,
+        SharedModule,
+        NgbPaginationModule,
+        FormsModule,
+        NgbCarouselModule,
+        CKEditorModule,
+    ],
 })
 export class AdminMasterPageModule {
 }

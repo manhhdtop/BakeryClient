@@ -1,0 +1,41 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">{{title | translate}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="save(modal, cancelModal)">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ckeditor [editor]="editor" [config]="configEditor" [data]="changedData" [(ngModel)]="changedData"
+              (ready)="onReady($event)"></ckeditor>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark"
+            (click)="save(modal, cancelModal)">{{'ckeditor.btn_cancel' | translate}}</button>
+    <button type="button" class="btn btn-outline-primary"
+            (click)="modal.close()">{{'ckeditor.btn_submit' | translate}}</button>
+  </div>
+</ng-template>
+<ng-template #cancelModal let-modalDelete>
+  <div class="modal-header">
+    <div class="w-100">
+      <h4 class="modal-title text-left font-weight-bold">{{'product.modal.title_delete' | translate}}</h4>
+    </div>
+    <button type="button" class="close" aria-label="Close" (click)="modalDelete.dismiss()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" innerHtml="{{'product.modal.message_save' | translate}}">
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline-secondary" (click)="modalDelete.dismiss()">
+      {{'product.modal.btn_cancel' | translate}}
+    </button>
+    <button class="btn btn-outline-danger" (click)="modalDelete.close('cancel')">
+      {{'product.modal.btn_dont_save' | translate}}
+    </button>
+    <button class="btn btn-outline-primary" (click)="modalDelete.close('ok')">
+      {{'product.modal.btn_submit' | translate}}
+    </button>
+  </div>
+</ng-template>

@@ -10,7 +10,7 @@ export class BaseService {
   constructor(public httpClient: HttpClient, protected configService: AppConfigService) {
   }
 
-  private static getToken(): string {
+  static getToken(): string {
     return localStorage.getItem(Constant.TOKEN);
   }
 

@@ -1,4 +1,3 @@
-import { HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseService } from '../shared/base-service/base-service.service';
@@ -36,5 +35,9 @@ export class CategoryService {
 
   delete(id): Observable<any> {
     return this.baseService.delete(UrlConstant.CATEGORY, id);
+  }
+
+  createSlug(name: string): Observable<any> {
+    return this.baseService.get(UrlConstant.CREATE_CATEGORY_SLUG + '?categoryName=' + name);
   }
 }

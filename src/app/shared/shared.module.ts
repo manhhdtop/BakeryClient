@@ -1,23 +1,30 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { I18nModule } from '../i18n/i18n.module';
-import { DateFormatPipe } from './pipe/format-date.pipe';
 import { DEFAULT_TIMEOUT, ErrorInterceptor } from './interceptor/error.interceptor';
+import { DateFormatPipe } from './pipe/format-date.pipe';
+import { CkeditorComponent } from './component/ckeditor/ckeditor.component';
 
 @NgModule({
   imports: [
     HttpClientModule,
     I18nModule,
     NgbModule,
+    CKEditorModule,
+    FormsModule,
   ],
   exports: [
     DateFormatPipe,
     HttpClientModule,
     I18nModule,
+    CkeditorComponent,
   ],
   declarations: [
     DateFormatPipe,
+    CkeditorComponent,
   ],
   providers: [
     {
