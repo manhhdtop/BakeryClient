@@ -21,7 +21,8 @@ a {
 }
 
 .ck.ck-editor__editable_inline {
-  min-height: 500px;
+  min-height: 350px;
+  max-height: 500px;
   border-color: var(--ck-color-base-border) !important;
 }
 
@@ -95,6 +96,10 @@ a {
 .ck-content .image-style-align-center {
   margin-left: auto;
   margin-right: auto;
+}
+
+.ck.ck-block-toolbar-button {
+  transform: translateX(-10px);
 }
 
 /* ckeditor5-image/theme/imagestyle.css */

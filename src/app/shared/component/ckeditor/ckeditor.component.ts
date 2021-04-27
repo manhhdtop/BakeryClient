@@ -1,9 +1,8 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import * as Editor from '@ckeditor/ckeditor5-build-decoupled-document';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { TranslateService } from '@ngx-translate/core';
+import * as ClassicEditor from '../../../../assets/ckeditor5';
 import { AppConfigService } from '../../../service/app-config.service';
-import { UrlConstant } from '../../constants/url.class';
+import { UploadAdapter } from './UploadAdapter';
 
 @Component({
   selector: 'app-ckeditor',
@@ -12,64 +11,28 @@ import { UrlConstant } from '../../constants/url.class';
 })
 export class CkeditorComponent implements OnInit {
   @Input() title: string;
+  @Input() type: number;
   data: string;
   @ViewChild('content') content;
 
-  editor = Editor;
-  // ckfinder = Ckfinder;
+  editor = ClassicEditor;
   configEditor: any;
   changedData: string;
 
   constructor(
     protected configService: AppConfigService,
     private modalService: NgbModal,
-    private translateService: TranslateService,
   ) {
   }
 
   ngOnInit(): void {
     this.configEditor = {
-      toolbar: [
-        'undo', 'redo',
-        'heading', '|',
-        'fontfamily', 'fontsize', '|',
-        'alignment', '|',
-        'ckfinder', 'uploadImage',
-        'fontColor', 'fontBackgroundColor', '|',
-        'bold', 'italic', 'strikethrough', 'underline', '|',
-        'link', '|',
-        'outdent', 'indent', '|',
-        'bulletedList', 'numberedList', '|',
-        'insertTable', '|', 'blockQuote', '|',
-      ],
-      ckfinder: {
-        uploadUrl: this.configService.getConfig().api.baseUrl + UrlConstant.CK_UPLOAD_IMAGES,
-        options: {
-          resourceType: 'Images',
-          openerMethod: 'modal',
-        },
-      },
-      filebrowserUploadUrl: this.configService.getConfig().api.baseUrl + UrlConstant.CK_UPLOAD_IMAGES,
-      fileTools_requestHeaders: {
-        'X-Requested-With': 'xhr',
-        Authorization: 'Bearer ' + localStorage.getItem('access_token'),
-      },
-      filebrowserUploadMethod: 'xhr',
-      on: {
-        instanceReady(evt): void {
-          const editor = evt.editor;
-          console.log('editor ===>', editor);
-        },
-        fileUploadRequest(evt): void {
-          console.log('evt ===>', evt);
-        },
-      },
+      extraPlugins: [UploadAdapterPlugin],
     };
   }
 
   open(data): Promise<any> {
-    this.data = data;
-    this.changedData = this.data;
+    this.changedData = this.data = data;
     return this.modalService.open(this.content, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'xl',
@@ -79,10 +42,6 @@ export class CkeditorComponent implements OnInit {
   }
 
   public onReady(editor): void {
-    editor.ui.getEditableElement().parentElement.insertBefore(
-      editor.ui.view.toolbar.element,
-      editor.ui.getEditableElement(),
-    );
     if (this.changedData) {
       editor.setData(this.changedData);
     }
@@ -90,17 +49,21 @@ export class CkeditorComponent implements OnInit {
 
   save(modal, cancelModal): void {
     if (this.changedData === this.data) {
-      this.changedData = this.data;
       modal.dismiss();
     } else {
       this.modalService.open(cancelModal).result.then((result) => {
         if (result && result === 'ok') {
           modal.close();
         } else {
-          this.changedData = this.data;
           modal.dismiss();
         }
       });
     }
   }
+}
+
+function UploadAdapterPlugin(editor): void {
+  editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+    return new UploadAdapter(loader);
+  };
 }

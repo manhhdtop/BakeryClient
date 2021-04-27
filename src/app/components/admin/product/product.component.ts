@@ -8,7 +8,7 @@ import { ProductService } from '../../../service/product.service';
 import { ToastService } from '../../../service/toast.service';
 import { UploadService } from '../../../service/upload.service';
 import { CkeditorComponent } from '../../../shared/component/ckeditor/ckeditor.component';
-import { Status } from '../../../shared/constants/constant.class';
+import { EditorType, Status } from '../../../shared/constants/constant.class';
 import { Category } from '../../../shared/model/category';
 import { Product } from '../../../shared/model/product';
 import { UploadResponse } from '../../../shared/model/upload-response';
@@ -38,6 +38,7 @@ export class ProductComponent implements OnInit {
   images: string;
   baseUrl: string;
   files: UploadResponse[];
+  readonly EditorType = EditorType;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -235,10 +236,11 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  openCkeditor(event): void {
+  openCkEditor(event): void {
     event.preventDefault();
     this.ckeditorModal.open(this.formUpdate.controls.description.value).then(() => {
       this.formUpdate.controls.description.setValue(this.ckeditorModal.changedData);
+    }, () => {
     });
   }
 }

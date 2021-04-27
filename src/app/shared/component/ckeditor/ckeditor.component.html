@@ -7,7 +7,8 @@
   </div>
   <div class="modal-body">
     <ckeditor [editor]="editor" [config]="configEditor" [data]="changedData" [(ngModel)]="changedData"
-              (ready)="onReady($event)"></ckeditor>
+              (ready)="onReady($event)"
+    ></ckeditor>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-outline-dark"

@@ -28,3 +28,8 @@ export const Status = [
   {value: 1, name: 'status.active'},
   {value: -1, name: 'status.locked'},
 ];
+
+export enum EditorType {
+  CLASSIC,
+  DOCUMENT
+}

@@ -13,7 +13,6 @@ export class UrlConstant {
   public static readonly UPLOADS = '/uploads';
   public static readonly UPLOAD_IMAGE = '/upload-image';
   public static readonly UPLOAD_IMAGES = '/upload-images';
-  public static readonly CK_UPLOAD_IMAGES = '/ck-upload-images';
   // Category
   public static readonly CATEGORY = UrlConstant.ADMIN + '/category';
   public static readonly PARENT_CATEGORIES = UrlConstant.CATEGORY + '/parents';

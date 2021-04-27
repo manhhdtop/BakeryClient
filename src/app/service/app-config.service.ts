@@ -8,10 +8,12 @@ import { AppConsts } from '../shared/appConsts';
 @Injectable()
 export class AppConfigService {
 
+  static instance: AppConfigService;
   private config: typeof AppConsts;
   private env: object;
 
   constructor(private http: HttpClient) {
+    AppConfigService.instance = this;
   }
 
   static bootstrap<TM>(moduleType: Type<TM>, compilerOptions?: CompilerOptions | CompilerOptions[]): Promise<NgModuleRef<TM>> {
