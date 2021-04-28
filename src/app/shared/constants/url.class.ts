@@ -14,10 +14,11 @@ export class UrlConstant {
   public static readonly UPLOAD_IMAGE = '/upload-image';
   public static readonly UPLOAD_IMAGES = '/upload-images';
   // Category
-  public static readonly CATEGORY = UrlConstant.ADMIN + '/category';
-  public static readonly PARENT_CATEGORIES = UrlConstant.CATEGORY + '/parents';
-  public static readonly ACTIVE_CATEGORIES = UrlConstant.CATEGORY + '/active';
-  public static readonly CREATE_CATEGORY_SLUG = UrlConstant.CATEGORY + '/create-slug';
+  public static readonly CATEGORY = '/category';
+  public static readonly ADMIN_CATEGORY = UrlConstant.ADMIN + UrlConstant.CATEGORY;
+  public static readonly PARENT_CATEGORIES = UrlConstant.ADMIN_CATEGORY + '/parents';
+  public static readonly ACTIVE_CATEGORIES = UrlConstant.ADMIN_CATEGORY + '/active';
+  public static readonly CREATE_CATEGORY_SLUG = UrlConstant.ADMIN_CATEGORY + '/create-slug';
   // Action
   public static readonly ACTION = UrlConstant.ADMIN + '/action';
   public static readonly ACTIVE_ACTIONS = UrlConstant.ACTION + '/actives';

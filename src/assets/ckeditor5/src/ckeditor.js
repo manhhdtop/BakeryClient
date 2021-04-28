@@ -105,7 +105,7 @@ ClassicEditor.defaultConfig = {
 		],
 		// Configure the available styles.
 		styles: [
-			'alignLeft', 'alignCenter', 'alignRight'
+			'alignLeft', 'alignCenter', 'alignRight', 'full', 'size'
 		],
 		// Configure the available image resize options.
 		resizeOptions: [
@@ -125,7 +125,6 @@ ClassicEditor.defaultConfig = {
 				value: '75'
 			}
 		],
-		resizeUnit: 'px'
 	},
 	styles: [
 		'full',

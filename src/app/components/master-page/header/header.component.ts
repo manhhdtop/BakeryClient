@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CartService } from '../../../service/cart.service';
-import { Item } from '../../../shared/model/item';
-import { TranslateService } from '@ngx-translate/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
+import { CartService } from '../../../service/cart.service';
+import { CategoryService } from '../../../service/category.service';
+import { ToastService } from '../../../service/toast.service';
+import { Item } from '../../../shared/model/item';
+import { MenuCategory } from '../../../shared/model/menu-category';
 import { Utils } from '../../../shared/util/utils';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styleUrls: ['./header.component.css'],
+  styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
   formSearch: FormGroup;
@@ -21,12 +24,15 @@ export class HeaderComponent implements OnInit {
   totalAmount: number;
   lang: string;
   items: Item[];
+  categories: MenuCategory[];
 
   constructor(
     private activeRoute: ActivatedRoute,
     private cartService: CartService,
+    private categoryService: CategoryService,
     private modalService: NgbModal,
     private titleService: Title,
+    private toast: ToastService,
     private translate: TranslateService,
   ) {
   }
@@ -40,13 +46,22 @@ export class HeaderComponent implements OnInit {
     this.itemAmount = this.items.length;
     this.totalAmount = this.cartService.getTotalAmount();
     this.lang = this.translate.currentLang;
+    this.categoryService.getMenuCategories().subscribe(res => {
+      this.categories = [...res.data];
+    }, error => {
+      this.toast.showDanger(error.errorDescription);
+    });
   }
 
   open(content): void {
-    this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    this.modalService.open(content, {
+      ariaLabelledBy: 'modal-basic-title',
+      windowClass: 'cart',
+    });
   }
 
   toggleSearch(): void {
+    console.log('searching: ', !this.searching);
     this.searching = !this.searching;
   }
 

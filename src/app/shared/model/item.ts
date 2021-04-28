@@ -1,7 +1,7 @@
+import { Product } from './product';
+
 export interface Item {
-  id: number;
-  name: string;
-  image: string;
+  product: Product;
   quantity: number;
   price: number;
 }

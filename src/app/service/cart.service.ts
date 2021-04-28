@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Item } from '../shared/model/item';
+import { Product } from '../shared/model/product';
 
 @Injectable({
   providedIn: 'root',
@@ -9,42 +10,21 @@ export class CartService {
 
   constructor() {
     this.items = [];
-    this.items.push({
-      id: 1,
-      name: 'BO&Play Wireless Speaker',
-      image: 'assets/image/product/big-img/1.jpg',
-      quantity: 2,
-      price: 105,
-    });
-    this.items.push({
-      id: 2,
-      name: 'Brone Candle',
-      image: 'assets/image/product/big-img/1.jpg',
-      quantity: 1,
-      price: 25,
-    });
-    this.items.push({
-      id: 3,
-      name: 'Brone Candle 3',
-      image: 'assets/image/product/big-img/1.jpg',
-      quantity: 13,
-      price: 25,
-    });
-    this.items.push({
-      id: 4,
-      name: 'Brone Candle 4 ',
-      image: 'assets/image/product/big-img/1.jpg',
-      quantity: 11,
-      price: 25,
-    });
   }
 
-  addToCart(product: Item): void {
-    const item = this.items.find(value => value.id === product.id);
+  addToCart(product: Product, quantity?: number): void {
+    if (!quantity) {
+      quantity = 1;
+    }
+    const item = this.items.find(value => value.product.id === product.id);
     if (item) {
-      item.quantity = item.quantity + product.quantity;
+      item.quantity = item.quantity + quantity;
     } else {
-      this.items.push(product);
+      this.items.push({
+        product,
+        quantity,
+        price: product.price * quantity,
+      });
     }
   }
 
@@ -58,7 +38,7 @@ export class CartService {
   }
 
   removeItem(itemId): any[] {
-    const index: number = this.items.findIndex(value => value.id === itemId);
+    const index: number = this.items.findIndex(value => value.product.id === itemId);
     if (index !== -1) {
       this.items.splice(index, 1);
     }

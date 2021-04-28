@@ -20,7 +20,7 @@ export class CartComponent implements OnInit {
   }
 
   updateQuantity(itemId: number, value: number): void {
-    const index = this.items.findIndex(e => e.id === itemId);
+    const index = this.items.findIndex(e => e.product.id === itemId);
     this.items[index].quantity = value;
     console.log('items: ', this.cartService.getItems());
   }

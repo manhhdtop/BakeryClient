@@ -19,6 +19,7 @@ import { SharedModule } from './shared/shared.module';
 import { UserComponent } from './components/admin/user/user.component';
 import { RoleComponent } from './components/admin/role/role.component';
 import { ActionComponent } from './components/admin/action/action.component';
+import { CategoryComponent } from './components/category/category.component';
 
 export function configServiceFactory(config: AppConfigService): any {
   return () => config.load();
@@ -34,6 +35,7 @@ export function configServiceFactory(config: AppConfigService): any {
     UserComponent,
     RoleComponent,
     ActionComponent,
+    CategoryComponent,
   ],
   imports: [
     AppRoutingModule,
