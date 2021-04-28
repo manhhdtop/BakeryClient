@@ -1,76 +1,87 @@
 <header class="bg-light">
-  <div class="col-12 d-flex justify-content-between navbar-light topbar align-items-end">
-    <div class="nav-item navbar-nav">
-      <a class="nav-link dropdown-toggle" role="button"
-         data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-globe"></i>
-      </a>
-      <div class="language-popup dropdown-list dropdown-menu dropdown-menu-left shadow animated--grow-down"
-           aria-labelledby="language">
-        <a class="dropdown-item" role="button" [ngClass]="{'active': lang === 'vn'}"
-           (click)="changeLanguage($event, 'vn')">
-          {{'language.vn.name' | translate}}
-        </a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" role="button" [ngClass]="{'active': lang === 'en'}"
-           (click)="changeLanguage($event, 'en')">
-          {{'language.en.name' | translate}}
-        </a>
+  <div class="container">
+    <div class="col-12 d-flex justify-content-center navbar-light">
+      <div class="col-sm-6 col-md-2">
+        <img class="img logo" src="/assets/image/logo.svg" alt="logo"/>
       </div>
     </div>
-    <div class="col-sm-6 col-md-2">
-      <img class="img logo" src="/assets/image/logo.svg" alt="logo"/>
-    </div>
-
-    <div class="nav-item navbar-nav">
-      <a class="nav-link" role="button" (click)="open(cart_modal)">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="badge bg-danger badge-counter">{{itemAmount > 3 ? '3+' : itemAmount}}</span>
-      </a>
-    </div>
-  </div>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" routerLink="{{'menu.home.href' | translate}}">{{'menu.home.name' | translate}}</a>
-        </li>
-        <li class="nav-item" [routerLinkActive]="'active'">
-          <a class="nav-link" routerLink="{{'menu.about.href' | translate}}">{{'menu.about.name' | translate}}</a>
-        </li>
-        <li class="nav-item dropdown" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}">
-          <a class="nav-link" routerLink="{{'menu.category.href' | translate}}">{{'menu.category.name' | translate}}</a>
-          <div class="dropdown-menu">
-            <a *ngFor="let c of categories" [routerLinkActive]="'active'" class="dropdown-item"
-               href="/danh-muc/{{c.slug}}">{{c.name}}
-              <div *ngIf="c.childs && c.childs.length > 0">
-                <a *ngFor="let child of c.childs" class="dropdown-child-item"
-                   href="/danh-muc/{{c.slug}}/{{child.slug}}">{{child.name}}</a>
-              </div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}"
+               routerLink="{{'menu.home.href' | translate}}">{{'menu.home.name' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLinkActive]="'active'"
+               routerLink="{{'menu.about.href' | translate}}">{{'menu.about.name' | translate}}</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}"
+               routerLink="{{'menu.category.href' | translate}}">{{'menu.category.name' | translate}}</a>
+            <div class="dropdown-menu" *ngIf="categories && categories.length > 0">
+              <a *ngFor="let c of categories" [routerLinkActive]="'active'" class="dropdown-item"
+                 href="/danh-muc/{{c.slug}}">{{c.name}}
+                <div *ngIf="c.childs && c.childs.length > 0">
+                  <a *ngFor="let child of c.childs" class="dropdown-child-item"
+                     [routerLinkActive]="'active'"
+                     [routerLinkActiveOptions]="{exact: true}"
+                     href="/danh-muc/{{c.slug}}/{{child.slug}}">{{child.name}}</a>
+                </div>
+              </a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLinkActive]="'active'"
+               routerLink="{{'menu.product.href' | translate}}">{{'menu.product.name' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLinkActive]="'active'"
+               routerLink="{{'menu.new.href' | translate}}">{{'menu.new.name' | translate}}</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [routerLinkActive]="'active'"
+               routerLink="{{'menu.contact.href' | translate}}">{{'menu.contact.name' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+      <div class="topbar float-right navbar">
+        <div class="nav-item navbar-nav">
+          <a class="nav-link" role="button" (click)="toggleSearch()">
+            <i class="fas fa-search"></i>
+          </a>
+        </div>
+        <div class="nav-item navbar-nav">
+          <a class="nav-link dropdown-toggle" role="button"
+             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-globe"></i>
+          </a>
+          <div class="language-popup dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+               aria-labelledby="language">
+            <a class="dropdown-item" role="button" [ngClass]="{'active': lang === 'vn'}"
+               (click)="changeLanguage($event, 'vn')">
+              {{'language.vn.name' | translate}}
+            </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" role="button" [ngClass]="{'active': lang === 'en'}"
+               (click)="changeLanguage($event, 'en')">
+              {{'language.en.name' | translate}}
             </a>
           </div>
-        </li>
-        <li class="nav-item" [routerLinkActive]="'active'">
-          <a class="nav-link" routerLink="{{'menu.product.href' | translate}}">{{'menu.product.name' | translate}}</a>
-        </li>
-        <li class="nav-item" [routerLinkActive]="'active'">
-          <a class="nav-link" routerLink="{{'menu.new.href' | translate}}">{{'menu.new.name' | translate}}</a>
-        </li>
-        <li class="nav-item" [routerLinkActive]="'active'">
-          <a class="nav-link" routerLink="{{'menu.contact.href' | translate}}">{{'menu.contact.name' | translate}}</a>
-        </li>
-      </ul>
-    </div>
-    <div class="topbar float-right">
-      <a class="nav-link" role="button" (click)="toggleSearch()">
-        <i class="fas fa-search"></i>
-      </a>
-    </div>
-  </nav>
+        </div>
+        <div class="nav-item navbar-nav">
+          <a class="nav-link" role="button" (click)="open(cart_modal)">
+            <i class="fas fa-shopping-cart"></i>
+            <span class="badge bg-danger badge-counter">{{itemAmount > 3 ? '3+' : itemAmount}}</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
 </header>
 <!-- Start Search Popup -->
 <div class="search_area bg-secondary" [ngClass]="{'search_box_show_hide': searching}">

@@ -177,11 +177,6 @@ a {
   background-color: transparent;
 }
 
-a:hover {
-  color: #224abe;
-  text-decoration: underline;
-}
-
 a:not([href]):not([class]) {
   color: inherit;
   text-decoration: none;
@@ -9397,7 +9392,6 @@ a:focus {
 }
 
 .topbar .nav-item .nav-link {
-  height: 4.375rem;
   display: flex;
   align-items: center;
   padding: 0 0.75rem;
@@ -9486,7 +9480,7 @@ a:focus {
   }
 
   .topbar .dropdown-list {
-    width: 20rem !important;
+    width: auto !important;
   }
 
   .topbar .dropdown-list .dropdown-item .text-truncate {
