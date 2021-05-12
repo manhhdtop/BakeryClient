@@ -1,11 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../../service/cart.service';
-import { CategoryService } from '../../../service/category.service';
 import { ToastService } from '../../../service/toast.service';
 import { Item } from '../../../shared/model/item';
 import { MenuCategory } from '../../../shared/model/menu-category';
@@ -24,12 +23,11 @@ export class HeaderComponent implements OnInit {
   totalAmount: number;
   lang: string;
   items: Item[];
-  categories: MenuCategory[];
+  @Input() categories: MenuCategory[];
 
   constructor(
     private activeRoute: ActivatedRoute,
     private cartService: CartService,
-    private categoryService: CategoryService,
     private modalService: NgbModal,
     private titleService: Title,
     private toast: ToastService,
@@ -46,11 +44,6 @@ export class HeaderComponent implements OnInit {
     this.itemAmount = this.items.length;
     this.totalAmount = this.cartService.getTotalAmount();
     this.lang = this.translate.currentLang;
-    this.categoryService.getMenuCategories().subscribe(res => {
-      this.categories = [...res.data];
-    }, error => {
-      this.toast.showDanger(error.errorDescription);
-    });
   }
 
   open(content): void {

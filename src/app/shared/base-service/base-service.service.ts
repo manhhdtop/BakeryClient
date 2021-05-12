@@ -14,53 +14,59 @@ export class BaseService {
     return localStorage.getItem(Constant.TOKEN);
   }
 
+  private static checkUrl(url: string): boolean {
+    return url.trim().startsWith('/admin');
+  }
+
   get(url: string, params?: {}, responseType?: string, timeout?: number): Observable<any> {
+    const needAuthen = BaseService.checkUrl(url);
     url = this.configService.getConfig().api.baseUrl + url;
     switch (responseType) {
       case 'text':
         return this.httpClient.get(url, {
-          headers: this.createHeaders(timeout) || {},
+          headers: needAuthen ? this.createHeaders(timeout) : {},
           params,
           responseType: 'text',
         });
       case 'blob':
         return this.httpClient.get(url, {
-          headers: this.createHeaders(timeout) || {},
+          headers: needAuthen ? this.createHeaders(timeout) : {},
           params,
           responseType: 'blob',
         });
       case 'arraybuffer':
         return this.httpClient.get(url, {
-          headers: this.createHeaders(timeout) || {},
+          headers: needAuthen ? this.createHeaders(timeout) : {},
           responseType: 'arraybuffer',
           params,
         });
       default:
         return this.httpClient.get(url, {
-          headers: this.createHeaders(timeout) || {},
+          headers: needAuthen ? this.createHeaders(timeout) : {},
           params,
         });
     }
   }
 
   async getWithAsync(url: string, params?: {}, responseType?: string): Promise<any> {
+    const needAuthen = BaseService.checkUrl(url);
     url = this.configService.getConfig().api.baseUrl + url;
     switch (responseType) {
       case 'text':
         return await this.httpClient.get(url, {
-          headers: this.createHeaders().set('skipLoading', 'true') || {},
+          headers: needAuthen ? this.createHeaders().set('skipLoading', 'true') : {},
           params,
           responseType: 'text',
         }).toPromise();
       case 'blob':
         return await this.httpClient.get(url, {
-          headers: this.createHeaders().set('skipLoading', 'true') || {},
+          headers: needAuthen ? this.createHeaders().set('skipLoading', 'true') : {},
           params,
           responseType: 'blob',
         }).toPromise();
       case 'arraybuffer':
         return await this.httpClient.get(url, {
-          headers: this.createHeaders() || {},
+          headers: needAuthen ? this.createHeaders() : {},
           responseType: 'arraybuffer',
           params,
         }).toPromise();
@@ -81,29 +87,30 @@ export class BaseService {
    * @param timeout timeout
    */
   put(url: string, data: any, params?: {}, responseType?: string, timeout?: number): Observable<any> {
+    const needAuthen = BaseService.checkUrl(url);
     url = this.configService.getConfig().api.baseUrl + url;
     switch (responseType) {
       case 'text':
         return this.httpClient.put(url, data, {
-          headers: this.createHeaders(timeout) || {},
+          headers: needAuthen ? this.createHeaders(timeout) : {},
           responseType: 'text',
           params,
         });
       case 'blob':
         return this.httpClient.put(url, data, {
-          headers: this.createHeaders(timeout) || {},
+          headers: needAuthen ? this.createHeaders(timeout) : {},
           responseType: 'blob',
           params,
         });
       case 'arraybuffer':
         return this.httpClient.put(url, data, {
-          headers: this.createHeaders(timeout) || {},
+          headers: needAuthen ? this.createHeaders(timeout) : {},
           responseType: 'arraybuffer',
           params,
         });
       default:
         return this.httpClient.put(url, data, {
-          headers: this.createHeaders(timeout) || {},
+          headers: needAuthen ? this.createHeaders(timeout) : {},
           params,
         });
     }
@@ -117,16 +124,17 @@ export class BaseService {
    * @param timeout timeout
    */
   post(url: string, data?: any, responseType?: string, timeout?: number): Observable<any> {
+    const needAuthen = BaseService.checkUrl(url);
     url = this.configService.getConfig().api.baseUrl + url;
     switch (responseType) {
       case 'text':
         return this.httpClient.post(url, data, {
-          headers: this.createHeaders(timeout) || {},
+          headers: needAuthen ? this.createHeaders(timeout) : {},
           responseType: 'text',
         });
       default:
         return this.httpClient.post(url, data, {
-          headers: this.createHeaders(timeout) || {},
+          headers: needAuthen ? this.createHeaders(timeout) : {},
         });
     }
   }
@@ -138,16 +146,17 @@ export class BaseService {
    * @param responseType responseType
    */
   delete(url: string, id: any, responseType?: string): Observable<any> {
+    const needAuthen = BaseService.checkUrl(url);
     url = this.configService.getConfig().api.baseUrl + url + '/' + id;
     switch (responseType) {
       case 'text':
         return this.httpClient.delete(url, {
-          headers: this.createHeaders() || {},
+          headers: needAuthen ? this.createHeaders() : {},
           responseType: 'text',
         });
       default:
         return this.httpClient.delete(url, {
-          headers: this.createHeaders() || {},
+          headers: needAuthen ? this.createHeaders() : {},
         });
     }
   }

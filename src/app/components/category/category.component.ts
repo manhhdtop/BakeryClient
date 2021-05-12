@@ -43,7 +43,6 @@ export class CategoryComponent implements OnInit {
     } else {
       this.category = undefined;
     }
-    console.log('category: ', this.category);
   }
 
 }

@@ -1,0 +1,17 @@
+.nav-item {
+  background-color: #ed5565;
+  color: #fff;
+}
+
+.nav-item .nav-link {
+  background-color: #000;
+  color: #fff;
+}
+
+.nav-item .nav-link:active, .nav-item .nav-link:hover {
+  color: #5bbd2a;
+}
+
+.nav-item .nav-link:disabled {
+  color: rgba(0,0,0,.3);
+}
