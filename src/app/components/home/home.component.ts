@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeService } from '../../service/home.service';
+import { CategoryService } from '../../service/category.service';
+import { ToastService } from '../../service/toast.service';
 import { MenuCategory } from '../../shared/model/menu-category';
 
 @Component({
@@ -11,13 +12,21 @@ export class HomeComponent implements OnInit {
   categories: MenuCategory[];
 
   constructor(
-    private homeService: HomeService,
+    private categoryService: CategoryService,
+    private toast: ToastService,
   ) {
   }
 
   ngOnInit(): void {
-    this.categories = this.homeService.getMenuCategories();
-    console.log('(HomeComponent) categories: ', this.categories);
+    this.getMenuCategory();
+  }
+
+  private getMenuCategory(): void {
+    this.categoryService.getMenuCategories().subscribe(res => {
+      this.categories = [...res.data];
+    }, error => {
+      this.toast.showDanger(error.errorDescription);
+    });
   }
 
 }

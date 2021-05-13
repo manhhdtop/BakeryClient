@@ -13,5 +13,9 @@
 }
 
 .nav-item .nav-link:disabled {
-  color: rgba(0,0,0,.3);
+  color: rgba(0, 0, 0, .3);
+}
+
+.nav .nav-item.dropdown:hover .dropdown-menu {
+  display: block;
 }

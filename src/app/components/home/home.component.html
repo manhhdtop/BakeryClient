@@ -1,45 +1,20 @@
 <div class="container py-3">
   <div class="row">
-    <div class="col-sm-12 col-md-4">
+    <div class="col-sm-12 col-md-4" *ngIf="categories && categories.length > 0">
       <ul class="nav navbar-light flex-column">
         <li class="nav-item bg-danger px-2 text-white">
           <h3>Danh mục</h3>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}"
-             routerLink="{{'menu.home.href' | translate}}">{{'menu.home.name' | translate}}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLinkActive]="'active'"
-             routerLink="{{'menu.about.href' | translate}}">{{'menu.about.name' | translate}}</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}"
-             routerLink="{{'menu.category.href' | translate}}">{{'menu.category.name' | translate}}</a>
-          <div class="dropdown-menu" *ngIf="categories && categories.length > 0">
-            <a *ngFor="let c of categories" [routerLinkActive]="'active'" class="dropdown-item"
-               href="/danh-muc/{{c.slug}}">{{c.name}}
-              <div *ngIf="c.childs && c.childs.length > 0">
-                <a *ngFor="let child of c.childs" class="dropdown-child-item"
-                   [routerLinkActive]="'active'"
-                   [routerLinkActiveOptions]="{exact: true}"
-                   href="/danh-muc/{{c.slug}}/{{child.slug}}">{{child.name}}</a>
-              </div>
-            </a>
+        <li class="nav-item" *ngFor="let c of categories" [routerLinkActive]="'active'">
+          <a class="nav-link" routerLink="/danh-muc/{{c.slug}}">{{c.name}}</a>
+          <div class="dropdown-menu dropdown-menu-right" *ngIf="c.childs && c.childs.length > 0">
+            <a *ngFor="let child of c.childs" class="dropdown-child-item"
+               [routerLinkActive]="'active'"
+               [routerLinkActiveOptions]="{exact: true}"
+               href="/danh-muc/{{c.slug}}/{{child.slug}}">{{child.name}}</a>
           </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLinkActive]="'active'"
-             routerLink="{{'menu.product.href' | translate}}">{{'menu.product.name' | translate}}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLinkActive]="'active'"
-             routerLink="{{'menu.new.href' | translate}}">{{'menu.new.name' | translate}}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" [routerLinkActive]="'active'"
-             routerLink="{{'menu.contact.href' | translate}}">{{'menu.contact.name' | translate}}</a>
-        </li>
+
       </ul>
     </div>
     <div class="col-sm-12 col-md-8">
