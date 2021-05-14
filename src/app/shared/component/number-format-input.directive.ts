@@ -1,5 +1,5 @@
 import { formatNumber } from '@angular/common';
-import { Directive, ElementRef, forwardRef, HostListener, Input, OnDestroy } from '@angular/core';
+import { AfterViewInit, Directive, ElementRef, forwardRef, HostListener, Input, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Directive({
@@ -13,42 +13,39 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ],
 })
-export class NumberFormatInputDirective implements ControlValueAccessor, OnDestroy {
+export class NumberFormatInputDirective implements ControlValueAccessor, OnDestroy, AfterViewInit {
   locale = 'en';
   decimalMarker = '.';
+  // tslint:disable-next-line:variable-name
+  private _value: string;
 
   constructor(private element: ElementRef<HTMLInputElement>) {
   }
 
-  get value(): string | null {
-    console.log('value: ', this._value);
+  ngAfterViewInit(): void {
+    this.formatValue(this._value + '');
+  }
+
+  get value(): string {
     return this._value;
   }
 
   @Input('value')
-  set value(value: string | null) {
-    this._value = value;
-    console.log('value: ', value);
+  set value(value: string) {
+    this._value = value + '';
     this.formatValue(value);
   }
-
-  // tslint:disable-next-line:variable-name
-  private _value: string | null;
 
   @HostListener('input', ['$event.target.value', '$event.target.value'])
   input(event, value): void {
     const regExp = new RegExp(`[^\\d\\${this.decimalMarker}-]`, 'g');
-    console.log('regExp: ', `[^\\d\\${this.decimalMarker}-]`);
-    console.log('value1: ', value.replace(regExp, ''));
     const [integer, decimal] = value.replace(regExp, '').split(this.decimalMarker);
 
     this._value = decimal ? integer.concat('.', decimal) : integer;
-    console.log('value2: ', this._value);
 
-    if (this.isLastCharacterDecimalSeparator(value)) {
-      this._value = value;
-    }
-    console.log('value3: ', this._value);
+    // if (this.isLastCharacterDecimalSeparator(value)) {
+    //   this._value = value;
+    // }
 
     this._onChange(this._value);
   }
@@ -64,7 +61,6 @@ export class NumberFormatInputDirective implements ControlValueAccessor, OnDestr
   }
 
   _onChange(value: any): void {
-    console.log('value: ', value);
   }
 
   writeValue(value: any): void {
@@ -80,12 +76,15 @@ export class NumberFormatInputDirective implements ControlValueAccessor, OnDestr
   }
 
   isLastCharacterDecimalSeparator(value: any): boolean {
+    if (value === undefined || value === null || value === '') {
+      return false;
+    }
     return isNaN(value[value.length - 1]);
   }
 
 
   private formatValue(value: string | null): void {
-    if (value === null) {
+    if (value === undefined || value === null || value === '') {
       this.element.nativeElement.value = '';
       return;
     }
@@ -97,9 +96,7 @@ export class NumberFormatInputDirective implements ControlValueAccessor, OnDestr
 
     const [thousandSeparator, decimalMarker] = formatNumber(1000.99, this.locale).replace(/\d/g, '');
     this.decimalMarker = decimalMarker;
-
     const [integer, decimal] = value.split('.');
-
     this.element.nativeElement.value = integer.replace(/\B(?=(\d{3})+(?!\d))/g, thousandSeparator);
 
     if (decimal) {
