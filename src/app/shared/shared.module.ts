@@ -4,9 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { I18nModule } from '../i18n/i18n.module';
+import { CkeditorComponent } from './component/ckeditor/ckeditor.component';
+import { NumberFormatInputDirective } from './component/number-format-input.directive';
 import { DEFAULT_TIMEOUT, ErrorInterceptor } from './interceptor/error.interceptor';
 import { DateFormatPipe } from './pipe/format-date.pipe';
-import { CkeditorComponent } from './component/ckeditor/ckeditor.component';
+import { NumberFormatPipe } from './pipe/format-number.pipe';
 
 @NgModule({
   imports: [
@@ -21,10 +23,14 @@ import { CkeditorComponent } from './component/ckeditor/ckeditor.component';
     HttpClientModule,
     I18nModule,
     CkeditorComponent,
+    NumberFormatInputDirective,
+    NumberFormatPipe,
   ],
   declarations: [
     DateFormatPipe,
     CkeditorComponent,
+    NumberFormatInputDirective,
+    NumberFormatPipe,
   ],
   providers: [
     {

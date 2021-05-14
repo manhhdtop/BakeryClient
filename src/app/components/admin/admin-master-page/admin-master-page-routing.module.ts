@@ -107,13 +107,6 @@ const routes: Routes = [
       },
     ],
   },
-  {
-    path: 'login',
-    component: LoginComponent,
-    data: {
-      page_title: 'menu.admin.login.title',
-    },
-  },
 ];
 
 @NgModule({

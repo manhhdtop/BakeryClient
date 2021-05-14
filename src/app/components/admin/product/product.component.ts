@@ -151,6 +151,7 @@ export class ProductComponent implements OnInit {
         name: [product.name, Validators.required],
         slug: [product.slug, Validators.required],
         description: [product.description],
+        price: [product.price, Validators.required],
         categoryId: [product.category.id],
         imageUploads: [null],
         status: [product.status, Validators.required],
@@ -163,6 +164,7 @@ export class ProductComponent implements OnInit {
       name: [null, Validators.required],
       slug: [null, Validators.required],
       description: [null],
+      price: [null, [Validators.required, Validators.min(1)]],
       categoryId: [''],
       imageUploads: [null],
       status: ['', Validators.required],
@@ -178,7 +180,7 @@ export class ProductComponent implements OnInit {
   }
 
   private getProducts(): void {
-    this.productService.getProducts(this.formSearch.value).subscribe(res => {
+    this.productService.getAdminProducts(this.formSearch.value).subscribe(res => {
       this.products = res.data.content;
       this.page = res.data.pageable.pageNumber + 1;
       this.size = res.data.pageable.pageSize;

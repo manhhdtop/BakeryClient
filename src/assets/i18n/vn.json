@@ -187,8 +187,11 @@
     "slug_placeholder": "Slug...",
     "description": "Mô tả",
     "description_placeholder": "Mô tả...",
+    "price": "Giá",
+    "price_placeholder": "Giá sản phẩm...",
+    "price_not_null": "Giá sản phẩm không được để trống",
+    "price_not_valid": "Giá sản phẩm phải lớn hơn 0",
     "using": "hoặc sử dụng",
-
     "image": "Hình ảnh",
     "image_placeholder": "Chọn hình ảnh...",
     "image_error": "Hình ảnh không được để trống",

@@ -118,13 +118,28 @@
                         formControlName="description" rows="3"></textarea>
             </div>
           </div>
-          <div class="col-md-6 col-sm-12">
+          <div class="col-md-12 col-sm-12">
             <div class="form-group">
               <label>{{'product.category' | translate}}</label>
               <select class="form-control" formControlName="categoryId">
                 <option value="">{{'choose' | translate}}</option>
                 <option *ngFor="let c of categories" [value]="c.id">{{c.name}}</option>
               </select>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'product.price' | translate}}</label>
+              <input numberFormatInput class="form-control"
+                     placeholder="{{'product.price_placeholder' | translate}}"
+                     formControlName="price">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.price.errors?.required">
+                {{'product.price_not_null' | translate}}
+              </small>
+              <small class="form-text text-danger"
+                     *ngIf="submitted && !formUpdate.controls.price.errors?.required && formUpdate.controls.price.errors?.min">
+                {{'product.price_not_valid' | translate}}
+              </small>
             </div>
           </div>
           <div class="col-md-6 col-sm-12">
@@ -155,7 +170,7 @@
             <ul class="list-group list-group-horizontal list-image">
               <li class="list-group-item d-flex justify-content-between align-items-start"
                   *ngFor="let f of files">
-                <img [src]="baseUrl + f.uri" class="img img-responsive" (click)="openImage(imageModal, f)">
+                <img [src]="baseUrl + f.uri" class="img img-fluid" (click)="openImage(imageModal, f)">
                 <span class="badge bg-primary rounded-pill" role="button" (click)="removeImage(f)">x</span>
               </li>
             </ul>

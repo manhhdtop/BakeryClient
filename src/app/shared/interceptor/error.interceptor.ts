@@ -32,7 +32,7 @@ export class ErrorInterceptor implements HttpInterceptor {
         if (error.status === 401) {
           localStorage.clear();
           const url = this.router.routerState.snapshot.url;
-          this.router.navigate([UrlConstant.LOGIN], {queryParams: {returnUrl: url}});
+          this.router.navigate(['/login'], {queryParams: {returnUrl: url}});
           return throwError(error);
         } else if (error.status === 403) {
           this.router.navigate([UrlConstant.UNAUTHORIZED]);

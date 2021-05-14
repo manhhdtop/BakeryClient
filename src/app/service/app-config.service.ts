@@ -44,7 +44,7 @@ export class AppConfigService {
     AppConsts.api = data.api;
     AppConsts.pageSize = data.pageSize;
     AppConsts.page = data.page;
-    AppConsts.defaultPage = data.defaultPage;
+    AppConsts.defaultPageSize = data.defaultPageSize;
     AppConsts.timeoutValue = data.timeoutApi;
     this.config = AppConsts;
   };

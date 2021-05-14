@@ -28,6 +28,7 @@ export class UrlConstant {
   // User
   public static readonly USER = UrlConstant.ADMIN + '/user';
   // Product
-  public static readonly PRODUCT = UrlConstant.ADMIN + '/product';
-  public static readonly CREATE_PRODUCT_SLUG = UrlConstant.PRODUCT + '/create-slug';
+  public static readonly PRODUCT = '/product';
+  public static readonly ADMIN_PRODUCT = UrlConstant.ADMIN + UrlConstant.PRODUCT;
+  public static readonly CREATE_PRODUCT_SLUG = UrlConstant.ADMIN_PRODUCT + '/create-slug';
 }

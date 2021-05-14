@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbCarouselModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
+import { SharedModule } from '../../shared/shared.module';
 import { CartComponent } from '../cart/cart.component';
 import { HomeComponent } from '../home/home.component';
 import { FooterComponent } from './footer/footer.component';
@@ -20,14 +21,15 @@ import { MasterPageComponent } from './master-page.component';
     HomeComponent,
     CartComponent,
   ],
-  imports: [
-    CommonModule,
-    MasterPageRoutingModule,
-    RouterModule,
-    TranslateModule,
-    FormsModule,
-    NgbCarouselModule,
-  ],
+    imports: [
+        CommonModule,
+        MasterPageRoutingModule,
+        RouterModule,
+        TranslateModule,
+        FormsModule,
+        NgbCarouselModule,
+        SharedModule,
+    ],
 })
 export class MasterPageModule {
 }

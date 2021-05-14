@@ -13,23 +13,27 @@ export class ProductService {
   ) {
   }
 
-  getProducts(params?): Observable<any> {
-    return this.baseService.get(UrlConstant.PRODUCT, params);
+  getAdminProducts(params?): Observable<any> {
+    return this.baseService.get(UrlConstant.ADMIN_PRODUCT, params);
   }
 
   save(data): Observable<any> {
-    return this.baseService.put(UrlConstant.PRODUCT, data);
+    return this.baseService.put(UrlConstant.ADMIN_PRODUCT, data);
   }
 
   update(data): Observable<any> {
-    return this.baseService.post(UrlConstant.PRODUCT, data);
+    return this.baseService.post(UrlConstant.ADMIN_PRODUCT, data);
   }
 
   delete(id): Observable<any> {
-    return this.baseService.delete(UrlConstant.PRODUCT, id);
+    return this.baseService.delete(UrlConstant.ADMIN_PRODUCT, id);
   }
 
   createSlug(name: string): Observable<any> {
     return this.baseService.get(UrlConstant.CREATE_PRODUCT_SLUG + '?productName=' + name);
+  }
+
+  getProducts(params?): Observable<any> {
+    return this.baseService.get(UrlConstant.PRODUCT, params);
   }
 }
