@@ -1532,7 +1532,7 @@ function getAlpha(string) {
 // generators
 function hexString(rgba, a) {
    var a = (a !== undefined && rgba.length === 3) ? a : rgba[3];
-   return "#" + hexDouble(rgba[0]) 
+   return "#" + hexDouble(rgba[0])
               + hexDouble(rgba[1])
               + hexDouble(rgba[2])
               + (
@@ -2302,7 +2302,7 @@ var helpers = {
 	},
 
 	/**
-	 * The default merger when Chart.helpers.merge is called without merger option.
+	 * The default merger when Chart.helpers.merge is called without merger option_type.
 	 * Note(SB): also used by mergeConfig and mergeScaleConfig as fallback.
 	 * @private
 	 */
@@ -3118,7 +3118,7 @@ var helpers_options = {
 	 * @param {number} [index] - If defined and the current value is an array, the value
 	 * at `index` become the new input.
 	 * @param {object} [info] - object to return information about resolution in
-	 * @param {boolean} [info.cacheable] - Will be set to `false` if option is not cacheable.
+	 * @param {boolean} [info.cacheable] - Will be set to `false` if option_type is not cacheable.
 	 * @since 2.7.0
 	 */
 	resolve: function(inputs, context, index, info) {
@@ -3652,7 +3652,7 @@ helpers$1.extend(DatasetController.prototype, {
 	dataElementType: null,
 
 	/**
-	 * Dataset element option keys to be resolved in _resolveDatasetElementOptions.
+	 * Dataset element option_type keys to be resolved in _resolveDatasetElementOptions.
 	 * A derived controller may override this to resolve controller-specific options.
 	 * The keys defined here are for backward compatibility for legend styles.
 	 * @private
@@ -3668,7 +3668,7 @@ helpers$1.extend(DatasetController.prototype, {
 	],
 
 	/**
-	 * Data element option keys to be resolved in _resolveDataElementOptions.
+	 * Data element option_type keys to be resolved in _resolveDataElementOptions.
 	 * A derived controller may override this to resolve controller-specific options.
 	 * The keys defined here are for backward compatibility for legend styles.
 	 * @private
@@ -3968,7 +3968,7 @@ helpers$1.extend(DatasetController.prototype, {
 			datasetIndex: me.index
 		};
 
-		// `resolve` sets cacheable to `false` if any option is indexed or scripted
+		// `resolve` sets cacheable to `false` if any option_type is indexed or scripted
 		var info = {cacheable: !custom};
 
 		var keys, i, ilen, key;
@@ -5989,7 +5989,7 @@ var controller_line = core_datasetController.extend({
 
 		// The default behavior of lines is to break at null values, according
 		// to https://github.com/chartjs/Chart.js/issues/2435#issuecomment-216718158
-		// This option gives lines the ability to span gaps
+		// This option_type gives lines the ability to span gaps
 		values.spanGaps = valueOrDefault$6(config.spanGaps, options.spanGaps);
 		values.tension = valueOrDefault$6(config.lineTension, lineOptions.tension);
 		values.steppedLine = resolve$2([custom.steppedLine, config.steppedLine, lineOptions.stepped]);
@@ -6045,7 +6045,7 @@ var controller_line = core_datasetController.extend({
 		var points = meta.data || [];
 		var i, ilen, model, controlPoints;
 
-		// Only consider points that are drawn in case the spanGaps option is used
+		// Only consider points that are drawn in case the spanGaps option_type is used
 		if (lineModel.spanGaps) {
 			points = points.filter(function(pt) {
 				return !pt._model.skip;
@@ -6602,7 +6602,7 @@ var controller_radar = core_datasetController.extend({
 		var points = meta.data || [];
 		var i, ilen, model, controlPoints;
 
-		// Only consider points that are drawn in case the spanGaps option is used
+		// Only consider points that are drawn in case the spanGaps option_type is used
 		if (meta.dataset._model.spanGaps) {
 			points = points.filter(function(pt) {
 				return !pt._model.skip;
@@ -7496,7 +7496,7 @@ function initCanvas(canvas, config) {
 	if (renderHeight === null || renderHeight === '') {
 		if (canvas.style.height === '') {
 			// If no explicit render height and style height, let's apply the aspect ratio,
-			// which one can be specified by the user but also by charts as default option
+			// which one can be specified by the user but also by charts as default option_type
 			// (i.e. options.aspectRatio). If not specified, use canvas aspect ratio of 2.
 			canvas.height = canvas.width / (config.options.aspectRatio || 2);
 		} else {
@@ -8087,7 +8087,7 @@ var core_plugins = {
 	},
 
 	/**
-	 * Invalidates cache for the given chart: descriptors hold a reference on plugin option,
+	 * Invalidates cache for the given chart: descriptors hold a reference on plugin option_type,
 	 * but in some cases, this reference can be changed by the user when updating options.
 	 * https://github.com/chartjs/Chart.js/issues/5111#issuecomment-355934167
 	 * @private
@@ -9185,7 +9185,7 @@ core_defaults._set('global', {
 });
 
 /**
- * Recursively merge the given config objects representing the `scales` option
+ * Recursively merge the given config objects representing the `scales` option_type
  * by incorporating scale defaults in `xAxes` and `yAxes` array items, then
  * returns a deep copy of the result, thus doesn't alter inputs.
  */
@@ -14148,7 +14148,7 @@ function toTimestamp(scale, input) {
 	}
 
 	// Labels are in an incompatible format and no `parser` has been provided.
-	// The user might still use the deprecated `format` option for parsing.
+	// The user might still use the deprecated `format` option_type for parsing.
 	if (!parser && typeof format === 'function') {
 		value = format(input);
 
@@ -14239,7 +14239,7 @@ function generate(scale, min, max, capacity) {
 	var ticks = [];
 	var time;
 
-	// For 'week' unit, handle the first day of week option
+	// For 'week' unit, handle the first day of week option_type
 	if (weekday) {
 		first = +adapter.startOf(first, 'isoWeek', weekday);
 	}
@@ -14267,7 +14267,7 @@ function generate(scale, min, max, capacity) {
  * Returns the start and end offsets from edges in the form of {start, end}
  * where each value is a relative width to the scale and ranges between 0 and 1.
  * They add extra margins on the both sides by scaling down the original scale.
- * Offsets are added when the `offset` option is true.
+ * Offsets are added when the `offset` option_type is true.
  */
 function computeOffsets(table, ticks, min, max, options) {
 	var start = 0;
@@ -14471,7 +14471,7 @@ var scale_time = core_scale.extend({
 		min = parse(me, getMin(options)) || min;
 		max = parse(me, getMax(options)) || max;
 
-		// In case there is no valid min/max, set limits based on unit time option
+		// In case there is no valid min/max, set limits based on unit time option_type
 		min = min === MAX_INTEGER ? +adapter.startOf(Date.now(), unit) : min;
 		max = max === MIN_INTEGER ? +adapter.endOf(Date.now(), unit) + 1 : max;
 
@@ -19839,7 +19839,7 @@ core_defaults._set('global', {
 });
 
 /**
- * Helper function to get the box width based on the usePointStyle option
+ * Helper function to get the box width based on the usePointStyle option_type
  * @param {object} labelopts - the label options on the legend
  * @param {number} fontSize - the label font size
  * @return {number} width of the color box area

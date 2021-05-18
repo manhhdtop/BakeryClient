@@ -1030,7 +1030,7 @@ function createDisabledPseudo( disabled ) {
 			// * listed form-associated elements in a disabled fieldset
 			//   https://html.spec.whatwg.org/multipage/forms.html#category-listed
 			//   https://html.spec.whatwg.org/multipage/forms.html#concept-fe-disabled
-			// * option elements in a disabled optgroup
+			// * option_type elements in a disabled optgroup
 			//   https://html.spec.whatwg.org/multipage/forms.html#concept-option-disabled
 			// All such elements have a "form" property.
 			if ( elem.parentNode && elem.disabled === false ) {
@@ -1327,7 +1327,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 			// https://bugs.jquery.com/ticket/12359
 			docElem.appendChild( el ).innerHTML = "<a id='" + expando + "'></a>" +
 				"<select id='" + expando + "-\r\\' msallowcapture=''>" +
-				"<option selected=''></option></select>";
+				"<option_type selected=''></option_type></select>";
 
 			// Support: IE8, Opera 11-12.16
 			// Nothing should be selected when empty strings follow ^= or $= or *=
@@ -1361,7 +1361,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 					whitespace + "*(?:''|\"\")" );
 			}
 
-			// Webkit/Opera - :checked should return selected option elements
+			// Webkit/Opera - :checked should return selected option_type elements
 			// http://www.w3.org/TR/2011/REC-css3-selectors-20110929/#checked
 			// IE8 throws error here and will not see later tests
 			if ( !el.querySelectorAll( ":checked" ).length ) {
@@ -1383,7 +1383,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 
 		assert( function( el ) {
 			el.innerHTML = "<a href='' disabled='disabled'></a>" +
-				"<select disabled='disabled'><option/></select>";
+				"<select disabled='disabled'><option_type/></select>";
 
 			// Support: Windows 8 Native Apps
 			// The type and name attributes are restricted during .innerHTML assignment
@@ -3432,7 +3432,7 @@ function createOptions( options ) {
  * Create a callback list using the following parameters:
  *
  *	options: an optional list of space-separated options that will change how
- *			the callback list behaves or a more traditional option object
+ *			the callback list behaves or a more traditional option_type object
  *
  * By default a callback list will act like an event callback list and can be
  * "fired" multiple times.
@@ -4928,9 +4928,9 @@ var rscriptType = ( /^$|^module$|\/(?:java|ecma)script/i );
 	support.noCloneChecked = !!div.cloneNode( true ).lastChild.defaultValue;
 
 	// Support: IE <=9 only
-	// IE <=9 replaces <option> tags with their contents when inserted outside of
+	// IE <=9 replaces <option_type> tags with their contents when inserted outside of
 	// the select element.
-	div.innerHTML = "<option></option>";
+	div.innerHTML = "<option_type></option_type>";
 	support.option = !!div.lastChild;
 } )();
 
@@ -6038,7 +6038,7 @@ function fixInput( src, dest ) {
 	if ( nodeName === "input" && rcheckableType.test( src.type ) ) {
 		dest.checked = src.checked;
 
-	// Fails to return the selected option to the default selected state when cloning options
+	// Fails to return the selected option_type to the default selected state when cloning options
 	} else if ( nodeName === "input" || nodeName === "textarea" ) {
 		dest.defaultValue = src.defaultValue;
 	}
@@ -8192,8 +8192,8 @@ jQuery.extend( {
 // Support: IE <=11 only
 // Accessing the selectedIndex property
 // forces the browser to respect setting selected
-// on the option
-// The getter ensures a default option is selected
+// on the option_type
+// The getter ensures a default option_type is selected
 // when in an optgroup
 // eslint rule "no-unused-expressions" is disabled for this code
 // since it considers such accessions noop
@@ -8509,7 +8509,7 @@ jQuery.extend( {
 					val :
 
 					// Support: IE <=10 - 11 only
-					// option.text throws exceptions (#14686, #14858)
+					// option_type.text throws exceptions (#14686, #14858)
 					// Strip and collapse whitespace
 					// https://html.spec.whatwg.org/#strip-and-collapse-whitespace
 					stripAndCollapse( jQuery.text( elem ) );
@@ -8544,7 +8544,7 @@ jQuery.extend( {
 							( !option.parentNode.disabled ||
 								!nodeName( option.parentNode, "optgroup" ) ) ) {
 
-						// Get the specific value for the option
+						// Get the specific value for the option_type
 						value = jQuery( option ).val();
 
 						// We don't need an array for one selects
@@ -9514,7 +9514,7 @@ jQuery.extend( {
 		s.url = ( ( url || s.url || location.href ) + "" )
 			.replace( rprotocol, location.protocol + "//" );
 
-		// Alias method option to type as per ticket #12004
+		// Alias method option_type to type as per ticket #12004
 		s.type = options.method || options.type || s.method || s.type;
 
 		// Extract dataTypes list
@@ -9630,7 +9630,7 @@ jQuery.extend( {
 				s.accepts[ "*" ]
 		);
 
-		// Check for headers option
+		// Check for headers option_type
 		for ( i in s.headers ) {
 			jqXHR.setRequestHeader( i, s.headers[ i ] );
 		}

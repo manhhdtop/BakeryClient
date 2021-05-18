@@ -122,6 +122,11 @@
         "title": "Quản lý sản phẩm",
         "name": "Sản phẩm"
       },
+      "option_type": {
+        "href": "option-type",
+        "title": "Quản lý Option Type",
+        "name": "Option Type"
+      },
       "user_role": {
         "href": "tai-khoan",
         "title": "Phân quyền và Người dùng",
@@ -209,6 +214,31 @@
       "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa sản phẩm <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><p> Tất cả thông tin liên quan đến sản phẩm này sẽ bị xóa vĩnh viễn. <span class=\"text-danger\">Không thể hoàn tác thao tác này.</span></p>",
       "message_save": "<p><strong>Bạn có muốn lưu thay đổi không?</strong></p>",
       "btn_dont_save": "Không lưu",
+      "btn_cancel": "Hủy",
+      "btn_submit": "Lưu",
+      "btn_delete": "Xóa"
+    }
+  },
+  "option_type": {
+    "header": "Quản lý Option Type",
+    "table_name": "Option Types",
+    "table_search": "Tìm kiếm Option Type...",
+    "btn_new": "Thêm mới",
+    "no": "STT",
+    "name": "Tên Option Type",
+    "name_placeholder": "Tên Option Type...",
+    "name_not_blank": "Tên Option Type không được bỏ trống",
+    "description": "Mô tả",
+    "description_placeholder": "Mô tả...",
+    "created_date": "Ngày tạo",
+    "updated_date": "Ngày cập nhật",
+    "status": "Trạng thái",
+    "status_error": "Trạng thái không được bỏ trống",
+    "modal": {
+      "title_add": "Thêm mới Option Type",
+      "title_update": "Cập nhật Option Type",
+      "title_delete": "Xóa Option",
+      "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa Option Type <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><span class=\"text-danger\">Không thể hoàn tác thao tác này.</span>",
       "btn_cancel": "Hủy",
       "btn_submit": "Lưu",
       "btn_delete": "Xóa"

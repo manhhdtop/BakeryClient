@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { AdminService } from '../../../../service/admin.service';
 import { Constant } from '../../../../shared/constants/constant.class';
+import { User } from '../../../../shared/model/user';
 import { Utils } from '../../../../shared/util/utils';
 
 @Component({
@@ -14,6 +15,7 @@ import { Utils } from '../../../../shared/util/utils';
 })
 export class HeaderComponent implements OnInit {
   lang: string;
+  user: User;
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -27,6 +29,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.lang = this.translate.currentLang;
+    this.user = JSON.parse(localStorage.getItem(Constant.USER_INFO));
   }
 
   changeLanguage(event, language): void {
@@ -50,7 +53,7 @@ export class HeaderComponent implements OnInit {
   logout(modal): void {
     localStorage.removeItem(Constant.TOKEN);
     localStorage.removeItem(Constant.USER_INFO);
-    this.router.navigate(['/admin/login']);
+    this.router.navigate(['/login']);
     modal.dismiss();
   }
 

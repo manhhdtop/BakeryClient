@@ -2,24 +2,22 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { OptionTypeService } from '../../../service/option-type.service';
 import { RoleService } from '../../../service/role.service';
 import { ToastService } from '../../../service/toast.service';
-import { UserService } from '../../../service/user.service';
 import { Constant, Status } from '../../../shared/constants/constant.class';
-import { Role } from '../../../shared/model/role';
-import { User } from '../../../shared/model/user';
+import { Option } from '../../../shared/model/option';
 import { Utils } from '../../../shared/util/utils';
 
 @Component({
-  selector: 'app-user',
-  templateUrl: './user.component.html',
-  styleUrls: ['./user.component.css'],
+  selector: 'app-option',
+  templateUrl: './option-type.component.html',
+  styleUrls: ['./option-type.component.css'],
 })
-export class UserComponent implements OnInit {
+export class OptionTypeComponent implements OnInit {
   readonly statuses = Status;
-  selectedUser: User;
-  users: User[];
-  roles: Role[];
+  selectedOption: Option;
+  options: Option[];
   dateDdmmyyHhmmss: string;
   submitted: boolean;
   formUpdate: FormGroup;
@@ -28,8 +26,6 @@ export class UserComponent implements OnInit {
   size: number;
   totalItem: number;
   currentItems: number;
-  selectedRoleIds: number[];
-  selectedRoleNames: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -38,13 +34,13 @@ export class UserComponent implements OnInit {
     private roleService: RoleService,
     private router: Router,
     private toast: ToastService,
-    private userService: UserService,
+    private optionTypeService: OptionTypeService,
   ) {
   }
 
   ngOnInit(): void {
     this.dateDdmmyyHhmmss = Constant.DATE_DDMMYY_HHMMSS;
-    this.selectedUser = undefined;
+    this.selectedOption = undefined;
     this.page = 1;
     this.size = 20;
     this.formSearch = this.fb.group({
@@ -52,24 +48,23 @@ export class UserComponent implements OnInit {
       page: this.page,
       size: this.size,
     });
-    this.getUsers();
-    this.getRoles();
+    this.getOptionTypes();
   }
 
-  openModal(content, user?: User): void {
-    this.selectedUser = user;
-    this.formUpdate = this.initForm(user);
+  openModal(content, option?: Option): void {
+    this.selectedOption = option;
+    this.formUpdate = this.initForm(option);
     this.submitted = false;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
-  delete(content, user: User): void {
-    this.selectedUser = user;
+  delete(content, option: Option): void {
+    this.selectedOption = option;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       if (result && result.trim() === 'ok') {
-        this.userService.delete(this.selectedUser.id).subscribe(res => {
+        this.optionTypeService.delete(this.selectedOption.id).subscribe(res => {
           if (res.errorCode === '200') {
-            this.getUsers();
+            this.getOptionTypes();
             this.toast.showSuccess(res.errorDescription);
           } else {
             this.toast.showDanger(res.errorDescription);
@@ -88,10 +83,10 @@ export class UserComponent implements OnInit {
     if (this.formUpdate.invalid) {
       return;
     }
-    if (this.selectedUser) {
-      this.userService.update(this.formUpdate.value).subscribe(res => {
+    if (this.selectedOption) {
+      this.optionTypeService.update(this.formUpdate.value).subscribe(res => {
         if (res.errorCode === '200') {
-          this.getUsers();
+          this.getOptionTypes();
           this.toast.showSuccess(res.errorDescription);
           modal.dismiss();
         } else {
@@ -104,9 +99,9 @@ export class UserComponent implements OnInit {
       return;
     }
 
-    this.userService.save(this.formUpdate.value).subscribe(res => {
+    this.optionTypeService.save(this.formUpdate.value).subscribe(res => {
       if (res.errorCode === '200') {
-        this.getUsers();
+        this.getOptionTypes();
         this.toast.showSuccess(res.errorDescription);
         modal.dismiss();
       } else {
@@ -118,44 +113,26 @@ export class UserComponent implements OnInit {
     });
   }
 
-  initForm(user): FormGroup {
-    if (user) {
-      this.selectedRoleIds = user.roles.map(({id}) => id);
-      this.selectedRoleNames = user.roles.map(({name}) => name).join(', ');
+  initForm(option): FormGroup {
+    if (option) {
       return this.fb.group({
-        id: [user.id, Validators.required],
-        username: [user.username, Validators.required],
-        password: [null],
-        name: [user.name, Validators.required],
-        email: [user.email],
-        roleIds: ['', Validators.required],
-        status: [user.status, Validators.required],
+        id: [option.id, Validators.required],
+        name: [option.name, Validators.required],
+        description: [option.description],
+        status: [option.status, Validators.required],
       });
     }
-    this.selectedRoleIds = [];
-    this.selectedRoleNames = '';
     return this.fb.group({
       id: [null],
-      username: [null, Validators.required],
-      password: [null, Validators.required],
       name: [null, Validators.required],
-      email: [null],
-      roleIds: ['', Validators.required],
+      description: [null],
       status: ['', Validators.required],
     });
   }
 
-  private getRoles(): void {
-    this.roleService.getActiveRoles().subscribe(res => {
-      this.roles = res.data;
-    }, error => {
-      this.toast.showDanger(error.error.message);
-    });
-  }
-
-  private getUsers(): void {
-    this.userService.getUsers(this.formSearch.value).subscribe(res => {
-      this.users = res.data.content;
+  private getOptionTypes(): void {
+    this.optionTypeService.getOptionTypes(this.formSearch.value).subscribe(res => {
+      this.options = res.data.content;
       this.page = res.data.pageable.pageNumber + 1;
       this.size = res.data.pageable.pageSize;
       this.totalItem = res.data.totalElements;
@@ -167,7 +144,7 @@ export class UserComponent implements OnInit {
 
   search(event): void {
     event.preventDefault();
-    this.getUsers();
+    this.getOptionTypes();
   }
 
   getStatusName(status: number): string {
@@ -177,22 +154,6 @@ export class UserComponent implements OnInit {
   onPageChange(): void {
     this.toast.show('' + this.page);
     this.formSearch.controls.page.setValue(this.page);
-    this.getUsers();
-  }
-
-  toggleRole(event, id: number): void {
-    event.preventDefault();
-    const index: number = this.selectedRoleIds.findIndex(value => value === id);
-    if (index === -1) {
-      this.selectedRoleIds.push(id);
-    } else {
-      console.log('before: ', this.selectedRoleIds);
-      this.selectedRoleIds.splice(index, 1);
-      console.log('after: ', this.selectedRoleIds);
-    }
-    const roles: Role[] = this.roles.filter(e => this.selectedRoleIds.includes(e.id));
-    console.log('after: ', roles);
-    this.selectedRoleNames = roles.map(({name}) => name).join(', ');
-    this.formUpdate.controls.roleIds.setValue(this.selectedRoleIds);
+    this.getOptionTypes();
   }
 }

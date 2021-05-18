@@ -9,6 +9,7 @@ import { NumberFormatInputDirective } from './component/number-format-input.dire
 import { DEFAULT_TIMEOUT, ErrorInterceptor } from './interceptor/error.interceptor';
 import { DateFormatPipe } from './pipe/format-date.pipe';
 import { NumberFormatPipe } from './pipe/format-number.pipe';
+import { AddToCardComponent } from './component/add-to-card/add-to-card.component';
 
 @NgModule({
   imports: [
@@ -31,6 +32,7 @@ import { NumberFormatPipe } from './pipe/format-number.pipe';
     CkeditorComponent,
     NumberFormatInputDirective,
     NumberFormatPipe,
+    AddToCardComponent,
   ],
   providers: [
     {

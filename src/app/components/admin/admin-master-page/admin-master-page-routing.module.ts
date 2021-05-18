@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../../../shared/guards/auth-guard.class';
 import { ActionComponent } from '../action/action.component';
 import { CategoryComponent } from '../category/category.component';
-import { LoginComponent } from '../login/login.component';
+import { OptionTypeComponent } from '../option_type/option-type.component';
 import { ProductComponent } from '../product/product.component';
 import { RoleComponent } from '../role/role.component';
 import { UserComponent } from '../user/user.component';
@@ -101,6 +101,15 @@ const routes: Routes = [
         component: RoleComponent,
         data: {
           page_title: 'menu.admin.role.title',
+        },
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
+      },
+      {
+        path: 'option-type',
+        component: OptionTypeComponent,
+        data: {
+          page_title: 'menu.admin.option_type.title',
         },
         canActivate: [AuthGuard],
         canLoad: [AuthGuard],

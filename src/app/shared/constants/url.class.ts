@@ -31,4 +31,6 @@ export class UrlConstant {
   public static readonly PRODUCT = '/product';
   public static readonly ADMIN_PRODUCT = UrlConstant.ADMIN + UrlConstant.PRODUCT;
   public static readonly CREATE_PRODUCT_SLUG = UrlConstant.ADMIN_PRODUCT + '/create-slug';
+  // Option
+  public static readonly OPTION_TYPE = UrlConstant.ADMIN + '/option-type';
 }

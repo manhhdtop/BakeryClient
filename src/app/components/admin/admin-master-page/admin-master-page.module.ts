@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from '../../../shared/shared.module';
 import { CategoryComponent } from '../category/category.component';
 import { LoginComponent } from '../login/login.component';
+import { OptionTypeComponent } from '../option_type/option-type.component';
 import { ProductComponent } from '../product/product.component';
 
 import { AdminMasterPageRoutingModule } from './admin-master-page-routing.module';
@@ -27,23 +28,24 @@ import { SidebarComponent } from './sidebar/sidebar.component';
     CategoryComponent,
     ProductComponent,
     LoginComponent,
+    OptionTypeComponent,
   ],
   exports: [
     SidebarComponent,
     HeaderComponent,
     FooterComponent,
   ],
-    imports: [
-        CommonModule,
-        AdminMasterPageRoutingModule,
-        TranslateModule,
-        ReactiveFormsModule,
-        SharedModule,
-        NgbPaginationModule,
-        FormsModule,
-        NgbCarouselModule,
-        CKEditorModule,
-    ],
+  imports: [
+    CommonModule,
+    AdminMasterPageRoutingModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    SharedModule,
+    NgbPaginationModule,
+    FormsModule,
+    NgbCarouselModule,
+    CKEditorModule,
+  ],
 })
 export class AdminMasterPageModule {
 }

@@ -14,7 +14,7 @@ export class AuthGuard implements CanActivate, CanLoad {
   constructor(
     private router: Router,
   ) {
-    this.loginUrl = '/admin/login';
+    this.loginUrl = '/login';
     this.roleAdmin = 'ADMINISTRATOR';
   }
 
