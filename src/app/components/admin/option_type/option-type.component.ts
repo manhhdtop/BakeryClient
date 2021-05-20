@@ -6,7 +6,7 @@ import { OptionTypeService } from '../../../service/option-type.service';
 import { RoleService } from '../../../service/role.service';
 import { ToastService } from '../../../service/toast.service';
 import { Constant, Status } from '../../../shared/constants/constant.class';
-import { Option } from '../../../shared/model/option';
+import { OptionType } from '../../../shared/model/option-type';
 import { Utils } from '../../../shared/util/utils';
 
 @Component({
@@ -16,8 +16,8 @@ import { Utils } from '../../../shared/util/utils';
 })
 export class OptionTypeComponent implements OnInit {
   readonly statuses = Status;
-  selectedOption: Option;
-  options: Option[];
+  selectedOption: OptionType;
+  options: OptionType[];
   dateDdmmyyHhmmss: string;
   submitted: boolean;
   formUpdate: FormGroup;
@@ -51,14 +51,14 @@ export class OptionTypeComponent implements OnInit {
     this.getOptionTypes();
   }
 
-  openModal(content, option?: Option): void {
+  openModal(content, option?: OptionType): void {
     this.selectedOption = option;
     this.formUpdate = this.initForm(option);
     this.submitted = false;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
   }
 
-  delete(content, option: Option): void {
+  delete(content, option: OptionType): void {
     this.selectedOption = option;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       if (result && result.trim() === 'ok') {

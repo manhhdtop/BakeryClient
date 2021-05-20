@@ -13,7 +13,7 @@ export class OptionTypeService {
   ) {
   }
 
-  getOptionTypes(params): Observable<any> {
+  getOptionTypes(params?): Observable<any> {
     return this.baseService.get(UrlConstant.OPTION_TYPE, params);
   }
 

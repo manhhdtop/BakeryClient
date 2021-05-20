@@ -1,4 +1,5 @@
 import { Category } from './category';
+import { Option } from './option';
 import { User } from './user';
 
 export interface Product {
@@ -14,4 +15,5 @@ export interface Product {
   updatedDate: Date;
   updatedBy: User;
   status: number;
+  options: Option[];
 }

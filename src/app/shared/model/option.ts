@@ -1,6 +1,9 @@
+import { OptionType } from './option-type';
+
 export interface Option {
   id: number;
-  name: string;
-  description: string;
-  status: number;
+  productId: number;
+  value: string;
+  optionType: OptionType;
+  moreInfo: string;
 }

@@ -1,11 +1,11 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry, timeout } from 'rxjs/operators';
-import { Router } from '@angular/router';
-import { UrlConstant } from '../constants/url.class';
 import { AppConfigService } from '../../service/app-config.service';
-import { AuthService } from '../../service/auth.service';
+import { UrlConstant } from '../constants/url.class';
 
 export const DEFAULT_TIMEOUT = new InjectionToken<number>('Value default time-out');
 
@@ -13,7 +13,7 @@ export const DEFAULT_TIMEOUT = new InjectionToken<number>('Value default time-ou
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(private router: Router,
               private appConfigService: AppConfigService,
-              private authService: AuthService,
+              private modal: NgbModal,
               @Inject(DEFAULT_TIMEOUT) protected defaultTimeout: number) {
   }
 
@@ -29,6 +29,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       timeout(timeoutValue),
       retry(0),
       catchError((error: HttpErrorResponse) => {
+        this.modal.dismissAll();
         if (error.status === 401) {
           localStorage.clear();
           const url = this.router.routerState.snapshot.url;

@@ -4,12 +4,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AppConfigService } from '../../../service/app-config.service';
 import { CategoryService } from '../../../service/category.service';
+import { OptionTypeService } from '../../../service/option-type.service';
 import { ProductService } from '../../../service/product.service';
 import { ToastService } from '../../../service/toast.service';
 import { UploadService } from '../../../service/upload.service';
 import { CkeditorComponent } from '../../../shared/component/ckeditor/ckeditor.component';
 import { EditorType, Status } from '../../../shared/constants/constant.class';
 import { Category } from '../../../shared/model/category';
+import { Option } from '../../../shared/model/option';
+import { OptionType } from '../../../shared/model/option-type';
 import { Product } from '../../../shared/model/product';
 import { UploadResponse } from '../../../shared/model/upload-response';
 import { Utils } from '../../../shared/util/utils';
@@ -28,6 +31,7 @@ export class ProductComponent implements OnInit {
   selectedImage: UploadResponse;
   products: Product[];
   categories: Category[];
+  optionTypes: OptionType[];
   submitted: boolean;
   formUpdate: FormGroup;
   formSearch: FormGroup;
@@ -45,6 +49,7 @@ export class ProductComponent implements OnInit {
     private appConfigService: AppConfigService,
     private categoryService: CategoryService,
     private fb: FormBuilder,
+    private optionTypeService: OptionTypeService,
     private productService: ProductService,
     private modalService: NgbModal,
     private router: Router,
@@ -65,6 +70,7 @@ export class ProductComponent implements OnInit {
     });
     this.getProducts();
     this.getCategories();
+    this.getOptionType();
   }
 
   openModal(content, product?: Product): void {
@@ -112,8 +118,10 @@ export class ProductComponent implements OnInit {
       return;
     }
     this.formUpdate.controls.imageUploads.setValue(this.files);
+    const body = {...this.formUpdate.value, productOptions: this.getOptions()};
+    console.log(body);
     if (this.currentProduct) {
-      this.productService.update(this.formUpdate.value).subscribe(res => {
+      this.productService.update(body).subscribe(res => {
         if (res.errorCode === '200') {
           this.getProducts();
           this.toast.showSuccess(res.errorDescription);
@@ -128,7 +136,7 @@ export class ProductComponent implements OnInit {
       return;
     }
 
-    this.productService.save(this.formUpdate.value).subscribe(res => {
+    this.productService.save(body).subscribe(res => {
       if (res.errorCode === '200') {
         this.getProducts();
         this.toast.showSuccess(res.errorDescription);
@@ -146,6 +154,18 @@ export class ProductComponent implements OnInit {
     if (product) {
       this.files = product.images;
       this.getListFileName();
+
+      if (product.options) {
+        this.optionTypes.forEach(e => {
+          const options = product.options.filter(o => {
+            return o.optionType.id === e.id;
+          });
+          if (options && options.length > 0) {
+            e.options = options;
+          }
+        });
+      }
+      this.initOption();
       return this.fb.group({
         id: [product.id, Validators.required],
         name: [product.name, Validators.required],
@@ -159,6 +179,7 @@ export class ProductComponent implements OnInit {
     }
     this.images = '';
     this.files = [];
+    this.initOption();
     return this.fb.group({
       id: [null],
       name: [null, Validators.required],
@@ -175,7 +196,13 @@ export class ProductComponent implements OnInit {
     this.categoryService.getActiveCategories().subscribe(res => {
       this.categories = res.data;
     }, error => {
-      this.toast.showDanger(error.error.message);
+    });
+  }
+
+  private getOptionType(): void {
+    this.optionTypeService.getOptionTypes().subscribe(res => {
+      this.optionTypes = res.data.content;
+    }, error => {
     });
   }
 
@@ -187,7 +214,6 @@ export class ProductComponent implements OnInit {
       this.totalItem = res.data.totalElements;
       this.currentItems = res.data.numberOfElements;
     }, error => {
-      this.toast.showDanger(error.error.message);
     });
   }
 
@@ -243,6 +269,37 @@ export class ProductComponent implements OnInit {
     this.ckeditorModal.open(this.formUpdate.controls.description.value).then(() => {
       this.formUpdate.controls.description.setValue(this.ckeditorModal.changedData);
     }, () => {
+    });
+  }
+
+  addOption(ot: OptionType): void {
+    if (!ot.options) {
+      ot.options = [];
+    }
+    ot.options.push({
+      id: null,
+      productId: this.currentProduct?.id,
+      value: '',
+      optionType: {...ot, options: undefined},
+      moreInfo: '',
+    });
+  }
+
+  removeOption(ot: OptionType, index): void {
+    ot.options.splice(index, 1);
+  }
+
+  private getOptions(): Option[] {
+    return this.optionTypes.map(e => {
+      return e.options;
+    }).shift();
+  }
+
+  private initOption(): void {
+    this.optionTypes.forEach(e => {
+      if (!e.options || e.options.length <= 0) {
+        this.addOption(e);
+      }
     });
   }
 }
