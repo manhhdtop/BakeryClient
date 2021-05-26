@@ -35,12 +35,9 @@
             <tr>
               <th>{{'category.no' | translate}}</th>
               <th>{{'category.name' | translate}}</th>
+              <th>{{'category.slug' | translate}}</th>
               <th>{{'category.description' | translate}}</th>
               <th>{{'category.parent_name' | translate}}</th>
-              <th>{{'category.created_date' | translate}}</th>
-              <th>{{'category.created_by' | translate}}</th>
-              <th>{{'category.updated_date' | translate}}</th>
-              <th>{{'category.updated_by' | translate}}</th>
               <th>{{'category.status' | translate}}</th>
               <th class="min"></th>
             </tr>
@@ -49,12 +46,9 @@
             <tr *ngFor="let c of categories, let i = index">
               <td>{{i + 1}}</td>
               <td>{{c.name}}</td>
+              <td>{{c.slug}}</td>
               <td>{{c.description}}</td>
               <td>{{c.parent?.name}}</td>
-              <td>{{c.createdDate | dateFormat: dateDdmmyyHhmmss}}</td>
-              <td>{{c.createdBy?.name}}</td>
-              <td>{{c.updatedDate | dateFormat: dateDdmmyyHhmmss}}</td>
-              <td>{{c.updatedBy?.name}}</td>
               <td>{{getStatusName(c.status) | translate}}</td>
               <td class="min">
                 <a role="button" class="mr-2" (click)="delete(deleteCategory, c)"><i class="fa fa-trash-alt"></i></a>
@@ -101,9 +95,12 @@
             <div class="form-group">
               <label>{{'category.name' | translate}}</label>
               <input type="text" class="form-control" placeholder="{{'category.name_placeholder' | translate}}"
-                     formControlName="name" (change)="getSlug()">
-              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid">
+                     formControlName="name" (change)="getSlug($event)">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid && formUpdate.controls.name.errors?.required">
                 {{'category.name_not_blank' | translate}}
+              </small>
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid && formUpdate.controls.name.errors">
+                {{'category.name_not_valid' | translate}}
               </small>
             </div>
           </div>

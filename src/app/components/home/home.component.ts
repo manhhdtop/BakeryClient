@@ -1,11 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { AppConfigService } from '../../service/app-config.service';
-import { CategoryService } from '../../service/category.service';
-import { ProductService } from '../../service/product.service';
-import { ToastService } from '../../service/toast.service';
-import { MenuCategory } from '../../shared/model/menu-category';
-import { Product } from '../../shared/model/product';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {AppConfigService} from '../../service/app-config.service';
+import {CategoryService} from '../../service/category.service';
+import {ProductService} from '../../service/product.service';
+import {ToastService} from '../../service/toast.service';
+import {MenuCategory} from '../../shared/model/menu-category';
+import {Product} from '../../shared/model/product';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +15,7 @@ import { Product } from '../../shared/model/product';
 export class HomeComponent implements OnInit {
   categories: MenuCategory[];
   products: Product[];
+  currentProduct: Product;
   page: number;
   size: number;
   baseUrl: string;
@@ -50,4 +51,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  showAddToCartModal(): void {
+
+  }
 }

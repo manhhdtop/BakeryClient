@@ -19,14 +19,15 @@ import { AddToCardComponent } from './component/add-to-card/add-to-card.componen
     CKEditorModule,
     FormsModule,
   ],
-  exports: [
-    DateFormatPipe,
-    HttpClientModule,
-    I18nModule,
-    CkeditorComponent,
-    NumberFormatInputDirective,
-    NumberFormatPipe,
-  ],
+    exports: [
+        DateFormatPipe,
+        HttpClientModule,
+        I18nModule,
+        CkeditorComponent,
+        NumberFormatInputDirective,
+        NumberFormatPipe,
+        AddToCardComponent,
+    ],
   declarations: [
     DateFormatPipe,
     CkeditorComponent,

@@ -27,9 +27,9 @@
         <div class="card-body items">
           <div class="row">
             <div class="col-sm-12 col-md-3" *ngFor="let p of products">
-              <div class="item">
+              <div class="item" (click)="showAddToCartModal()">
                 <div class="item-image">
-                  <img src="{{baseUrl + p.images[0]}}" alt="{{p.description}}">
+                  <img src="{{baseUrl + p.images[0].uri}}" alt="{{p.description}}">
                 </div>
                 <p class="item-name">{{p.name}}</p>
                 <p class="item-price">{{p.price | numberFormat}}₫</p>
@@ -41,3 +41,6 @@
     </div>
   </div>
 </div>
+<app-add-to-card
+  [product]="currentProduct">
+</app-add-to-card>

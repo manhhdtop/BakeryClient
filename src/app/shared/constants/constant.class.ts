@@ -21,6 +21,7 @@ export class Constant {
   public static readonly DEFAULT_IMG_LABEL = 'image_label';
   public static readonly VALID_FILE = 'Vui lòng chọn file upload';
   static HEADER_APPLICATION = 'Authorization';
+  static NAME_PARTTERN = '\\s*[\\w\u00C0-\u01FF][\u00C0-\u01FF \\w- ]{3,}';
 }
 
 export const Status = [

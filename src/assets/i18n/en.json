@@ -143,6 +143,7 @@
     "name": "Category name",
     "name_placeholder": "Category name...",
     "name_not_blank": "Category name can not blank",
+    "name_not_valid": "Category names can only contain letters, numbers, and symbols `-_`",
     "slug": "Slug",
     "slug_placeholder": "Slug...",
     "description": "Description",

@@ -158,6 +158,7 @@
     "name": "Tên danh mục",
     "name_placeholder": "Tên danh mục...",
     "name_not_blank": "Tên danh mục không được để trống",
+    "name_not_valid": "Tên danh mục chỉ được chứa ký tự, số và các dấu `-_`",
     "slug": "Slug",
     "slug_placeholder": "Slug...",
     "description": "Mô tả",

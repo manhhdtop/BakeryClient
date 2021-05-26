@@ -1,5 +1,6 @@
 import { Category } from './category';
 import { Option } from './option';
+import { UploadResponse } from './upload-response';
 import { User } from './user';
 
 export interface Product {
@@ -8,7 +9,7 @@ export interface Product {
   slug: string;
   description: string;
   category: Category;
-  images: string[];
+  images: UploadResponse[];
   price: number;
   createdDate: Date;
   createdBy: User;

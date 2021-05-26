@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { CategoryService } from '../../../service/category.service';
-import { ToastService } from '../../../service/toast.service';
-import { Constant, Status } from '../../../shared/constants/constant.class';
-import { Category } from '../../../shared/model/category';
-import { Utils } from '../../../shared/util/utils';
+import {Component, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
+import {CategoryService} from '../../../service/category.service';
+import {ToastService} from '../../../service/toast.service';
+import {Constant, Status} from '../../../shared/constants/constant.class';
+import {Category} from '../../../shared/model/category';
+import {Utils} from '../../../shared/util/utils';
 
 @Component({
   selector: 'app-category',
@@ -26,6 +26,7 @@ export class CategoryComponent implements OnInit {
   size: number;
   totalItem: number;
   currentItems: number;
+  namePattern: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -39,6 +40,7 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.dateDdmmyyHhmmss = Constant.DATE_DDMMYY_HHMMSS;
+    this.namePattern = Constant.NAME_PARTTERN;
     this.selectedCategory = undefined;
     this.page = 1;
     this.size = 20;
@@ -123,7 +125,7 @@ export class CategoryComponent implements OnInit {
     if (category) {
       return this.fb.group({
         id: [category.id, Validators.required],
-        name: [category.name, Validators.required],
+        name: [category.name, [Validators.required, Validators.pattern(this.namePattern)]],
         slug: [category.slug, Validators.required],
         description: [category.description],
         parentId: [category.parent?.id],
@@ -132,9 +134,9 @@ export class CategoryComponent implements OnInit {
     }
     return this.fb.group({
       id: [null],
-      name: [null, Validators.required],
-      slug: [null, Validators.required],
-      description: [null],
+      name: ['', [Validators.required, Validators.pattern(this.namePattern)]],
+      slug: ['', Validators.required],
+      description: [''],
       parentId: [''],
       status: ['', Validators.required],
     });
@@ -175,8 +177,11 @@ export class CategoryComponent implements OnInit {
     this.getCategory();
   }
 
-  getSlug(): void {
-    this.categoryService.createSlug(this.formUpdate.controls.name.value).subscribe(res => {
+  getSlug(event): void {
+    if (this.formUpdate.controls.name.invalid) {
+      return;
+    }
+    this.categoryService.createSlug(event.target.value).subscribe(res => {
       this.formUpdate.controls.slug.setValue(res.data);
     }, error => {
       this.toast.showDanger(error.error.message);
