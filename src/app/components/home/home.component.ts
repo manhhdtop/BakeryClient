@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
-import {AppConfigService} from '../../service/app-config.service';
-import {CategoryService} from '../../service/category.service';
-import {ProductService} from '../../service/product.service';
-import {ToastService} from '../../service/toast.service';
-import {MenuCategory} from '../../shared/model/menu-category';
-import {Product} from '../../shared/model/product';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AppConfigService } from '../../service/app-config.service';
+import { CategoryService } from '../../service/category.service';
+import { ProductService } from '../../service/product.service';
+import { ToastService } from '../../service/toast.service';
+import { MenuCategory } from '../../shared/model/menu-category';
+import { Product } from '../../shared/model/product';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +19,8 @@ export class HomeComponent implements OnInit {
   page: number;
   size: number;
   baseUrl: string;
+
+  @ViewChild('addToCardModal') addToCardModal;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -51,7 +53,8 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  showAddToCartModal(): void {
-
+  showAddToCartModal(product): void {
+    this.currentProduct = product;
+    this.addToCardModal.open();
   }
 }

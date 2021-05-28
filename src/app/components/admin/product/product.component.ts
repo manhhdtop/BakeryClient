@@ -182,12 +182,12 @@ export class ProductComponent implements OnInit {
     this.initOption();
     return this.fb.group({
       id: [null],
-      name: [null, Validators.required],
-      slug: [null, Validators.required],
-      description: [null],
-      price: [null, [Validators.required, Validators.min(1)]],
+      name: ['', Validators.required],
+      slug: ['', Validators.required],
+      description: [''],
+      price: ['', [Validators.required, Validators.min(1)]],
       categoryId: [''],
-      imageUploads: [null],
+      imageUploads: [''],
       status: ['', Validators.required],
     });
   }
