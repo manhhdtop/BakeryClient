@@ -119,7 +119,6 @@ export class ProductComponent implements OnInit {
     }
     this.formUpdate.controls.imageUploads.setValue(this.files);
     const body = {...this.formUpdate.value, productOptions: this.getOptions()};
-    console.log(body);
     if (this.currentProduct) {
       this.productService.update(body).subscribe(res => {
         if (res.errorCode === '200') {
@@ -290,9 +289,14 @@ export class ProductComponent implements OnInit {
   }
 
   private getOptions(): Option[] {
-    return this.optionTypes.map(e => {
-      return e.options;
-    }).shift();
+    let options = [];
+    this.optionTypes.forEach(e => {
+      options = options.concat(e.options);
+    });
+    options = options.filter(e => {
+      return e.value !== '';
+    });
+    return options;
   }
 
   private initOption(): void {

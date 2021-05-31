@@ -30,6 +30,7 @@
     "title": "Shopping Cart",
     "amount": " item in your cart",
     "total": "Total",
+    "btn_add_to_cart": "Add to cart",
     "btn_view_cart": "View cart",
     "btn_checkout": "Checkout",
     "empty_cart": "The shopping cart is empty",
@@ -38,7 +39,14 @@
     "price": "Price",
     "shipping": "Shipping",
     "quantity": "Quantity",
-    "text_more": "More..."
+    "quantity_less": "QTY",
+    "text_more": "More...",
+    "delete_product_title": "Delete product",
+    "delete_product_content": "Are you want to delete product `{{name}}` from the cart?"
+  },
+  "add_to_cart": {
+    "error": "The quantity must be greater than 0",
+    "success": "Added successful"
   },
   "menu": {
     "home": {

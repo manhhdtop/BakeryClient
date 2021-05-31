@@ -9,11 +9,34 @@
     <div class="row item">
       <div class="col-12 col-md-6">
         <img class="img img-fluid" src="{{imageVisible}}" alt="{{product?.name}}"/>
+        <ul *ngIf="product?.images" class="image-list">
+          <li *ngFor="let img of product?.images; index as i" class="image" (click)="changeImage(i)">
+            <img class="img img-fluid" src="{{baseUrl + img.uri}}" alt="{{img.fileName}}">
+          </li>
+        </ul>
       </div>
       <div class="col-12 col-md-6">
         <p class="item-name">{{product?.name}}</p>
         <p class="item-description">{{product?.description}}</p>
-        <button class="btn btn-outline-primary" (click)="save()">Add To Cart</button>
+        <div *ngIf="product?.optionTypes && product?.optionTypes.length > 0">
+          <div *ngFor="let ot of product?.optionTypes">
+            <p>{{ot.name}}</p>
+            <div class="form-check form-check-inline" *ngFor="let o of ot.options">
+              <input class="form-check-input" type="radio" value="{{o.id}}" id="option_type_{{ot.id}}"
+                     name="option_type_{{ot.id}}">
+              <label class="form-check-label" for="option_type_{{ot.id}}">{{o.value}}</label>
+            </div>
+          </div>
+        </div>
+        <div class="w-100 d-flex flex-row justify-content-between mb-3">
+          <span class="my-auto">{{'cart.quantity_less' | translate}}</span>
+          <div class="w-auto d-flex flex-row justify-content-between mx-3">
+            <span role="button" class="my-auto" (click)="decreaseQuantity()"><i class="fa fa-minus-circle"></i></span>
+            <input numberInput class="form-control w-50" [(ngModel)]="quantity">
+            <span role="button" class="my-auto" (click)="increaseQuantity()"><i class="fa fa-plus-circle"></i></span>
+          </div>
+        </div>
+        <button class="btn btn-outline-primary" (click)="save(modal)">Add To Cart</button>
       </div>
     </div>
   </div>

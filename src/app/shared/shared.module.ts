@@ -10,6 +10,9 @@ import { DEFAULT_TIMEOUT, ErrorInterceptor } from './interceptor/error.intercept
 import { DateFormatPipe } from './pipe/format-date.pipe';
 import { NumberFormatPipe } from './pipe/format-number.pipe';
 import { AddToCardComponent } from './component/add-to-card/add-to-card.component';
+import { NumberInputDirective } from 'src/app/shared/component/number-input.directive';
+import { ConfirmComponent } from './component/confirm/confirm.component';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   imports: [
@@ -18,6 +21,7 @@ import { AddToCardComponent } from './component/add-to-card/add-to-card.componen
     NgbModule,
     CKEditorModule,
     FormsModule,
+    CommonModule,
   ],
     exports: [
         DateFormatPipe,
@@ -25,15 +29,19 @@ import { AddToCardComponent } from './component/add-to-card/add-to-card.componen
         I18nModule,
         CkeditorComponent,
         NumberFormatInputDirective,
+        NumberInputDirective,
         NumberFormatPipe,
         AddToCardComponent,
+        ConfirmComponent,
     ],
   declarations: [
     DateFormatPipe,
     CkeditorComponent,
     NumberFormatInputDirective,
+    NumberInputDirective,
     NumberFormatPipe,
     AddToCardComponent,
+    ConfirmComponent,
   ],
   providers: [
     {

@@ -11,15 +11,33 @@
         width: 100%;
         height: 120px;
       }
+
+      @media (min-width: 576px) {
+        img {
+          width: 100%;
+          height: auto;
+        }
+      }
     }
 
     .item-name {
+      width: 100%;
+      display: inline-block;
+      color: #333333;
       padding-top: 0.5rem;
       font-size: 13px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .item-name:hover {
+      color: #5bbd2a;
     }
 
     .item-price {
-      font-size: 10px;
+      color: #ff0000;
+      font-size: 12px;
     }
 
     button {

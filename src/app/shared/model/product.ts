@@ -2,6 +2,7 @@ import { Category } from './category';
 import { Option } from './option';
 import { UploadResponse } from './upload-response';
 import { User } from './user';
+import { OptionType } from 'src/app/shared/model/option-type';
 
 export interface Product {
   id: number;
@@ -17,4 +18,5 @@ export interface Product {
   updatedBy: User;
   status: number;
   options: Option[];
+  optionTypes: OptionType[];
 }

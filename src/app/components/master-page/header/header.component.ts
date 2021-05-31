@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
@@ -10,6 +10,8 @@ import { ToastService } from '../../../service/toast.service';
 import { Item } from '../../../shared/model/item';
 import { MenuCategory } from '../../../shared/model/menu-category';
 import { Utils } from '../../../shared/util/utils';
+import { AppConfigService } from 'src/app/service/app-config.service';
+import { ConfirmComponent } from 'src/app/shared/component/confirm/confirm.component';
 
 @Component({
   selector: 'app-header',
@@ -17,6 +19,9 @@ import { Utils } from '../../../shared/util/utils';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+
+  @ViewChild(ConfirmComponent) confirmModal;
+
   formSearch: FormGroup;
   fb: FormBuilder;
   searching: boolean;
@@ -25,9 +30,13 @@ export class HeaderComponent implements OnInit {
   lang: string;
   items: Item[];
   categories: MenuCategory[];
+  baseUrl: string;
+  deleteTitle: string;
+  deleteContent: string;
 
   constructor(
     private activeRoute: ActivatedRoute,
+    private configService: AppConfigService,
     private cartService: CartService,
     private categoryService: CategoryService,
     private modalService: NgbModal,
@@ -42,9 +51,13 @@ export class HeaderComponent implements OnInit {
     this.formSearch = new FormGroup({
       name: new FormControl('', Validators.required),
     });
-    this.items = this.cartService.getItems();
-    this.itemAmount = this.items.length;
-    this.totalAmount = this.cartService.getTotalAmount();
+    this.baseUrl = this.configService.getConfig().api.baseUrl;
+    this.cartService.itemEvent.subscribe(e => {
+      this.items = e;
+      this.itemAmount = this.items.length;
+      this.totalAmount = this.cartService.getTotalAmount();
+    });
+    this.cartService.getItems();
     this.lang = this.translate.currentLang;
     this.getMenuCategory();
   }
@@ -69,11 +82,18 @@ export class HeaderComponent implements OnInit {
     console.log('Checkout');
   }
 
-  removeItem(event, id): void {
+  removeItem(event, product): void {
     event.preventDefault();
-    this.items = this.cartService.removeItem(id);
-    this.itemAmount = this.items.length;
-    this.totalAmount = this.cartService.getTotalAmount();
+    this.translate.get('cart.delete_product_title').subscribe(e => {
+      this.deleteTitle = e;
+      this.deleteContent = this.translate.instant('cart.delete_product_content', {name: product.name});
+    });
+    this.confirmModal.open().then((result) => {
+      if (result === this.confirmModal.ok) {
+        this.cartService.removeItem(product.id);
+      }
+    }, () => {
+    });
   }
 
   changeLanguage(event, language): void {
@@ -91,10 +111,9 @@ export class HeaderComponent implements OnInit {
   }
 
   private getMenuCategory(): void {
-    this.categoryService.getMenuCategories().subscribe(res => {
-      this.categories = [...res.data];
-    }, error => {
-      this.toast.showDanger(error.errorDescription);
+    this.categoryService.menuCategoryEvent.subscribe(e => {
+      this.categories = e;
     });
+    this.categoryService.getMenuCategories();
   }
 }

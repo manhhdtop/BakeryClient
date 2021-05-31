@@ -1,0 +1,15 @@
+<ng-template #confirmModal class="modal fade" let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">{{title}}</h5>
+      <button class="close" type="button" data-dismiss="modal" aria-label="Close" (click)="modal.close(cancel)">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body" [innerHTML]="content"></div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="modal.close(cancel)">Cancel</button>
+      <button class="btn btn-primary" (click)="modal.close(ok)">Ok</button>
+    </div>
+  </div>
+</ng-template>

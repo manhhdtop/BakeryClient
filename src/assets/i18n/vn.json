@@ -2,6 +2,7 @@
   "logo_text": "Bakery",
   "choose": "Chọn",
   "address": "Ngô Xuân Quảng, Trâu Quỳ, Gia Lâm, Hà Nội",
+  "vnd": "₫",
   "language": {
     "vn": {
       "code": "vn",
@@ -30,6 +31,7 @@
     "title": "Giỏ hàng",
     "amount": " sản phẩm trong giỏ hàng",
     "total": "Tổng cộng",
+    "btn_add_to_cart": "Thêm vào giỏ",
     "btn_view_cart": "Xem giỏ hàng",
     "btn_checkout": "Thanh toán",
     "empty_cart": "Không có sản phẩm nào trong giỏ hàng",
@@ -38,7 +40,14 @@
     "price": "Giá",
     "shipping": "Phí vận chuyển",
     "quantity": "Số lượng",
-    "text_more": "Còn nữa..."
+    "quantity_less": "SL",
+    "text_more": "Còn nữa...",
+    "delete_product_title": "Xóa sản phẩm?",
+    "delete_product_content": "Bạn có muốn xóa sản phẩm `{{name}}` ra khỏi giỏ hàng?"
+  },
+  "add_to_cart": {
+    "error": "Số lượng phải lớn hơn 0",
+    "success": "Thêm thành công"
   },
   "menu": {
     "home": {

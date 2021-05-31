@@ -18,6 +18,7 @@ img.logo {
 }
 
 .cart {
+
   .modal-title {
     text-align: center;
     font-size: 16px;
@@ -29,7 +30,43 @@ img.logo {
     margin-top: 5px;
   }
 
-  .cart-item {
+  .cart_thumb {
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .cart_details {
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    h3 {
+      font-size: 14px;
+    }
+
+    span {
+      font-size: inherit;
+    }
+  }
+
+  .remove_btn {
+    text-align: right;
+    width: 20px;
+
+    a i {
+      color: #ccc;
+      font-size: 22px;
+      transition: all 0.5s ease 0s;
+    }
+
+    a:hover i {
+      color: #ff4136;
+      transform: rotate(180deg);
+    }
   }
 }
 

@@ -1,12 +1,16 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BaseService } from '../shared/base-service/base-service.service';
 import { UrlConstant } from '../shared/constants/url.class';
+import { MenuCategory } from 'src/app/shared/model/menu-category';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CategoryService {
+  menuCategoryEvent: EventEmitter<MenuCategory[]> = new EventEmitter<MenuCategory[]>();
+  private menuCategories: MenuCategory[];
+  private getting = false;
 
   constructor(
     private baseService: BaseService,
@@ -45,8 +49,19 @@ export class CategoryService {
     return this.baseService.get(UrlConstant.CREATE_CATEGORY_SLUG + '?categoryName=' + name);
   }
 
-  getMenuCategories(): Observable<any> {
-    return this.baseService.get(UrlConstant.CATEGORY);
+  getMenuCategories(): void {
+    if (this.menuCategories && this.menuCategories.length > 0) {
+      this.menuCategoryEvent.emit(this.menuCategories);
+    } else {
+      if (!this.getting) {
+        this.getting = true;
+        this.baseService.get(UrlConstant.CATEGORY).subscribe(res => {
+          this.menuCategories = [...res.data];
+          this.menuCategoryEvent.emit(this.menuCategories);
+          this.getting = false;
+        });
+      }
+    }
   }
 
 }

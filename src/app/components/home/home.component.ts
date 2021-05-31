@@ -40,10 +40,10 @@ export class HomeComponent implements OnInit {
   }
 
   private getMenuCategory(): void {
-    this.categoryService.getMenuCategories().subscribe(res => {
-      this.categories = [...res.data];
-    }, error => {
+    this.categoryService.menuCategoryEvent.subscribe(e => {
+      this.categories = e;
     });
+    this.categoryService.getMenuCategories();
   }
 
   private getProduct(): void {

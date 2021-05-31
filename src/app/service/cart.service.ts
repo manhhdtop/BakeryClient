@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Item } from '../shared/model/item';
 import { Product } from '../shared/model/product';
 
@@ -6,10 +6,17 @@ import { Product } from '../shared/model/product';
   providedIn: 'root',
 })
 export class CartService {
-  items: Item[];
+  private items: Item[];
+  private ITEMS_KEY = 'cart';
+  itemEvent: EventEmitter<Item[]> = new EventEmitter<Item[]>();
 
   constructor() {
-    this.items = [];
+    const json = localStorage.getItem(this.ITEMS_KEY);
+    if (json) {
+      this.items = JSON.parse(json);
+    } else {
+      this.items = [];
+    }
   }
 
   addToCart(product: Product, quantity?: number): void {
@@ -18,7 +25,9 @@ export class CartService {
     }
     const item = this.items.find(value => value.product.id === product.id);
     if (item) {
+      item.product = product;
       item.quantity = item.quantity + quantity;
+      item.price = item.quantity * product.price;
     } else {
       this.items.push({
         product,
@@ -26,23 +35,26 @@ export class CartService {
         price: product.price * quantity,
       });
     }
+    localStorage.setItem(this.ITEMS_KEY, JSON.stringify(this.items));
+    this.getItems();
   }
 
-  getItems(): any[] {
-    return this.items.map(x => Object.assign({}, x));
+  getItems(): void {
+    const items = this.items.map(x => Object.assign({}, x));
+    this.itemEvent.emit(items);
   }
 
-  clearCart(): any[] {
+  clearCart(): void {
     this.items = [];
-    return this.getItems();
+    this.getItems();
   }
 
-  removeItem(itemId): any[] {
+  removeItem(itemId): void {
     const index: number = this.items.findIndex(value => value.product.id === itemId);
     if (index !== -1) {
       this.items.splice(index, 1);
     }
-    return this.getItems();
+    this.getItems();
   }
 
   getTotalAmount(): number {
