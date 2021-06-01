@@ -1,6 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { I18nModule } from '../i18n/i18n.module';
@@ -15,14 +15,15 @@ import { ConfirmComponent } from './component/confirm/confirm.component';
 import { CommonModule } from '@angular/common';
 
 @NgModule({
-  imports: [
-    HttpClientModule,
-    I18nModule,
-    NgbModule,
-    CKEditorModule,
-    FormsModule,
-    CommonModule,
-  ],
+    imports: [
+        HttpClientModule,
+        I18nModule,
+        NgbModule,
+        CKEditorModule,
+        FormsModule,
+        CommonModule,
+        ReactiveFormsModule,
+    ],
     exports: [
         DateFormatPipe,
         HttpClientModule,

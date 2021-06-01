@@ -132,12 +132,18 @@
           <div class="cart_details col-md">
             <h3><a routerLink="/product/{{item.product.slug}}">{{item.product.name}}</a></h3>
             <span class="quantity">{{'cart.quantity_less' | translate}}: {{item.quantity}}</span><br/>
+            <span class="quantity" *ngFor="let entry of item.options">
+                {{getOptionType(item, entry).name}}: {{getOption(item, entry).value}}
+            </span><br/>
             <span class="shp__price">
-              {{'cart.price' | translate}}: {{item.price | numberFormat}} {{'vnd' | translate}}
+              {{'cart.price' | translate}}: {{item.product.price | numberFormat}} {{'vnd' | translate}}
+            </span><br/>
+            <span class="shp__price" *ngIf="item.quantity && item.quantity > 1">
+              {{'cart.total_price' | translate}}: {{item.price | numberFormat}} {{'vnd' | translate}}
             </span>
           </div>
           <div class="remove_btn col-md-auto mx-2">
-            <a href="#" title="{{'delete_product_title' | translate}}" (click)="removeItem($event, item.product)"><i
+            <a href="#" title="{{'delete_product_title' | translate}}" (click)="removeItem($event, item)"><i
               class="zmdi zmdi-close"></i></a>
           </div>
         </div>

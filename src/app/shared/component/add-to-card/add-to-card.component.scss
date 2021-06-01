@@ -41,7 +41,7 @@
   .item-description {
     display: -webkit-box;
     width: 100%;
-    height: 30px; // = webkit-line-clamp(2) * font-size(10) * line-height(1.5)
+    max-height: 30px; // = webkit-line-clamp(2) * font-size(10) * line-height(1.5)
     font-size: 10px;
     overflow: hidden;
     text-overflow: ellipsis;

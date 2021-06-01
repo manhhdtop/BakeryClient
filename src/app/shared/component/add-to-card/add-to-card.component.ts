@@ -5,7 +5,8 @@ import { AppConfigService } from 'src/app/service/app-config.service';
 import { CartService } from 'src/app/service/cart.service';
 import { ToastService } from 'src/app/service/toast.service';
 import { TranslateService } from '@ngx-translate/core';
-import { UploadResponse } from 'src/app/shared/model/upload-response';
+import { FormBuilder } from '@angular/forms';
+import { OptionType } from 'src/app/shared/model/option-type';
 
 @Component({
   selector: 'app-add-to-card',
@@ -20,12 +21,16 @@ export class AddToCardComponent implements OnInit, OnChanges {
   imageVisibleIndex: number;
   baseUrl: string;
   quantity: number;
-  private error: string;
+  private quantityError: string;
+  private optionError: string;
   private success: string;
+  optionTypes: OptionType[];
+  private options = [];
 
   constructor(
     private configService: AppConfigService,
     private cartService: CartService,
+    private fb: FormBuilder,
     private modalService: NgbModal,
     private toast: ToastService,
     private translate: TranslateService,
@@ -35,14 +40,21 @@ export class AddToCardComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.baseUrl = this.configService.getConfig().api.baseUrl;
     this.quantity = 1;
-    this.translate.get('add_to_cart.error').subscribe(e => {
-      this.error = e;
+    this.translate.get('add_to_cart.quantity_error').subscribe(e => {
+      this.quantityError = e;
+      this.optionError = this.translate.instant('add_to_cart.option_error');
       this.success = this.translate.instant('add_to_cart.success');
     });
   }
 
   ngOnChanges(): void {
     this.changeImage(0);
+    this.optionTypes = this.product?.optionTypes;
+    this.options.length = 0;
+
+    while (this.options.length > 0) {
+      this.options.pop();
+    }
   }
 
   open(): void {
@@ -66,10 +78,18 @@ export class AddToCardComponent implements OnInit, OnChanges {
 
   save(modal): void {
     if (this.quantity <= 0) {
-      this.toast.showDanger(this.error);
+      this.toast.showDanger(this.quantityError);
       return;
     }
-    this.cartService.addToCart(this.product, this.quantity);
+    if (this.optionTypes && this.optionTypes.length > 0) {
+      const optionSize = this.options.length;
+      if (!optionSize || optionSize <= 0 || optionSize < this.optionTypes.length) {
+        this.toast.showDanger(this.optionError);
+        return;
+      }
+    }
+
+    this.cartService.addToCart(this.product, this.quantity, Object.assign([], this.options));
     this.toast.showSuccess(this.success);
     setTimeout((handler) => {
       modal.dismiss();
@@ -82,5 +102,9 @@ export class AddToCardComponent implements OnInit, OnChanges {
 
   decreaseQuantity(): void {
     this.quantity--;
+  }
+
+  chooseOption(optionTypeId, optionId): void {
+    this.options.push([optionTypeId, optionId]);
   }
 }

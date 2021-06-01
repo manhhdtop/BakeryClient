@@ -12,6 +12,8 @@ import { MenuCategory } from '../../../shared/model/menu-category';
 import { Utils } from '../../../shared/util/utils';
 import { AppConfigService } from 'src/app/service/app-config.service';
 import { ConfirmComponent } from 'src/app/shared/component/confirm/confirm.component';
+import { OptionType } from 'src/app/shared/model/option-type';
+import { Option } from 'src/app/shared/model/option';
 
 @Component({
   selector: 'app-header',
@@ -29,6 +31,7 @@ export class HeaderComponent implements OnInit {
   totalAmount: number;
   lang: string;
   items: Item[];
+  options = [];
   categories: MenuCategory[];
   baseUrl: string;
   deleteTitle: string;
@@ -82,15 +85,15 @@ export class HeaderComponent implements OnInit {
     console.log('Checkout');
   }
 
-  removeItem(event, product): void {
+  removeItem(event, item): void {
     event.preventDefault();
     this.translate.get('cart.delete_product_title').subscribe(e => {
       this.deleteTitle = e;
-      this.deleteContent = this.translate.instant('cart.delete_product_content', {name: product.name});
+      this.deleteContent = this.translate.instant('cart.delete_product_content', {name: item.product.name});
     });
     this.confirmModal.open().then((result) => {
       if (result === this.confirmModal.ok) {
-        this.cartService.removeItem(product.id);
+        this.cartService.removeItem(item.id);
       }
     }, () => {
     });
@@ -115,5 +118,17 @@ export class HeaderComponent implements OnInit {
       this.categories = e;
     });
     this.categoryService.getMenuCategories();
+  }
+
+  getOptionType(item: Item, entry): OptionType {
+    return item.product.optionTypes.find(e => {
+      return e.id === entry[0];
+    });
+  }
+
+  getOption(item: Item, entry): Option {
+    return this.getOptionType(item, entry).options.find(e => {
+      return e.id === entry[1];
+    });
   }
 }

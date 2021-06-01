@@ -37,6 +37,7 @@
     "image": "Image",
     "product": "Product",
     "price": "Price",
+    "total_price": "Total price",
     "shipping": "Shipping",
     "quantity": "Quantity",
     "quantity_less": "QTY",
@@ -45,7 +46,8 @@
     "delete_product_content": "Are you want to delete product `{{name}}` from the cart?"
   },
   "add_to_cart": {
-    "error": "The quantity must be greater than 0",
+    "quantity_error": "The quantity must be greater than 0",
+    "option_error": "Please choose option",
     "success": "Added successful"
   },
   "menu": {
