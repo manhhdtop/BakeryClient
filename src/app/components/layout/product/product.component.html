@@ -1,0 +1,64 @@
+<div class="container bg-gray-200 pb-3 mt-3" *ngIf="product">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a routerLink="{{'menu.home.href' | translate}}">{{'menu.home.name' | translate}}</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a routerLink="/{{'menu.category.href'|translate }}/{{product?.category?.slug}}">{{product?.category?.name}}</a>
+      </li>
+      <li class="breadcrumb-item active" aria-current="page">{{product?.name}}</li>
+    </ol>
+  </nav>
+  <div class="row bg-white px-2 py-3">
+    <div class="col-12 col-sm-6 col-md-6">
+      <img class="img img-fluid" src="{{baseUrl + product?.images[imageIndex]?.uri}}">
+      <app-slider
+        [images]="product?.images"
+        (changeEvent)="changeImage($event)"
+      ></app-slider>
+    </div>
+    <div class="col-12 col-sm-6 col-md-6">
+      <span class="item-name">{{product.name}}</span>
+      <span class="item-price">{{'product.price' | translate}}: <em>{{price | numberFormat}} {{'vnd' | translate}}</em></span>
+      <span class="item-description">{{'product.description' | translate}}</span>
+
+      <div *ngIf="optionTypes && optionTypes.length > 0">
+        <div *ngFor="let ot of product?.optionTypes, index as i">
+          <p class="mb-0">{{ot.name}}</p>
+          <div class="form-check form-check-inline" *ngFor="let o of ot.options">
+            <input class="form-check-input" type="radio" value="{{o.id}}" id="option_type_{{ot.id}}"
+                   name="option_type_{{ot.id}}" (click)="chooseOption(ot.id, o.id)">
+            <label class="form-check-label" for="option_type_{{ot.id}}">{{o.value}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="row my-2">
+        <span class="col-auto my-auto">{{'cart.quantity' | translate}}</span>
+        <div class="col">
+          <div class="row">
+            <span role="button" class="col-auto my-auto" (click)="decreaseQuantity()"><i class="fa fa-minus-circle"></i></span>
+            <input numberInput class="col-auto form-control" [(ngModel)]="quantity">
+            <span role="button" class="col-auto my-auto" (click)="increaseQuantity()"><i class="fa fa-plus-circle"></i></span>
+          </div>
+        </div>
+      </div>
+      <div class="d-flex justify-content-center pt-3">
+        <button class="btn btn-outline-info" (click)="addToCart()">
+          {{'product.btn_add_to_cart' | translate}} <i class="fa fa-cart-plus"></i>
+        </button>
+      </div>
+      <div class="d-flex justify-content-center pt-2">
+        <button class="btn btn-outline-success" (click)="buyNow()">
+          {{'product.btn_buy_now' | translate}} <i class="fa fa-money-bill-wave"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-12 bg-white pt-3" [innerHTML]="product?.description">
+
+    </div>
+  </div>
+</div>
+<div *ngIf="loaded && !product" class="mt-3">
+  <app-page-not-found></app-page-not-found>
+</div>

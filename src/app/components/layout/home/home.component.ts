@@ -1,16 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { AppConfigService } from '../../service/app-config.service';
-import { CategoryService } from '../../service/category.service';
-import { ProductService } from '../../service/product.service';
-import { ToastService } from '../../service/toast.service';
-import { MenuCategory } from '../../shared/model/menu-category';
-import { Product } from '../../shared/model/product';
+import { AppConfigService } from 'src/app/service/app-config.service';
+import { CategoryService } from 'src/app/service/category.service';
+import { ProductService } from 'src/app/service/product.service';
+import { ToastService } from 'src/app/service/toast.service';
+import { MenuCategory } from 'src/app/shared/model/menu-category';
+import { Product } from 'src/app/shared/model/product';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css', '../../../assets/css/items.scss'],
+  styleUrls: ['./home.component.css', '../../../../assets/css/items.scss'],
 })
 export class HomeComponent implements OnInit {
   categories: MenuCategory[];

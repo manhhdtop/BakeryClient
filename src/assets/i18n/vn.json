@@ -219,6 +219,8 @@
     "updated_by": "Người cập nhật",
     "status": "Trạng thái",
     "status_error": "Trạng thái bắt buộc chọn",
+    "btn_add_to_cart": "Thêm vào giỏ",
+    "btn_buy_now": "Mua ngay",
     "modal": {
       "title_add": "Thêm mới sản phẩm",
       "title_update": "Cập nhật sản phẩm",
@@ -349,5 +351,9 @@
   "ckeditor": {
     "btn_cancel": "Hủy",
     "btn_submit": "Lưu"
+  },
+  "slider": {
+    "previous": "Trước",
+    "next": "Sau"
   }
 }

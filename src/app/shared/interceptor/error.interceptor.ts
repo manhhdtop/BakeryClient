@@ -36,13 +36,13 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.router.navigate(['/login'], {queryParams: {returnUrl: url}});
           return throwError(error);
         } else if (error.status === 403) {
-          this.router.navigate([UrlConstant.UNAUTHORIZED]);
+          this.router.navigate([UrlConstant.UNAUTHORIZED], {skipLocationChange: true});
           return throwError(error);
         } else if (error.status === 404) {
-          this.router.navigate([UrlConstant.PAGE_NOT_FOUND]);
+          this.router.navigate([UrlConstant.PAGE_NOT_FOUND], {skipLocationChange: true});
           return throwError(error);
         } else if (error.status === 500) {
-          this.router.navigate([UrlConstant.INTERNAL_SERVER_ERROR]);
+          this.router.navigate([UrlConstant.INTERNAL_SERVER_ERROR], {skipLocationChange: true});
           return throwError(error);
         }
         return throwError(error);

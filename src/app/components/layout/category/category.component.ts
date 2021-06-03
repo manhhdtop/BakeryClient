@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { CategoryService } from '../../service/category.service';
-import { Category } from '../../shared/model/category';
-import { Product } from '../../shared/model/product';
+import { CategoryService } from 'src/app/service/category.service';
+import { Category } from 'src/app/shared/model/category';
+import { Product } from 'src/app/shared/model/product';
 
 @Component({
   selector: 'app-category',

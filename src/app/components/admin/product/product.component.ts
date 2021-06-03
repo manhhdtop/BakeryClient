@@ -84,8 +84,8 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  openImage(content, image: UploadResponse): void {
-    this.selectedImage = image;
+  openImage(content, index): void {
+    this.selectedImage = this.files[index];
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
       size: 'lg',
@@ -280,7 +280,6 @@ export class ProductComponent implements OnInit {
       productId: this.currentProduct?.id,
       value: '',
       optionType: {...ot, options: undefined},
-      moreInfo: '',
     });
   }
 

@@ -40,7 +40,6 @@ export class CartService {
         price: product.price * quantity,
         options,
       };
-      console.log('push item: ', item);
       this.items.push(item);
     }
     this.saveCart();

@@ -9,18 +9,18 @@
     <div class="row item">
       <div class="col-12 col-md-6">
         <img class="img img-fluid" src="{{imageVisible}}" alt="{{product?.name}}"/>
-        <ul *ngIf="product?.images" class="image-list">
-          <li *ngFor="let img of product?.images; index as i" class="image" (click)="changeImage(i)">
-            <img class="img img-fluid" src="{{baseUrl + img.uri}}" alt="{{img.fileName}}">
-          </li>
-        </ul>
+        <app-slider
+          [images]="product?.images"
+          (changeEvent)="changeImage($event)"
+        ></app-slider>
       </div>
       <div class="col-12 col-md-6">
         <p class="item-name">{{product?.name}}</p>
+        <p class="item-description">{{price | numberFormat}} {{'vnd' | translate}}</p>
         <p class="item-description">{{product?.description}}</p>
         <div *ngIf="optionTypes && optionTypes.length > 0">
           <div *ngFor="let ot of product?.optionTypes, index as i">
-            <p>{{ot.name}}</p>
+            <p class="mb-0">{{ot.name}}</p>
             <div class="form-check form-check-inline" *ngFor="let o of ot.options">
               <input class="form-check-input" type="radio" value="{{o.id}}" id="option_type_{{ot.id}}"
                      name="option_type_{{ot.id}}" (click)="chooseOption(ot.id, o.id)">

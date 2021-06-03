@@ -36,4 +36,8 @@ export class ProductService {
   getProducts(params?): Observable<any> {
     return this.baseService.get(UrlConstant.PRODUCT, params);
   }
+
+  getProductBySlug(slug: string): Observable<any> {
+    return this.baseService.get(UrlConstant.PRODUCT + '/' + slug);
+  }
 }

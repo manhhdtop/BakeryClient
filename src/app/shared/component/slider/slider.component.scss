@@ -1,0 +1,44 @@
+span.control {
+  color: #adb5bd;
+  padding: .75rem .5rem;
+}
+
+span.control:hover {
+  color: #fff;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+.slider {
+  display: flex;
+  flex-flow: row;
+  overflow: auto;
+  width: 100%;
+  max-height: 100px;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slide {
+    flex-shrink: 0;
+    cursor: pointer;
+    margin-right: .15rem;
+    width: 25%;
+    max-height: 100px;
+    border: 1px solid transparent;
+    scroll-snap-align: start;
+  }
+
+  .slide:last-child {
+    margin-right: 0;
+  }
+
+  .slide.active, .image:hover {
+    border-color: #dc3545;
+  }
+}

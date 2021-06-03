@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CartComponent } from '../cart/cart.component';
-import { CategoryComponent } from '../category/category.component';
-import { HomeComponent } from '../home/home.component';
-import { MasterPageComponent } from './master-page.component';
+import { CartComponent } from 'src/app/components/layout/cart/cart.component';
+import { CategoryComponent } from 'src/app/components/layout/category/category.component';
+import { HomeComponent } from 'src/app/components/layout/home/home.component';
+import { MasterPageComponent } from 'src/app/components/master-page/master-page.component';
+import { ProductComponent } from 'src/app/components/layout/product/product.component';
 
 const routes: Routes = [
   {
@@ -80,6 +81,34 @@ const routes: Routes = [
           page_title: 'menu.category.title',
         },
       },
+      {
+        path: 'san-pham',
+        component: ProductComponent,
+        data: {
+          page_title: 'menu.product.title',
+        },
+      },
+      {
+        path: 'product',
+        component: ProductComponent,
+        data: {
+          page_title: 'menu.product.title',
+        },
+      },
+      {
+        path: 'san-pham/:slug',
+        component: ProductComponent,
+        data: {
+          page_title: 'menu.product.title',
+        },
+      },
+      {
+        path: 'product/:slug',
+        component: ProductComponent,
+        data: {
+          page_title: 'menu.product.title',
+        },
+      },
     ],
   },
 ];
@@ -89,5 +118,5 @@ const routes: Routes = [
   exports: [RouterModule],
   providers: [],
 })
-export class MasterPageRoutingModule {
+export class LayoutRoutingModule {
 }

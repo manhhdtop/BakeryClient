@@ -21,10 +21,11 @@ export class AddToCardComponent implements OnInit, OnChanges {
   imageVisibleIndex: number;
   baseUrl: string;
   quantity: number;
+  price: number;
+  optionTypes: OptionType[];
   private quantityError: string;
   private optionError: string;
   private success: string;
-  optionTypes: OptionType[];
   private options = [];
 
   constructor(
@@ -51,6 +52,7 @@ export class AddToCardComponent implements OnInit, OnChanges {
     this.changeImage(0);
     this.optionTypes = this.product?.optionTypes;
     this.options.length = 0;
+    this.price = this.product?.price;
 
     while (this.options.length > 0) {
       this.options.pop();
@@ -105,6 +107,25 @@ export class AddToCardComponent implements OnInit, OnChanges {
   }
 
   chooseOption(optionTypeId, optionId): void {
-    this.options.push([optionTypeId, optionId]);
+    const option = this.optionTypes.find(e => {
+      return e.id === optionTypeId;
+    })?.options.find(e => {
+      return e.id === optionId;
+    });
+    if (option) {
+      this.price = option.price ? option.price : this.product.price;
+      if (!this.options || this.options.length === 0) {
+        this.options.push([optionTypeId, optionId]);
+      } else {
+        const index = this.options.findIndex(e => {
+          return e[0] === optionTypeId;
+        });
+        if (index !== undefined && index !== null && index >= 0) {
+          this.options[index] = [optionTypeId, optionId];
+        } else {
+          this.options.push([optionTypeId, optionId]);
+        }
+      }
+    }
   }
 }

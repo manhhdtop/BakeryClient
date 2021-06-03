@@ -5,5 +5,6 @@ export interface Option {
   productId: number;
   value: string;
   optionType: OptionType;
-  moreInfo: string;
+  price?: number;
+  moreInfo?: string;
 }

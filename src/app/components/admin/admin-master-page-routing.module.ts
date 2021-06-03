@@ -1,25 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../../../shared/guards/auth-guard.class';
-import { ActionComponent } from '../action/action.component';
-import { CategoryComponent } from '../category/category.component';
-import { OptionTypeComponent } from '../option_type/option-type.component';
-import { ProductComponent } from '../product/product.component';
-import { RoleComponent } from '../role/role.component';
-import { UserComponent } from '../user/user.component';
-import { AdminMasterPageComponent } from './admin-master-page.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from 'src/app/shared/guards/auth-guard.class';
+import { ActionComponent } from 'src/app/components/admin/action/action.component';
+import { CategoryComponent } from 'src/app/components/admin/category/category.component';
+import { OptionTypeComponent } from 'src/app/components/admin/option_type/option-type.component';
+import { ProductComponent } from 'src/app/components/admin/product/product.component';
+import { RoleComponent } from 'src/app/components/admin/role/role.component';
+import { UserComponent } from 'src/app/components/admin/user/user.component';
+import { AdminMasterPageComponent } from 'src/app/components/admin/admin-master-page/admin-master-page.component';
+import { DashboardComponent } from 'src/app/components/admin/admin-master-page/dashboard/dashboard.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AdminMasterPageComponent,
     children: [
-      // {
-      //   path: '',
-      //   redirectTo: 'dashboard',
-      //   pathMatch: 'full',
-      // },
       {
         path: '',
         component: DashboardComponent,

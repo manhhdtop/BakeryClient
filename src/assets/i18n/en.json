@@ -203,6 +203,8 @@
     "updated_by": "Updated by",
     "status": "Status",
     "status_error": "Status is required",
+    "btn_add_to_cart": "Add to cart",
+    "btn_buy_now": "Buy now",
     "modal": {
       "title_add": "New Product",
       "title_update": "Update Product",
@@ -329,5 +331,9 @@
       "btn_submit": "Save",
       "btn_delete": "Delete"
     }
+  },
+  "slider": {
+    "previous": "Previous",
+    "next": "Next"
   }
 }

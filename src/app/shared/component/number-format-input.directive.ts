@@ -18,6 +18,7 @@ export class NumberFormatInputDirective implements ControlValueAccessor, OnDestr
   decimalMarker = '.';
   // tslint:disable-next-line:variable-name
   private _value: string;
+  private regExp = new RegExp(`[^\\d\\${this.decimalMarker}-]`, 'g');
 
   constructor(private element: ElementRef<HTMLInputElement>) {
   }
@@ -32,14 +33,13 @@ export class NumberFormatInputDirective implements ControlValueAccessor, OnDestr
 
   @Input('value')
   set value(value: string) {
-    this._value = value + '';
+    this._value = (value + '').replace(this.regExp, '');
     this.formatValue(value);
   }
 
   @HostListener('input', ['$event.target.value', '$event.target.value'])
   input(event, value): void {
-    const regExp = new RegExp(`[^\\d\\${this.decimalMarker}-]`, 'g');
-    const [integer, decimal] = value.replace(regExp, '').split(this.decimalMarker);
+    const [integer, decimal] = value.replace(this.regExp, '').split(this.decimalMarker);
 
     this._value = decimal ? integer.concat('.', decimal) : integer;
 

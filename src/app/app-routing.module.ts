@@ -9,11 +9,11 @@ import { AuthGuard } from './shared/guards/auth-guard.class';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./components/master-page/master-page.module').then(m => m.MasterPageModule),
+    loadChildren: () => import('src/app/components/layout/layout.module').then(m => m.LayoutModule),
   },
   {
     path: 'admin',
-    loadChildren: () => import('./components/admin/admin-master-page/admin-master-page.module').then(m => m.AdminMasterPageModule),
+    loadChildren: () => import('src/app/components/admin/admin-master-page.module').then(m => m.AdminMasterPageModule),
     canActivate: [AuthGuard],
   },
   {
