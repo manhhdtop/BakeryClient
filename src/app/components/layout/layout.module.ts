@@ -13,6 +13,8 @@ import { LayoutRoutingModule } from 'src/app/components/layout/layout-routing.mo
 import { MasterPageComponent } from 'src/app/components/master-page/master-page.component';
 import { CategoryComponent } from 'src/app/components/layout/category/category.component';
 import { ProductComponent } from 'src/app/components/layout/product/product.component';
+import { ProductListComponent } from 'src/app/components/layout/product-list/product-list.component';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { ProductComponent } from 'src/app/components/layout/product/product.comp
     CartComponent,
     CategoryComponent,
     ProductComponent,
+    ProductListComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +37,7 @@ import { ProductComponent } from 'src/app/components/layout/product/product.comp
     NgbCarouselModule,
     SharedModule,
     NgbTooltipModule,
+    NgxSliderModule,
   ],
 })
 export class LayoutModule {

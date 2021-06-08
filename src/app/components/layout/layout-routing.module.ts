@@ -5,6 +5,7 @@ import { CategoryComponent } from 'src/app/components/layout/category/category.c
 import { HomeComponent } from 'src/app/components/layout/home/home.component';
 import { MasterPageComponent } from 'src/app/components/master-page/master-page.component';
 import { ProductComponent } from 'src/app/components/layout/product/product.component';
+import { ProductListComponent } from 'src/app/components/layout/product-list/product-list.component';
 
 const routes: Routes = [
   {
@@ -47,50 +48,15 @@ const routes: Routes = [
         },
       },
       {
-        path: 'category',
-        component: CategoryComponent,
-        data: {
-          page_title: 'menu.category.title',
-        },
-      },
-      {
-        path: 'danh-muc/:slug',
-        component: CategoryComponent,
-        data: {
-          page_title: 'menu.category.title',
-        },
-      },
-      {
-        path: 'category/:slug',
-        component: CategoryComponent,
-        data: {
-          page_title: 'menu.category.title',
-        },
-      },
-      {
-        path: 'danh-muc/:slug/:child',
-        component: CategoryComponent,
-        data: {
-          page_title: 'menu.category.title',
-        },
-      },
-      {
-        path: 'category/:slug/:child',
-        component: CategoryComponent,
-        data: {
-          page_title: 'menu.category.title',
-        },
-      },
-      {
         path: 'san-pham',
-        component: ProductComponent,
+        component: ProductListComponent,
         data: {
           page_title: 'menu.product.title',
         },
       },
       {
         path: 'product',
-        component: ProductComponent,
+        component: ProductListComponent,
         data: {
           page_title: 'menu.product.title',
         },

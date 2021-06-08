@@ -8,7 +8,6 @@ import { CartService } from '../../../service/cart.service';
 import { CategoryService } from '../../../service/category.service';
 import { ToastService } from '../../../service/toast.service';
 import { Item } from '../../../shared/model/item';
-import { MenuCategory } from '../../../shared/model/menu-category';
 import { Utils } from '../../../shared/util/utils';
 import { AppConfigService } from 'src/app/service/app-config.service';
 import { ConfirmComponent } from 'src/app/shared/component/confirm/confirm.component';
@@ -31,8 +30,6 @@ export class HeaderComponent implements OnInit {
   totalAmount: number;
   lang: string;
   items: Item[];
-  options = [];
-  categories: MenuCategory[];
   baseUrl: string;
   deleteTitle: string;
   deleteContent: string;
@@ -62,7 +59,6 @@ export class HeaderComponent implements OnInit {
     });
     this.cartService.getItems();
     this.lang = this.translate.currentLang;
-    this.getMenuCategory();
   }
 
   open(content): void {
@@ -111,13 +107,6 @@ export class HeaderComponent implements OnInit {
     this.translate.get(Utils.getPageTitle(this.activeRoute)).subscribe(e => {
       this.titleService.setTitle(e);
     });
-  }
-
-  private getMenuCategory(): void {
-    this.categoryService.menuCategoryEvent.subscribe(e => {
-      this.categories = e;
-    });
-    this.categoryService.getMenuCategories();
   }
 
   getOptionType(item: Item, entry): OptionType {

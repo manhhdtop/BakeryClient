@@ -1,0 +1,68 @@
+<div class="container pb-3 mt-3">
+  <div class="row">
+    <div class="col-12 col-md-4 shadow bg-body py-3">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-search"></i> Tìm kiếm
+        </div>
+        <div class="card-body">
+          <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Tên sản phẩm..." aria-describedby="keyword">
+            <span class="input-group-text" id="keyword"><i class="fa fa-search"></i></span>
+          </div>
+          <hr>
+          <div class="d-flex flex-column mb-3" *ngIf="categories && categories.length > 0">
+            <div class="form-check" *ngFor="let c of categories">
+              <input class="form-check-input" type="radio" name="category" [value]="c.id">
+              <label class="form-check-label">{{c.name}}</label>
+            </div>
+          </div>
+          <hr>
+          <div class="mb-3" *ngIf="minPrice != maxPrice">
+            <div class="row">
+              <div class="col">
+                <label>Từ giá</label>
+                <input class="form-control" [(ngModel)]="minPrice">
+              </div>
+              <div class="col">
+                <label>Đến giá</label>
+                <input class="form-control" [(ngModel)]="maxPrice">
+              </div>
+            </div>
+            <ngx-slider [(value)]="minPrice" [(highValue)]="maxPrice" [options]="sliderOptions"
+                        (valueChange)="valueChange($event)"
+                        (highValueChange)="highValueChange($event)"></ngx-slider>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button class="btn btn-outline-primary">Tìm kiếm</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-8 shadow bg-body py-3">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-pie"></i> Sản phẩm
+        </div>
+        <div class="card-body items">
+          <div class="row">
+            <div class="col-sm-12 col-md-4 col-lg-3" *ngFor="let p of products">
+              <div class="item">
+                <div class="item-image">
+                  <img src="{{baseUrl + p.images[0].uri}}" alt="{{p.description}}">
+                </div>
+                <a class="item-name" [ngbTooltip]="p.name"
+                   routerLink="/{{'menu.product.href' | translate}}/{{p.slug}}">{{p.name}}</a>
+                <p class="item-price">{{p.price | numberFormat}} {{'vnd' | translate}}</p>
+                <button class="btn btn-outline-primary" (click)="showAddToCartModal(p)">
+                  <span class="d-sm-inline d-md-none d-lg-inline">{{'cart.btn_add_to_cart' | translate}} </span>
+                  <i class="d-inline d-lg-none d-xl-inline fa fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
