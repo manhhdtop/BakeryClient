@@ -1,12 +1,12 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
-import {CategoryService} from '../../../service/category.service';
-import {ToastService} from '../../../service/toast.service';
-import {Constant, Status} from '../../../shared/constants/constant.class';
-import {Category} from '../../../shared/model/category';
-import {Utils} from '../../../shared/util/utils';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { CategoryService } from '../../../service/category.service';
+import { ToastService } from '../../../service/toast.service';
+import { Constant, Status } from '../../../shared/constants/constant.class';
+import { Category } from '../../../shared/model/category';
+import { Utils } from '../../../shared/util/utils';
 
 @Component({
   selector: 'app-category',
@@ -18,7 +18,7 @@ export class CategoryComponent implements OnInit {
   selectedCategory: Category;
   categories: Category[];
   parentCategories: Category[];
-  dateDdmmyyHhmmss: string;
+  dateDdMmYyHhMmSs: string;
   submitted: boolean;
   formUpdate: FormGroup;
   formSearch: FormGroup;
@@ -39,8 +39,8 @@ export class CategoryComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.dateDdmmyyHhmmss = Constant.DATE_DDMMYY_HHMMSS;
-    this.namePattern = Constant.NAME_PARTTERN;
+    this.dateDdMmYyHhMmSs = Constant.DATE_DDMMYY_HHMMSS;
+    this.namePattern = Constant.NAME_PATTERN;
     this.selectedCategory = undefined;
     this.page = 1;
     this.size = 20;
@@ -59,7 +59,7 @@ export class CategoryComponent implements OnInit {
     this.submitted = false;
     this.modalService.open(content, {
       ariaLabelledBy: 'modal-basic-title',
-      size: 'lg'
+      size: 'lg',
     });
   }
 

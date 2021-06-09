@@ -5,7 +5,7 @@ export class AppConsts {
     static pageSize: {
         size: any
     };
-    static page: { basePage: number };
-    static defaultPageSize: { defaultBasePage: number };
+    static page: number;
+    static defaultPageSize: number;
     static timeoutValue: number;
 }

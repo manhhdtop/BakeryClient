@@ -11,6 +11,15 @@ import { MenuCategory } from 'src/app/shared/model/menu-category';
 import { LabelType, Options } from '@angular-slider/ngx-slider';
 import { formatNumber } from '@angular/common';
 
+interface Param {
+  name?: string;
+  categoryIds?: number[];
+  fromPrice?: string;
+  toPrice?: string;
+  page: number;
+  size: number;
+}
+
 @Component({
   selector: 'app-product-list',
   templateUrl: './product-list.component.html',
@@ -18,14 +27,16 @@ import { formatNumber } from '@angular/common';
 })
 export class ProductListComponent implements OnInit {
   baseUrl: string;
-  params: any;
   products: Product[];
   categories: MenuCategory[];
+  sliderOptions: Options;
+  params: Param;
   page: number;
   size: number;
   minPrice: number;
   maxPrice: number;
-  sliderOptions: Options;
+  keyword: string;
+  categoryIds: number[];
 
   constructor(
     private categoryService: CategoryService,
@@ -57,6 +68,7 @@ export class ProductListComponent implements OnInit {
         }
       },
     };
+    this.categoryIds = [];
     this.getProducts();
     this.getCategories();
   }
@@ -70,11 +82,43 @@ export class ProductListComponent implements OnInit {
     }
     this.productService.getProducts(this.params).subscribe(res => {
       if (res.errorCode && res.errorCode === '200') {
+        const isInit = this.products === undefined;
         this.products = [...res.data.content];
         const arrPrice = this.products.map(({price}) => price);
-        this.minPrice = Math.min.apply(null, arrPrice);
-        this.maxPrice = Math.max.apply(null, arrPrice);
-        this.updateSliderOptions(this.minPrice, this.maxPrice);
+        let min: number;
+        let max: number;
+        if (arrPrice && arrPrice.length > 0) {
+          min = Math.min.apply(null, arrPrice);
+          max = Math.max.apply(null, arrPrice);
+        } else {
+          min = 0;
+          max = 0;
+        }
+        if (min === max) {
+          this.minPrice = null;
+          this.maxPrice = null;
+        } else {
+          if (isInit) {
+            this.minPrice = min ? min : null;
+            this.maxPrice = max ? max : null;
+          } else {
+            if (this.minPrice == null) {
+              this.minPrice = min ? min : null;
+            } else {
+              if (this.minPrice < min) {
+                this.minPrice = min ? min : null;
+              }
+            }
+            if (this.maxPrice == null) {
+              this.maxPrice = max ? max : null;
+            } else {
+              if (this.maxPrice > max) {
+                this.maxPrice = max ? max : null;
+              }
+            }
+          }
+        }
+        this.updateSliderOptions(min, max);
         this.page = res.data.pageable.pageNumber + 1;
         this.size = res.data.pageable.pageSize;
       } else {
@@ -103,11 +147,22 @@ export class ProductListComponent implements OnInit {
     this.sliderOptions = newOptions;
   }
 
-  valueChange(value): void {
-    console.log('min: ', value);
+  search(): void {
+    this.params.name = this.keyword ? this.keyword.trim() : '';
+    this.params.fromPrice = this.minPrice ? this.minPrice + '' : '';
+    this.params.toPrice = this.maxPrice ? this.maxPrice + '' : '';
+    this.params.categoryIds = this.categoryIds;
+    this.getProducts();
   }
 
-  highValueChange(value): void {
-    console.log('max: ', value);
+  chooseCategory(id, checked): void {
+    if (checked) {
+      this.categoryIds.push(id);
+    } else {
+      const index = this.categoryIds.findIndex(e => e === id);
+      if (index !== undefined && index != null) {
+        this.categoryIds.splice(index, 1);
+      }
+    }
   }
 }
