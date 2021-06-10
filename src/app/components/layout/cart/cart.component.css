@@ -1,0 +1,47 @@
+table.table-content .product-remove {
+  padding: 0 15px;
+  width: 20px;
+}
+
+table.table-content .product-remove > a {
+  font-size: 20px;
+  cursor: pointer;
+}
+
+table.table-content .product-thumbnail {
+  width: 150px;
+}
+
+table.table-content .product-thumbnail img {
+  width: 100%;
+  height: auto;
+}
+
+table.table-content td.product-price .amount {
+  font-weight: 700;
+}
+
+table.table-content td.product-quantity input {
+  width: 100%;
+  border: 1px solid transparent;
+  background: none;
+  display: block;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-clip: padding-box;
+  border-radius: .25rem;
+}
+
+table.table-content td.product-quantity input:hover,
+table.table-content td.product-quantity input:focus,
+table.table-content td.product-quantity input:focus-visible {
+  border-color: #ced4da;
+  background-color: #fff;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+}

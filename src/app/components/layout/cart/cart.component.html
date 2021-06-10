@@ -13,11 +13,11 @@
 <!-- cart-main-area start -->
 <div class="container pt-5">
   <div class="row">
-    <div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="col-md-12 col-sm-12 col-xs-12 cart-table">
       <form action="#">
-        <div class="table-content table-bordered table-responsive">
-          <table>
-            <thead>
+        <div class="row">
+          <table class="table table-content table-bordered table-responsive table-hover">
+            <thead class="bg-primary">
               <tr>
                 <th class="product-thumbnail">{{'cart.image' | translate}}</th>
                 <th class="product-name">{{'cart.product' | translate}}</th>
@@ -35,15 +35,19 @@
             <tbody *ngIf="items && items.length > 0">
               <tr *ngFor="let item of items">
                 <td class="product-thumbnail">
-                  <a href="#"><img src="{{item.product.images[0]}}" alt="{{item.product.name}}"/></a>
+                  <a routerLink="/san-pham/{{item.product.slug}}">
+                    <img src="{{baseUrl + item.product.images[0].uri}}" alt="{{item.product.name}}"/>
+                  </a>
                 </td>
-                <td class="product-name"><a href="#">{{item.product.name}}</a></td>
-                <td class="product-price"><span class="amount">${{item.price}}</span></td>
+                <td class="product-name">
+                  <a routerLink="/san-pham/{{item.product.slug}}">{{item.product.name}}</a>
+                </td>
+                <td class="product-price"><span class="amount">{{item.price | numberFormat}} {{'vnd' | translate}}</span></td>
                 <td class="product-quantity">
                   <input type="number" min="1" value="{{item.quantity}}"
                          (change)="updateQuantity(item.product.id, $event.target.value)"/>
                 </td>
-                <td class="product-subtotal">${{item.quantity * item.price}}</td>
+                <td class="product-subtotal">{{item.quantity * item.price | numberFormat}} {{'vnd' | translate}}</td>
                 <td class="product-remove">
                   <a (click)="removeItem($event, item.product.id)" class="pointer-event"><i
                     class="fa fa-times-circle text-danger"></i></a>
@@ -55,10 +59,10 @@
         <div class="row">
           <div class="col-md-8 col-sm-7 col-xs-12">
             <div class="buttons-cart">
-              <input type="submit" value="Update Cart"/>
-              <a routerLink="/san-pham">Continue Shopping</a>
+              <button class="btn btn-outline-success">Cập nhật giỏ hàng</button>
+              <a class="btn btn-outline-info ml-3" routerLink="/san-pham">Tiếp tục mua sắm</a>
             </div>
-            <div class="coupon">
+            <div class="coupon mt-3">
               <h3>Coupon</h3>
               <p>Enter your coupon code if you have one.</p>
               <input type="text" placeholder="Coupon code"/>
@@ -72,7 +76,7 @@
                 <div class="row">
                   <div class="col-12 d-flex justify-content-between">
                     <div>{{'cart.price' | translate}}</div>
-                    <div><span class="amount">${{totalAmount}}</span></div>
+                    <div><span class="amount">{{totalAmount | numberFormat}} {{'vnd' | translate}}</span></div>
                   </div>
                   <div class="col-12 shipping d-flex justify-content-between">
                     <div>{{'cart.shipping' | translate}}</div>
@@ -103,7 +107,7 @@
                   </div>
                 </div>
                 <div class="wc-proceed-to-checkout">
-                  <a routerLink="/thanh-toan">{{'cart.btn_checkout' | translate}}</a>
+                  <a class="btn btn-outline-primary" routerLink="/thanh-toan">{{'cart.btn_checkout' | translate}}</a>
                 </div>
               </div>
             </div>
