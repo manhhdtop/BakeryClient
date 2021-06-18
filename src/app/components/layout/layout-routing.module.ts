@@ -6,6 +6,7 @@ import { HomeComponent } from 'src/app/components/layout/home/home.component';
 import { MasterPageComponent } from 'src/app/components/master-page/master-page.component';
 import { ProductComponent } from 'src/app/components/layout/product/product.component';
 import { ProductListComponent } from 'src/app/components/layout/product-list/product-list.component';
+import { CheckoutComponent } from 'src/app/components/layout/checkout/checkout.component';
 
 const routes: Routes = [
   {
@@ -73,6 +74,20 @@ const routes: Routes = [
         component: ProductComponent,
         data: {
           page_title: 'menu.product.title',
+        },
+      },
+      {
+        path: 'thanh-toan',
+        component: CheckoutComponent,
+        data: {
+          page_title: 'menu.checkout.title',
+        },
+      },
+      {
+        path: 'checkout',
+        component: CheckoutComponent,
+        data: {
+          page_title: 'menu.checkout.title',
         },
       },
     ],

@@ -42,15 +42,15 @@
                 <td class="product-name">
                   <a routerLink="/san-pham/{{item.product.slug}}">{{item.product.name}}</a>
                 </td>
-                <td class="product-price"><span class="amount">{{item.price | numberFormat}} {{'vnd' | translate}}</span></td>
+                <td class="product-price"><span
+                  class="amount">{{item.price | numberFormat}} {{'vnd' | translate}}</span></td>
                 <td class="product-quantity">
                   <input type="number" min="1" value="{{item.quantity}}"
                          (change)="updateQuantity(item.product.id, $event.target.value)"/>
                 </td>
                 <td class="product-subtotal">{{item.quantity * item.price | numberFormat}} {{'vnd' | translate}}</td>
                 <td class="product-remove">
-                  <a (click)="removeItem($event, item.product.id)" class="pointer-event"><i
-                    class="fa fa-times-circle text-danger"></i></a>
+                  <a href="#" (click)="removeItem($event, item.id)"><i class="fa fa-times-circle text-danger"></i></a>
                 </td>
               </tr>
             </tbody>
@@ -59,54 +59,25 @@
         <div class="row">
           <div class="col-md-8 col-sm-7 col-xs-12">
             <div class="buttons-cart">
-              <button class="btn btn-outline-success">Cập nhật giỏ hàng</button>
-              <a class="btn btn-outline-info ml-3" routerLink="/san-pham">Tiếp tục mua sắm</a>
+              <a class="btn btn-outline-info" routerLink="/san-pham">Tiếp tục mua sắm</a>
             </div>
             <div class="coupon mt-3">
               <h3>Coupon</h3>
               <p>Enter your coupon code if you have one.</p>
-              <input type="text" placeholder="Coupon code"/>
-              <input type="submit" value="Apply Coupon"/>
+              <input type="text" class="form-control" placeholder="Coupon code"/>
+              <button class="btn btn-outline-primary">Apply Coupon</button>
             </div>
           </div>
           <div class="col-md-4 col-sm-5 col-xs-12">
             <div class="row">
-              <div class="col-12 text-end text-uppercase">
+              <div class="col-12 text-end">
                 <h2>{{'cart.total' | translate}}</h2>
                 <div class="row">
-                  <div class="col-12 d-flex justify-content-between">
-                    <div>{{'cart.price' | translate}}</div>
+                  <div class="col-12 d-flex justify-content-end">
                     <div><span class="amount">{{totalAmount | numberFormat}} {{'vnd' | translate}}</span></div>
                   </div>
-                  <div class="col-12 shipping d-flex justify-content-between">
-                    <div>{{'cart.shipping' | translate}}</div>
-                    <div>
-                      <ul id="shipping_method">
-                        <li>
-                          <input type="radio"/>
-                          <label>
-                            Flat Rate: <span class="amount">£7.00</span>
-                          </label>
-                        </li>
-                        <li>
-                          <input type="radio"/>
-                          <label>
-                            Free Shipping
-                          </label>
-                        </li>
-                        <li></li>
-                      </ul>
-                      <p><a class="shipping-calculator-button" href="#">Calculate Shipping</a></p>
-                    </div>
-                  </div>
-                  <div class="order-total">
-                    <p>Total</p>
-                    <p>
-                      <strong><span class="amount">£215.00</span></strong>
-                    </p>
-                  </div>
                 </div>
-                <div class="wc-proceed-to-checkout">
+                <div class="wc-proceed-to-checkout mt-2">
                   <a class="btn btn-outline-primary" routerLink="/thanh-toan">{{'cart.btn_checkout' | translate}}</a>
                 </div>
               </div>

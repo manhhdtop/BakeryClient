@@ -45,3 +45,8 @@ table.table-content td.product-quantity input:focus-visible {
   appearance: none;
   transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
 }
+
+.coupon input {
+  width: 150px !important;
+  display: inline;
+}

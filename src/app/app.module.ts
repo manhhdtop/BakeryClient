@@ -1,5 +1,4 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbCarouselModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
@@ -29,7 +28,6 @@ export function configServiceFactory(config: AppConfigService): any {
     NgbCarouselModule,
     NgbModule,
     AdminMasterPageModule,
-    ReactiveFormsModule,
   ],
   providers: [
     AppConfigService,

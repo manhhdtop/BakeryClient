@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgbCarouselModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
@@ -15,6 +15,7 @@ import { CategoryComponent } from 'src/app/components/layout/category/category.c
 import { ProductComponent } from 'src/app/components/layout/product/product.component';
 import { ProductListComponent } from 'src/app/components/layout/product-list/product-list.component';
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 @NgModule({
@@ -27,18 +28,20 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
     CategoryComponent,
     ProductComponent,
     ProductListComponent,
+    CheckoutComponent,
   ],
-  imports: [
-    CommonModule,
-    LayoutRoutingModule,
-    RouterModule,
-    TranslateModule,
-    FormsModule,
-    NgbCarouselModule,
-    SharedModule,
-    NgbTooltipModule,
-    NgxSliderModule,
-  ],
+    imports: [
+        CommonModule,
+        LayoutRoutingModule,
+        RouterModule,
+        TranslateModule,
+        FormsModule,
+        NgbCarouselModule,
+        SharedModule,
+        NgbTooltipModule,
+        NgxSliderModule,
+        ReactiveFormsModule,
+    ],
 })
 export class LayoutModule {
 }

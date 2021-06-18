@@ -20,7 +20,6 @@ import { Option } from 'src/app/shared/model/option';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-
   @ViewChild(ConfirmComponent) confirmModal;
 
   formSearch: FormGroup;

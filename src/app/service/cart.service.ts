@@ -77,4 +77,12 @@ export class CartService {
   private saveCart(): void {
     localStorage.setItem(this.ITEMS_KEY, JSON.stringify(this.items));
   }
+
+  updateItem(item: Item): void {
+    const index = this.items.findIndex(e => e.id === item.id);
+    if (index !== -1) {
+      this.items[index] = item;
+      this.saveCart();
+    }
+  }
 }
