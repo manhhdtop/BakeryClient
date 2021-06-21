@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-access-denied',
@@ -8,7 +8,10 @@ import { Router } from '@angular/router';
 })
 export class AccessDeniedComponent implements OnInit {
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+  ) {
   }
 
   ngOnInit(): void {
@@ -16,7 +19,7 @@ export class AccessDeniedComponent implements OnInit {
 
   backHome(event): void {
     event.preventDefault();
-    const url = this.router.url;
+    const url = this.activatedRoute.snapshot.queryParams.returnUrl || '/';
     if (url && url.trim() !== '' && url.trim().startsWith('/admin')) {
       this.router.navigate(['/admin']);
       return;

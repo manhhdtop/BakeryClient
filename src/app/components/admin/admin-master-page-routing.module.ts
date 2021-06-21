@@ -9,6 +9,7 @@ import { RoleComponent } from 'src/app/components/admin/role/role.component';
 import { UserComponent } from 'src/app/components/admin/user/user.component';
 import { AdminMasterPageComponent } from 'src/app/components/admin/admin-master-page/admin-master-page.component';
 import { DashboardComponent } from 'src/app/components/admin/admin-master-page/dashboard/dashboard.component';
+import { VoucherComponent } from 'src/app/components/admin/voucher/voucher.component';
 
 const routes: Routes = [
   {
@@ -105,6 +106,15 @@ const routes: Routes = [
         component: OptionTypeComponent,
         data: {
           page_title: 'menu.admin.option_type.title',
+        },
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
+      },
+      {
+        path: 'voucher',
+        component: VoucherComponent,
+        data: {
+          page_title: 'menu.admin.voucher.title',
         },
         canActivate: [AuthGuard],
         canLoad: [AuthGuard],

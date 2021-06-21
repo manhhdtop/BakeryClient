@@ -19,6 +19,10 @@
     "locked": "Khóa",
     "locked_by_admin": "Khóa do Admin"
   },
+  "voucher_type": {
+    "amount": "Tiền",
+    "percent": "Phần trăm"
+  },
   "login_page": {
     "username": "Tên đăng nhập...",
     "username_required": "Tên đăng nhập không được để trống",
@@ -137,6 +141,11 @@
         "href": "option-type",
         "title": "Quản lý Option Type",
         "name": "Option Type"
+      },
+      "voucher": {
+        "href": "voucher",
+        "title": "Quản lý Voucher",
+        "name": "Voucher"
       },
       "user_role": {
         "href": "tai-khoan",
@@ -355,5 +364,48 @@
   "slider": {
     "previous": "Trước",
     "next": "Sau"
+  },
+  "voucher": {
+    "header": "Quản lý Voucher",
+    "table_name": "Voucher",
+    "table_search": "Tìm kiếm Voucher...",
+    "btn_new": "Thêm mới",
+    "no": "STT",
+    "code": "Mã Voucher",
+    "code_placeholder": "Mã Voucher...",
+    "code_not_blank": "Mã Voucher không được để trống",
+    "name": "Tên Voucher",
+    "name_placeholder": "Tên Voucher...",
+    "name_not_blank": "Tên Voucher không được để trống",
+    "value": "Giá trị",
+    "value_placeholder": "Giá trị...",
+    "value_not_null": "Giá trị không được để trống",
+    "value_greater_than_0": "Giá trị phải lớn hơn 0",
+    "value_less_than_100": "Giá trị phải nhỏ hơn 100",
+    "min_amount": "Số tiền nhỏ nhất",
+    "min_amount_placeholder": "Số tiền nhỏ nhất...",
+    "min_amount_not_null": "Số tiền nhỏ nhất không được để trống",
+    "min_amount_greater_than_0": "Số tiền nhỏ nhất phải lớn hơn 0",
+    "max_amount": "Số tiền lớn nhất",
+    "max_amount_placeholder": "Số tiền lớn nhất...",
+    "max_amount_not_null": "Số tiền lớn nhất không được để trống",
+    "max_amount_greater_than_0": "Số tiền lớn nhất phải lớn hơn 0",
+    "max_amount_must_greater_than_min_amount": "Số tiền lớn nhất phải lớn hơn Số tiền nhỏ nhất",
+    "start_date": "Ngày bắt đầu",
+    "end_date": "Ngày kết thúc",
+    "status": "Trạng thái",
+    "status_error": "Trạng thái bắt buộc chọn",
+    "type": "Loại Voucher",
+    "type_not_null": "Loại Voucher không được để trống",
+    "btn_generate_code": "Tạo mã",
+    "modal": {
+      "title_add": "Thêm mới Voucher",
+      "title_update": "Cập nhật Voucher",
+      "title_delete": "Xóa Action",
+      "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa Voucher <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><span class=\"text-danger\">Không thể hoàn tác thao tác này.</span></p>",
+      "btn_cancel": "Hủy",
+      "btn_submit": "Lưu",
+      "btn_delete": "Xóa"
+    }
   }
 }

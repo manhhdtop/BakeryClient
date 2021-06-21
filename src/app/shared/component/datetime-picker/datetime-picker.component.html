@@ -1,0 +1,25 @@
+<div class="input-group mr-2">
+  <input class="form-control"
+         [value]="dateTimeString"
+         placeholder="dd/mm/yyyy">
+  <div class="input-group-append">
+    <button
+      class="btn btn-outline-secondary"
+      [ngbPopover]="calendarContent"
+      [autoClose]="'outside'"
+      type="button">
+      <i class="fa fa-calendar"></i>
+    </button>
+  </div>
+</div>
+<ng-template #calendarContent>
+  <div>
+    <ngb-datepicker id="dp" #dp name="datepicker" [ngModel]="date"
+                    (ngModelChange)="onDateChange($event, dp)"></ngb-datepicker>
+    <div class="mt-auto">
+      <ngb-timepicker #tp name="timepicker" [ngModel]="time" (ngModelChange)="onTimeChange($event)"
+                      [seconds]="seconds" [hourStep]="hourStep" [minuteStep]="minuteStep" [secondStep]="secondStep">
+      </ngb-timepicker>
+    </div>
+  </div>
+</ng-template>

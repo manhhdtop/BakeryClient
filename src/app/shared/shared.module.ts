@@ -18,6 +18,7 @@ import { InternalServerErrorComponent } from 'src/app/components/error/internal-
 import { PageNotFoundComponent } from 'src/app/components/error/page-not-found/page-not-found.component';
 import { ToastComponent } from 'src/app/shared/component/toast/toast.component';
 import { SliderComponent } from './component/slider/slider.component';
+import { DatetimePickerComponent } from './component/datetime-picker/datetime-picker.component';
 
 @NgModule({
   imports: [
@@ -29,22 +30,23 @@ import { SliderComponent } from './component/slider/slider.component';
     CommonModule,
     ReactiveFormsModule,
   ],
-  exports: [
-    DateFormatPipe,
-    HttpClientModule,
-    I18nModule,
-    CkeditorComponent,
-    NumberFormatInputDirective,
-    NumberInputDirective,
-    NumberFormatPipe,
-    AddToCardComponent,
-    ConfirmComponent,
-    AccessDeniedComponent,
-    InternalServerErrorComponent,
-    PageNotFoundComponent,
-    ToastComponent,
-    SliderComponent,
-  ],
+    exports: [
+        DateFormatPipe,
+        HttpClientModule,
+        I18nModule,
+        CkeditorComponent,
+        NumberFormatInputDirective,
+        NumberInputDirective,
+        NumberFormatPipe,
+        AddToCardComponent,
+        ConfirmComponent,
+        AccessDeniedComponent,
+        InternalServerErrorComponent,
+        PageNotFoundComponent,
+        ToastComponent,
+        SliderComponent,
+        DatetimePickerComponent,
+    ],
   declarations: [
     DateFormatPipe,
     CkeditorComponent,
@@ -58,6 +60,7 @@ import { SliderComponent } from './component/slider/slider.component';
     PageNotFoundComponent,
     ToastComponent,
     SliderComponent,
+    DatetimePickerComponent,
   ],
   providers: [
     {

@@ -13,6 +13,11 @@ export const Status = [
   {value: -1, name: 'status.locked'},
 ];
 
+export const VoucherType = [
+  {value: 1, name: 'voucher_type.amount', icon: 'vnd'},
+  {value: 2, name: 'voucher_type.percent', icon: '%'},
+];
+
 export enum EditorType {
   CLASSIC,
   DOCUMENT

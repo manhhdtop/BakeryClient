@@ -1,0 +1,235 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-3 text-gray-800">{{'voucher.header' | translate}}</h1>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="my-2 font-weight-bold text-primary">{{'voucher.table_name' | translate}}</h6>
+    </div>
+    <div class="card-body">
+      <div class="card-header py-3 d-flex justify-content-between">
+        <div class="col-auto px-0">
+          <button class="btn btn-primary" (click)="openModal(voucher)">{{'voucher.btn_new' | translate}}</button>
+        </div>
+        <div class="col-auto px-0">
+          <form [formGroup]="formSearch" (submit)="search($event)"
+                class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light small" formControlName="keyword"
+                     placeholder="{{'voucher.table_search' | translate}}"
+                     aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>{{'voucher.no' | translate}}</th>
+              <th>{{'voucher.code' | translate}}</th>
+              <th>{{'voucher.name' | translate}}</th>
+              <th>{{'voucher.value' | translate}}</th>
+              <th>{{'voucher.start_date' | translate}}</th>
+              <th>{{'voucher.end_date' | translate}}</th>
+              <th>{{'voucher.status' | translate}}</th>
+              <th class="min"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let v of vouchers, let i = index">
+              <td>{{i + 1}}</td>
+              <td>{{v.code}}</td>
+              <td>{{v.name}}</td>
+              <td>{{v.value}} {{v.type == 1 ? 'vnd' : '%' | translate}}</td>
+              <td>{{v.startDate | dateFormat: dateDdmmyy}}</td>
+              <td>{{v.endDate | dateFormat: dateDdmmyy}}</td>
+              <td>{{getStatusName(v.status) | translate}}</td>
+              <td class="min">
+                <a role="button" class="mr-2" (click)="delete(deleteVoucher, v)"><i class="fa fa-trash-alt"></i></a>
+                <a role="button" class="mr-2" (click)="openModal(voucher, v)"><i
+                  class="fa fa-edit"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-md-between mt-3" *ngIf="totalItem >= currentItems">
+        <div>
+          Showing {{(page - 1) * size + 1}} - {{(page - 1) * size + currentItems}} of {{totalItem}} items
+        </div>
+        <div>
+          <ngb-pagination
+            [(page)]="page"
+            [pageSize]="size"
+            [maxSize]="5"
+            [collectionSize]="totalItem"
+            [ellipses]="true"
+            (pageChange)="onPageChange()"
+          >
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #voucher let-modal>
+    <div class="modal-header">
+      <div class="w-100">
+        <h4
+          class="modal-title">{{(selectedVoucher ? 'voucher.modal.title_update' : 'voucher.modal.title_add') | translate}}</h4>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formUpdate">
+        <div class="row">
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'voucher.code' | translate}}</label>
+              <input type="text" class="form-control" placeholder="{{'voucher.code_placeholder' | translate}}"
+                     formControlName="code">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.code.invalid">
+                {{'voucher.code_not_blank' | translate}}
+              </small>
+              <div>
+                <button type="button" class="btn btn-outline-info mt-2" (click)="generateCode()">
+                  {{'voucher.btn_generate_code' | translate}}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'voucher.value' | translate}}</label>
+              <div class="input-group">
+                <input type="number" class="form-control" placeholder="{{'voucher.value_placeholder' | translate}}"
+                       formControlName="value">
+                <div class="input-group-append" *ngIf="formUpdate.controls.type.value">
+                  <span class="align-middle pl-2" *ngIf="formUpdate.controls.type.value === '1'">
+                    {{'vnd' | translate}}
+                  </span>
+                  <span class="align-middle pl-2" *ngIf="formUpdate.controls.type.value === '2'">%</span>
+                </div>
+              </div>
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.value.errors?.required">
+                {{'voucher.value_not_null' | translate}}
+              </small>
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.value.errors?.min">
+                {{'voucher.value_greater_than_0' | translate}}
+              </small>
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.value.errors?.max">
+                {{'voucher.value_less_than_100' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-12 mt-2">
+            <div class="form-group">
+              <label>{{'voucher.name' | translate}}</label>
+              <input type="text" class="form-control" placeholder="{{'voucher.name_placeholder' | translate}}"
+                     formControlName="name">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid">
+                {{'voucher.name_not_blank' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 mt-2">
+            <div class="form-group">
+              <label>{{'voucher.min_amount' | translate}}</label>
+              <input type="number" class="form-control" placeholder="{{'voucher.min_amount_placeholder' | translate}}"
+                     formControlName="minAmount">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.minAmount.errors?.required">
+                {{'voucher.min_amount_not_null' | translate}}
+              </small>
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.minAmount.errors?.min">
+                {{'voucher.min_amount_greater_than_0' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 mt-2">
+            <div class="form-group">
+              <label>{{'voucher.max_amount' | translate}}</label>
+              <input type="number" class="form-control" placeholder="{{'voucher.max_amount_placeholder' | translate}}"
+                     formControlName="maxAmount">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.maxAmount.errors?.required">
+                {{'voucher.max_amount_not_null' | translate}}
+              </small>
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.maxAmount.errors?.min">
+                {{'voucher.max_amount_greater_than_0' | translate}}
+              </small>
+              <small class="form-text text-danger"
+                     *ngIf="submitted && formUpdate.controls.maxAmount.errors?.maxAmountMustGreaterThanMinAmount">
+                {{'voucher.max_amount_must_greater_than_min_amount' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-12 mt-2">
+            <label>{{'voucher.start_date' | translate}}</label>
+            <div class="form-group">
+              <app-datetime-picker class="form-control" formControlName="startDate"
+                                   [seconds]="false">
+              </app-datetime-picker>
+            </div>
+          </div>
+          <div class="col-12 mt-2">
+            <label>{{'voucher.end_date' | translate}}</label>
+            <div class="form-group">
+              <app-datetime-picker class="form-control" formControlName="startDate"
+                                   [seconds]="false">
+              </app-datetime-picker>
+            </div>
+          </div>
+          <div class="col-md-6 col-sm-12 mt-2">
+            <label class="d-block">{{'voucher.type' | translate}}</label>
+            <div class="form-check form-check-inline" *ngFor="let t of types">
+              <input class="form-check-input" type="radio" value="{{t.value}}" id="type_{{t.value}}"
+                     name="type" formControlName="type" (click)="changeType(t.value)">
+              <label class="form-check-label" for="type_{{t.value}}">{{t.name | translate}}</label>
+            </div>
+            <small class="d-block form-text text-danger" *ngIf="submitted && formUpdate.controls.type.invalid">
+              {{'voucher.type_not_null' | translate}}
+            </small>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()">
+        {{'voucher.modal.btn_cancel' | translate}}
+      </button>
+      <button class="btn btn-outline-primary" (click)="submit(modal)">
+        {{'voucher.modal.btn_submit' | translate}}
+      </button>
+    </div>
+  </ng-template>
+  <ng-template #deleteVoucher let-modal>
+    <div class="modal-header">
+      <div class="w-100">
+        <h4 class="modal-title text-left font-weight-bold">{{'voucher.modal.title_delete' | translate}}</h4>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body"
+         innerHtml="{{'voucher.modal.message_delete' | translate : {name: selectedVoucher?.name} }}">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()">
+        {{'voucher.modal.btn_cancel' | translate}}
+      </button>
+      <button class="btn btn-outline-danger" (click)="modal.close('ok')">
+        {{'voucher.modal.btn_delete' | translate}}
+      </button>
+    </div>
+  </ng-template>
+</div>

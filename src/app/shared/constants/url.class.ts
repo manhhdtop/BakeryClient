@@ -33,4 +33,10 @@ export class UrlConstant {
   public static readonly CREATE_PRODUCT_SLUG = UrlConstant.ADMIN_PRODUCT + '/create-slug';
   // Option
   public static readonly OPTION_TYPE = UrlConstant.ADMIN + '/option-type';
+  // Voucher
+  public static readonly VOUCHER = UrlConstant.ADMIN + '/voucher';
+  public static readonly ACTIVE_VOUCHERS = UrlConstant.VOUCHER + '/actives';
+  public static readonly GET_VOUCHER_BY_CODE = UrlConstant.VOUCHER + '/find-by-code';
+  public static readonly UPDATE_STATUS_VOUCHER = UrlConstant.VOUCHER + '/update-status';
+  public static readonly GENERATE_CODE = UrlConstant.VOUCHER + '/generate-code';
 }

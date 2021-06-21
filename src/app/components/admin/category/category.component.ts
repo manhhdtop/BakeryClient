@@ -172,7 +172,6 @@ export class CategoryComponent implements OnInit {
   }
 
   onPageChange(): void {
-    this.toast.show('' + this.page);
     this.formSearch.controls.page.setValue(this.page);
     this.getCategory();
   }

@@ -18,6 +18,10 @@
     "locked": "Locked",
     "locked_by_admin": "Locked by Admin"
   },
+  "voucher_type": {
+    "amount": "Amount",
+    "percent": "Percent"
+  },
   "login_page": {
     "username": "Username...",
     "username_required": "Username can not be blank",
@@ -121,6 +125,11 @@
         "href": "option-type",
         "title": "Option Type Management",
         "name": "Option Type"
+      },
+      "voucher": {
+        "href": "voucher",
+        "title": "Voucher Management",
+        "name": "Voucher"
       },
       "user_role": {
         "href": "user",
@@ -335,5 +344,48 @@
   "slider": {
     "previous": "Previous",
     "next": "Next"
+  },
+  "voucher": {
+    "header": "Voucher Management",
+    "table_name": "Vouchers",
+    "table_search": "Searching voucher...",
+    "btn_new": "New",
+    "no": "STT",
+    "code": "Voucher code",
+    "code_placeholder": "Voucher code...",
+    "code_not_blank": "Voucher code can not blank",
+    "name": "Name",
+    "name_placeholder": "Name...",
+    "name_not_blank": "Name can not blank",
+    "value": "Value",
+    "value_placeholder": "Value...",
+    "value_not_null": "Value can not be null",
+    "value_greater_than_0": "Value must greater than 0",
+    "value_less_than_0": "Value must less than 100",
+    "min_amount": "Min amount",
+    "min_amount_placeholder": "Min amount...",
+    "min_amount_not_null": "Min amount can not be null",
+    "min_amount_greater_than_0": "Min amount must greater than 0",
+    "max_amount": "Max amount",
+    "max_amount_placeholder": "Max amount...",
+    "max_amount_not_null": "Max amount can not be null",
+    "max_amount_greater_than_0": "Max amount must greater than 0",
+    "max_amount_must_greater_than_min_amount": "Max amount must greater than Min amount",
+    "created_date": "Created date",
+    "updated_date": "Updated date",
+    "status": "Status",
+    "status_error": "Status is required",
+    "type": "Voucher type",
+    "type_not_null": "Voucher type không được để trống",
+    "btn_generate_code": "Generate code",
+    "modal": {
+      "title_add": "New Voucher",
+      "title_update": "Update Voucher",
+      "title_delete": "Delete Voucher",
+      "message_delete": "<p><strong>Are you sure you want to delete this Voucher <span class=\"text-primary\">\"{{name}}\"</span>?</strong></p><span class=\"text-danger\">This operation can not be undone.</span></p>",
+      "btn_cancel": "Cancel",
+      "btn_submit": "Save",
+      "btn_delete": "Delete"
+    }
   }
 }

@@ -19,6 +19,7 @@ import { SidebarComponent } from 'src/app/components/admin/admin-master-page/sid
 import { UserComponent } from 'src/app/components/admin/user/user.component';
 import { RoleComponent } from 'src/app/components/admin/role/role.component';
 import { ActionComponent } from 'src/app/components/admin/action/action.component';
+import { VoucherComponent } from './voucher/voucher.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { ActionComponent } from 'src/app/components/admin/action/action.componen
     UserComponent,
     RoleComponent,
     ActionComponent,
+    VoucherComponent,
   ],
   exports: [
     SidebarComponent,
