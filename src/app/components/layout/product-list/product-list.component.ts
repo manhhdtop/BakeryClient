@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/service/product.service';
 import { ToastService } from 'src/app/service/toast.service';
@@ -27,6 +27,7 @@ interface Param {
 })
 export class ProductListComponent implements OnInit {
   baseUrl: string;
+  currentProduct: Product;
   products: Product[];
   categories: MenuCategory[];
   sliderOptions: Options;
@@ -37,6 +38,8 @@ export class ProductListComponent implements OnInit {
   maxPrice: number;
   keyword: string;
   categoryIds: number[];
+
+  @ViewChild('addToCardModal') addToCardModal;
 
   constructor(
     private categoryService: CategoryService,
@@ -136,10 +139,6 @@ export class ProductListComponent implements OnInit {
     this.categoryService.getMenuCategories();
   }
 
-  showAddToCartModal(p: Product): void {
-
-  }
-
   updateSliderOptions(min, max): void {
     const newOptions: Options = Object.assign({}, this.sliderOptions);
     newOptions.floor = min;
@@ -164,5 +163,10 @@ export class ProductListComponent implements OnInit {
         this.categoryIds.splice(index, 1);
       }
     }
+  }
+
+  showAddToCartModal(product): void {
+    this.currentProduct = product;
+    this.addToCardModal.open();
   }
 }

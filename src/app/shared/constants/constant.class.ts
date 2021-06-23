@@ -5,6 +5,7 @@ export class Constant {
   public static readonly USER_INFO = 'user_info';
   static HEADER_APPLICATION = 'Authorization';
   static NAME_PATTERN = '\\s*[a-zA-ZẠ-ỵ\u00c0-\u00fd0-9][a-zA-ZẠ-ỵ\u00c0-\u00fd- ]+[a-zA-ZẠ-ỵ\u00c0-\u00fd]\\s*';
+  static EMAIL_PATTERN = '^[a-z][a-z0-9_\\.]{2,32}@[a-z0-9]{2,}(\\.[a-z0-9]{2,4}){1,2}$';
 }
 
 export const Status = [

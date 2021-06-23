@@ -50,6 +50,12 @@ export class NumberFormatInputDirective implements ControlValueAccessor, OnDestr
     this._onChange(this._value);
   }
 
+  @HostListener('keypress', ['$event'])
+  keypress(event): boolean {
+    const k = event.charCode;
+    return (k === 46 || (k >= 48 && k <= 57));
+  }
+
   @HostListener('blur')
   _onBlur(): void {
     this.formatValue(this._value);
@@ -64,6 +70,9 @@ export class NumberFormatInputDirective implements ControlValueAccessor, OnDestr
   }
 
   writeValue(value: any): void {
+    if (!value) {
+      value = '';
+    }
     this._value = value;
     this.formatValue(this._value);
   }

@@ -34,9 +34,19 @@ export class UrlConstant {
   // Option
   public static readonly OPTION_TYPE = UrlConstant.ADMIN + '/option-type';
   // Voucher
-  public static readonly VOUCHER = UrlConstant.ADMIN + '/voucher';
-  public static readonly ACTIVE_VOUCHERS = UrlConstant.VOUCHER + '/actives';
-  public static readonly GET_VOUCHER_BY_CODE = UrlConstant.VOUCHER + '/find-by-code';
-  public static readonly UPDATE_STATUS_VOUCHER = UrlConstant.VOUCHER + '/update-status';
+  public static readonly VOUCHER = '/voucher';
+  public static readonly ADMIN_VOUCHER = UrlConstant.ADMIN + UrlConstant.VOUCHER;
+  public static readonly ACTIVE_VOUCHERS = UrlConstant.ADMIN_VOUCHER + '/actives';
+  public static readonly GET_VOUCHER_BY_CODE = UrlConstant.ADMIN_VOUCHER + '/find-by-code';
+  public static readonly UPDATE_STATUS_VOUCHER = UrlConstant.ADMIN_VOUCHER + '/update-status';
   public static readonly GENERATE_CODE = UrlConstant.VOUCHER + '/generate-code';
+  public static readonly CHECK_CODE = UrlConstant.VOUCHER + '/check-code';
+  // Catalog
+  public static readonly CATALOG = '/catalog';
+  public static readonly PROVINCES = UrlConstant.CATALOG + '/provinces';
+  public static readonly DISTRICTS = UrlConstant.CATALOG + '/districts';
+  // Invoice
+  public static readonly INVOICE = '/invoice';
+  public static readonly ADMIN_INVOICE = UrlConstant.ADMIN + UrlConstant.INVOICE;
+  public static readonly CREATE_INVOICE = UrlConstant.INVOICE + '/create-invoice';
 }

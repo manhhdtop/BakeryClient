@@ -5,7 +5,7 @@
         <a routerLink="{{'menu.home.href' | translate}}">{{'menu.home.name' | translate}}</a>
       </li>
       <li class="breadcrumb-item">
-        <a routerLink="/{{'menu.category.href'|translate }}/{{product?.category?.slug}}">{{product?.category?.name}}</a>
+        <a routerLink="{{'menu.category.href'|translate }}/{{product?.category?.slug}}">{{product?.category?.name}}</a>
       </li>
       <li class="breadcrumb-item active" aria-current="page">{{product?.name}}</li>
     </ol>

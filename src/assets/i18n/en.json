@@ -2,6 +2,9 @@
   "logo_text": "Bakery",
   "choose": "Choose",
   "address": "Ngo Xuan Quang, Trau Quy, Gia Lam, Ha Noi",
+  "vnd": "₫",
+  "api_error": "Something went wrong!",
+  "back_home": "Back to Home page",
   "language": {
     "vn": {
       "code": "vn",
@@ -42,6 +45,7 @@
     "product": "Product",
     "price": "Price",
     "total_price": "Total price",
+    "continue_shopping": "Continue shopping",
     "shipping": "Shipping",
     "quantity": "Quantity",
     "quantity_less": "QTY",
@@ -71,27 +75,27 @@
       "name": "Checkout"
     },
     "about": {
-      "href": "about",
+      "href": "/about",
       "title": "About us",
       "name": "About"
     },
     "product": {
-      "href": "product",
+      "href": "/product",
       "title": "My product",
       "name": "Product"
     },
     "category": {
-      "href": "category",
+      "href": "/category",
       "title": "Category",
       "name": "Category"
     },
     "new": {
-      "href": "new",
+      "href": "/new",
       "title": "New product, Coupon, and more...",
       "name": "New"
     },
     "contact": {
-      "href": "contact",
+      "href": "/contact",
       "title": "Contact us",
       "name": "Contact"
     },
@@ -107,47 +111,47 @@
         "name": "Management"
       },
       "login": {
-        "href": "login",
+        "href": "/login",
         "title": "Login to management page",
         "name": "Login"
       },
       "category": {
-        "href": "category",
+        "href": "/category",
         "title": "Category Management",
         "name": "Category"
       },
       "product": {
-        "href": "product",
+        "href": "/product",
         "title": "Product Management",
         "name": "Product"
       },
       "option_type": {
-        "href": "option-type",
+        "href": "/option-type",
         "title": "Option Type Management",
         "name": "Option Type"
       },
       "voucher": {
-        "href": "voucher",
+        "href": "/voucher",
         "title": "Voucher Management",
         "name": "Voucher"
       },
       "user_role": {
-        "href": "user",
+        "href": "/user",
         "title": "User & Role",
         "name": "User & Role"
       },
       "user": {
-        "href": "user",
+        "href": "/user",
         "title": "User Management",
         "name": "User"
       },
       "role": {
-        "href": "role",
+        "href": "/role",
         "title": "Role Management",
         "name": "Role"
       },
       "action": {
-        "href": "action",
+        "href": "/action",
         "title": "Action Management",
         "name": "Action"
       }
@@ -364,19 +368,38 @@
     "value_less_than_0": "Value must less than 100",
     "min_amount": "Min amount",
     "min_amount_placeholder": "Min amount...",
-    "min_amount_not_null": "Min amount can not be null",
     "min_amount_greater_than_0": "Min amount must greater than 0",
     "max_amount": "Max amount",
     "max_amount_placeholder": "Max amount...",
-    "max_amount_not_null": "Max amount can not be null",
     "max_amount_greater_than_0": "Max amount must greater than 0",
-    "max_amount_must_greater_than_min_amount": "Max amount must greater than Min amount",
+    "max_amount_not_less_than_min_amount": "Max amount not less than Min amount",
+    "min_refund": "Min refund",
+    "min_refund_placeholder": "Min refund...",
+    "min_refund_greater_than_0": "Min refund must greater than 0",
+    "max_refund": "Max refund",
+    "max_refund_placeholder": "Max refund...",
+    "max_refund_greater_than_0": "Max refund must greater than 0",
+    "max_refund_not_less_than_min_refund": "Max refund not less than Min refund",
+    "start_date": "Start date",
+    "start_date_not_blank": "Start date can not be null",
+    "end_date": "End date",
+    "end_date_not_blank": "End date can not be null",
+    "end_date_must_after_start_date": "End date must after Start date",
     "created_date": "Created date",
     "updated_date": "Updated date",
     "status": "Status",
     "status_error": "Status is required",
+    "status_invalid": "Status is invalid",
+    "update_status_title": "Update Voucher status",
+    "update_status_deactive": "Are your want change status from Deactive to Active?",
+    "update_status_active": "Are your want change status from Active to Lock?",
+    "update_status_lock": "Are your want change status from Lock to Active?",
     "type": "Voucher type",
-    "type_not_null": "Voucher type không được để trống",
+    "type_not_null": "Voucher type can not be null",
+    "quantity": "Quantity",
+    "quantity_placeholder": "Quantity...",
+    "quantity_not_null": "Quantity can not be null",
+    "quantity_greater_than_0": "Quantity must greater than 0",
     "btn_generate_code": "Generate code",
     "modal": {
       "title_add": "New Voucher",
@@ -386,6 +409,39 @@
       "btn_cancel": "Cancel",
       "btn_submit": "Save",
       "btn_delete": "Delete"
+    }
+  },
+  "checkout": {
+    "customer_name": "Your name",
+    "customer_name_placeholder": "Your name...",
+    "customer_name_required": "Your name can not blank",
+    "customer_email": "Email",
+    "customer_email_placeholder": "Email...",
+    "customer_email_required": "Email can not blank",
+    "customer_email_error": "Email is invalid",
+    "customer_phone": "Phone number",
+    "customer_phone_placeholder": "Phone number...",
+    "customer_phone_required": "Phone number can not blank",
+    "province": "Province",
+    "province_required": "Province can not blank",
+    "district": "District",
+    "district_required": "District can not blank",
+    "address": "Address",
+    "address_placeholder": "Address...",
+    "address_required": "Address can not blank",
+    "total_amount": "Total amount",
+    "coupon": "Coupon",
+    "coupon_code_placeholder": "Coupon code...",
+    "apply_coupon": "Apply Coupon",
+    "remove_coupon": "Remove Coupon",
+    "total_pay": "Total Pay",
+    "order": "Order",
+    "order_success": "Order success",
+    "order_success_content": "Thank you for ordered, We have send a email and contact you later to confirm your invoice",
+    "voucher_code": {
+      "not_blank": "You need to type your Coupon code",
+      "not_exist": "Coupon is not exist or ",
+      "not_enough_condition": "Invoice not enough condition of Coupon"
     }
   }
 }

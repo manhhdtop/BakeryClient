@@ -14,23 +14,26 @@ export class VoucherService {
   }
 
   getVouchers(params): Observable<any> {
-    return this.baseService.get(UrlConstant.VOUCHER, params);
+    return this.baseService.get(UrlConstant.ADMIN_VOUCHER, params);
   }
 
   getVoucherActives(): Observable<any> {
     return this.baseService.get(UrlConstant.ACTIVE_VOUCHERS);
   }
 
-  getVoucherByCode(): Observable<any> {
-    return this.baseService.get(UrlConstant.GET_VOUCHER_BY_CODE);
+  getVoucherByCode(code): Observable<any> {
+    const param = {
+      code
+    };
+    return this.baseService.get(UrlConstant.GET_VOUCHER_BY_CODE, param);
   }
 
   save(data): Observable<any> {
-    return this.baseService.put(UrlConstant.VOUCHER, data);
+    return this.baseService.put(UrlConstant.ADMIN_VOUCHER, data);
   }
 
   update(data): Observable<any> {
-    return this.baseService.post(UrlConstant.VOUCHER, data);
+    return this.baseService.post(UrlConstant.ADMIN_VOUCHER, data);
   }
 
   updateStatus(data): Observable<any> {
@@ -38,10 +41,17 @@ export class VoucherService {
   }
 
   delete(id): Observable<any> {
-    return this.baseService.delete(UrlConstant.VOUCHER, id);
+    return this.baseService.delete(UrlConstant.ADMIN_VOUCHER, id);
   }
 
   generateCode(): Observable<any> {
     return this.baseService.get(UrlConstant.GENERATE_CODE);
+  }
+
+  checkCode(code): Observable<any> {
+    const param = {
+      code
+    };
+    return this.baseService.get(UrlConstant.CHECK_CODE, param);
   }
 }

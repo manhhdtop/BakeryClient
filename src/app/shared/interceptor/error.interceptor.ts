@@ -6,15 +6,19 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, retry, timeout } from 'rxjs/operators';
 import { AppConfigService } from '../../service/app-config.service';
 import { UrlConstant } from '../constants/url.class';
+import { ToastService } from 'src/app/service/toast.service';
 
 export const DEFAULT_TIMEOUT = new InjectionToken<number>('Value default time-out');
 
 @Injectable({providedIn: 'root'})
 export class ErrorInterceptor implements HttpInterceptor {
-  constructor(private router: Router,
-              private appConfigService: AppConfigService,
-              private modal: NgbModal,
-              @Inject(DEFAULT_TIMEOUT) protected defaultTimeout: number) {
+  constructor(
+    private appConfigService: AppConfigService,
+    private modal: NgbModal,
+    private router: Router,
+    private toast: ToastService,
+    @Inject(DEFAULT_TIMEOUT) protected defaultTimeout: number,
+  ) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -37,12 +41,6 @@ export class ErrorInterceptor implements HttpInterceptor {
           return throwError(error);
         } else if (error.status === 403) {
           this.router.navigate([UrlConstant.UNAUTHORIZED], {skipLocationChange: true});
-          return throwError(error);
-        } else if (error.status === 404) {
-          this.router.navigate([UrlConstant.PAGE_NOT_FOUND], {skipLocationChange: true});
-          return throwError(error);
-        } else if (error.status === 500) {
-          this.router.navigate([UrlConstant.INTERNAL_SERVER_ERROR], {skipLocationChange: true});
           return throwError(error);
         }
         return throwError(error);

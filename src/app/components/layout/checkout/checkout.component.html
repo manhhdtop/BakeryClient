@@ -1,50 +1,93 @@
 <div class="container py-3">
+  <div class="d-flex flex-column mt-3 mb-5 px-5 py-3 border shadow text-center" *ngIf="orderSuccess">
+    <i class="fas fa-check-circle text-info fs-1"></i>
+    <span class="text-info mt-2">{{'checkout.order_success' | translate}}</span>
+    <span class="mt-3">{{'checkout.order_success_content' | translate}}</span>
+    <a class="mt-2" routerLink="{{'menu.home.href' | translate}}">
+      <i class="fa fa-arrow-left"></i> {{'back_home' | translate}}
+    </a>
+  </div>
   <div class="row">
-    <div class="col-12">
+    <div class="col-12 bg-white shadow py-3">
       <h3>{{'logo_text' | translate}}</h3>
     </div>
-    <form [formGroup]="formGroup">
+    <form [formGroup]="formGroup" class="shadow py-5 px-3">
       <div class="row">
         <div class="col-12 col-md-6">
           <div class="form-group">
-            <label>Họ tên</label>
-            <input class="form-control" formControlName="name" placeholder="Họ tên...">
+            <label>{{'checkout.customer_name' | translate}}</label>
+            <input class="form-control" formControlName="customerName"
+                   placeholder="{{'checkout.customer_name_placeholder' | translate}}" [readonly]="orderSuccess">
+            <small class="form-text text-danger text-left"
+                   *ngIf="submitted && formGroup.controls.customerName.errors?.required">
+              {{'checkout.customer_name_required' | translate}}
+            </small>
           </div>
           <div class="row mt-2 gx-3">
             <div class="col-12 col-md-7">
               <div class="form-group">
-                <label>Email</label>
-                <input class="form-control" formControlName="email" placeholder="Email...">
+                <label>{{'checkout.customer_email' | translate}}</label>
+                <input class="form-control" formControlName="customerEmail" [readonly]="orderSuccess"
+                       placeholder="{{'checkout.customer_email_placeholder' | translate}}">
+                <small class="form-text text-danger text-left"
+                       *ngIf="submitted && formGroup.controls.customerEmail.errors?.required">
+                  {{'checkout.customer_email_required' | translate}}
+                </small>
+                <small class="form-text text-danger text-left"
+                       *ngIf="submitted && formGroup.controls.customerEmail.errors?.pattern">
+                  {{'checkout.customer_email_error' | translate}}
+                </small>
               </div>
             </div>
             <div class="col-12 col-md-5 mt-2 mt-md-0">
               <div class="form-group">
-                <label>Số điện thoại</label>
-                <input class="form-control" formControlName="phoneNumber" placeholder="Số điện thoại...">
+                <label>{{'checkout.customer_phone' | translate}}</label>
+                <input class="form-control" formControlName="customerPhone" [readonly]="orderSuccess"
+                       placeholder="{{'checkout.customer_phone_placeholder' | translate}}">
+                <small class="form-text text-danger text-left"
+                       *ngIf="submitted && formGroup.controls.customerPhone.errors?.required">
+                  {{'checkout.customer_phone_required' | translate}}
+                </small>
               </div>
             </div>
           </div>
           <div class="row mt-2 gx-3">
             <div class="col-12 col-md-6">
               <div class="form-group">
-                <label>Tỉnh/Thành phố</label>
-                <select class="form-select" formControlName="province">
-                  <option value="-1" selected>Chọn</option>
+                <label>{{'checkout.province' | translate}}</label>
+                <select class="form-select" formControlName="provinceId" [attr.disabled]="orderSuccess ? '' : null"
+                        (change)="provinceSelectedChange($event)">
+                  <option value="">{{'choose' | translate}}</option>
+                  <option *ngFor="let p of provinces" [value]="p.id">{{p.name}}</option>
                 </select>
+                <small class="form-text text-danger text-left"
+                       *ngIf="submitted && formGroup.controls.provinceId.errors?.required">
+                  {{'checkout.province_required' | translate}}
+                </small>
               </div>
             </div>
             <div class="col-12 col-md-6 mt-2 mt-md-0">
               <div class="form-group">
-                <label>Quận/Huyện</label>
-                <select class="form-select" formControlName="district">
-                  <option value="-1" selected>Chọn</option>
+                <label>{{'checkout.district' | translate}}</label>
+                <select class="form-select" formControlName="districtId" [attr.disabled]="orderSuccess ? '' : null">
+                  <option value="">{{'choose' | translate}}</option>
+                  <option *ngFor="let d of districts" [value]="d.id">{{d.name}}</option>
                 </select>
+                <small class="form-text text-danger text-left"
+                       *ngIf="submitted && formGroup.controls.districtId.errors?.required">
+                  {{'checkout.district_required' | translate}}
+                </small>
               </div>
             </div>
           </div>
           <div class="form-group mt-2">
-            <label>Địa chỉ</label>
-            <input class="form-control" formControlName="address" placeholder="Địa chỉ...">
+            <label>{{'checkout.address' | translate}}</label>
+            <input class="form-control" formControlName="address" [readonly]="orderSuccess"
+                   placeholder="{{'checkout.address_placeholder' | translate}}">
+            <small class="form-text text-danger text-left"
+                   *ngIf="submitted && formGroup.controls.address.errors?.required">
+              {{'checkout.address_required' | translate}}
+            </small>
           </div>
         </div>
         <div class="col-12 col-md-6">
@@ -58,29 +101,50 @@
               <h5><a routerLink="/product/{{item.product.slug}}">{{item.product.name}}</a></h5>
               <span class="quantity">{{'cart.quantity_less' | translate}}: {{item.quantity}}</span>
               <br/>
-              <span class="shp__price" *ngIf="item.quantity && item.quantity > 1">
+              <span class="shp__price">
                 {{'cart.price' | translate}}: {{item.price | numberFormat}} {{'vnd' | translate}}
               </span>
             </div>
           </div>
           <hr>
-          <div class="row row-cols-lg-auto g-3">
-            <div class="col-12">
-              <input type="text" class="form-control" placeholder="Coupon code"/>
-            </div>
-            <div class="col-12">
-              <button class="btn btn-outline-primary">Apply Coupon</button>
-            </div>
+          <div class="d-flex justify-content-between">
+            <span>{{'checkout.total_amount' | translate}}</span>
+            <span>{{totalAmount | numberFormat}}{{'vnd' | translate}}</span>
           </div>
           <hr>
-          <div class="d-flex justify-content-between" *ngIf="coupon">
-            <span>Coupon</span>
-            <span>{{coupon | numberFormat}} {{'vnd' | translate}}</span>
+          <span>{{'checkout.coupon' | translate}}</span>
+          <div class="row row-cols-lg-auto g-3 mt-2">
+            <div class="col-12">
+              <input type="text" formControlName="voucherCode" class="form-control" [readonly]="orderSuccess"
+                     placeholder="{{'checkout.coupon_code_placeholder' | translate}}"/>
+              <span class="form-text text-danger" *ngIf="voucherCodeError">
+                {{voucherCodeError | translate}}
+              </span>
+            </div>
+            <div class="col-12">
+              <button type="button" class="btn btn-outline-primary" (click)="applyVoucher()"
+                      [attr.disabled]="orderSuccess ? '' : null">
+                {{'checkout.apply_coupon' | translate}}
+              </button>
+              <button type="button" class="btn btn-outline-danger ml-2" (click)="removeVoucher()"
+                      [attr.disabled]="orderSuccess ? '' : null"
+                      *ngIf="voucher">
+                {{'checkout.remove_coupon' | translate}}
+              </button>
+            </div>
+          </div>
+          <div class="d-flex justify-content-between mt-2" *ngIf="voucher">
+            <span *ngIf="voucher.type === 1">{{voucher.value | numberFormat}}{{'vnd' | translate}}</span>
+            <span *ngIf="voucher.type === 2">{{voucher.value | numberFormat}}%</span>
           </div>
           <hr>
           <div class="d-flex justify-content-between">
-            <span>Tổng tiền</span>
-            <span>{{totalAmount - coupon | numberFormat}} {{'vnd' | translate}}</span>
+            <span>{{'checkout.total_pay' | translate}}</span>
+            <span *ngIf="!voucher">{{totalAmount | numberFormat}}{{'vnd' | translate}}</span>
+            <span
+              *ngIf="voucher && voucher.type === 1">{{(totalAmount - voucher.value) | numberFormat}}{{'vnd' | translate}}</span>
+            <span
+              *ngIf="voucher && voucher.type === 2">{{(totalAmount - voucher.value * 0.1 * totalAmount) | numberFormat}}{{'vnd' | translate}}</span>
           </div>
         </div>
       </div>
@@ -94,8 +158,9 @@
               </a>
             </div>
             <div class="col-12 col-md-6 order-first order-md-last mb-2 mb-md-0">
-              <button type="button" class="btn btn-outline-primary w-100 float-md-end" (click)="submit()">
-                Đặt hàng
+              <button type="button" class="btn btn-outline-primary w-100 float-md-end" (click)="submit()"
+                      [attr.disabled]="orderSuccess ? '' : null">
+                {{'checkout.order' | translate}}
               </button>
             </div>
           </div>

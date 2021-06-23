@@ -48,14 +48,21 @@
               <td>{{i + 1}}</td>
               <td>{{v.code}}</td>
               <td>{{v.name}}</td>
-              <td>{{v.value}} {{v.type == 1 ? 'vnd' : '%' | translate}}</td>
-              <td>{{v.startDate | dateFormat: dateDdmmyy}}</td>
-              <td>{{v.endDate | dateFormat: dateDdmmyy}}</td>
+              <td>{{v.value | numberFormat}}{{(v.type == 1 ? 'vnd' : '%') | translate}}</td>
+              <td>{{v.startDate | dateFormat: dateDdmmyyHhmmss}}</td>
+              <td>{{v.endDate | dateFormat: dateDdmmyyHhmmss}}</td>
               <td>{{getStatusName(v.status) | translate}}</td>
               <td class="min">
                 <a role="button" class="mr-2" (click)="delete(deleteVoucher, v)"><i class="fa fa-trash-alt"></i></a>
-                <a role="button" class="mr-2" (click)="openModal(voucher, v)"><i
-                  class="fa fa-edit"></i></a>
+                <a role="button" class="mr-2" (click)="openModal(voucher, v)" *ngIf="v.status === 0">
+                  <i class="fa fa-edit"></i>
+                </a>
+                <a role="button" class="mr-2" (click)="updateStatus(v)" *ngIf="v.status === 0 || v.status === -1">
+                  <i class="fa fa-toggle-on"></i>
+                </a>
+                <a role="button" class="mr-2" (click)="updateStatus(v)" *ngIf="v.status === 1">
+                  <i class="fa fa-toggle-off"></i>
+                </a>
               </td>
             </tr>
           </tbody>
@@ -97,11 +104,11 @@
             <div class="form-group">
               <label>{{'voucher.code' | translate}}</label>
               <input type="text" class="form-control" placeholder="{{'voucher.code_placeholder' | translate}}"
-                     formControlName="code">
+                     formControlName="code" [readonly]="selectedVoucher != undefined">
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.code.invalid">
                 {{'voucher.code_not_blank' | translate}}
               </small>
-              <div>
+              <div *ngIf="!selectedVoucher">
                 <button type="button" class="btn btn-outline-info mt-2" (click)="generateCode()">
                   {{'voucher.btn_generate_code' | translate}}
                 </button>
@@ -112,7 +119,7 @@
             <div class="form-group">
               <label>{{'voucher.value' | translate}}</label>
               <div class="input-group">
-                <input type="number" class="form-control" placeholder="{{'voucher.value_placeholder' | translate}}"
+                <input numberFormatInput class="form-control" placeholder="{{'voucher.value_placeholder' | translate}}"
                        formControlName="value">
                 <div class="input-group-append" *ngIf="formUpdate.controls.type.value">
                   <span class="align-middle pl-2" *ngIf="formUpdate.controls.type.value === '1'">
@@ -145,11 +152,9 @@
           <div class="col-12 col-md-6 mt-2">
             <div class="form-group">
               <label>{{'voucher.min_amount' | translate}}</label>
-              <input type="number" class="form-control" placeholder="{{'voucher.min_amount_placeholder' | translate}}"
+              <input numberFormatInput class="form-control"
+                     placeholder="{{'voucher.min_amount_placeholder' | translate}}"
                      formControlName="minAmount">
-              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.minAmount.errors?.required">
-                {{'voucher.min_amount_not_null' | translate}}
-              </small>
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.minAmount.errors?.min">
                 {{'voucher.min_amount_greater_than_0' | translate}}
               </small>
@@ -158,46 +163,95 @@
           <div class="col-12 col-md-6 mt-2">
             <div class="form-group">
               <label>{{'voucher.max_amount' | translate}}</label>
-              <input type="number" class="form-control" placeholder="{{'voucher.max_amount_placeholder' | translate}}"
+              <input numberFormatInput class="form-control"
+                     placeholder="{{'voucher.max_amount_placeholder' | translate}}"
                      formControlName="maxAmount">
-              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.maxAmount.errors?.required">
-                {{'voucher.max_amount_not_null' | translate}}
-              </small>
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.maxAmount.errors?.min">
                 {{'voucher.max_amount_greater_than_0' | translate}}
               </small>
               <small class="form-text text-danger"
-                     *ngIf="submitted && formUpdate.controls.maxAmount.errors?.maxAmountMustGreaterThanMinAmount">
-                {{'voucher.max_amount_must_greater_than_min_amount' | translate}}
+                     *ngIf="submitted && formUpdate.controls.maxAmount.errors?.maxAmountNotLessThanMinAmount">
+                {{'voucher.max_amount_not_less_than_min_amount' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 mt-2" *ngIf="formUpdate.controls.type.value === 2">
+            <div class="form-group">
+              <label>{{'voucher.min_refund' | translate}}</label>
+              <input numberFormatInput class="form-control"
+                     placeholder="{{'voucher.min_refund_placeholder' | translate}}"
+                     formControlName="minRefund">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.minRefund.errors?.min">
+                {{'voucher.min_refund_greater_than_0' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-12 col-md-6 mt-2" *ngIf="formUpdate.controls.type.value === 2">
+            <div class="form-group">
+              <label>{{'voucher.max_refund' | translate}}</label>
+              <input numberFormatInput class="form-control"
+                     placeholder="{{'voucher.max_refund_placeholder' | translate}}"
+                     formControlName="maxRefund">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.maxRefund.errors?.min">
+                {{'voucher.max_refund_greater_than_0' | translate}}
+              </small>
+              <small class="form-text text-danger"
+                     *ngIf="submitted && formUpdate.controls.maxRefund.errors?.maxRefundNotLessThanMinRefund">
+                {{'voucher.max_refund_not_less_than_min_refund' | translate}}
               </small>
             </div>
           </div>
           <div class="col-12 mt-2">
             <label>{{'voucher.start_date' | translate}}</label>
             <div class="form-group">
-              <app-datetime-picker class="form-control" formControlName="startDate"
-                                   [seconds]="false">
+              <app-datetime-picker
+                formControlName="startDate"
+                [seconds]="false">
               </app-datetime-picker>
             </div>
+            <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.startDate.invalid">
+              {{'voucher.start_date_not_blank' | translate}}
+            </small>
           </div>
           <div class="col-12 mt-2">
             <label>{{'voucher.end_date' | translate}}</label>
             <div class="form-group">
-              <app-datetime-picker class="form-control" formControlName="startDate"
-                                   [seconds]="false">
+              <app-datetime-picker
+                formControlName="endDate"
+                [seconds]="false">
               </app-datetime-picker>
             </div>
+            <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.endDate.errors?.required">
+              {{'voucher.end_date_not_blank' | translate}}
+            </small>
+            <small class="form-text text-danger"
+                   *ngIf="submitted && formUpdate.controls.endDate.errors?.startDateNotAfterEndDate">
+              {{'voucher.end_date_must_after_start_date' | translate}}
+            </small>
           </div>
           <div class="col-md-6 col-sm-12 mt-2">
             <label class="d-block">{{'voucher.type' | translate}}</label>
             <div class="form-check form-check-inline" *ngFor="let t of types">
-              <input class="form-check-input" type="radio" value="{{t.value}}" id="type_{{t.value}}"
+              <input class="form-check-input" type="radio" [value]="t.value" id="type_{{t.value}}"
                      name="type" formControlName="type" (click)="changeType(t.value)">
               <label class="form-check-label" for="type_{{t.value}}">{{t.name | translate}}</label>
             </div>
             <small class="d-block form-text text-danger" *ngIf="submitted && formUpdate.controls.type.invalid">
               {{'voucher.type_not_null' | translate}}
             </small>
+          </div>
+          <div class="col-md-6 col-sm-12">
+            <div class="form-group">
+              <label>{{'voucher.quantity' | translate}}</label>
+              <input type="number" class="form-control" placeholder="{{'voucher.quantity_placeholder' | translate}}"
+                     formControlName="quantity">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.quantity.errors?.required">
+                {{'voucher.quantity_not_null' | translate}}
+              </small>
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.quantity.errors?.min">
+                {{'voucher.quantity_greater_than_0' | translate}}
+              </small>
+            </div>
           </div>
         </div>
       </form>
@@ -233,3 +287,7 @@
     </div>
   </ng-template>
 </div>
+<app-confirm
+  [title]="updateStatusTitle"
+  [content]="updateStatusContent"
+></app-confirm>

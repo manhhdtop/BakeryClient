@@ -38,7 +38,7 @@ export class NumberInputDirective implements OnInit, ControlValueAccessor, OnDes
     this._value = value;
   }
 
-  @HostListener('document:keypress', ['$event'])
+  @HostListener('keypress', ['$event'])
   keypress(event): boolean {
     const k = event.charCode;
     return (k === 46 || (k >= 48 && k <= 57));

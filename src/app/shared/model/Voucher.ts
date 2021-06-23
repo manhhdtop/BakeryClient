@@ -6,6 +6,8 @@ export interface Voucher {
   value: number;
   minAmount: number;
   maxAmount: number;
+  minRefund: number;
+  maxRefund: number;
   type: number;
   quantity: number;
   startDate: Date;

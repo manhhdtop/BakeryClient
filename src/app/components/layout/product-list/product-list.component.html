@@ -50,7 +50,7 @@
                   <img src="{{baseUrl + p.images[0].uri}}" alt="{{p.description}}">
                 </div>
                 <a class="item-name" [ngbTooltip]="p.name"
-                   routerLink="/{{'menu.product.href' | translate}}/{{p.slug}}">{{p.name}}</a>
+                   routerLink="{{'menu.product.href' | translate}}/{{p.slug}}">{{p.name}}</a>
                 <p class="item-price">{{p.price | numberFormat}} {{'vnd' | translate}}</p>
                 <button class="btn btn-outline-primary" (click)="showAddToCartModal(p)">
                   <span class="d-sm-inline d-md-none d-lg-inline">{{'cart.btn_add_to_cart' | translate}} </span>
@@ -64,3 +64,6 @@
     </div>
   </div>
 </div>
+<app-add-to-card #addToCardModal
+                 [product]="currentProduct">
+</app-add-to-card>

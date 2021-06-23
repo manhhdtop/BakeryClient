@@ -3,6 +3,8 @@
   "choose": "Chọn",
   "address": "Ngô Xuân Quảng, Trâu Quỳ, Gia Lâm, Hà Nội",
   "vnd": "₫",
+  "api_error": "Có lỗi xảy ra",
+  "back_home": "Quay lại trang chủ",
   "language": {
     "vn": {
       "code": "vn",
@@ -43,6 +45,7 @@
     "product": "Sản phẩm",
     "price": "Giá",
     "total_price": "Tổng",
+    "continue_shopping": "Tiếp tục mua sắm",
     "shipping": "Phí vận chuyển",
     "quantity": "Số lượng",
     "quantity_less": "SL",
@@ -77,43 +80,43 @@
       "name": "Access denied"
     },
     "cart": {
-      "href": "gio-hang",
+      "href": "/gio-hang",
       "title": "Giỏ hàng",
       "name": "Giỏ hàng"
     },
     "checkout": {
-      "href": "thanh-toan",
+      "href": "/thanh-toan",
       "title": "Thanh toán đơn hàng",
       "name": "Thanh toán"
     },
     "about": {
-      "href": "gioi-thieu",
+      "href": "/gioi-thieu",
       "title": "Giới thiệu",
       "name": "Giới thiệu"
     },
     "product": {
-      "href": "san-pham",
+      "href": "/san-pham",
       "title": "Sản phẩm",
       "name": "Sản phẩm"
     },
     "category": {
-      "href": "danh-muc",
+      "href": "/danh-muc",
       "title": "Danh mục sản phẩm",
       "name": "Danh mục"
     },
     "new": {
-      "href": "tin-tuc",
+      "href": "/tin-tuc",
       "title": "Tin tức",
       "name": "Tin tức"
     },
     "contact": {
-      "href": "lien-he",
+      "href": "/lien-he",
       "title": "Liên hệ",
       "name": "Liên hệ"
     },
     "admin": {
       "login": {
-        "href": "login",
+        "href": "/login",
         "title": "Đăng nhập để vào trang quản trị",
         "name": "Đăng nhập"
       },
@@ -128,42 +131,42 @@
         "name": "Dashboard"
       },
       "category": {
-        "href": "danh-muc",
+        "href": "/danh-muc",
         "title": "Quản lý danh mục",
         "name": "Danh mục"
       },
       "product": {
-        "href": "san-pham",
+        "href": "/san-pham",
         "title": "Quản lý sản phẩm",
         "name": "Sản phẩm"
       },
       "option_type": {
-        "href": "option-type",
+        "href": "/option-type",
         "title": "Quản lý Option Type",
         "name": "Option Type"
       },
       "voucher": {
-        "href": "voucher",
+        "href": "/voucher",
         "title": "Quản lý Voucher",
         "name": "Voucher"
       },
       "user_role": {
-        "href": "tai-khoan",
+        "href": "/tai-khoan",
         "title": "Phân quyền và Người dùng",
         "name": "Phân quyền và Người dùng"
       },
       "user": {
-        "href": "tai-khoan",
+        "href": "/tai-khoan",
         "title": "Quản lý Tài khoản",
         "name": "Tài khoản"
       },
       "role": {
-        "href": "phan-quyen",
+        "href": "/phan-quyen",
         "title": "Quản lý Phân quyền",
         "name": "Phân quyền"
       },
       "action": {
-        "href": "action",
+        "href": "/action",
         "title": "Quản lý Action",
         "name": "Action"
       }
@@ -382,21 +385,38 @@
     "value_not_null": "Giá trị không được để trống",
     "value_greater_than_0": "Giá trị phải lớn hơn 0",
     "value_less_than_100": "Giá trị phải nhỏ hơn 100",
-    "min_amount": "Số tiền nhỏ nhất",
-    "min_amount_placeholder": "Số tiền nhỏ nhất...",
-    "min_amount_not_null": "Số tiền nhỏ nhất không được để trống",
-    "min_amount_greater_than_0": "Số tiền nhỏ nhất phải lớn hơn 0",
-    "max_amount": "Số tiền lớn nhất",
-    "max_amount_placeholder": "Số tiền lớn nhất...",
-    "max_amount_not_null": "Số tiền lớn nhất không được để trống",
-    "max_amount_greater_than_0": "Số tiền lớn nhất phải lớn hơn 0",
-    "max_amount_must_greater_than_min_amount": "Số tiền lớn nhất phải lớn hơn Số tiền nhỏ nhất",
+    "min_amount": "Số tiền tối thiểu",
+    "min_amount_placeholder": "Số tiền tối thiểu...",
+    "min_amount_greater_than_0": "Số tiền tối thiểu phải lớn hơn 0",
+    "max_amount": "Số tiền tối đa",
+    "max_amount_placeholder": "Số tiền tối đa...",
+    "max_amount_greater_than_0": "Số tiền tối đa phải lớn hơn 0",
+    "max_amount_not_less_than_min_amount": "Số tiền tối đa không được nhỏ hơn Số tiền tối thiểu",
+    "min_refund": "Số tiền giảm tối thiểu",
+    "min_refund_placeholder": "Số tiền giảm tối thiểu...",
+    "min_refund_greater_than_0": "Số tiền giảm tối thiểu phải lớn hơn 0",
+    "max_refund": "Số tiền giảm tối đa",
+    "max_refund_placeholder": "Số tiền giảm tối đa...",
+    "max_refund_greater_than_0": "Số tiền giảm tối đa phải lớn hơn 0",
+    "max_refund_not_less_than_min_refund": "Số tiền giảm tối đa không được nhỏ hơn Số tiền giảm tối thiểu",
     "start_date": "Ngày bắt đầu",
+    "start_date_not_blank": "Ngày bắt đầu không được để trống",
     "end_date": "Ngày kết thúc",
+    "end_date_not_blank": "Ngày kết thúc không được để trống",
+    "end_date_must_after_start_date": "Ngày kết thúc phải sau Ngày bắt đầu",
     "status": "Trạng thái",
     "status_error": "Trạng thái bắt buộc chọn",
+    "status_invalid": "Trạng thái không hợp lệ",
+    "update_status_title": "Chuyển trạng thái Voucher",
+    "update_status_deactive": "Bạn có muốn chuyển trạng thái Chưa kích hoạt sang Hoạt động không?",
+    "update_status_active": "Bạn có muốn chuyển trạng thái Hoạt động sang Khóa không?",
+    "update_status_lock": "Bạn có muốn chuyển trạng thái Khóa sang Hoạt động không?",
     "type": "Loại Voucher",
     "type_not_null": "Loại Voucher không được để trống",
+    "quantity": "Số lượng",
+    "quantity_placeholder": "Số lượng...",
+    "quantity_not_null": "Số lượng không được để trống",
+    "quantity_greater_than_0": "Số lượng phải lớn hơn 0",
     "btn_generate_code": "Tạo mã",
     "modal": {
       "title_add": "Thêm mới Voucher",
@@ -406,6 +426,39 @@
       "btn_cancel": "Hủy",
       "btn_submit": "Lưu",
       "btn_delete": "Xóa"
+    }
+  },
+  "checkout": {
+    "customer_name": "Họ tên",
+    "customer_name_placeholder": "Họ tên...",
+    "customer_name_required": "Họ tên không được để trống",
+    "customer_email": "Email",
+    "customer_email_placeholder": "Email...",
+    "customer_email_required": "Email không được để trống",
+    "customer_email_error": "Email không hợp lệ",
+    "customer_phone": "Số điện thoại",
+    "customer_phone_placeholder": "Số điện thoại...",
+    "customer_phone_required": "Số điện thoại không được để trống",
+    "province": "Tỉnh/Thành phố",
+    "province_required": "Tỉnh/Thành phố không được để trống",
+    "district": "Quận/Huyện",
+    "district_required": "Quận/Huyện không được để trống",
+    "address": "Địa chỉ",
+    "address_placeholder": "Địa chỉ...",
+    "address_required": "Địa chỉ không được để trống",
+    "total_amount": "Tổng tiền",
+    "coupon": "Coupon",
+    "coupon_code_placeholder": "Mã Coupon...",
+    "apply_coupon": "Sử dụng Coupon",
+    "remove_coupon": "Xóa Coupon",
+    "total_pay": "Tổng thanh toán",
+    "order": "Đặt hàng",
+    "order_success": "Đặt hàng thành công",
+    "order_success_content": "Cảm ơn bạn đã đặt hàng, vui lòng kiểm tra email, Shop sẽ liên lạc để xác nhận đơn hàng.",
+    "voucher_code": {
+      "not_blank": "Bạn chưa nhập mã coupon",
+      "not_exist": "Coupon không đủ tồn tại hoặc đã hết",
+      "not_enough_condition": "Đơn hàng không đủ điều kiện đơn hàng"
     }
   }
 }

@@ -1,4 +1,4 @@
-import { Component, forwardRef, Input, OnInit } from '@angular/core';
+import { Component, forwardRef, HostListener, Input, OnInit } from '@angular/core';
 import { NgbDateParserFormatter, NgbDateStruct, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { DateParserFormatter } from 'src/app/shared/component/DateParserFormatter';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -30,8 +30,8 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
   @Input()
   seconds = true;
 
-  date: NgbDateStruct;
-  time: NgbTimeStruct;
+  @Input() date: NgbDateStruct;
+  @Input() time: NgbTimeStruct;
   dateString: string;
   timeString: string;
 
@@ -39,6 +39,21 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
   }
 
   ngOnInit(): void {
+  }
+
+  get value(): string {
+    return this.dateTimeString;
+  }
+
+  @Input('value')
+  set value(value: string) {
+    this.dateTimeString = value;
+  }
+
+  @HostListener('input', ['$event.target.value', '$event.target.value'])
+  input(event, value): void {
+    this.dateTimeString = value;
+    this.onChange(this.dateTimeString);
   }
 
   onChange(value: any): void {
@@ -53,23 +68,25 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
 
   writeValue(value: any): void {
     if (value) {
-      const datetime = value.split(' ');
-      this.date = datetime[0];
-      this.time = datetime[1];
-    } else {
-      const now = new Date();
+      const datetime = value.trim().split(' ');
+      const date = datetime[0].split('/');
+      const time = datetime[1].split(':');
       this.date = {
-        day: now.getDate(),
-        month: now.getMonth() + 1,
-        year: now.getFullYear(),
+        day: date[0],
+        month: date[1],
+        year: date[2],
+      };
+      this.time = {
+        hour: time[0],
+        minute: time[1],
+        second: this.seconds ? time[2] : 0,
       };
       this.getDateString();
-      this.time = {
-        hour: now.getHours(),
-        minute: now.getMinutes(),
-        second: this.seconds ? now.getSeconds() : 0,
-      };
       this.getTimeString();
+    } else {
+      this.dateString = '';
+      this.timeString = '';
+      this.dateTimeString = '';
     }
   }
 
@@ -105,6 +122,9 @@ export class DatetimePickerComponent implements OnInit, ControlValueAccessor {
   }
 
   private pad(value): string {
+    if (!value) {
+      return '';
+    }
     return value.toString().padStart(2, '0');
   }
 }
