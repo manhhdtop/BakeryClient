@@ -131,42 +131,42 @@
         "name": "Dashboard"
       },
       "category": {
-        "href": "/danh-muc",
+        "href": "/admin/danh-muc",
         "title": "Quản lý danh mục",
         "name": "Danh mục"
       },
       "product": {
-        "href": "/san-pham",
+        "href": "/admin/san-pham",
         "title": "Quản lý sản phẩm",
         "name": "Sản phẩm"
       },
       "option_type": {
-        "href": "/option-type",
+        "href": "/admin/option-type",
         "title": "Quản lý Option Type",
         "name": "Option Type"
       },
       "voucher": {
-        "href": "/voucher",
+        "href": "/admin/voucher",
         "title": "Quản lý Voucher",
         "name": "Voucher"
       },
       "user_role": {
-        "href": "/tai-khoan",
+        "href": "/admin/tai-khoan",
         "title": "Phân quyền và Người dùng",
         "name": "Phân quyền và Người dùng"
       },
       "user": {
-        "href": "/tai-khoan",
+        "href": "/admin/tai-khoan",
         "title": "Quản lý Tài khoản",
         "name": "Tài khoản"
       },
       "role": {
-        "href": "/phan-quyen",
+        "href": "/admin/phan-quyen",
         "title": "Quản lý Phân quyền",
         "name": "Phân quyền"
       },
       "action": {
-        "href": "/action",
+        "href": "/admin/action",
         "title": "Quản lý Action",
         "name": "Action"
       }

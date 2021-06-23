@@ -40,7 +40,6 @@ export class AddToCardComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.baseUrl = this.configService.getConfig().api.baseUrl;
-    this.quantity = 1;
     this.translate.get('add_to_cart.quantity_error').subscribe(e => {
       this.quantityError = e;
       this.optionError = this.translate.instant('add_to_cart.option_error');
@@ -53,6 +52,7 @@ export class AddToCardComponent implements OnInit, OnChanges {
     this.optionTypes = this.product?.optionTypes;
     this.options.length = 0;
     this.price = this.product?.price;
+    this.quantity = 1;
 
     while (this.options.length > 0) {
       this.options.pop();

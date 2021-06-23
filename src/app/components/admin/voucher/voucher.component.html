@@ -122,10 +122,10 @@
                 <input numberFormatInput class="form-control" placeholder="{{'voucher.value_placeholder' | translate}}"
                        formControlName="value">
                 <div class="input-group-append" *ngIf="formUpdate.controls.type.value">
-                  <span class="align-middle pl-2" *ngIf="formUpdate.controls.type.value === '1'">
+                  <span class="align-middle pl-2" *ngIf="formUpdate.controls.type.value === 1">
                     {{'vnd' | translate}}
                   </span>
-                  <span class="align-middle pl-2" *ngIf="formUpdate.controls.type.value === '2'">%</span>
+                  <span class="align-middle pl-2" *ngIf="formUpdate.controls.type.value === 2">%</span>
                 </div>
               </div>
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.value.errors?.required">

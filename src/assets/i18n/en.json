@@ -116,42 +116,42 @@
         "name": "Login"
       },
       "category": {
-        "href": "/category",
+        "href": "/admin/category",
         "title": "Category Management",
         "name": "Category"
       },
       "product": {
-        "href": "/product",
+        "href": "/admin/product",
         "title": "Product Management",
         "name": "Product"
       },
       "option_type": {
-        "href": "/option-type",
+        "href": "/admin/option-type",
         "title": "Option Type Management",
         "name": "Option Type"
       },
       "voucher": {
-        "href": "/voucher",
+        "href": "/admin/voucher",
         "title": "Voucher Management",
         "name": "Voucher"
       },
       "user_role": {
-        "href": "/user",
+        "href": "/admin/user",
         "title": "User & Role",
         "name": "User & Role"
       },
       "user": {
-        "href": "/user",
+        "href": "/admin/user",
         "title": "User Management",
         "name": "User"
       },
       "role": {
-        "href": "/role",
+        "href": "/admin/role",
         "title": "Role Management",
         "name": "Role"
       },
       "action": {
-        "href": "/action",
+        "href": "/admin/action",
         "title": "Action Management",
         "name": "Action"
       }
