@@ -74,9 +74,6 @@ export class UserComponent implements OnInit {
           } else {
             this.toast.showDanger(res.errorDescription);
           }
-        }, error => {
-          console.log('error: ', error);
-          this.toast.showDanger(error.error.message);
         });
       }
     }, () => {
@@ -97,9 +94,6 @@ export class UserComponent implements OnInit {
         } else {
           this.toast.showDanger(res.errorDescription);
         }
-      }, error => {
-        console.log('error: ', error);
-        this.toast.showDanger(error.error.message);
       });
       return;
     }
@@ -112,9 +106,6 @@ export class UserComponent implements OnInit {
       } else {
         this.toast.showDanger(res.errorDescription);
       }
-    }, error => {
-      console.log('error: ', error);
-      this.toast.showDanger(error.error.message);
     });
   }
 
@@ -148,8 +139,6 @@ export class UserComponent implements OnInit {
   private getRoles(): void {
     this.roleService.getActiveRoles().subscribe(res => {
       this.roles = res.data;
-    }, error => {
-      this.toast.showDanger(error.error.message);
     });
   }
 
@@ -160,8 +149,6 @@ export class UserComponent implements OnInit {
       this.size = res.data.pageable.pageSize;
       this.totalItem = res.data.totalElements;
       this.currentItems = res.data.numberOfElements;
-    }, error => {
-      this.toast.showDanger(error.error.message);
     });
   }
 

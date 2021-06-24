@@ -35,10 +35,6 @@ export class CategoryComponent implements OnInit {
       slug = '/' + arr[arr.length - 1].toLowerCase();
       this.categoryService.getCategoryBySlug(slug).subscribe(res => {
         this.category = res.data;
-      }, error => {
-        this.translateService.get('menu.category.href').subscribe(e => {
-          this.router.navigate([e]);
-        });
       });
     } else {
       this.category = undefined;

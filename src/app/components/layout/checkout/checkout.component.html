@@ -112,8 +112,7 @@
             <span>{{totalAmount | numberFormat}}{{'vnd' | translate}}</span>
           </div>
           <hr>
-          <span>{{'checkout.coupon' | translate}}</span>
-          <div class="row row-cols-lg-auto g-3 mt-2">
+          <div class="row row-cols-lg-auto g-3">
             <div class="col-12">
               <input type="text" formControlName="voucherCode" class="form-control" [readonly]="orderSuccess"
                      placeholder="{{'checkout.coupon_code_placeholder' | translate}}"/>
@@ -134,6 +133,7 @@
             </div>
           </div>
           <div class="d-flex justify-content-between mt-2" *ngIf="voucher">
+            <span>{{'checkout.coupon' | translate}}</span>
             <span *ngIf="voucher.type === 1">{{voucher.value | numberFormat}}{{'vnd' | translate}}</span>
             <span *ngIf="voucher.type === 2">{{voucher.value | numberFormat}}%</span>
           </div>

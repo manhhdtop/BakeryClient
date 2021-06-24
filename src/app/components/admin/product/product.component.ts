@@ -103,9 +103,6 @@ export class ProductComponent implements OnInit {
           } else {
             this.toast.showDanger(res.errorDescription);
           }
-        }, error => {
-          console.log('error: ', error);
-          this.toast.showDanger(error.error.message);
         });
       }
     }, () => {
@@ -128,9 +125,6 @@ export class ProductComponent implements OnInit {
         } else {
           this.toast.showDanger(res.errorDescription);
         }
-      }, error => {
-        console.log('error: ', error);
-        this.toast.showDanger(error.error.message);
       });
       return;
     }
@@ -143,9 +137,6 @@ export class ProductComponent implements OnInit {
       } else {
         this.toast.showDanger(res.errorDescription);
       }
-    }, error => {
-      console.log('error: ', error);
-      this.toast.showDanger(error.error.message);
     });
   }
 
@@ -194,14 +185,12 @@ export class ProductComponent implements OnInit {
   private getCategories(): void {
     this.categoryService.getActiveCategories().subscribe(res => {
       this.categories = res.data;
-    }, error => {
     });
   }
 
   private getOptionType(): void {
     this.optionTypeService.getOptionTypes().subscribe(res => {
       this.optionTypes = res.data.content;
-    }, error => {
     });
   }
 
@@ -212,7 +201,6 @@ export class ProductComponent implements OnInit {
       this.size = res.data.pageable.pageSize;
       this.totalItem = res.data.totalElements;
       this.currentItems = res.data.numberOfElements;
-    }, error => {
     });
   }
 
@@ -239,8 +227,6 @@ export class ProductComponent implements OnInit {
     this.uploadService.uploadImages(formData).subscribe(res => {
       this.files = this.files.concat(res);
       this.getListFileName();
-    }, error => {
-      this.toast.showDanger(error.error.message);
     });
   }
 
@@ -257,8 +243,6 @@ export class ProductComponent implements OnInit {
   getSlug(): void {
     this.productService.createSlug(this.formUpdate.controls.name.value).subscribe(res => {
       this.formUpdate.controls.slug.setValue(res.data);
-    }, error => {
-      this.toast.showDanger(error.error.message);
     });
   }
 

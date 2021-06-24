@@ -21,6 +21,15 @@
     "locked": "Khóa",
     "locked_by_admin": "Khóa do Admin"
   },
+  "invoice_status": {
+    "init": "Khởi tạo",
+    "confirmed": "Đã xác nhận",
+    "shipping": "Đang giao hàng",
+    "success": "Thành công",
+    "reject": "Hủy",
+    "shipping_error": "Giao hàng thất bại",
+    "error": "Thất bại"
+  },
   "voucher_type": {
     "amount": "Tiền",
     "percent": "Phần trăm"
@@ -149,6 +158,11 @@
         "href": "/admin/voucher",
         "title": "Quản lý Voucher",
         "name": "Voucher"
+      },
+      "invoice": {
+        "href": "/admin/invoice",
+        "title": "Quản lý Hóa đơn",
+        "name": "Hóa đơn"
       },
       "user_role": {
         "href": "/admin/tai-khoan",
@@ -463,6 +477,33 @@
       "not_blank": "Bạn chưa nhập mã coupon",
       "not_exist": "Coupon không đủ tồn tại hoặc đã hết",
       "not_enough_condition": "Đơn hàng không đủ điều kiện đơn hàng"
+    }
+  },
+  "invoice": {
+    "header": "Quản lý Hóa đơn",
+    "table_name": "Hóa đơn",
+    "table_search": "Tìm kiếm Hóa đơn...",
+    "table_search_hint": "Tìm kiếm theo sđt hoặc Mã đơn hàng",
+    "no": "STT",
+    "invoice_id": "Mã đơn hàng",
+    "customer_name": "Họ tên",
+    "customer_email": "Email",
+    "customer_email_error": "Email không hợp lệ",
+    "customer_phone": "Số điện thoại",
+    "voucher": "Voucher",
+    "total_amount": "Tổng tiền",
+    "created_date": "Ngày đặt",
+    "status": "Trạng thái",
+    "update_status": {
+      "header": "Cập nhật trạng thái đơn hàng",
+      "status_invalid": "Trạng thái không hợp lệ",
+      "status": "Trạng thái",
+      "status_required": "Trạng thái không được để trống",
+      "description": "Chú thích",
+      "description_placeholder": "Chú thích..."
+    },
+    "modal": {
+      "btn_cancel": "Đóng"
     }
   }
 }

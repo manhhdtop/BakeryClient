@@ -1,0 +1,196 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-3 text-gray-800">{{'invoice.header' | translate}}</h1>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="my-2 font-weight-bold text-primary">{{'invoice.table_name' | translate}}</h6>
+    </div>
+    <div class="card-body">
+      <div class="card-header py-3 d-flex justify-content-end">
+        <div class="col-auto px-0 mw-100">
+          <form [formGroup]="formSearch" (submit)="search($event)"
+                class="form-inline ml-md-3 my-2 my-md-0 mw-100">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light small" formControlName="keyword"
+                     placeholder="{{'invoice.table_search' | translate}}"
+                     ngbTooltip="{{'invoice.table_search_hint' | translate}}" placement="bottom">
+              <div class="input-group-append">
+                <button class="btn btn-primary">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>{{'invoice.no' | translate}}</th>
+              <th>{{'invoice.invoice_id' | translate}}</th>
+              <th>{{'invoice.customer_name' | translate}}</th>
+              <th>{{'invoice.customer_phone' | translate}}</th>
+              <th>{{'invoice.voucher' | translate}}</th>
+              <th>{{'invoice.total_amount' | translate}}</th>
+              <th>{{'invoice.created_date' | translate}}</th>
+              <th>{{'invoice.status' | translate}}</th>
+              <th class="min"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let invoice of invoices, let i = index">
+              <td>{{i + 1}}</td>
+              <td>{{invoice.invoiceId}}</td>
+              <td>{{invoice.customerName}}</td>
+              <td>{{invoice.customerPhone}}</td>
+              <td>{{invoice.voucher?.name}}</td>
+              <td>{{invoice.totalAmount | numberFormat}}</td>
+              <td>{{invoice.createdDate | dateFormat: dateDdmmyyHhmmss}}</td>
+              <td>{{getStatusName(invoice.status) | translate}}</td>
+              <td class="min">
+                <a role="button" class="mr-2" (click)="view(viewInvoice, invoice)"><i class="fa fa-eye"></i></a>
+                <a role="button" class="mr-2" (click)="updateStatus(invoice)">
+                  <i class="fa fa-toggle-on"></i>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-md-between mt-3" *ngIf="totalItem >= currentItems">
+        <div>
+          Showing {{(page - 1) * size + 1}} - {{(page - 1) * size + currentItems}} of {{totalItem}} items
+        </div>
+        <div>
+          <ngb-pagination
+            [(page)]="page"
+            [pageSize]="size"
+            [maxSize]="5"
+            [collectionSize]="totalItem"
+            [ellipses]="true"
+            (pageChange)="onPageChange()"
+          >
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #viewInvoice let-modal class="modal-lg">
+    <div class="modal-header">
+      <div class="w-100">
+        <h4
+          class="modal-title">{{'invoice.header' | translate}}</h4>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-12 col-md-6">
+          <div class="form-group">
+            <label>{{'checkout.customer_name' | translate}}</label>
+            <input class="form-control" [value]="selectedInvoice.customerName" readonly>
+          </div>
+          <div class="row mt-2 gx-3">
+            <div class="col-12 col-md-7">
+              <div class="form-group">
+                <label>{{'checkout.customer_email' | translate}}</label>
+                <input class="form-control" [value]="selectedInvoice.customerEmail" readonly>
+              </div>
+            </div>
+            <div class="col-12 col-md-5 mt-2 mt-md-0">
+              <div class="form-group">
+                <label>{{'checkout.customer_phone' | translate}}</label>
+                <input class="form-control" [value]="selectedInvoice.customerPhone" readonly>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2 gx-3">
+            <div class="col-12 col-md-6">
+              <div class="form-group">
+                <label>{{'checkout.province' | translate}}</label>
+                <select class="form-select" disabled>
+                  <option [value]="selectedInvoice.province.id">{{selectedInvoice.province.name}}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 mt-2 mt-md-0">
+              <div class="form-group">
+                <label>{{'checkout.district' | translate}}</label>
+                <select class="form-select" disabled>
+                  <option [value]="selectedInvoice.district.id">{{selectedInvoice.district.name}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="form-group mt-2">
+            <label>{{'checkout.address' | translate}}</label>
+            <input class="form-control" [value]="selectedInvoice.address" readonly>
+          </div>
+        </div>
+        <div class="col-12 col-md-6">
+          <div *ngFor="let item of selectedInvoice.products | slice:0:2" class="cart-item row mt-3">
+            <div class="cart_thumb col-4">
+              <a href="#">
+                <img class="img img-fluid" src="{{baseUrl + item.product.images[0]?.uri}}" alt="product images">
+              </a>
+            </div>
+            <div class="cart_details col">
+              <h5><a routerLink="/product/{{item.product.slug}}">{{item.product.name}}</a></h5>
+              <span class="quantity">{{'cart.quantity_less' | translate}}: {{item.quantity}}</span>
+              <br/>
+              <span class="shp__price">
+                {{'cart.price' | translate}}: {{item.product.price | numberFormat}} {{'vnd' | translate}}
+              </span>
+            </div>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between">
+            <span>{{'checkout.total_amount' | translate}}</span>
+            <span>{{selectedInvoice.totalAmount | numberFormat}}{{'vnd' | translate}}</span>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between" *ngIf="selectedInvoice.voucher">
+            <span>{{'checkout.coupon' | translate}}</span>
+            <span *ngIf="selectedInvoice.voucher.type === 1">
+              {{selectedInvoice.voucher.value | numberFormat}}{{'vnd' | translate}}
+            </span>
+            <span *ngIf="selectedInvoice.voucher.type === 2">{{selectedInvoice.voucher.value | numberFormat}}%</span>
+          </div>
+          <hr>
+          <div class="d-flex justify-content-between mt-2">
+            <span>{{'checkout.total_pay' | translate}}</span>
+            <span *ngIf="!selectedInvoice.voucher">
+              {{selectedInvoice.totalAmount | numberFormat}}{{'vnd' | translate}}
+            </span>
+            <span *ngIf="selectedInvoice.voucher && selectedInvoice.voucher.type === 1">
+              {{(selectedInvoice.totalAmount - selectedInvoice.voucher.value) | numberFormat}}{{'vnd' | translate}}
+            </span>
+            <span *ngIf="selectedInvoice.voucher && selectedInvoice.voucher.type === 2">
+              {{(selectedInvoice.totalAmount - selectedInvoice.voucher.value * 0.1 * selectedInvoice.totalAmount) | numberFormat}}
+              {{'vnd' | translate}}
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline-secondary" (click)="modal.dismiss()">
+          {{'invoice.modal.btn_cancel' | translate}}
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</div>
+<app-confirm
+  [title]="updateStatusTitle"
+  [content]="updateStatusContent"
+></app-confirm>
+<app-invoice-update-status *ngIf="selectedInvoice"
+                           [status]="selectedInvoice.status"
+></app-invoice-update-status>

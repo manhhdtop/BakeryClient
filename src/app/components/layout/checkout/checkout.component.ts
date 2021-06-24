@@ -6,10 +6,10 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfigService } from 'src/app/service/app-config.service';
 import { ToastService } from 'src/app/service/toast.service';
-import { Voucher } from 'src/app/shared/model/Voucher';
+import { Voucher } from 'src/app/shared/model/voucher';
 import { VoucherService } from 'src/app/service/voucher.service';
 import { CatalogService } from 'src/app/service/catalog.service';
-import { Catalog } from 'src/app/shared/model/Catalog';
+import { Catalog } from 'src/app/shared/model/catalog';
 import { Constant } from 'src/app/shared/constants/constant.class';
 import { InvoiceService } from 'src/app/service/invoice.service';
 
@@ -107,10 +107,6 @@ export class CheckoutComponent implements OnInit {
       } else {
         this.toast.showDanger(res.errorDescription);
       }
-    }, error => {
-      this.translate.get('api_error').subscribe(e => {
-        this.toast.showDanger(error?.error.message ? error.error.message : e);
-      });
     });
   }
 
@@ -145,8 +141,6 @@ export class CheckoutComponent implements OnInit {
         this.voucherCodeError = res.errorDescription;
         this.toast.showDanger(res.errorDescription);
       }
-    }, error => {
-      this.voucherCodeError = error.error.message ? error.error.message : 'api_error';
     });
   }
 

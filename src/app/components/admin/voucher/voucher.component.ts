@@ -7,7 +7,7 @@ import { RoleService } from 'src/app/service/role.service';
 import { ToastService } from 'src/app/service/toast.service';
 import { Utils } from 'src/app/shared/util/utils';
 import { VoucherService } from 'src/app/service/voucher.service';
-import { Voucher } from 'src/app/shared/model/Voucher';
+import { Voucher } from 'src/app/shared/model/voucher';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmComponent } from 'src/app/shared/component/confirm/confirm.component';
 import { DateFormatPipe } from 'src/app/shared/pipe/format-date.pipe';
@@ -40,12 +40,9 @@ export class VoucherComponent implements OnInit {
   @ViewChild(ConfirmComponent) confirmModal;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private dateFormatPipe: DateFormatPipe,
     private fb: FormBuilder,
     private modalService: NgbModal,
-    private roleService: RoleService,
-    private router: Router,
     private toast: ToastService,
     private translate: TranslateService,
     private voucherService: VoucherService,
@@ -93,9 +90,6 @@ export class VoucherComponent implements OnInit {
           } else {
             this.toast.showDanger(res.errorDescription);
           }
-        }, error => {
-          console.log('error: ', error);
-          this.toast.showDanger(error.error.message);
         });
       }
     }, () => {
@@ -119,9 +113,6 @@ export class VoucherComponent implements OnInit {
         } else {
           this.toast.showDanger(res.errorDescription);
         }
-      }, error => {
-        console.log('error: ', error);
-        this.toast.showDanger(error.error.message);
       });
       return;
     }
@@ -134,9 +125,6 @@ export class VoucherComponent implements OnInit {
       } else {
         this.toast.showDanger(res.errorDescription);
       }
-    }, error => {
-      console.log('error: ', error);
-      this.toast.showDanger(error.error.message);
     });
   }
 
@@ -266,8 +254,6 @@ export class VoucherComponent implements OnInit {
       this.size = res.data.pageable.pageSize;
       this.totalItem = res.data.totalElements;
       this.currentItems = res.data.numberOfElements;
-    }, error => {
-      this.toast.showDanger(error.error.message);
     });
   }
 
@@ -303,8 +289,6 @@ export class VoucherComponent implements OnInit {
       } else {
         this.toast.showDanger(res.errorDescription);
       }
-    }, error => {
-      this.toast.showDanger(error?.error?.message ? error.error.message : '');
     });
   }
 
@@ -362,10 +346,6 @@ export class VoucherComponent implements OnInit {
           } else {
             this.toast.showDanger(res.errorDescription);
           }
-        }, error => {
-          this.translate.get('api_error').subscribe(e => {
-            this.toast.showDanger(error?.error?.message ? error.error.message : e);
-          });
         });
       }
     });

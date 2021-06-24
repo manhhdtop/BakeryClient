@@ -127,8 +127,6 @@ export class ProductListComponent implements OnInit {
       } else {
         this.toast.showDanger(res.errorDescription);
       }
-    }, error => {
-      this.toast.showDanger(error.error.message);
     });
   }
 

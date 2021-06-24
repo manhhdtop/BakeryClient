@@ -2,7 +2,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { NgbCarouselModule, NgbDropdownModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import {
+    NgbCarouselModule,
+    NgbDropdownModule,
+    NgbPaginationModule,
+    NgbTooltipModule,
+} from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CategoryComponent } from 'src/app/components/admin/category/category.component';
@@ -20,6 +25,8 @@ import { UserComponent } from 'src/app/components/admin/user/user.component';
 import { RoleComponent } from 'src/app/components/admin/role/role.component';
 import { ActionComponent } from 'src/app/components/admin/action/action.component';
 import { VoucherComponent } from './voucher/voucher.component';
+import { InvoiceComponent } from './invoice/invoice.component';
+import { InvoiceUpdateStatusComponent } from 'src/app/components/admin/invoice/update-status/invoice-update-status.component';
 
 
 @NgModule({
@@ -37,6 +44,8 @@ import { VoucherComponent } from './voucher/voucher.component';
     RoleComponent,
     ActionComponent,
     VoucherComponent,
+    InvoiceComponent,
+    InvoiceUpdateStatusComponent,
   ],
   exports: [
     SidebarComponent,
@@ -54,6 +63,7 @@ import { VoucherComponent } from './voucher/voucher.component';
         NgbCarouselModule,
         CKEditorModule,
         NgbDropdownModule,
+        NgbTooltipModule,
     ],
 })
 export class AdminMasterPageModule {

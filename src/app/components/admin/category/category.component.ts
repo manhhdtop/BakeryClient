@@ -75,9 +75,6 @@ export class CategoryComponent implements OnInit {
           } else {
             this.toast.showDanger(res.errorDescription);
           }
-        }, error => {
-          console.log('error: ', error);
-          this.toast.showDanger(error.error.message);
         });
       }
     }, () => {
@@ -99,9 +96,6 @@ export class CategoryComponent implements OnInit {
         } else {
           this.toast.showDanger(res.errorDescription);
         }
-      }, error => {
-        console.log('error: ', error);
-        this.toast.showDanger(error.error.message);
       });
       return;
     }
@@ -115,9 +109,6 @@ export class CategoryComponent implements OnInit {
       } else {
         this.toast.showDanger(res.errorDescription);
       }
-    }, error => {
-      console.log('error: ', error);
-      this.toast.showDanger(error.error.message);
     });
   }
 
@@ -145,8 +136,6 @@ export class CategoryComponent implements OnInit {
   private getParentCategories(): void {
     this.categoryService.getParentCategories().subscribe(res => {
       this.parentCategories = res.data;
-    }, error => {
-      this.toast.showDanger(error.error.message);
     });
   }
 
@@ -157,8 +146,6 @@ export class CategoryComponent implements OnInit {
       this.size = res.data.pageable.pageSize;
       this.totalItem = res.data.totalElements;
       this.currentItems = res.data.numberOfElements;
-    }, error => {
-      this.toast.showDanger(error.error.message);
     });
   }
 
@@ -182,8 +169,6 @@ export class CategoryComponent implements OnInit {
     }
     this.categoryService.createSlug(event.target.value).subscribe(res => {
       this.formUpdate.controls.slug.setValue(res.data);
-    }, error => {
-      this.toast.showDanger(error.error.message);
     });
   }
 }

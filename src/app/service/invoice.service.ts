@@ -13,11 +13,15 @@ export class InvoiceService {
   ) {
   }
 
-  getInvoices(): Observable<any> {
-    return this.baseService.get(UrlConstant.ADMIN_INVOICE);
+  getInvoices(params): Observable<any> {
+    return this.baseService.get(UrlConstant.ADMIN_INVOICE, params);
   }
 
   createInvoice(data): Observable<any> {
     return this.baseService.post(UrlConstant.CREATE_INVOICE, data);
+  }
+
+  updateStatus(data): Observable<any> {
+    return this.baseService.post(UrlConstant.INVOICE_UPDATE_STATUS, data);
   }
 }

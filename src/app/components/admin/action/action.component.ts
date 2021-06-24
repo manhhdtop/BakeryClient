@@ -69,9 +69,6 @@ export class ActionComponent implements OnInit {
           } else {
             this.toast.showDanger(res.errorDescription);
           }
-        }, error => {
-          console.log('error: ', error);
-          this.toast.showDanger(error.error.message);
         });
       }
     }, () => {
@@ -92,9 +89,6 @@ export class ActionComponent implements OnInit {
         } else {
           this.toast.showDanger(res.errorDescription);
         }
-      }, error => {
-        console.log('error: ', error);
-        this.toast.showDanger(error.error.message);
       });
       return;
     }
@@ -107,9 +101,6 @@ export class ActionComponent implements OnInit {
       } else {
         this.toast.showDanger(res.errorDescription);
       }
-    }, error => {
-      console.log('error: ', error);
-      this.toast.showDanger(error.error.message);
     });
   }
 
@@ -139,8 +130,6 @@ export class ActionComponent implements OnInit {
       this.size = res.data.pageable.pageSize;
       this.totalItem = res.data.totalElements;
       this.currentItems = res.data.numberOfElements;
-    }, error => {
-      this.toast.showDanger(error.error.message);
     });
   }
 

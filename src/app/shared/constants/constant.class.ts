@@ -14,6 +14,16 @@ export const Status = [
   {value: -1, name: 'status.locked'},
 ];
 
+export const InvoiceStatus = [
+  {value: 0, name: 'invoice_status.init'},
+  {value: 1, name: 'invoice_status.confirmed'},
+  {value: 2, name: 'invoice_status.shipping'},
+  {value: 3, name: 'invoice_status.success'},
+  {value: -1, name: 'invoice_status.reject'},
+  {value: -2, name: 'invoice_status.shipping_error'},
+  {value: -3, name: 'invoice_status.error'},
+];
+
 export const VoucherType = [
   {value: 1, name: 'voucher_type.amount', icon: 'vnd'},
   {value: 2, name: 'voucher_type.percent', icon: '%'},

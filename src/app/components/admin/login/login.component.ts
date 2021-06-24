@@ -42,7 +42,6 @@ export class LoginComponent implements OnInit {
         localStorage.setItem(Constant.TOKEN, token);
         localStorage.setItem(Constant.USER_INFO, user);
         this.router.navigate([this.returnUrl]);
-      }, error => {
       });
     }
     this.loginForm = this.createForm();
@@ -64,9 +63,6 @@ export class LoginComponent implements OnInit {
       localStorage.setItem(Constant.TOKEN, token);
       localStorage.setItem(Constant.USER_INFO, user);
       this.router.navigate([this.returnUrl]);
-    }, error => {
-      console.log('error', error);
-      this.messageError = error.error.message;
     });
   }
 

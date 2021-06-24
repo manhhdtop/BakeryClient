@@ -49,7 +49,6 @@ export class HomeComponent implements OnInit {
   private getProduct(): void {
     this.productService.getProducts().subscribe(res => {
       this.products = [...res.data.content];
-    }, error => {
     });
   }
 

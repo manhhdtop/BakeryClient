@@ -21,6 +21,15 @@
     "locked": "Locked",
     "locked_by_admin": "Locked by Admin"
   },
+  "invoice_status": {
+    "init": "Init",
+    "confirmed": "Confirmed",
+    "shipping": "Shipping",
+    "success": "Success",
+    "reject": "Reject",
+    "shipping_error": "Shipping error",
+    "error": "Error"
+  },
   "voucher_type": {
     "amount": "Amount",
     "percent": "Percent"
@@ -134,6 +143,11 @@
         "href": "/admin/voucher",
         "title": "Voucher Management",
         "name": "Voucher"
+      },
+      "invoice": {
+        "href": "/admin/invoice",
+        "title": "Invoice Management",
+        "name": "Invoice"
       },
       "user_role": {
         "href": "/admin/user",

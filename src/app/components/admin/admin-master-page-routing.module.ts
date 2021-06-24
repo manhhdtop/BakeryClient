@@ -10,6 +10,7 @@ import { UserComponent } from 'src/app/components/admin/user/user.component';
 import { AdminMasterPageComponent } from 'src/app/components/admin/admin-master-page/admin-master-page.component';
 import { DashboardComponent } from 'src/app/components/admin/admin-master-page/dashboard/dashboard.component';
 import { VoucherComponent } from 'src/app/components/admin/voucher/voucher.component';
+import { InvoiceComponent } from 'src/app/components/admin/invoice/invoice.component';
 
 const routes: Routes = [
   {
@@ -115,6 +116,15 @@ const routes: Routes = [
         component: VoucherComponent,
         data: {
           page_title: 'menu.admin.voucher.title',
+        },
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
+      },
+      {
+        path: 'invoice',
+        component: InvoiceComponent,
+        data: {
+          page_title: 'menu.admin.invoice.title',
         },
         canActivate: [AuthGuard],
         canLoad: [AuthGuard],

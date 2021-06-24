@@ -1,7 +1,8 @@
-import { Status } from '../constants/constant.class';
+import { InvoiceStatus, Status } from '../constants/constant.class';
 
 export class Utils {
   static statuses = Status;
+  static invoiceStatus = InvoiceStatus;
 
   static getPageTitle(activeRoute): string {
     const pageTitle = 'page_title';
@@ -18,6 +19,10 @@ export class Utils {
   }
 
   static getStatusName(status): string {
-    return this.statuses.filter(e => e.value === status)[0]?.name || 'status.locked_by_admin';
+    return this.statuses.filter(e => e.value === status)[0]?.name || '';
+  }
+
+  static getInvoiceStatusName(status): string {
+    return this.invoiceStatus.filter(e => e.value === status)[0]?.name || '';
   }
 }

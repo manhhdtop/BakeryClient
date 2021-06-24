@@ -1,0 +1,34 @@
+<ng-template #modal class="modal fade" let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title" id="exampleModalLabel">{{'invoice.update_status.header' | translate}}</h5>
+      <button class="close" type="button" data-dismiss="modal" aria-label="Close" (click)="modal.close(cancel)">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formGroup">
+        <div class="form-group">
+          <label>{{'invoice.update_status.status' | translate}}</label>
+          <select class="form-select" formControlName="status">
+            <option value="">{{'choose' | translate}}</option>
+            <option *ngFor="let s of acceptStatus" [value]="s.value">{{s.name | translate}}</option>
+          </select>
+          <small class="form-text text-danger" *ngIf="submitted && formGroup.controls.status.invalid">
+            {{'invoice.update_status.status_required' | translate}}
+          </small>
+        </div>
+        <div class="form-group mt-2">
+          <label>{{'invoice.update_status.description' | translate}}</label>
+          <textarea class="form-control" rows="3" formControlName="description"
+                    placeholder="{{'invoice.update_status.description_placeholder' | translate}}">
+          </textarea>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" (click)="modal.close(cancel)">Cancel</button>
+      <button class="btn btn-primary" (click)="submit(modal)">Ok</button>
+    </div>
+  </div>
+</ng-template>

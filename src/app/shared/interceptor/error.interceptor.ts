@@ -7,6 +7,7 @@ import { catchError, retry, timeout } from 'rxjs/operators';
 import { AppConfigService } from '../../service/app-config.service';
 import { UrlConstant } from '../constants/url.class';
 import { ToastService } from 'src/app/service/toast.service';
+import { TranslateService } from '@ngx-translate/core';
 
 export const DEFAULT_TIMEOUT = new InjectionToken<number>('Value default time-out');
 
@@ -17,6 +18,7 @@ export class ErrorInterceptor implements HttpInterceptor {
     private modal: NgbModal,
     private router: Router,
     private toast: ToastService,
+    private translate: TranslateService,
     @Inject(DEFAULT_TIMEOUT) protected defaultTimeout: number,
   ) {
   }
@@ -43,6 +45,9 @@ export class ErrorInterceptor implements HttpInterceptor {
           this.router.navigate([UrlConstant.UNAUTHORIZED], {skipLocationChange: true});
           return throwError(error);
         }
+        this.translate.get('api_error').subscribe(e => {
+          this.toast.showDanger(error?.error?.message ? error.error.message : e);
+        });
         return throwError(error);
       }),
     );

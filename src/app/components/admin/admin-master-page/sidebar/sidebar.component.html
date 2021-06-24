@@ -49,6 +49,16 @@
   </li>
   <hr class="sidebar-divider">
   <div class="sidebar-heading">
+    {{'menu.admin.invoice.name' | translate}}
+  </div>
+  <li class="nav-item" [routerLinkActive]="'active'">
+    <a class="nav-link" routerLink="{{'menu.admin.invoice.href' | translate}}">
+      <i class="fas fa-fw fa-receipt"></i>
+      <span>{{'menu.admin.invoice.name' | translate}}</span>
+    </a>
+  </li>
+  <hr class="sidebar-divider">
+  <div class="sidebar-heading">
     {{'menu.admin.user_role.name' | translate}}
   </div>
   <li class="nav-item" [routerLinkActive]="'active'">

@@ -54,9 +54,6 @@ export class ProductComponent implements OnInit {
         this.price = this.product.price;
         this.optionTypes = this.product.optionTypes;
         this.loaded = true;
-      }, error => {
-        this.toast.showDanger(error.error.message);
-        this.loaded = true;
       });
     }
   }
