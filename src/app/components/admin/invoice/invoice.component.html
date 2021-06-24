@@ -53,7 +53,8 @@
               <td>{{getStatusName(invoice.status) | translate}}</td>
               <td class="min">
                 <a role="button" class="mr-2" (click)="view(viewInvoice, invoice)"><i class="fa fa-eye"></i></a>
-                <a role="button" class="mr-2" (click)="updateStatus(invoice)">
+                <a role="button" class="mr-2" (click)="updateStatus(invoice)"
+                   *ngIf="invoice.status !== 3 && invoice.status !== -1 && invoice.status !== -2 && invoice.status !== -3">
                   <i class="fa fa-toggle-on"></i>
                 </a>
               </td>
