@@ -36,6 +36,7 @@
               <th>{{'option_type.no' | translate}}</th>
               <th>{{'option_type.name' | translate}}</th>
               <th>{{'option_type.description' | translate}}</th>
+              <th>{{'option_type.change_price' | translate}}</th>
               <th>{{'option_type.status' | translate}}</th>
               <th class="min"></th>
             </tr>
@@ -45,6 +46,7 @@
               <td>{{i + 1}}</td>
               <td>{{o.name}}</td>
               <td>{{o.description}}</td>
+              <td>{{(o.changePrice ? 'can_change_price' : 'not_change_price') | translate}}</td>
               <td>{{getStatusName(o.status) | translate}}</td>
               <td class="min">
                 <a role="button" class="mr-2" (click)="delete(deleteOption, o)"><i class="fa fa-trash-alt"></i></a>
@@ -97,15 +99,31 @@
               </small>
             </div>
           </div>
-          <div class="col-md-12 col-sm-12">
+          <div class="col-md-12 col-sm-12 mt-2">
             <div class="form-group">
               <label>{{'option_type.description' | translate}}</label>
-              <input type="email" class="form-control"
+              <input type="text" class="form-control"
                      placeholder="{{'option_type.description_placeholder' | translate}}"
                      formControlName="description">
             </div>
           </div>
-          <div class="col-md-12 col-sm-12">
+          <div class="col-12 mt-2">
+            <label class="d-block">{{'option_type.change_price' | translate}}</label>
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="canChangePrice"
+                     formControlName="changePrice" [value]="1">
+              <label class="mb-0" for="canChangePrice">{{'option_type.can_change_price' | translate}}</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input type="radio" class="form-check-input" id="notChangePrice"
+                     formControlName="changePrice" [value]="0">
+              <label class="mb-0" for="notChangePrice">{{'option_type.not_change_price' | translate}}</label>
+            </div>
+            <small class="d-block form-text text-danger mt-0 mb-2" *ngIf="submitted && formUpdate.controls.changePrice.invalid">
+              {{'option_type.change_price_required' | translate}}
+            </small>
+          </div>
+          <div class="col-12">
             <div class="form-group">
               <label>{{'option_type.status' | translate}}</label>
               <select class="form-control" formControlName="status">

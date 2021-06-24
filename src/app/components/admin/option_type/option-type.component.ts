@@ -83,8 +83,10 @@ export class OptionTypeComponent implements OnInit {
     if (this.formUpdate.invalid) {
       return;
     }
+    const data = this.formUpdate.value;
+    data.changePrice = data.changePrice === 1;
     if (this.selectedOption) {
-      this.optionTypeService.update(this.formUpdate.value).subscribe(res => {
+      this.optionTypeService.update(data).subscribe(res => {
         if (res.errorCode === '200') {
           this.getOptionTypes();
           this.toast.showSuccess(res.errorDescription);
@@ -99,7 +101,8 @@ export class OptionTypeComponent implements OnInit {
       return;
     }
 
-    this.optionTypeService.save(this.formUpdate.value).subscribe(res => {
+    data.id = undefined;
+    this.optionTypeService.save(data).subscribe(res => {
       if (res.errorCode === '200') {
         this.getOptionTypes();
         this.toast.showSuccess(res.errorDescription);
@@ -119,6 +122,7 @@ export class OptionTypeComponent implements OnInit {
         id: [option.id, Validators.required],
         name: [option.name, Validators.required],
         description: [option.description],
+        changePrice: [option.changePrice ? 1 : 0, Validators.required],
         status: [option.status, Validators.required],
       });
     }
@@ -126,6 +130,7 @@ export class OptionTypeComponent implements OnInit {
       id: [null],
       name: [null, Validators.required],
       description: [null],
+      changePrice: [0, Validators.required],
       status: ['', Validators.required],
     });
   }

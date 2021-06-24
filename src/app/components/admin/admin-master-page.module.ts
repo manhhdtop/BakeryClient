@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { NgbCarouselModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbDropdownModule, NgbPaginationModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CategoryComponent } from 'src/app/components/admin/category/category.component';
@@ -43,17 +43,18 @@ import { VoucherComponent } from './voucher/voucher.component';
     HeaderComponent,
     FooterComponent,
   ],
-  imports: [
-    CommonModule,
-    AdminMasterPageRoutingModule,
-    TranslateModule,
-    ReactiveFormsModule,
-    SharedModule,
-    NgbPaginationModule,
-    FormsModule,
-    NgbCarouselModule,
-    CKEditorModule,
-  ],
+    imports: [
+        CommonModule,
+        AdminMasterPageRoutingModule,
+        TranslateModule,
+        ReactiveFormsModule,
+        SharedModule,
+        NgbPaginationModule,
+        FormsModule,
+        NgbCarouselModule,
+        CKEditorModule,
+        NgbDropdownModule,
+    ],
 })
 export class AdminMasterPageModule {
 }
