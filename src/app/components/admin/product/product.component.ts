@@ -23,9 +23,6 @@ import { Utils } from '../../../shared/util/utils';
   styleUrls: ['./product.component.css'],
 })
 export class ProductComponent implements OnInit {
-
-  @ViewChild(CkeditorComponent) ckeditorModal;
-
   readonly statuses = Status;
   currentProduct: Product;
   selectedImage: UploadResponse;
@@ -43,6 +40,8 @@ export class ProductComponent implements OnInit {
   baseUrl: string;
   files: UploadResponse[];
   readonly EditorType = EditorType;
+
+  @ViewChild(CkeditorComponent) ckeditorModal;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -96,7 +95,7 @@ export class ProductComponent implements OnInit {
     this.currentProduct = category;
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       if (result && result.trim() === 'ok') {
-        this.categoryService.delete(this.currentProduct.id).subscribe(res => {
+        this.productService.delete(this.currentProduct.id).subscribe(res => {
           if (res.errorCode === '200') {
             this.getProducts();
             this.toast.showSuccess(res.errorDescription);

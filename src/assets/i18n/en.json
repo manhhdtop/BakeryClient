@@ -168,6 +168,16 @@
         "href": "/admin/action",
         "title": "Action Management",
         "name": "Action"
+      },
+      "template": {
+        "href": "/admin/mail-template",
+        "title": "Template Management",
+        "name": "Template"
+      },
+      "mail_template": {
+        "href": "/admin/mail-template",
+        "title": "Mail Template Management",
+        "name": "Mail Template"
       }
     }
   },
@@ -460,6 +470,66 @@
       "not_blank": "You need to type your Coupon code",
       "not_exist": "Coupon is not exist or ",
       "not_enough_condition": "Invoice not enough condition of Coupon"
+    }
+  },
+  "invoice": {
+    "header": "Quản lý Hóa đơn",
+    "table_name": "Hóa đơn",
+    "table_search": "Tìm kiếm Hóa đơn...",
+    "table_search_hint": "Tìm kiếm theo sđt hoặc Mã đơn hàng",
+    "no": "STT",
+    "invoice_id": "Mã đơn hàng",
+    "customer_name": "Họ tên",
+    "customer_email": "Email",
+    "customer_email_error": "Email không hợp lệ",
+    "customer_phone": "Số điện thoại",
+    "voucher": "Voucher",
+    "total_amount": "Tổng tiền",
+    "created_date": "Ngày đặt",
+    "status": "Trạng thái",
+    "update_status": {
+      "header": "Cập nhật trạng thái đơn hàng",
+      "status_invalid": "Trạng thái không hợp lệ",
+      "status": "Trạng thái",
+      "status_required": "Trạng thái không được để trống",
+      "description": "Chú thích",
+      "description_placeholder": "Chú thích..."
+    },
+    "modal": {
+      "btn_cancel": "Đóng"
+    }
+  },
+  "mail_template": {
+    "header": "Mail Template Management",
+    "table_name": "Mail Template",
+    "table_search": "Searching Mail Template...",
+    "btn_new": "New",
+    "no": "No",
+    "code": "Template code",
+    "code_placeholder": "Template code...",
+    "code_required": "Template code can not blank",
+    "code_not_valid": "Template code not valid (Template code just contains uppercase and symbol `_`",
+    "name": "Template name",
+    "name_placeholder": "Template name...",
+    "name_required": "Template name code can not blank",
+    "subject": "Subject",
+    "subject_placeholder": "Subject...",
+    "subject_required": "Subject can not blank",
+    "message": "Message",
+    "message_placeholder": "Message...",
+    "message_required": "Message code can not blank",
+    "using": "or using",
+    "status": "Status",
+    "status_placeholder": "Status...",
+    "status_required": "Status can not blank",
+    "modal": {
+      "title_add": "Add Mail Template",
+      "title_update": "Update Mail Template",
+      "title_delete": "Delete Mail Template",
+      "message_delete": "<p><strong>Are you sure you want to delete this Mail Template <span class=\"text-primary\">\"{{name}}\"</span>?</strong></p><span class=\"text-danger\">This operation can not be undone.</span></p>",
+      "btn_cancel": "Cancel",
+      "btn_submit": "Save",
+      "btn_delete": "Delete"
     }
   }
 }

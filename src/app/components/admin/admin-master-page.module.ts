@@ -27,6 +27,7 @@ import { ActionComponent } from 'src/app/components/admin/action/action.componen
 import { VoucherComponent } from './voucher/voucher.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceUpdateStatusComponent } from 'src/app/components/admin/invoice/update-status/invoice-update-status.component';
+import { MailTemplateComponent } from './mail-template/mail-template.component';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { InvoiceUpdateStatusComponent } from 'src/app/components/admin/invoice/u
     VoucherComponent,
     InvoiceComponent,
     InvoiceUpdateStatusComponent,
+    MailTemplateComponent,
   ],
   exports: [
     SidebarComponent,

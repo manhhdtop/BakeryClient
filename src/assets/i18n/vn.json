@@ -183,6 +183,16 @@
         "href": "/admin/action",
         "title": "Quản lý Action",
         "name": "Action"
+      },
+      "template": {
+        "href": "/admin/mail-template",
+        "title": "Quản lý Template",
+        "name": "Template"
+      },
+      "mail_template": {
+        "href": "/admin/mail-template",
+        "title": "Quản lý Mail Template",
+        "name": "Mail Template"
       }
     }
   },
@@ -439,7 +449,7 @@
     "modal": {
       "title_add": "Thêm mới Voucher",
       "title_update": "Cập nhật Voucher",
-      "title_delete": "Xóa Action",
+      "title_delete": "Xóa Voucher",
       "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa Voucher <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><span class=\"text-danger\">Không thể hoàn tác thao tác này.</span></p>",
       "btn_cancel": "Hủy",
       "btn_submit": "Lưu",
@@ -504,6 +514,39 @@
     },
     "modal": {
       "btn_cancel": "Đóng"
+    }
+  },
+  "mail_template": {
+    "header": "Quản lý Mail Template",
+    "table_name": "Mail Template",
+    "table_search": "Tìm kiếm Mail Template...",
+    "btn_new": "Thêm mới",
+    "no": "STT",
+    "code": "Mã template",
+    "code_placeholder": "Mã template...",
+    "code_required": "Mã template không được bỏ trống",
+    "code_not_valid": "Mã template không hợp lệ (Mã chỉ chứa ký tự viết hoa và dấu `_`",
+    "name": "Tên template",
+    "name_placeholder": "Tên template...",
+    "name_required": "Tên template không được bỏ trống",
+    "subject": "Tiêu đề",
+    "subject_placeholder": "Tiêu đề...",
+    "subject_required": "Tiêu đề không được bỏ trống",
+    "message": "Nội dung",
+    "message_placeholder": "Nội dung...",
+    "message_required": "Nội dung không được bỏ trống",
+    "using": "hoặc sử dụng",
+    "status": "Trạng thái",
+    "status_placeholder": "Trạng thái...",
+    "status_required": "Trạng thái không được bỏ trống",
+    "modal": {
+      "title_add": "Thêm mới Mail Template",
+      "title_update": "Cập nhật Mail Template",
+      "title_delete": "Xóa Mail Template",
+      "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa Mail Template <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><span class=\"text-danger\">Không thể hoàn tác thao tác này.</span></p>",
+      "btn_cancel": "Hủy",
+      "btn_submit": "Lưu",
+      "btn_delete": "Xóa"
     }
   }
 }

@@ -11,6 +11,7 @@ import { AdminMasterPageComponent } from 'src/app/components/admin/admin-master-
 import { DashboardComponent } from 'src/app/components/admin/admin-master-page/dashboard/dashboard.component';
 import { VoucherComponent } from 'src/app/components/admin/voucher/voucher.component';
 import { InvoiceComponent } from 'src/app/components/admin/invoice/invoice.component';
+import { MailTemplateComponent } from 'src/app/components/admin/mail-template/mail-template.component';
 
 const routes: Routes = [
   {
@@ -125,6 +126,15 @@ const routes: Routes = [
         component: InvoiceComponent,
         data: {
           page_title: 'menu.admin.invoice.title',
+        },
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
+      },
+      {
+        path: 'mail-template',
+        component: MailTemplateComponent,
+        data: {
+          page_title: 'menu.admin.mail_template.title',
         },
         canActivate: [AuthGuard],
         canLoad: [AuthGuard],

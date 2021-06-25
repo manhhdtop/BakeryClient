@@ -60,6 +60,16 @@
   </li>
   <hr class="sidebar-divider">
   <div class="sidebar-heading">
+    {{'menu.admin.template.name' | translate}}
+  </div>
+  <li class="nav-item" [routerLinkActive]="'active'">
+    <a class="nav-link" routerLink="{{'menu.admin.mail_template.href' | translate}}">
+      <i class="fas fa-fw fa-mail-bulk"></i>
+      <span>{{'menu.admin.mail_template.name' | translate}}</span>
+    </a>
+  </li>
+  <hr class="sidebar-divider">
+  <div class="sidebar-heading">
     {{'menu.admin.user_role.name' | translate}}
   </div>
   <li class="nav-item" [routerLinkActive]="'active'">
