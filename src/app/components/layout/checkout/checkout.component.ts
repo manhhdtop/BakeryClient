@@ -102,8 +102,8 @@ export class CheckoutComponent implements OnInit {
       if (res.errorCode === '200') {
         this.toast.showSuccess(res.errorDescription);
         this.orderSuccess = true;
-        // this.cartService.clearCart();
-        // localStorage.removeItem(this.VOUCHER_KEY);
+        this.cartService.clearCart();
+        localStorage.removeItem(this.VOUCHER_KEY);
       } else {
         this.toast.showDanger(res.errorDescription);
       }

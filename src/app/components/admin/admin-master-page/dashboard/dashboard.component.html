@@ -1,10 +1,8 @@
 <div class="container-fluid">
 
   <!-- Page Heading -->
-  <div class="d-sm-flex align-items-center justify-content-between mb-4">
+  <div class="d-sm-flex align-items-center justify-content-start mb-4">
     <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
-      class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
   </div>
 
   <!-- Content Row -->
@@ -17,12 +15,14 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                Earnings (Monthly)
+                {{'dashboard.total_money' | translate}}
               </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$40,000</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {{dashboardOverview?.totalMoney | numberFormat}}{{'vnd' | translate}}
+              </div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-calendar fa-2x text-gray-300"></i>
+              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
@@ -36,12 +36,14 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                Earnings (Annual)
+                {{'dashboard.total_invoice' | translate}}
               </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">$215,000</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {{dashboardOverview?.totalInvoice}}
+              </div>
             </div>
             <div class="col-auto">
-              <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+              <i class="fas fa-receipt fa-2x text-gray-300"></i>
             </div>
           </div>
         </div>
@@ -54,18 +56,23 @@
         <div class="card-body">
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
-              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Tasks
+              <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                {{'dashboard.total_success' | translate}}
               </div>
               <div class="row no-gutters align-items-center">
                 <div class="col-auto">
-                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">50%</div>
+                  <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">
+                    {{dashboardOverview?.totalSuccess}}
+                  </div>
                 </div>
                 <div class="col">
-                  <div class="progress progress-sm mr-2">
-                    <div class="progress-bar bg-info" role="progressbar"
-                         style="width: 50%" aria-valuenow="50" aria-valuemin="0"
-                         aria-valuemax="100"></div>
-                  </div>
+                  <p class="mb-0">
+                    <ngb-progressbar type="success" textType="white"
+                                     [value]="dashboardOverview?.totalSuccess"
+                                     [max]="dashboardOverview?.totalInvoice"
+                                     [showValue]="true">
+                    </ngb-progressbar>
+                  </p>
                 </div>
               </div>
             </div>
@@ -84,9 +91,11 @@
           <div class="row no-gutters align-items-center">
             <div class="col mr-2">
               <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                Pending Requests
+                {{'dashboard.total_pending' | translate}}
               </div>
-              <div class="h5 mb-0 font-weight-bold text-gray-800">18</div>
+              <div class="h5 mb-0 font-weight-bold text-gray-800">
+                {{dashboardOverview?.totalPending}}
+              </div>
             </div>
             <div class="col-auto">
               <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -126,7 +135,15 @@
         <!-- Card Body -->
         <div class="card-body">
           <div class="chart-area">
-            <canvas id="myAreaChart"></canvas>
+            <google-chart
+              class="chart"
+              [title]="chart?.title"
+              [type]="chart?.type"
+              [data]="chart?.data"
+              [options]="chart?.options"
+              [dynamicResize]="chart?.dynamicResize"
+            >
+            </google-chart>
           </div>
         </div>
       </div>
@@ -160,15 +177,15 @@
             <canvas id="myPieChart"></canvas>
           </div>
           <div class="mt-4 text-center small">
-                                        <span class="mr-2">
-                                            <i class="fas fa-circle text-primary"></i> Direct
-                                        </span>
             <span class="mr-2">
-                                            <i class="fas fa-circle text-success"></i> Social
-                                        </span>
+              <i class="fas fa-circle text-primary"></i> Direct
+            </span>
             <span class="mr-2">
-                                            <i class="fas fa-circle text-info"></i> Referral
-                                        </span>
+              <i class="fas fa-circle text-success"></i> Social
+            </span>
+            <span class="mr-2">
+              <i class="fas fa-circle text-info"></i> Referral
+            </span>
           </div>
         </div>
       </div>

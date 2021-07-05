@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import {
-    NgbCarouselModule,
-    NgbDropdownModule,
-    NgbPaginationModule,
-    NgbTooltipModule,
+  NgbCarouselModule,
+  NgbDropdownModule,
+  NgbPaginationModule,
+  NgbProgressbarModule,
+  NgbTooltipModule,
 } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
@@ -28,6 +29,7 @@ import { VoucherComponent } from './voucher/voucher.component';
 import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceUpdateStatusComponent } from 'src/app/components/admin/invoice/update-status/invoice-update-status.component';
 import { MailTemplateComponent } from './mail-template/mail-template.component';
+import { GoogleChartsModule } from 'angular-google-charts';
 
 
 @NgModule({
@@ -54,19 +56,21 @@ import { MailTemplateComponent } from './mail-template/mail-template.component';
     HeaderComponent,
     FooterComponent,
   ],
-    imports: [
-        CommonModule,
-        AdminMasterPageRoutingModule,
-        TranslateModule,
-        ReactiveFormsModule,
-        SharedModule,
-        NgbPaginationModule,
-        FormsModule,
-        NgbCarouselModule,
-        CKEditorModule,
-        NgbDropdownModule,
-        NgbTooltipModule,
-    ],
+  imports: [
+    CommonModule,
+    AdminMasterPageRoutingModule,
+    TranslateModule,
+    ReactiveFormsModule,
+    SharedModule,
+    NgbPaginationModule,
+    FormsModule,
+    NgbCarouselModule,
+    CKEditorModule,
+    NgbDropdownModule,
+    NgbTooltipModule,
+    NgbProgressbarModule,
+    GoogleChartsModule,
+  ],
 })
 export class AdminMasterPageModule {
 }

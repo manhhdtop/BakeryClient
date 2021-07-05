@@ -50,6 +50,9 @@ export class UrlConstant {
   public static readonly ADMIN_INVOICE = UrlConstant.ADMIN + UrlConstant.INVOICE;
   public static readonly CREATE_INVOICE = UrlConstant.INVOICE + '/create-invoice';
   public static readonly INVOICE_UPDATE_STATUS = UrlConstant.ADMIN_INVOICE + '/update-status';
-  // Invoice
+  // Mail
   public static readonly MAIL_TEMPLATE = UrlConstant.ADMIN + '/mail-template';
+  // Dashboard
+  public static readonly DASHBOARD = UrlConstant.ADMIN + '/dashboard';
+  public static readonly DASHBOARD_OVERVIEW = UrlConstant.DASHBOARD + '/dashboard-overview';
 }

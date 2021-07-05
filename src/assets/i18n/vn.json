@@ -548,5 +548,11 @@
       "btn_submit": "Lưu",
       "btn_delete": "Xóa"
     }
+  },
+  "dashboard": {
+    "total_money": "Tổng tiền (tháng này)",
+    "total_invoice": "Đơn hàng (Tháng này)",
+    "total_success": "Đơn hàng hoàn thành",
+    "total_pending": "Đơn hàng đang đợi"
   }
 }
