@@ -30,6 +30,11 @@
     "shipping_error": "Shipping error",
     "error": "Error"
   },
+  "contact_status": {
+    "init": "Init",
+    "success": "Success",
+    "reject": "Reject"
+  },
   "voucher_type": {
     "amount": "Amount",
     "percent": "Percent"
@@ -178,6 +183,11 @@
         "href": "/admin/mail-template",
         "title": "Mail Template Management",
         "name": "Mail Template"
+      },
+      "contact": {
+        "href": "/admin/contact",
+        "title": "Contact Management",
+        "name": "Contact"
       }
     }
   },

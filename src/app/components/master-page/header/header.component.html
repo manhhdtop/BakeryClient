@@ -61,7 +61,7 @@
         <div class="nav-item navbar-nav">
           <a class="nav-link" role="button" (click)="open(cart_modal)">
             <i class="fas fa-shopping-cart"></i>
-            <span class="badge bg-danger badge-counter">{{itemAmount > 3 ? '3+' : itemAmount}}</span>
+            <span class="badge bg-danger badge-counter" *ngIf="itemAmount && itemAmount > 0">{{itemAmount > 3 ? '3+' : itemAmount}}</span>
           </a>
         </div>
       </div>

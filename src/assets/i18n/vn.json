@@ -30,6 +30,11 @@
     "shipping_error": "Giao hàng thất bại",
     "error": "Thất bại"
   },
+  "contact_status": {
+    "init": "Khởi tạo",
+    "success": "Thành công",
+    "reject": "Từ chối"
+  },
   "voucher_type": {
     "amount": "Tiền",
     "percent": "Phần trăm"
@@ -193,6 +198,11 @@
         "href": "/admin/mail-template",
         "title": "Quản lý Mail Template",
         "name": "Mail Template"
+      },
+      "contact": {
+        "href": "/admin/lien-he",
+        "title": "Quản lý Liên hệ",
+        "name": "Liên hệ"
       }
     }
   },
@@ -554,5 +564,34 @@
     "total_invoice": "Đơn hàng (Tháng này)",
     "total_success": "Đơn hàng hoàn thành",
     "total_pending": "Đơn hàng đang đợi"
+  },
+  "contact": {
+    "header": "Quản lý Liên hệ",
+    "table_name": "Danh sách Liên hệ",
+    "table_search": "Tìm kiếm Liên hệ...",
+    "btn_new": "Thêm mới",
+    "no": "STT",
+    "name": "Họ tên",
+    "name_required": "Họ tên không được để trống",
+    "name_placeholder": "Họ tên...",
+    "email": "Email",
+    "email_required": "Email không được để trống",
+    "email_invalid": "Email không đúng định dạng",
+    "email_placeholder": "Email...",
+    "phone_number": "Số điện thoại",
+    "phone_number_invalid": "Số điện thoại không đúng định dạng",
+    "phone_number_required": "Số điện thoại không được để trống",
+    "phone_number_placeholder": "Số điện thoại...",
+    "content": "Nội dung",
+    "content_required": "Nội dung không được để trống",
+    "content_placeholder": "Nội dung...",
+    "btn_send": "Gửi",
+    "updated_by": "Người cập nhật",
+    "updated_date": "Ngày cập nhật",
+    "status": "Trạng thái",
+    "modal": {
+      "btn_cancel": "Đóng",
+      "btn_delete": "Xóa"
+    }
   }
 }

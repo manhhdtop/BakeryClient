@@ -1,8 +1,9 @@
-import { InvoiceStatus, Status } from '../constants/constant.class';
+import { ContactStatus, InvoiceStatus, Status } from 'src/app/shared/constants/constant.class';
 
 export class Utils {
   static statuses = Status;
   static invoiceStatus = InvoiceStatus;
+  static contactStatus = ContactStatus;
 
   static getPageTitle(activeRoute): string {
     const pageTitle = 'page_title';
@@ -24,5 +25,9 @@ export class Utils {
 
   static getInvoiceStatusName(status): string {
     return this.invoiceStatus.filter(e => e.value === status)[0]?.name || '';
+  }
+
+  static getContactStatusName(status): string {
+    return this.contactStatus.filter(e => e.value === status)[0]?.name || '';
   }
 }

@@ -1,0 +1,72 @@
+<div class="container pt-3">
+  <div class="row">
+    <h2 class="">{{'menu.contact.name' | translate}}</h2>
+    <nav class="">
+      <a class="breadcrumb-item" routerLink="/">{{'menu.home.name' | translate}}</a>
+      <span class="brd-separator"> / </span>
+      <span class="breadcrumb-item active">{{'menu.contact.name' | translate}}</span>
+    </nav>
+  </div>
+</div>
+<div class="container pt-3">
+  <form [formGroup]="formContact" (submit)="submit()">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="form-group">
+          <label>{{'contact.name' | translate}}</label>
+          <input class="form-control"
+                 formControlName="name"
+                 placeholder="{{'contact.name_placeholder' | translate}}">
+          <small class="form-text text-danger text-left"
+                 *ngIf="submitted && formContact.controls.name.errors?.required">
+            {{'contact.name_required' | translate}}
+          </small>
+        </div>
+        <div class="form-group pt-2">
+          <label>{{'contact.email' | translate}}</label>
+          <input class="form-control"
+                 formControlName="email"
+                 placeholder="{{'contact.email_placeholder' | translate}}">
+          <small class="form-text text-danger text-left"
+                 *ngIf="submitted && formContact.controls.email.errors?.required">
+            {{'contact.email_required' | translate}}
+          </small>
+          <small class="form-text text-danger text-left"
+                 *ngIf="(formContact.controls.email.dirty || formContact.controls.email.touched) && formContact.controls.email.errors?.pattern">
+            {{'contact.email_invalid' | translate}}
+          </small>
+        </div>
+        <div class="form-group pt-2">
+          <label>{{'contact.phone_number' | translate}}</label>
+          <input class="form-control"
+                 formControlName="phoneNumber"
+                 placeholder="{{'contact.phone_number_placeholder' | translate}}">
+          <small class="form-text text-danger text-left"
+                 *ngIf="submitted && formContact.controls.phoneNumber.errors?.required">
+            {{'contact.phone_number_required' | translate}}
+          </small>
+          <small class="form-text text-danger text-left"
+                 *ngIf="(formContact.controls.phoneNumber.dirty || formContact.controls.phoneNumber.touched) && formContact.controls.phoneNumber.errors?.pattern">
+            {{'contact.phone_number_invalid' | translate}}
+          </small>
+        </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="form-group pt-2 pt-md-0">
+          <label>{{'contact.content' | translate}}</label>
+          <textarea class="form-control" rows="10"
+                    formControlName="content"
+                    placeholder="{{'contact.content_placeholder' | translate}}">
+          </textarea>
+          <small class="form-text text-danger text-left"
+                 *ngIf="submitted && formContact.controls.content.errors?.required">
+            {{'contact.content_required' | translate}}
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 d-flex justify-content-end pt-3">
+      <button class="btn btn-outline-primary">{{'contact.btn_send' | translate}}</button>
+    </div>
+  </form>
+</div>

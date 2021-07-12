@@ -55,4 +55,9 @@ export class UrlConstant {
   // Dashboard
   public static readonly DASHBOARD = UrlConstant.ADMIN + '/dashboard';
   public static readonly DASHBOARD_OVERVIEW = UrlConstant.DASHBOARD + '/dashboard-overview';
+  // Contact
+  public static readonly CONTACT = '/contact';
+  public static readonly ADMIN_CONTACT = UrlConstant.ADMIN + UrlConstant.CONTACT;
+  public static readonly NEW_CONTACT = UrlConstant.CONTACT + '/new-contact';
+  public static readonly CONTACT_UPDATE_STATUS = UrlConstant.ADMIN_CONTACT + '/update-status';
 }

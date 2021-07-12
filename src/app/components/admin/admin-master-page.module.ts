@@ -30,6 +30,8 @@ import { InvoiceComponent } from './invoice/invoice.component';
 import { InvoiceUpdateStatusComponent } from 'src/app/components/admin/invoice/update-status/invoice-update-status.component';
 import { MailTemplateComponent } from './mail-template/mail-template.component';
 import { GoogleChartsModule } from 'angular-google-charts';
+import { ContactComponent } from './contact/contact.component';
+import { ContactUpdateStatusComponent } from 'src/app/components/admin/contact/update-status/contact-update-status.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { GoogleChartsModule } from 'angular-google-charts';
     VoucherComponent,
     InvoiceComponent,
     InvoiceUpdateStatusComponent,
+    ContactUpdateStatusComponent,
     MailTemplateComponent,
+    ContactComponent,
   ],
   exports: [
     SidebarComponent,

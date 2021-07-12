@@ -1,7 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as ClassicEditor from '../../../../assets/ckeditor5';
-import { AppConfigService } from '../../../service/app-config.service';
+import { AppConfigService } from 'src/app/service/app-config.service';
 import { UploadAdapter } from './UploadAdapter';
 
 @Component({

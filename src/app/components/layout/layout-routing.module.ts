@@ -7,6 +7,7 @@ import { MasterPageComponent } from 'src/app/components/master-page/master-page.
 import { ProductComponent } from 'src/app/components/layout/product/product.component';
 import { ProductListComponent } from 'src/app/components/layout/product-list/product-list.component';
 import { CheckoutComponent } from 'src/app/components/layout/checkout/checkout.component';
+import { ContactComponent } from 'src/app/components/layout/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -88,6 +89,20 @@ const routes: Routes = [
         component: CheckoutComponent,
         data: {
           page_title: 'menu.checkout.title',
+        },
+      },
+      {
+        path: 'lien-he',
+        component: ContactComponent,
+        data: {
+          page_title: 'menu.contact.title',
+        },
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+        data: {
+          page_title: 'menu.contact.title',
         },
       },
     ],
