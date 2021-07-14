@@ -6,7 +6,7 @@ import { AdminService } from '../../../../service/admin.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css'],
+  styleUrls: ['./sidebar.component.scss'],
   host: {
     '(window:resize)': 'onWindowResize($event)',
   },

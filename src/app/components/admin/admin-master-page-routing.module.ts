@@ -13,6 +13,7 @@ import { VoucherComponent } from 'src/app/components/admin/voucher/voucher.compo
 import { InvoiceComponent } from 'src/app/components/admin/invoice/invoice.component';
 import { MailTemplateComponent } from 'src/app/components/admin/mail-template/mail-template.component';
 import { ContactComponent } from 'src/app/components/admin/contact/contact.component';
+import { NewsComponent } from 'src/app/components/admin/news/news.component';
 
 const routes: Routes = [
   {
@@ -148,6 +149,20 @@ const routes: Routes = [
         },
         canActivate: [AuthGuard],
         canLoad: [AuthGuard],
+      },
+      {
+        path: 'tin-tuc',
+        component: NewsComponent,
+        data: {
+          page_title: 'menu.news.title',
+        },
+      },
+      {
+        path: 'news',
+        component: NewsComponent,
+        data: {
+          page_title: 'menu.news.title',
+        },
       },
     ],
   },

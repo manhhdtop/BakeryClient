@@ -103,10 +103,10 @@
       "title": "Category",
       "name": "Category"
     },
-    "new": {
-      "href": "/new",
-      "title": "New product, Coupon, and more...",
-      "name": "New"
+    "news": {
+      "href": "/news",
+      "title": "News product, Coupon, and more...",
+      "name": "News"
     },
     "contact": {
       "href": "/contact",
@@ -188,6 +188,11 @@
         "href": "/admin/contact",
         "title": "Contact Management",
         "name": "Contact"
+      },
+      "news": {
+        "href": "/admin/news",
+        "title": "News Management",
+        "name": "News"
       }
     }
   },

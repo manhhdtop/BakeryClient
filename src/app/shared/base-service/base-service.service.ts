@@ -7,7 +7,10 @@ import { Constant } from '../constants/constant.class';
 @Injectable()
 export class BaseService {
 
-  constructor(public httpClient: HttpClient, protected configService: AppConfigService) {
+  constructor(
+    protected configService: AppConfigService,
+    public httpClient: HttpClient,
+  ) {
   }
 
   static getToken(): string {
@@ -79,7 +82,7 @@ export class BaseService {
   }
 
   /**
-   * Create a new entity.
+   * Create a news entity.
    * @param url the api url
    * @param data the entity to create
    * @param params params

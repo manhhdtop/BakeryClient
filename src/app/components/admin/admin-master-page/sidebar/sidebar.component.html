@@ -70,6 +70,16 @@
   </li>
   <hr class="sidebar-divider">
   <div class="sidebar-heading">
+    {{'menu.admin.news.name' | translate}}
+  </div>
+  <li class="nav-item" [routerLinkActive]="'active'">
+    <a class="nav-link" routerLink="{{'menu.admin.news.href' | translate}}">
+      <i class="fas fa-fw fa-newspaper"></i>
+      <span>{{'menu.admin.news.name' | translate}}</span>
+    </a>
+  </li>
+  <hr class="sidebar-divider">
+  <div class="sidebar-heading">
     {{'menu.admin.user_role.name' | translate}}
   </div>
   <li class="nav-item" [routerLinkActive]="'active'">

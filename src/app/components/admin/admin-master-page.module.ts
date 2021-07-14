@@ -32,6 +32,7 @@ import { MailTemplateComponent } from './mail-template/mail-template.component';
 import { GoogleChartsModule } from 'angular-google-charts';
 import { ContactComponent } from './contact/contact.component';
 import { ContactUpdateStatusComponent } from 'src/app/components/admin/contact/update-status/contact-update-status.component';
+import { NewsComponent } from 'src/app/components/admin/news/news.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { ContactUpdateStatusComponent } from 'src/app/components/admin/contact/u
     ContactUpdateStatusComponent,
     MailTemplateComponent,
     ContactComponent,
+    NewsComponent,
   ],
   exports: [
     SidebarComponent,

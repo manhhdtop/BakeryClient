@@ -23,7 +23,7 @@ export class NumberInputDirective implements OnInit, ControlValueAccessor, OnDes
       this._onChange(value);
     });
 
-    /* Inform ng model for any new change happened */
+    /* Inform ng model for any news change happened */
     $(this.element.nativeElement).bind('customEvent', (newValue) => {
       this.ngModel.update.emit(newValue);
     });

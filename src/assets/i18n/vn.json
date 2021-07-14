@@ -118,7 +118,7 @@
       "title": "Danh mục sản phẩm",
       "name": "Danh mục"
     },
-    "new": {
+    "news": {
       "href": "/tin-tuc",
       "title": "Tin tức",
       "name": "Tin tức"
@@ -203,6 +203,11 @@
         "href": "/admin/lien-he",
         "title": "Quản lý Liên hệ",
         "name": "Liên hệ"
+      },
+      "news": {
+        "href": "/admin/tin-tuc",
+        "title": "Quản lý Tin tức",
+        "name": "Tin tức"
       }
     }
   },
@@ -602,6 +607,42 @@
     "status": "Trạng thái",
     "modal": {
       "btn_cancel": "Đóng",
+      "btn_delete": "Xóa"
+    }
+  },
+  "news": {
+    "header": "Quản lý Tin bài",
+    "table_name": "Danh sách Tin bài",
+    "table_search": "Tìm kiếm Tin bài...",
+    "btn_new": "Thêm mới",
+    "no": "STT",
+    "name": "Tên",
+    "name_required": "Tên không được để trống",
+    "name_placeholder": "Tên...",
+    "slug": "Slug",
+    "slug_required": "Slug không được để trống",
+    "slug_placeholder": "Slug...",
+    "description": "Mô tả",
+    "description_required": "Mô tả không được để trống",
+    "description_placeholder": "Mô tả...",
+    "content": "Nội dung",
+    "content_required": "Nội dung không được để trống",
+    "content_placeholder": "Nội dung...",
+    "using": "hoặc sử dụng",
+    "read": "Lượt xem",
+    "like": "Lượt thích",
+    "status": "Trạng thái",
+    "status_required": "Trạng thái không được để trống",
+    "created_date": "Ngày tạo",
+    "updated_date": "Ngày cập nhật",
+    "upload_date": "Đăng lúc",
+    "modal": {
+      "title_add": "Thêm mới Tin bài",
+      "title_update": "Cập nhật Tin bài",
+      "title_delete": "Xóa Tin tức",
+      "message_delete": "<p><strong>Bạn có chắc chắn muốn xóa Tin bài <span class=\"text-primary\">\"{{name}}\"</span> không?</strong></p><span class=\"text-danger\">Không thể hoàn tác thao tác này.</span></p>",
+      "btn_cancel": "Hủy",
+      "btn_submit": "Lưu",
       "btn_delete": "Xóa"
     }
   }
