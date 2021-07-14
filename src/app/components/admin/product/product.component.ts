@@ -107,7 +107,6 @@ export class ProductComponent implements OnInit {
     }, () => {
     });
   }
-
   submit(modal): void {
     this.submitted = true;
     if (this.formUpdate.invalid || !this.files || this.files.length === 0) {
@@ -115,6 +114,7 @@ export class ProductComponent implements OnInit {
     }
     this.formUpdate.controls.imageUploads.setValue(this.files);
     const body = {...this.formUpdate.value, productOptions: this.getOptions()};
+    body.price = body.price.toString().replace('.', '');
     if (this.currentProduct) {
       this.productService.update(body).subscribe(res => {
         if (res.errorCode === '200') {
