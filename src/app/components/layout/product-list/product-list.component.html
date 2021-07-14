@@ -3,17 +3,19 @@
     <div class="col-12 col-md-4 shadow bg-body py-3">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-search"></i> Tìm kiếm
+          <i class="fa fa-search"></i> {{'product.search' | translate}}
         </div>
         <div class="card-body">
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Tên sản phẩm..." [(ngModel)]="keyword">
+            <input type="text" class="form-control" placeholder="{{'product.product_name_placeholder' | translate}}"
+                   [(ngModel)]="keyword">
             <span class="input-group-text" id="keyword"><i class="fa fa-search"></i></span>
           </div>
           <hr>
           <div class="row mx-auto mb-3" *ngIf="categories && categories.length > 0">
             <div class="col-12 col-md-6 form-check" *ngFor="let c of categories">
-              <input id="category-{{c.id}}" class="form-check-input" type="checkbox" name="category" [value]="c.id" (change)="chooseCategory(c.id, $event.target.checked)">
+              <input id="category-{{c.id}}" class="form-check-input" type="checkbox" name="category" [value]="c.id"
+                     (change)="chooseCategory(c.id, $event.target.checked)">
               <label class="form-check-label text-truncate" for="category-{{c.id}}">{{c.name}}</label>
             </div>
           </div>
@@ -21,11 +23,11 @@
           <div class="mb-3" *ngIf="sliderOptions.floor != sliderOptions.ceil">
             <div class="row">
               <div class="col">
-                <label>Từ giá</label>
+                <label>{{'product.from_price' | translate}}</label>
                 <input class="form-control" [(ngModel)]="minPrice">
               </div>
               <div class="col">
-                <label>Đến giá</label>
+                <label>{{'product.to_price' | translate}}</label>
                 <input class="form-control" [(ngModel)]="maxPrice">
               </div>
             </div>
@@ -33,14 +35,14 @@
           </div>
         </div>
         <div class="card-footer">
-          <button class="btn btn-outline-primary" (click)="search()">Tìm kiếm</button>
+          <button class="btn btn-outline-primary" (click)="search()">{{'product.search' | translate}}</button>
         </div>
       </div>
     </div>
     <div class="col-12 col-md-8 shadow bg-body py-3">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-pie"></i> Sản phẩm
+          <i class="fa fa-pie"></i> {{'product.table_name' | translate}}
         </div>
         <div class="card-body items">
           <div class="row">

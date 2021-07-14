@@ -25,6 +25,12 @@ export const InvoiceStatus = [
   {value: -3, name: 'invoice_status.error'},
 ];
 
+export const ContactStatus = [
+  {value: 0, name: 'contact_status.init'},
+  {value: 1, name: 'contact_status.success'},
+  {value: 2, name: 'contact_status.reject'},
+];
+
 export const VoucherType = [
   {value: 1, name: 'voucher_type.amount', icon: 'vnd'},
   {value: 2, name: 'voucher_type.percent', icon: '%'},

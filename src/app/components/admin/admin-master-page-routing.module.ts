@@ -12,6 +12,7 @@ import { DashboardComponent } from 'src/app/components/admin/admin-master-page/d
 import { VoucherComponent } from 'src/app/components/admin/voucher/voucher.component';
 import { InvoiceComponent } from 'src/app/components/admin/invoice/invoice.component';
 import { MailTemplateComponent } from 'src/app/components/admin/mail-template/mail-template.component';
+import { ContactComponent } from 'src/app/components/admin/contact/contact.component';
 
 const routes: Routes = [
   {
@@ -135,6 +136,15 @@ const routes: Routes = [
         component: MailTemplateComponent,
         data: {
           page_title: 'menu.admin.mail_template.title',
+        },
+        canActivate: [AuthGuard],
+        canLoad: [AuthGuard],
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+        data: {
+          page_title: 'menu.admin.contact.title',
         },
         canActivate: [AuthGuard],
         canLoad: [AuthGuard],

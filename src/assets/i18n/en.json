@@ -30,6 +30,11 @@
     "shipping_error": "Shipping error",
     "error": "Error"
   },
+  "contact_status": {
+    "init": "Init",
+    "success": "Success",
+    "reject": "Reject"
+  },
   "voucher_type": {
     "amount": "Amount",
     "percent": "Percent"
@@ -178,6 +183,11 @@
         "href": "/admin/mail-template",
         "title": "Mail Template Management",
         "name": "Mail Template"
+      },
+      "contact": {
+        "href": "/admin/contact",
+        "title": "Contact Management",
+        "name": "Contact"
       }
     }
   },
@@ -202,6 +212,12 @@
     "updated_by": "Updated by",
     "status": "Status",
     "status_error": "Status is required",
+    "search": "Search",
+    "clear_filter": "Clear filter",
+    "product_name_placeholder": "Product name...",
+    "from_price": "From price",
+    "to_price": "To price",
+    "products": "Products",
     "modal": {
       "title_add": "Adding a category",
       "title_update": "Update category",
@@ -242,6 +258,11 @@
     "status_error": "Status is required",
     "btn_add_to_cart": "Add to cart",
     "btn_buy_now": "Buy now",
+    "search": "Search",
+    "clear_filter": "Clear filter",
+    "product_name_placeholder": "Product name...",
+    "from_price": "From price",
+    "to_price": "To price",
     "modal": {
       "title_add": "New Product",
       "title_update": "Update Product",
