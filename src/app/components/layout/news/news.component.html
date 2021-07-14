@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row py-3 border-bottom">
+    <nav>
+      <a class="breadcrumb-item" routerLink="/">{{'menu.home.name' | translate}}</a>
+      <span class="brd-separator"> / </span>
+      <a class="breadcrumb-item" routerLink="{{'menu.news.href' | translate}}">{{'menu.news.name' | translate}}</a>
+      <span class="brd-separator"> / </span>
+      <span class="breadcrumb-item active">{{ news?.name }}</span>
+    </nav>
+    <small>
+      {{'news.upload_date' | translate}} <span class="font-italic">{{news?.createdDate | dateFormat: 'dddd, dd/MM/yyyy HH:mm:ss'}}</span>
+    </small>
+  </div>
+  <div class="row">
+    <div class="col-12 pt-3" [innerHTML]="news?.content"></div>
+    <div class="col-12 pt-3 d-flex justify-content-end">
+      <small>{{'news.read' | translate}}: {{news?.read}}</small>
+      <small class="ml-3">{{'news.like' | translate}}: {{news?.like}}</small>
+    </div>
+  </div>
+</div>

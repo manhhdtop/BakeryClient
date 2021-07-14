@@ -17,6 +17,7 @@ import { ProductListComponent } from 'src/app/components/layout/product-list/pro
 import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ContactComponent } from './contact/contact.component';
+import { NewsComponent } from './news/news.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { ContactComponent } from './contact/contact.component';
     ProductListComponent,
     CheckoutComponent,
     ContactComponent,
+    NewsComponent,
   ],
     imports: [
         CommonModule,

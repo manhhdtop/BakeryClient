@@ -58,6 +58,11 @@ export class UrlConstant {
   // Contact
   public static readonly CONTACT = '/contact';
   public static readonly ADMIN_CONTACT = UrlConstant.ADMIN + UrlConstant.CONTACT;
-  public static readonly NEW_CONTACT = UrlConstant.CONTACT + '/new-contact';
+  public static readonly NEW_CONTACT = UrlConstant.CONTACT + '/news-contact';
   public static readonly CONTACT_UPDATE_STATUS = UrlConstant.ADMIN_CONTACT + '/update-status';
+  // Action
+  public static readonly NEWS = '/news';
+  public static readonly ADMIN_NEWS = UrlConstant.ADMIN + UrlConstant.NEWS;
+  public static readonly ACTIVE_NEWS = UrlConstant.ADMIN_NEWS + '/actives';
+  public static readonly CREATE_NEWS_SLUG = UrlConstant.ADMIN_NEWS + '/create-slug';
 }

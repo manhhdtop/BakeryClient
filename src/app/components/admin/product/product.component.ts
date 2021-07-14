@@ -20,7 +20,7 @@ import { Utils } from '../../../shared/util/utils';
 @Component({
   selector: 'app-product',
   templateUrl: './product.component.html',
-  styleUrls: ['./product.component.css'],
+  styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
   readonly statuses = Status;
@@ -39,7 +39,6 @@ export class ProductComponent implements OnInit {
   images: string;
   baseUrl: string;
   files: UploadResponse[];
-  readonly EditorType = EditorType;
 
   @ViewChild(CkeditorComponent) ckeditorModal;
 

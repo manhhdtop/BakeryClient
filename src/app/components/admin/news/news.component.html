@@ -1,0 +1,182 @@
+<div class="container-fluid">
+
+  <!-- Page Heading -->
+  <h1 class="h3 mb-3 text-gray-800">{{'news.header' | translate}}</h1>
+
+  <!-- DataTales Example -->
+  <div class="card shadow mb-4">
+    <div class="card-header py-3">
+      <h6 class="my-2 font-weight-bold text-primary">{{'news.table_name' | translate}}</h6>
+    </div>
+    <div class="card-body">
+      <div class="card-header py-3 d-flex justify-content-between">
+        <div class="col-auto px-0">
+          <button class="btn btn-primary" (click)="openModal(news_modal)">{{'news.btn_new' | translate}}</button>
+        </div>
+        <div class="col-auto px-0">
+          <form [formGroup]="formSearch" (submit)="search($event)"
+                class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100">
+            <div class="input-group">
+              <input type="text" class="form-control bg-light small" formControlName="keyword"
+                     placeholder="{{'news.table_search' | translate}}"
+                     aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th class="min">{{'news.no' | translate}}</th>
+              <th>{{'news.name' | translate}}</th>
+              <th>{{'news.slug' | translate}}</th>
+              <th>{{'news.read' | translate}}</th>
+              <th>{{'news.like' | translate}}</th>
+              <th>{{'news.created_date' | translate}}</th>
+              <th>{{'news.updated_date' | translate}}</th>
+              <th>{{'news.status' | translate}}</th>
+              <th class="min" *ngIf="newsList && newsList.length > 0"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let n of newsList, let i = index">
+              <td class="min">{{i + 1}}</td>
+              <td>{{n.name}}</td>
+              <td>{{n.slug}}</td>
+              <td>{{n.read}}</td>
+              <td>{{n.like}}</td>
+              <td>{{n.createdDate}}</td>
+              <td>{{n.updatedDate}}</td>
+              <td>{{getStatusName(n.status) | translate}}</td>
+              <td class="min">
+                <a role="button" class="mr-2" routerLink="/{{'menu.news.href' | translate}}/{{n.slug}}">
+                  <i class="fa fa-external-link"></i>
+                </a>
+                <a role="button" class="mr-2" (click)="delete(deleteNews, n)"><i class="fa fa-trash-alt"></i></a>
+                <a role="button" class="mr-2" (click)="openModal(news_modal, n)"><i
+                  class="fa fa-edit"></i></a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="d-flex justify-content-md-between mt-3" *ngIf="totalItem >= currentItems">
+        <div>
+          Showing {{(page - 1) * size + 1}} - {{(page - 1) * size + currentItems}} of {{totalItem}} items
+        </div>
+        <div>
+          <ngb-pagination
+            [(page)]="page"
+            [pageSize]="size"
+            [maxSize]="5"
+            [collectionSize]="totalItem"
+            [ellipses]="true"
+            (pageChange)="onPageChange()"
+          >
+          </ngb-pagination>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #news_modal let-modal class="modal-lg">
+    <div class="modal-header">
+      <div class="w-100">
+        <h4
+          class="modal-title">{{(currentNews ? 'news.modal.title_update' : 'news.modal.title_add') | translate}}</h4>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="formUpdate">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="form-group">
+              <label>{{'news.name' | translate}}</label>
+              <input type="text" class="form-control" placeholder="{{'news.name_placeholder' | translate}}"
+                     formControlName="name" (change)="getSlug()">
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid">
+                {{'news.name_not_blank' | translate}}
+              </small>
+            </div>
+          </div>
+          <div class="col-md-6 col-12 mt-2 mt-md-0">
+            <div class="form-group">
+              <label>{{'news.slug' | translate}}</label>
+              <input class="form-control" placeholder="{{'news.slug_placeholder' | translate}}"
+                     formControlName="slug" readonly>
+            </div>
+          </div>
+          <div class="col-md-12 col-12 mt-2">
+            <div class="form-group">
+              <label>{{'news.description' | translate}}
+                <em>({{'news.using' |translate}} <a href="#" (click)="writeDescription($event)">Editor</a>)</em>
+              </label>
+              <textarea type="text" class="form-control" placeholder="{{'news.description_placeholder' | translate}}"
+                        formControlName="description" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="col-md-12 col-12 mt-2">
+            <div class="form-group">
+              <label>{{'news.content' | translate}}
+                <em>({{'news.using' |translate}} <a href="#" (click)="writeContent($event)">Editor</a>)</em>
+              </label>
+              <textarea type="text" class="form-control" placeholder="{{'news.content_placeholder' | translate}}"
+                        formControlName="content" rows="3"></textarea>
+            </div>
+          </div>
+          <div class="col-md-6 col-12 mt-2">
+            <div class="form-group">
+              <label>{{'news.status' | translate}}</label>
+              <select class="form-control" formControlName="status">
+                <option value="">{{'choose' | translate}}</option>
+                <option *ngFor="let s of statuses" [value]="s.value">{{s.name | translate}}</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.status.invalid">
+                {{'news.status_error' | translate}}
+              </small>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-secondary" (click)="modal.dismiss()">
+        {{'news.modal.btn_cancel' | translate}}
+      </button>
+      <button class="btn btn-outline-primary" (click)="submit(modal)">
+        {{'news.modal.btn_submit' | translate}}
+      </button>
+    </div>
+  </ng-template>
+  <ng-template #deleteNews let-modalDelete>
+    <div class="modal-header">
+      <div class="w-100">
+        <h4 class="modal-title text-left font-weight-bold">{{'news.modal.title_delete' | translate}}</h4>
+      </div>
+      <button type="button" class="close" aria-label="Close" (click)="modalDelete.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body"
+         innerHtml="{{'news.modal.message_delete' | translate : {name: currentNews?.name} }}">
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-secondary" (click)="modalDelete.dismiss()">
+        {{'news.modal.btn_cancel' | translate}}
+      </button>
+      <button class="btn btn-outline-danger" (click)="modalDelete.close('ok')">
+        {{'news.modal.btn_delete' | translate}}
+      </button>
+    </div>
+  </ng-template>
+</div>
+<app-ckeditor [title]="'news.description'"></app-ckeditor>
