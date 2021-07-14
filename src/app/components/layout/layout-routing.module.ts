@@ -50,6 +50,27 @@ const routes: Routes = [
         },
       },
       {
+        path: 'category',
+        component: CategoryComponent,
+        data: {
+          page_title: 'menu.category.title',
+        },
+      },
+      {
+        path: 'danh-muc/:slug',
+        component: CategoryComponent,
+        data: {
+          page_title: 'menu.category.title',
+        },
+      },
+      {
+        path: 'category/:slug',
+        component: CategoryComponent,
+        data: {
+          page_title: 'menu.category.title',
+        },
+      },
+      {
         path: 'san-pham',
         component: ProductListComponent,
         data: {

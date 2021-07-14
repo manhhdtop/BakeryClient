@@ -1,8 +1,15 @@
 <header class="bg-light">
   <div class="container">
-    <div class="col-12 d-flex justify-content-center navbar-light">
-      <div class="col-sm-6 col-md-2">
-        <img class="img logo" src="/assets/image/logo.svg" alt="logo"/>
+    <div class="col-12 navbar-light">
+      <div class="row d-flex justify-content-center">
+        <div class="col-auto">
+          <img class="img logo" src="/assets/image/logo.svg" alt="logo"/>
+        </div>
+      </div>
+      <div class="row d-flex justify-content-center">
+        <div class="col-auto font-italic">
+          Thế giới ngọt ngào trong vòng tay bạn
+        </div>
       </div>
     </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -16,18 +23,18 @@
             <a class="nav-link" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}"
                routerLink="{{'menu.home.href' | translate}}">{{'menu.home.name' | translate}}</a>
           </li>
-<!--          <li class="nav-item">-->
-<!--            <a class="nav-link" [routerLinkActive]="'active'"-->
-<!--               routerLink="{{'menu.about.href' | translate}}">{{'menu.about.name' | translate}}</a>-->
-<!--          </li>-->
+          <!--          <li class="nav-item">-->
+          <!--            <a class="nav-link" [routerLinkActive]="'active'"-->
+          <!--               routerLink="{{'menu.about.href' | translate}}">{{'menu.about.name' | translate}}</a>-->
+          <!--          </li>-->
           <li class="nav-item">
             <a class="nav-link" [routerLinkActive]="'active'"
                routerLink="{{'menu.product.href' | translate}}">{{'menu.product.name' | translate}}</a>
           </li>
-<!--          <li class="nav-item">-->
-<!--            <a class="nav-link" [routerLinkActive]="'active'"-->
-<!--               routerLink="{{'menu.new.href' | translate}}">{{'menu.new.name' | translate}}</a>-->
-<!--          </li>-->
+          <!--          <li class="nav-item">-->
+          <!--            <a class="nav-link" [routerLinkActive]="'active'"-->
+          <!--               routerLink="{{'menu.new.href' | translate}}">{{'menu.new.name' | translate}}</a>-->
+          <!--          </li>-->
           <li class="nav-item">
             <a class="nav-link" [routerLinkActive]="'active'"
                routerLink="{{'menu.contact.href' | translate}}">{{'menu.contact.name' | translate}}</a>
@@ -61,7 +68,8 @@
         <div class="nav-item navbar-nav">
           <a class="nav-link" role="button" (click)="open(cart_modal)">
             <i class="fas fa-shopping-cart"></i>
-            <span class="badge bg-danger badge-counter" *ngIf="itemAmount && itemAmount > 0">{{itemAmount > 3 ? '3+' : itemAmount}}</span>
+            <span class="badge bg-danger badge-counter"
+                  *ngIf="itemAmount && itemAmount > 0">{{itemAmount > 3 ? '3+' : itemAmount}}</span>
           </a>
         </div>
       </div>
@@ -118,7 +126,7 @@
             <h3><a routerLink="/product/{{item.product.slug}}">{{item.product.name}}</a></h3>
             <span class="quantity">{{'cart.quantity_less' | translate}}: {{item.quantity}}</span><br/>
             <span class="quantity" *ngFor="let entry of item.options">
-                {{getOptionType(item, entry).name}}: {{getOption(item, entry).value}}
+              {{getOptionType(item, entry).name}}: {{getOption(item, entry).value}}
             </span><br/>
             <span class="shp__price">
               {{'cart.price' | translate}}: {{item.product.price | numberFormat}} {{'vnd' | translate}}
