@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve --port 8000 --open",
-    "build": "ng build --base-href bakery --output-path /var/www/bakery",
+    "build": "ng build --base-href /bakery/ --output-path /var/www/bakery --delete-output-path true",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
