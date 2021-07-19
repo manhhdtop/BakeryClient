@@ -1,6 +1,6 @@
 {
   "api": {
-    "baseUrl": "http://localhost:8081"
+    "baseUrl": "http://35.220.255.222:8081"
   },
   "size": [
     10,
