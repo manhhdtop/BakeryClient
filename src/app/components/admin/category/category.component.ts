@@ -26,7 +26,6 @@ export class CategoryComponent implements OnInit {
   size: number;
   totalItem: number;
   currentItems: number;
-  namePattern: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -40,7 +39,6 @@ export class CategoryComponent implements OnInit {
 
   ngOnInit(): void {
     this.dateDdMmYyHhMmSs = Constant.DATE_DDMMYY_HHMMSS;
-    this.namePattern = Constant.NAME_PATTERN;
     this.selectedCategory = undefined;
     this.page = 1;
     this.size = 20;
@@ -116,7 +114,7 @@ export class CategoryComponent implements OnInit {
     if (category) {
       return this.fb.group({
         id: [category.id, Validators.required],
-        name: [category.name, [Validators.required, Validators.pattern(this.namePattern)]],
+        name: [category.name, Validators.required],
         slug: [category.slug, Validators.required],
         description: [category.description],
         parentId: [category.parent?.id],
@@ -125,7 +123,7 @@ export class CategoryComponent implements OnInit {
     }
     return this.fb.group({
       id: [null],
-      name: ['', [Validators.required, Validators.pattern(this.namePattern)]],
+      name: ['', Validators.required],
       slug: ['', Validators.required],
       description: [''],
       parentId: [''],
