@@ -143,7 +143,7 @@ export class NewsComponent implements OnInit {
   }
 
   private getNews(): void {
-    this.newsService.getNews(this.formSearch.value).subscribe(res => {
+    this.newsService.getAdminNews(this.formSearch.value).subscribe(res => {
       this.newsList = res.data.content;
       this.page = res.data.pageable.pageNumber + 1;
       this.size = res.data.pageable.pageSize;

@@ -13,8 +13,12 @@ export class NewsService {
   ) {
   }
 
-  getNews(params): Observable<any> {
+  getAdminNews(params): Observable<any> {
     return this.baseService.get(UrlConstant.ADMIN_NEWS, params);
+  }
+
+  getNews(params): Observable<any> {
+    return this.baseService.get(UrlConstant.NEWS, params);
   }
 
   getNewsActives(): Observable<any> {
