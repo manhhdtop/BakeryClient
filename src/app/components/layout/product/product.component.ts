@@ -7,6 +7,8 @@ import { AppConfigService } from 'src/app/service/app-config.service';
 import { OptionType } from 'src/app/shared/model/option-type';
 import { CartService } from 'src/app/service/cart.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Utils } from 'src/app/shared/util/utils';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-product',
@@ -33,6 +35,7 @@ export class ProductComponent implements OnInit {
     private cartService: CartService,
     private productService: ProductService,
     private router: Router,
+    private titleService: Title,
     private toast: ToastService,
     private translate: TranslateService,
   ) {
@@ -51,6 +54,9 @@ export class ProductComponent implements OnInit {
     if (this.slug) {
       this.productService.getProductBySlug(this.slug).subscribe(res => {
         this.product = res.data;
+        this.router.events.subscribe((val) => {
+          this.titleService.setTitle(this.product.name);
+        });
         this.price = this.product.price;
         this.optionTypes = this.product.optionTypes;
         this.loaded = true;

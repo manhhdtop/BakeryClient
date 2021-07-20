@@ -4,11 +4,11 @@ import { ToastService } from 'src/app/service/toast.service';
 import { AppConfigService } from 'src/app/service/app-config.service';
 
 @Component({
-  selector: 'app-slider',
-  templateUrl: './slider.component.html',
-  styleUrls: ['./slider.component.scss'],
+  selector: 'app-slider-image',
+  templateUrl: './slider-image.component.html',
+  styleUrls: ['./slider-image.component.scss'],
 })
-export class SliderComponent implements OnInit, OnChanges {
+export class SliderImageComponent implements OnInit, OnChanges {
   @Input() images: UploadResponse[];
   @Input() index: number;
   @Output() changeEvent: EventEmitter<number> = new EventEmitter<number>();

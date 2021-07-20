@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { ToastService } from 'src/app/service/toast.service';
 import { News } from 'src/app/shared/model/news';
 import { UrlConstant } from 'src/app/shared/constants/url.class';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-news',
@@ -16,6 +17,7 @@ export class NewsComponent implements OnInit {
   constructor(
     private newsService: NewsService,
     private router: Router,
+    private titleService: Title,
     private toast: ToastService,
   ) {
   }
@@ -31,6 +33,9 @@ export class NewsComponent implements OnInit {
       slug = '/' + arr[arr.length - 1].toLowerCase();
       this.newsService.getNewsBySlug(slug).subscribe(res => {
         this.news = res.data;
+        this.router.events.subscribe((val) => {
+          this.titleService.setTitle(this.news.name);
+        });
       });
     } else {
       this.router.navigate([UrlConstant.PAGE_NOT_FOUND], {skipLocationChange: true});

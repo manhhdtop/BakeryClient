@@ -548,6 +548,7 @@
     "status": "Status",
     "status_placeholder": "Status...",
     "status_required": "Status can not blank",
+    "no_news_available": "No news available now",
     "modal": {
       "title_add": "Add Mail Template",
       "title_update": "Update Mail Template",

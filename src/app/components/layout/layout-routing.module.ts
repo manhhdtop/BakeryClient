@@ -9,6 +9,7 @@ import { ProductListComponent } from 'src/app/components/layout/product-list/pro
 import { CheckoutComponent } from 'src/app/components/layout/checkout/checkout.component';
 import { ContactComponent } from 'src/app/components/layout/contact/contact.component';
 import { NewsComponent } from 'src/app/components/layout/news/news.component';
+import { NewsListComponent } from 'src/app/components/layout/news-list/news-list.component';
 
 const routes: Routes = [
   {
@@ -129,14 +130,14 @@ const routes: Routes = [
       },
       {
         path: 'tin-tuc',
-        component: NewsComponent,
+        component: NewsListComponent,
         data: {
           page_title: 'menu.news.title',
         },
       },
       {
         path: 'news',
-        component: NewsComponent,
+        component: NewsListComponent,
         data: {
           page_title: 'menu.news.title',
         },

@@ -636,6 +636,7 @@
     "created_date": "Ngày tạo",
     "updated_date": "Ngày cập nhật",
     "upload_date": "Đăng lúc",
+    "no_news_available": "Không có bài viết nào để hiển thị",
     "modal": {
       "title_add": "Thêm mới Tin bài",
       "title_update": "Cập nhật Tin bài",

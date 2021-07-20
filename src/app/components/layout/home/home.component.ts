@@ -6,6 +6,8 @@ import { ProductService } from 'src/app/service/product.service';
 import { ToastService } from 'src/app/service/toast.service';
 import { MenuCategory } from 'src/app/shared/model/menu-category';
 import { Product } from 'src/app/shared/model/product';
+import { News } from 'src/app/shared/model/news';
+import { NewsService } from 'src/app/service/news.service';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +17,7 @@ import { Product } from 'src/app/shared/model/product';
 export class HomeComponent implements OnInit {
   categories: MenuCategory[];
   products: Product[];
+  newsList: News[];
   currentProduct: Product;
   page: number;
   size: number;
@@ -27,6 +30,7 @@ export class HomeComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private appConfigService: AppConfigService,
     private categoryService: CategoryService,
+    private newsService: NewsService,
     private productService: ProductService,
     private toast: ToastService,
   ) {
@@ -35,13 +39,14 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.getMenuCategory();
     this.getProduct();
+    this.getNews();
     this.baseUrl = this.appConfigService.getConfig().api.baseUrl;
     this.page = this.activatedRoute.snapshot.queryParams.page || this.appConfigService.getConfig().page;
     this.size = this.activatedRoute.snapshot.queryParams.size || this.appConfigService.getConfig().defaultPageSize;
     this.images = [
       '/files/images/1621000152449.png',
       '/files/images/1621000156358.png',
-      '/files/images/1621000159199.png'
+      '/files/images/1621000159199.png',
     ];
   }
 
@@ -55,6 +60,12 @@ export class HomeComponent implements OnInit {
   private getProduct(): void {
     this.productService.getProducts().subscribe(res => {
       this.products = [...res.data.content];
+    });
+  }
+
+  private getNews(): void {
+    this.newsService.getNewActives().subscribe(res => {
+      this.newsList = [...res.data.content];
     });
   }
 

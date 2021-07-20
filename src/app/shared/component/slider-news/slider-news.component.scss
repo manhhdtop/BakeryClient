@@ -1,0 +1,51 @@
+span.control {
+  color: #adb5bd;
+  padding: .75rem .5rem;
+}
+
+span.control:hover {
+  color: #fff;
+}
+
+.slider::-webkit-scrollbar {
+  display: none;
+}
+
+.slider {
+  display: flex;
+  flex-flow: row;
+  overflow: auto;
+  width: 100%;
+  padding: 0.25rem;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  .slide {
+    padding: 0.25rem;
+    flex-shrink: 0;
+    margin-right: .15rem;
+    width: 25%;
+    border: 1px solid transparent;
+    scroll-snap-align: start;
+    font-size: 12px;
+    background: #fff;
+
+    h3 {
+      font-size: 15px;
+    }
+
+    .image-cover {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+  }
+
+  .slide:last-child {
+    margin-right: 0;
+  }
+}

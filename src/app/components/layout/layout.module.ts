@@ -18,6 +18,7 @@ import { NgxSliderModule } from '@angular-slider/ngx-slider';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ContactComponent } from './contact/contact.component';
 import { NewsComponent } from './news/news.component';
+import { NewsListComponent } from './news-list/news-list.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { NewsComponent } from './news/news.component';
     CheckoutComponent,
     ContactComponent,
     NewsComponent,
+    NewsListComponent,
   ],
     imports: [
         CommonModule,
