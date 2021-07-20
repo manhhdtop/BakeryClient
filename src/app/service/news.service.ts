@@ -17,7 +17,7 @@ export class NewsService {
     return this.baseService.get(UrlConstant.ADMIN_NEWS, params);
   }
 
-  getNewActives(): Observable<any> {
+  getNewsActives(): Observable<any> {
     return this.baseService.get(UrlConstant.ACTIVE_NEWS);
   }
 
@@ -43,4 +43,9 @@ export class NewsService {
   getNewsBySlug(slug: string): Observable<any> {
     return this.baseService.get(UrlConstant.NEWS + slug);
   }
+
+  getHomeNews(): Observable<any> {
+    return this.baseService.get(UrlConstant.HOME_NEWS);
+  }
+
 }

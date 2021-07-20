@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
   }
 
   private getNews(): void {
-    this.newsService.getNewActives().subscribe(res => {
+    this.newsService.getHomeNews().subscribe(res => {
       this.newsList = [...res.data.content];
     });
   }

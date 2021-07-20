@@ -65,4 +65,5 @@ export class UrlConstant {
   public static readonly ADMIN_NEWS = UrlConstant.ADMIN + UrlConstant.NEWS;
   public static readonly ACTIVE_NEWS = UrlConstant.ADMIN_NEWS + '/actives';
   public static readonly CREATE_NEWS_SLUG = UrlConstant.ADMIN_NEWS + '/create-slug';
+  public static readonly HOME_NEWS = UrlConstant.NEWS + '/home-news';
 }
