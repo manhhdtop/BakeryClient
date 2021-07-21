@@ -8,6 +8,7 @@ import { MenuCategory } from 'src/app/shared/model/menu-category';
 import { Product } from 'src/app/shared/model/product';
 import { News } from 'src/app/shared/model/news';
 import { NewsService } from 'src/app/service/news.service';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home',
@@ -30,9 +31,14 @@ export class HomeComponent implements OnInit {
     private appConfigService: AppConfigService,
     private categoryService: CategoryService,
     private newsService: NewsService,
+    private config: NgbCarouselConfig,
     private productService: ProductService,
     private toast: ToastService,
   ) {
+    config.interval = 10000;
+    config.wrap = true;
+    config.keyboard = false;
+    config.pauseOnHover = true;
   }
 
   ngOnInit(): void {
