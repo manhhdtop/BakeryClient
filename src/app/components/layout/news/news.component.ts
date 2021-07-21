@@ -33,9 +33,7 @@ export class NewsComponent implements OnInit {
       slug = '/' + arr[arr.length - 1].toLowerCase();
       this.newsService.getNewsBySlug(slug).subscribe(res => {
         this.news = res.data;
-        this.router.events.subscribe((val) => {
-          this.titleService.setTitle(this.news.name);
-        });
+        this.titleService.setTitle(this.news.name);
       });
     } else {
       this.router.navigate([UrlConstant.PAGE_NOT_FOUND], {skipLocationChange: true});

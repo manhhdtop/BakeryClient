@@ -10,6 +10,7 @@ import { ToastService } from 'src/app/service/toast.service';
 import { LabelType, Options } from '@angular-slider/ngx-slider';
 import { formatNumber } from '@angular/common';
 import { MenuCategory } from 'src/app/shared/model/menu-category';
+import { Title } from '@angular/platform-browser';
 
 interface Param {
   name?: string;
@@ -50,6 +51,7 @@ export class CategoryComponent implements OnInit {
     private productService: ProductService,
     private route: ActivatedRoute,
     private router: Router,
+    private titleService: Title,
     private toast: ToastService,
   ) {
   }
@@ -83,6 +85,7 @@ export class CategoryComponent implements OnInit {
       this.categoryService.getCategoryBySlug(slug).subscribe(res => {
         this.category = res.data;
         this.categoryIds = [this.category.id];
+        this.titleService.setTitle(this.category.name);
       });
     } else {
       this.category = undefined;
