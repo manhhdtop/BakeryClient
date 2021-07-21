@@ -12,7 +12,7 @@ import { NewsService } from 'src/app/service/news.service';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css', '../../../../assets/css/items.scss'],
+  styleUrls: ['./home.component.scss', '../../../../assets/css/items.scss'],
 })
 export class HomeComponent implements OnInit {
   categories: MenuCategory[];
@@ -22,7 +22,6 @@ export class HomeComponent implements OnInit {
   page: number;
   size: number;
   baseUrl: string;
-  images: any[];
 
   @ViewChild('addToCardModal') addToCardModal;
 
@@ -43,11 +42,6 @@ export class HomeComponent implements OnInit {
     this.baseUrl = this.appConfigService.getConfig().api.baseUrl;
     this.page = this.activatedRoute.snapshot.queryParams.page || this.appConfigService.getConfig().page;
     this.size = this.activatedRoute.snapshot.queryParams.size || this.appConfigService.getConfig().defaultPageSize;
-    this.images = [
-      '/files/images/1621000152449.png',
-      '/files/images/1621000156358.png',
-      '/files/images/1621000159199.png',
-    ];
   }
 
   private getMenuCategory(): void {
