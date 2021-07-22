@@ -67,11 +67,8 @@ export class CartService {
   }
 
   getTotalAmount(): number {
-    let sum = 0;
-    for (const item of this.items) {
-      sum += item.price;
-    }
-    return sum;
+    const totalAmount = this.items.map(({quantity, product}) => product.price * quantity).reduce((a, b) => a + b, 0);
+    return totalAmount;
   }
 
   private saveCart(): void {

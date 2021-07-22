@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+    import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/service/category.service';
 import { Category } from 'src/app/shared/model/category';

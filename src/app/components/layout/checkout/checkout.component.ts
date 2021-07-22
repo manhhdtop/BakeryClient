@@ -55,9 +55,8 @@ export class CheckoutComponent implements OnInit {
     this.buildForm();
     this.cartService.itemEvent.subscribe(e => {
       if (!this.orderSuccess && (!e || e.length === 0)) {
-        // tslint:disable-next-line:no-shadowed-variable
-        this.translate.get('menu.product.href').subscribe(e => {
-          this.router.navigate([e]);
+        this.translate.get('menu.product.href').subscribe(s => {
+          this.router.navigate([s]);
         });
       }
       this.items = e;
