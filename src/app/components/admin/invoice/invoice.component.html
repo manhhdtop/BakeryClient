@@ -19,7 +19,7 @@
                      ngbTooltip="{{'invoice.table_search_hint' | translate}}" placement="bottom">
               <div class="input-group-append">
                 <button class="btn btn-primary">
-                  <i class="fas fa-search fa-sm"></i>
+                  <i class="far fa-search fa-sm"></i>
                 </button>
               </div>
             </div>
@@ -52,10 +52,10 @@
               <td>{{invoice.createdDate | dateFormat: dateDdmmyyHhmmss}}</td>
               <td>{{getStatusName(invoice.status) | translate}}</td>
               <td class="min">
-                <a role="button" class="mr-2" (click)="view(viewInvoice, invoice)"><i class="fa fa-eye"></i></a>
+                <a role="button" class="mr-2" (click)="view(viewInvoice, invoice)"><i class="far fa-eye"></i></a>
                 <a role="button" class="mr-2" (click)="updateStatus(invoice)"
                    *ngIf="invoice.status !== 3 && invoice.status !== -1 && invoice.status !== -2 && invoice.status !== -3">
-                  <i class="fa fa-toggle-on"></i>
+                  <i class="far fa-toggle-on"></i>
                 </a>
               </td>
             </tr>

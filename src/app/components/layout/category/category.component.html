@@ -21,12 +21,12 @@
       <div class="col-12 col-md-4 shadow bg-body py-3">
         <div class="card">
           <div class="card-header">
-            <i class="fa fa-search"></i> {{'category.search' | translate}}
+            <i class="far fa-search"></i> {{'category.search' | translate}}
           </div>
           <div class="card-body">
             <div class="input-group mb-3">
               <input type="text" class="form-control" placeholder="{{'category.product_name_placeholder' | translate}}" [(ngModel)]="keyword">
-              <span class="input-group-text" id="keyword"><i class="fa fa-search"></i></span>
+              <span class="input-group-text" id="keyword"><i class="far fa-search"></i></span>
             </div>
             <hr *ngIf="!category">
             <div class="row mx-auto mb-3" *ngIf="!category && categories && categories.length > 0">
@@ -61,7 +61,7 @@
       <div class="col-12 col-md-8 shadow bg-body py-3">
         <div class="card">
           <div class="card-header">
-            <i class="fa fa-pie"></i> {{'category.products' | translate}}
+            <i class="far fa-pie"></i> {{'category.products' | translate}}
           </div>
           <div class="card-body items">
             <div class="row">

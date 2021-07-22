@@ -3,7 +3,7 @@
     <div class="col-12 navbar-light">
       <div class="row d-flex justify-content-center">
         <div class="col-auto">
-          <img class="img logo" src="/assets/image/logo.svg" alt="logo"/>
+          <img class="img logo" src="assets/image/logo.svg" alt="logo"/>
         </div>
       </div>
       <div class="row d-flex justify-content-center">
@@ -45,13 +45,13 @@
       <div class="topbar float-right navbar">
         <div class="nav-item navbar-nav">
           <a class="nav-link" role="button" (click)="toggleSearch()">
-            <i class="fas fa-search"></i>
+            <i class="far fa-search"></i>
           </a>
         </div>
         <div class="nav-item navbar-nav">
           <a class="nav-link dropdown-toggle" role="button"
              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-globe"></i>
+            <i class="far fa-globe"></i>
           </a>
           <div class="language-popup dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
                aria-labelledby="language">
@@ -68,7 +68,7 @@
         </div>
         <div class="nav-item navbar-nav">
           <a class="nav-link" role="button" (click)="open(cart_modal)">
-            <i class="fas fa-shopping-cart"></i>
+            <i class="far fa-shopping-cart"></i>
             <span class="badge bg-danger badge-counter"
                   *ngIf="itemAmount && itemAmount > 0">{{itemAmount > 3 ? '3+' : itemAmount}}</span>
           </a>
@@ -90,7 +90,7 @@
                      aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-primary">
-                  <i class="fas fa-search fa-sm"></i>
+                  <i class="far fa-search fa-sm"></i>
                 </button>
               </div>
               <div class="w-100">
@@ -98,7 +98,7 @@
               </div>
             </div>
             <div class="search_close_btn col-auto my-auto" role="button">
-              <span class="search_close_btn_icon" (click)="toggleSearch()"><i class="fa fa-times-circle"></i></span>
+              <span class="search_close_btn_icon" (click)="toggleSearch()"><i class="far fa-times-circle"></i></span>
             </div>
           </div>
         </form>

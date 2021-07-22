@@ -1,7 +1,7 @@
 <div class="col-12 bg-gray-300" *ngIf="images && images.length > 0">
   <div class="row my-2">
     <div class="col-auto align-self-center px-0" *ngIf="images.length > 4">
-      <span role="button" class="control" (click)="previous()"><i class="fa fa-chevron-left"></i></span>
+      <span role="button" class="control" (click)="previous()"><i class="far fa-chevron-left"></i></span>
       <span class="sr-only control" (click)="previous()">{{'slider-image.previous' | translate}}</span>
     </div>
     <div class="col align-self-center p-0 o-hidden">
@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="col-auto align-self-center px-0" *ngIf="images.length > 4">
-      <span role="button" class="control" (click)="next()"><i class="fa fa-chevron-right"></i></span>
+      <span role="button" class="control" (click)="next()"><i class="far fa-chevron-right"></i></span>
       <span class="sr-only control" (click)="next()">{{'slider-image.next' | translate}}</span>
     </div>
   </div>

@@ -22,7 +22,7 @@
                      aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-primary">
-                  <i class="fas fa-search fa-sm"></i>
+                  <i class="far fa-search fa-sm"></i>
                 </button>
               </div>
             </div>
@@ -51,8 +51,8 @@
               <td>{{p.slug}}</td>
               <td>{{getStatusName(p.status) | translate}}</td>
               <td class="min">
-                <a role="button" class="mr-2" routerLink="/product/{{p.slug}}"> <i class="fa fa-external-link"></i> </a>
-                <a role="button" class="mr-2" (click)="delete(deleteProduct, p)"><i class="fa fa-trash-alt"></i></a>
+                <a role="button" class="mr-2" routerLink="/product/{{p.slug}}"> <i class="far fa-external-link"></i> </a>
+                <a role="button" class="mr-2" (click)="delete(deleteProduct, p)"><i class="far fa-trash-alt"></i></a>
                 <a role="button" class="mr-2" (click)="openModal(product, p)"><i
                   class="fa fa-edit"></i></a>
               </td>
@@ -181,14 +181,15 @@
                           </div>
                           <div class="col-auto p-0">
                             <button class="btn btn-outline-primary" (click)="removeOption(ot, i)">
-                              <i class="fa fa-minus-circle"></i>
+                              <i class="far fa-minus-circle"></i>
                             </button>
                           </div>
                         </div>
                       </div>
                       <div class="col-auto pr-0">
-                        <button class="btn btn-outline-primary" (click)="addOption(ot)"><i
-                          class="fa fa-plus-circle"></i></button>
+                        <button class="btn btn-outline-primary" (click)="addOption(ot)">
+                          <i class="far fa-plus-circle"></i>
+                        </button>
                       </div>
                     </div>
                   </div>

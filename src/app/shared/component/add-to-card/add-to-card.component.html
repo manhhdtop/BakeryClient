@@ -31,9 +31,9 @@
         <div class="w-100 d-flex flex-row justify-content-between mb-3">
           <span class="my-auto">{{'cart.quantity_less' | translate}}</span>
           <div class="w-auto d-flex flex-row justify-content-between mx-3">
-            <span role="button" class="my-auto" (click)="decreaseQuantity()"><i class="fa fa-minus-circle"></i></span>
+            <span role="button" class="my-auto" (click)="decreaseQuantity()"><i class="far fa-minus-circle"></i></span>
             <input numberInput class="form-control w-50" [(ngModel)]="quantity">
-            <span role="button" class="my-auto" (click)="increaseQuantity()"><i class="fa fa-plus-circle"></i></span>
+            <span role="button" class="my-auto" (click)="increaseQuantity()"><i class="far fa-plus-circle"></i></span>
           </div>
         </div>
         <button class="btn btn-outline-primary" (click)="save(modal)">Add To Cart</button>

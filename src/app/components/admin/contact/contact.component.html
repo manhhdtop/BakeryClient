@@ -19,7 +19,7 @@
                      ngbTooltip="{{'contact.table_search_hint' | translate}}" placement="bottom">
               <div class="input-group-append">
                 <button class="btn btn-primary">
-                  <i class="fas fa-search fa-sm"></i>
+                  <i class="far fa-search fa-sm"></i>
                 </button>
               </div>
             </div>
@@ -48,10 +48,10 @@
               <td>{{contact.updatedBy ? contact.updatedDate : ''}}</td>
               <td>{{getStatusName(contact.status) | translate}}</td>
               <td class="min">
-                <a role="button" class="mr-2" (click)="view(viewContact, contact)"><i class="fa fa-eye"></i></a>
+                <a role="button" class="mr-2" (click)="view(viewContact, contact)"><i class="far fa-eye"></i></a>
                 <a role="button" class="mr-2" (click)="updateStatus(contact)"
                    *ngIf="contact.status !== 3 && contact.status !== -1 && contact.status !== -2 && contact.status !== -3">
-                  <i class="fa fa-toggle-on"></i>
+                  <i class="far fa-toggle-on"></i>
                 </a>
               </td>
             </tr>

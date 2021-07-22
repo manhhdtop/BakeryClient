@@ -35,7 +35,7 @@
   <!--  Main section-->
   <div class="row mt-3">
     <div class="col-sm-12 col-md-4" *ngIf="categories && categories.length > 0">
-      <ul class="nav navbar-light flex-column">
+      <ul class="nav navbar-light flex-column rounded border">
         <li class="nav-item px-2 text-white topbar">
           <h3>{{'menu.category.name' | translate}}</h3>
         </li>
@@ -58,7 +58,7 @@
     <div class="col-sm-12 col-md-8">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-pie"></i> {{'menu.product.name' | translate}}
+          <i class="far fa-pie"></i> {{'menu.product.name' | translate}}
         </div>
         <div class="card-body">
           <div class="row items">
@@ -86,7 +86,7 @@
     <div class="col-12">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-pie"></i> {{'home.news_section' | translate}}
+          <i class="far fa-pie"></i> {{'home.news_section' | translate}}
         </div>
         <div class="card-body">
           <app-slider-news [newsList]="newsList"></app-slider-news>
