@@ -9,6 +9,8 @@ import { NewsService } from 'src/app/service/news.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastService } from 'src/app/service/toast.service';
 import { Utils } from 'src/app/shared/util/utils';
+import { UploadResponse } from 'src/app/shared/model/upload-response';
+import { UploadService } from 'src/app/service/upload.service';
 
 @Component({
   selector: 'app-news',
@@ -27,6 +29,7 @@ export class NewsComponent implements OnInit {
   totalItem: number;
   currentItems: number;
   baseUrl: string;
+  image: UploadResponse;
 
   @ViewChild(CkeditorComponent) ckeditorModal;
 
@@ -38,6 +41,7 @@ export class NewsComponent implements OnInit {
     private modalService: NgbModal,
     private router: Router,
     private toast: ToastService,
+    private uploadService: UploadService,
   ) {
   }
 
@@ -88,6 +92,7 @@ export class NewsComponent implements OnInit {
       return;
     }
     const body = this.formUpdate.value;
+    body.imageUpload = this.image;
     if (this.currentNews) {
       this.newsService.update(body).subscribe(res => {
         if (res.errorCode === '200') {
@@ -114,19 +119,23 @@ export class NewsComponent implements OnInit {
 
   initForm(news): FormGroup {
     if (news) {
+      this.image = news.image;
       return this.fb.group({
         id: [news.id, Validators.required],
         name: [news.name, Validators.required],
         slug: [news.slug, Validators.required],
+        imageUpload: [news.image?.fileName, Validators.required],
         description: [news.description],
         content: [news.content, Validators.required],
         status: [news.status, Validators.required],
       });
     }
+    this.image = undefined;
     return this.fb.group({
       id: [null],
       name: ['', Validators.required],
       slug: ['', Validators.required],
+      imageUpload: ['', Validators.required],
       description: [''],
       content: ['', Validators.required],
       status: ['', Validators.required],
@@ -134,7 +143,7 @@ export class NewsComponent implements OnInit {
   }
 
   private getNews(): void {
-    this.newsService.getNews(this.formSearch.value).subscribe(res => {
+    this.newsService.getAdminNews(this.formSearch.value).subscribe(res => {
       this.newsList = res.data.content;
       this.page = res.data.pageable.pageNumber + 1;
       this.size = res.data.pageable.pageSize;
@@ -176,6 +185,15 @@ export class NewsComponent implements OnInit {
     this.ckeditorModal.open(this.formUpdate.controls.content.value).then(() => {
       this.formUpdate.controls.content.setValue(this.ckeditorModal.changedData);
     }, () => {
+    });
+  }
+
+  processFile(imageInput: any): void {
+    const formData: FormData = new FormData();
+    formData.append('file', imageInput.files[0]);
+    this.uploadService.uploadImage(formData).subscribe(res => {
+      this.image = res;
+      this.formUpdate.controls.imageUpload.setValue(res.fileName);
     });
   }
 }

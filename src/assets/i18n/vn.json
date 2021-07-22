@@ -2,6 +2,7 @@
   "logo_text": "Bakery",
   "choose": "Chọn",
   "address": "Ngô Xuân Quảng, Trâu Quỳ, Gia Lâm, Hà Nội",
+  "slogan": "Thế giới ngọt ngào trong vòng tay bạn",
   "vnd": "₫",
   "api_error": "Có lỗi xảy ra",
   "back_home": "Quay lại trang chủ",
@@ -14,6 +15,9 @@
       "code": "en",
       "name": "English"
     }
+  },
+  "header": {
+    "search_placeholder": "Tìm kiếm sản phẩm, tin tức..."
   },
   "status": {
     "deactive": "Chưa kích hoạt",
@@ -127,6 +131,11 @@
       "href": "/lien-he",
       "title": "Liên hệ",
       "name": "Liên hệ"
+    },
+    "search": {
+      "href": "/tim-kiem",
+      "title": "Tìm kiếm",
+      "name": "Tìm kiếm"
     },
     "admin": {
       "login": {
@@ -636,6 +645,7 @@
     "created_date": "Ngày tạo",
     "updated_date": "Ngày cập nhật",
     "upload_date": "Đăng lúc",
+    "no_news_available": "Không có bài viết nào để hiển thị",
     "modal": {
       "title_add": "Thêm mới Tin bài",
       "title_update": "Cập nhật Tin bài",
@@ -645,5 +655,13 @@
       "btn_submit": "Lưu",
       "btn_delete": "Xóa"
     }
+  },
+  "search": {
+    "title": "Kết quả tìm kiếm \"{{keyword}}\"",
+    "result_empty": "Không tìm thấy sản phẩm hoặc bài viết nào.",
+    "view_more": "Xem tất cả"
+  },
+  "home": {
+    "news_section": "Tin tức mới nhất"
   }
 }

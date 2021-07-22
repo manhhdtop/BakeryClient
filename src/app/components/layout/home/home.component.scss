@@ -1,0 +1,33 @@
+.nav-item.topbar {
+  background-color: #3654a5;
+  color: #fff;
+}
+
+.carousel-caption {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.picsum-img-wrapper {
+
+  .image-cover {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+  }
+}
+
+.nav-item {
+  background-color: #f0e8e8;
+}
+
+.nav-item .nav-link {
+  color: #000;
+}
+
+.nav-item .nav-link:active, .nav-item .nav-link:hover {
+  color: #5bbd2a;
+}
+
+.nav-item .nav-link:disabled {
+  color: rgba(0, 0, 0, .3);
+}

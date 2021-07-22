@@ -9,10 +9,10 @@
     <div class="row item">
       <div class="col-12 col-md-6">
         <img class="img img-fluid" src="{{imageVisible}}" alt="{{product?.name}}"/>
-        <app-slider
+        <app-slider-image
           [images]="product?.images"
           (changeEvent)="changeImage($event)"
-        ></app-slider>
+        ></app-slider-image>
       </div>
       <div class="col-12 col-md-6">
         <p class="item-name">{{product?.name}}</p>

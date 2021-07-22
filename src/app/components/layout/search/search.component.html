@@ -1,0 +1,96 @@
+<div class="container">
+  <div class="row py-3 border-bottom">
+    <h2 class="">{{'menu.search.name' | translate}}</h2>
+    <nav>
+      <a class="breadcrumb-item" routerLink="/">{{'menu.home.name' | translate}}</a>
+      <span class="brd-separator"> / </span>
+      <span class="breadcrumb-item">{{'menu.search.name' | translate}}</span>
+    </nav>
+  </div>
+  <div class="row mt-3">
+    <h3 class="text-center">{{'search.title' | translate: {keyword: keywordParam} }}</h3>
+    <hr/>
+    <div class="col-12 mb-3">
+      <form class="form-inline navbar-search ng-untouched ng-pristine ng-valid gx-2" (submit)="onSearch($event)">
+        <div class="input-group">
+          <input type="text" class="form-control small" [(ngModel)]="keyword" [ngModelOptions]="{standalone: true}"
+                 placeholder="{{'header.search_placeholder' | translate}}"
+                 aria-label="Search" aria-describedby="basic-addon2">
+          <div class="input-group-append">
+            <button class="btn btn-primary">
+              <i class="fas fa-search fa-sm"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    <hr/>
+    <div class="col-12 mb-3" *ngIf="products && products.length > 0">
+      <div class="card">
+        <div class="card-header">
+          <div class="w-100 d-flex justify-content-between">
+            <span>{{'menu.product.name' | translate}}</span>
+            <a routerLink="{{'menu.product.href' | translate}}"
+               [queryParams]="{ keyword: this.keyword}"
+               *ngIf="totalPageProduct && totalPageProduct > 1">
+              {{'search.view_more' | translate}} <i class="fas fa-angle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row items">
+            <div class="col-sm-12 col-md-4 col-lg-3" *ngFor="let p of products">
+              <div class="item">
+                <div class="item-image">
+                  <img src="{{baseUrl + p.images[0].uri}}" alt="{{p.description}}">
+                </div>
+                <a class="item-name" [ngbTooltip]="p.name"
+                   routerLink="{{'menu.product.href' | translate}}/{{p.slug}}">{{p.name}}</a>
+                <p class="item-price">{{p.price | numberFormat}} {{'vnd' | translate}}</p>
+                <button class="btn btn-outline-primary" (click)="showAddToCartModal(p)">
+                  <span class="d-sm-inline d-md-none d-lg-inline">{{'cart.btn_add_to_cart' | translate}} </span>
+                  <i class="d-inline d-lg-none d-xl-inline fa fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr *ngIf="newsList && newsList.length > 0"/>
+    <div class="col-12 mb-3" *ngIf="newsList && newsList.length > 0">
+      <div class="card">
+        <div class="card-header">
+          <div class="w-100 d-flex justify-content-between">
+            <span>{{'menu.news.name' | translate}}</span>
+            <a routerLink="{{'menu.news.href' | translate}}"
+               [queryParams]="{ keyword: this.keyword}"
+               *ngIf="totalPageNews && totalPageNews >= 1">
+              {{'search.view_more' | translate}} <i class="fas fa-angle-right"></i>
+            </a>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="row py-3 newsList">
+            <div class="row news" *ngFor="let news of newsList">
+              <div class="col-12 col-md-4 col-lg-3">
+                <img class="image-cover" src="{{baseUrl + news.image.uri}}" alt="{{news.name}}"/>
+              </div>
+              <div class="col-12 col-md-8 col-lg-9">
+                <h3><a routerLink="{{'menu.news.href' | translate}}/{{news.slug}}">{{news.name}}</a></h3>
+                <div class="w-100 pt-2" [innerHTML]="news.description"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 mb-3 font-italic text-center"
+         *ngIf="(!products || products.length === 0) && (!newsList || newsList.length === 0)">
+      {{'search.result_empty' | translate}}
+    </div>
+  </div>
+</div>
+<app-add-to-card #addToCardModal
+                 [product]="currentProduct">
+</app-add-to-card>

@@ -55,7 +55,7 @@
               <td>{{n.updatedDate}}</td>
               <td>{{getStatusName(n.status) | translate}}</td>
               <td class="min">
-                <a role="button" class="mr-2" routerLink="/{{'menu.news.href' | translate}}/{{n.slug}}">
+                <a role="button" class="mr-2" routerLink="/{{'menu.news.href' | translate}}/{{n.slug}}" target="_blank">
                   <i class="fa fa-external-link"></i>
                 </a>
                 <a role="button" class="mr-2" (click)="delete(deleteNews, n)"><i class="fa fa-trash-alt"></i></a>
@@ -143,6 +143,25 @@
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.status.invalid">
                 {{'news.status_error' | translate}}
               </small>
+            </div>
+          </div>
+          <div class="col-12 mt-2">
+            <div class="row">
+              <div class="col-12" [ngClass]="{'col-lg-6': image}">
+                <div class="form-group">
+                  <label>{{'product.image' | translate}}</label>
+                  <input class="form-control" (click)="imageInput.click()" formControlName="imageUpload" readonly>
+                  <input #imageInput type="file" class="d-none" placeholder="{{'product.image_placeholder' | translate}}"
+                         accept="image/*" (change)="processFile(imageInput)"/>
+                  <small class="form-text text-danger" *ngIf="submitted && (!image)">
+                    {{'product.image_error' | translate}}
+                  </small>
+                </div>
+              </div>
+              <div class="col-md-12 col-lg-6" *ngIf="image">
+                <label>{{'product.image' | translate}}</label>
+                <img class="image-cover" src="{{baseUrl + image?.uri}}">
+              </div>
             </div>
           </div>
         </div>

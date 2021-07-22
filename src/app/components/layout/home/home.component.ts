@@ -6,15 +6,19 @@ import { ProductService } from 'src/app/service/product.service';
 import { ToastService } from 'src/app/service/toast.service';
 import { MenuCategory } from 'src/app/shared/model/menu-category';
 import { Product } from 'src/app/shared/model/product';
+import { News } from 'src/app/shared/model/news';
+import { NewsService } from 'src/app/service/news.service';
+import { NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css', '../../../../assets/css/items.scss'],
+  styleUrls: ['./home.component.scss', '../../../../assets/css/items.scss'],
 })
 export class HomeComponent implements OnInit {
   categories: MenuCategory[];
   products: Product[];
+  newsList: News[];
   currentProduct: Product;
   page: number;
   size: number;
@@ -26,15 +30,22 @@ export class HomeComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private appConfigService: AppConfigService,
     private categoryService: CategoryService,
+    private newsService: NewsService,
+    private config: NgbCarouselConfig,
     private productService: ProductService,
     private toast: ToastService,
   ) {
-    this.baseUrl = this.appConfigService.getConfig().api.baseUrl;
+    config.interval = 10000;
+    config.wrap = true;
+    config.keyboard = false;
+    config.pauseOnHover = true;
   }
 
   ngOnInit(): void {
     this.getMenuCategory();
     this.getProduct();
+    this.getNews();
+    this.baseUrl = this.appConfigService.getConfig().api.baseUrl;
     this.page = this.activatedRoute.snapshot.queryParams.page || this.appConfigService.getConfig().page;
     this.size = this.activatedRoute.snapshot.queryParams.size || this.appConfigService.getConfig().defaultPageSize;
   }
@@ -49,6 +60,12 @@ export class HomeComponent implements OnInit {
   private getProduct(): void {
     this.productService.getProducts().subscribe(res => {
       this.products = [...res.data.content];
+    });
+  }
+
+  private getNews(): void {
+    this.newsService.getHomeNews().subscribe(res => {
+      this.newsList = [...res.data.content];
     });
   }
 

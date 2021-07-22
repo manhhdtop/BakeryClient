@@ -99,9 +99,6 @@
               <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid && formUpdate.controls.name.errors?.required">
                 {{'category.name_not_blank' | translate}}
               </small>
-              <small class="form-text text-danger" *ngIf="submitted && formUpdate.controls.name.invalid && formUpdate.controls.name.errors">
-                {{'category.name_not_valid' | translate}}
-              </small>
             </div>
           </div>
           <div class="col-md-6 col-sm-12">

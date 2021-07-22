@@ -1,19 +1,55 @@
 <div class="container py-3">
   <div class="row">
+    <ngb-carousel class="carousel slide carousel-fade">
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img class="image-cover" src="assets/image/banner/banner1.jpg" alt="banner1.jpg">
+        </div>
+        <div class="carousel-caption">
+          <h4>ThaoThao bakery</h4>
+          <p>Với mỗi 300k, được tặng 1 cup tự chọn (*)</p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img class="image-cover" src="assets/image/banner/banner2.jpg" alt="banner2.jpg">
+        </div>
+        <div class="carousel-caption">
+          <h4>Durion</h4>
+          <h3 class="text-danger">MỘT CẢM GIÁC RẤT THẬT</h3>
+          <p>Con gái là phải biết dịu dàng đúng mực, ví như chiếc bánh Mousse nhà </p>
+        </div>
+      </ng-template>
+      <ng-template ngbSlide>
+        <div class="picsum-img-wrapper">
+          <img class="image-cover" src="assets/image/banner/banner3.jpg" alt="banner3.jpg">
+        </div>
+        <div class="carousel-caption">
+          <h3>BÁNH NGỌT ÍT NGỌT</h3>
+          <p>Bánh mát lạnh lại không hề ngọt quá gắt gao, cho bất cứ ai trải nghiệm đều đứng hình mất vài giây để cảm
+            nhận và thốt lên hai chữ: ngon tuyệt!</p>
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+  <!--  Main section-->
+  <div class="row mt-3">
     <div class="col-sm-12 col-md-4" *ngIf="categories && categories.length > 0">
       <ul class="nav navbar-light flex-column">
         <li class="nav-item px-2 text-white topbar">
-          <h3>Danh mục</h3>
+          <h3>{{'menu.category.name' | translate}}</h3>
         </li>
         <li class="nav-item" [ngClass]="{'dropdown': c.childs && c.childs.length > 0}"
             *ngFor="let c of categories"
             [routerLinkActive]="'active'">
-          <a class="nav-link" routerLink="/danh-muc/{{c.slug}}">{{c.name}}</a>
+          <a class="nav-link" routerLink="{{'menu.category.href' | translate}}/{{c.slug}}">{{c.name}}</a>
           <ul class="nav navbar-light flex-column pl-3" *ngIf="c.childs && c.childs.length > 0">
             <li class="nav-item" *ngFor="let child of c.childs"
                 [routerLinkActive]="'active'"
                 [routerLinkActiveOptions]="{exact: true}">
-              <a class="nav-link" routerLink="/danh-muc/{{c.slug}}/{{child.slug}}"><small>{{child.name}}</small></a>
+              <a class="nav-link" routerLink="{{'menu.category.href' | translate}}/{{c.slug}}/{{child.slug}}">
+                <small>{{child.name}}</small>
+              </a>
             </li>
           </ul>
         </li>
@@ -22,16 +58,17 @@
     <div class="col-sm-12 col-md-8">
       <div class="card">
         <div class="card-header">
-          <i class="fa fa-pie"></i> Sản phẩm
+          <i class="fa fa-pie"></i> {{'menu.product.name' | translate}}
         </div>
-        <div class="card-body items">
-          <div class="row">
+        <div class="card-body">
+          <div class="row items">
             <div class="col-sm-12 col-md-4 col-lg-3" *ngFor="let p of products">
               <div class="item">
                 <div class="item-image">
                   <img src="{{baseUrl + p.images[0].uri}}" alt="{{p.description}}">
                 </div>
-                <a class="item-name" [ngbTooltip]="p.name" routerLink="{{'menu.product.href' | translate}}/{{p.slug}}">{{p.name}}</a>
+                <a class="item-name" [ngbTooltip]="p.name"
+                   routerLink="{{'menu.product.href' | translate}}/{{p.slug}}">{{p.name}}</a>
                 <p class="item-price">{{p.price | numberFormat}} {{'vnd' | translate}}</p>
                 <button class="btn btn-outline-primary" (click)="showAddToCartModal(p)">
                   <span class="d-sm-inline d-md-none d-lg-inline">{{'cart.btn_add_to_cart' | translate}} </span>
@@ -40,6 +77,19 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- News section -->
+  <div class="row mt-3">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <i class="fa fa-pie"></i> {{'home.news_section' | translate}}
+        </div>
+        <div class="card-body">
+          <app-slider-news [newsList]="newsList"></app-slider-news>
         </div>
       </div>
     </div>

@@ -2,6 +2,7 @@
   "logo_text": "Bakery",
   "choose": "Choose",
   "address": "Ngo Xuan Quang, Trau Quy, Gia Lam, Ha Noi",
+  "slogan": "Sweet world in your arms",
   "vnd": "₫",
   "api_error": "Something went wrong!",
   "back_home": "Back to Home page",
@@ -14,6 +15,9 @@
       "code": "en",
       "name": "English"
     }
+  },
+  "header": {
+    "search_placeholder": "Search for product, news..."
   },
   "status": {
     "deactive": "Deactive",
@@ -112,6 +116,11 @@
       "href": "/contact",
       "title": "Contact us",
       "name": "Contact"
+    },
+    "search": {
+      "href": "/search",
+      "title": "Search",
+      "name": "Search"
     },
     "admin": {
       "home": {
@@ -548,6 +557,7 @@
     "status": "Status",
     "status_placeholder": "Status...",
     "status_required": "Status can not blank",
+    "no_news_available": "No news available now",
     "modal": {
       "title_add": "Add Mail Template",
       "title_update": "Update Mail Template",

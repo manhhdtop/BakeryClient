@@ -1,4 +1,4 @@
-<header class="bg-light">
+<header class="bg-header">
   <div class="container">
     <div class="col-12 navbar-light">
       <div class="row d-flex justify-content-center">
@@ -8,11 +8,11 @@
       </div>
       <div class="row d-flex justify-content-center">
         <div class="col-auto font-italic text-white">
-          Thế giới ngọt ngào trong vòng tay bạn
+          {{'slogan' | translate}}
         </div>
       </div>
     </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-header">
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,11 +20,12 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link text-uppercase text-white" [routerLinkActive]="'active'" [routerLinkActiveOptions]="{exact: true}"
+            <a class="nav-link text-uppercase text-white" [routerLinkActive]="'active'"
+               [routerLinkActiveOptions]="{exact: true}"
                routerLink="{{'menu.home.href' | translate}}">{{'menu.home.name' | translate}}</a>
           </li>
           <!--          <li class="nav-item">-->
-          <!--            <a class="nav-link text-uppercase" [routerLinkActive]="'active'"-->
+          <!--            <a class="nav-link text-uppercase text-white" [routerLinkActive]="'active'"-->
           <!--               routerLink="{{'menu.about.href' | translate}}">{{'menu.about.name' | translate}}</a>-->
           <!--          </li>-->
           <li class="nav-item">
@@ -81,18 +82,24 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12 my-5">
-        <form class="form-inline mr-auto mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-          <div class="input-group col">
-            <input type="text" class="form-control small" placeholder="Search for..."
-                   aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-              <button class="btn btn-primary" type="button">
-                <i class="fas fa-search fa-sm"></i>
-              </button>
+        <form class="form-inline navbar-search ng-untouched ng-pristine ng-valid gx-2" (submit)="onSearch($event)">
+          <div class="row">
+            <div class="input-group col">
+              <input type="text" class="form-control small" [(ngModel)]="keyword" [ngModelOptions]="{standalone: true}"
+                     placeholder="{{'header.search_placeholder' | translate}}"
+                     aria-label="Search" aria-describedby="basic-addon2">
+              <div class="input-group-append">
+                <button class="btn btn-primary">
+                  <i class="fas fa-search fa-sm"></i>
+                </button>
+              </div>
+              <div class="w-100">
+                <small *ngIf="submit && (!keyword || keyword.length ===0)"></small>
+              </div>
             </div>
-          </div>
-          <div class="search_close_btn" role="button">
-            <span class="search_close_btn_icon" (click)="toggleSearch()"><i class="fa fa-times-circle"></i></span>
+            <div class="search_close_btn col-auto my-auto" role="button">
+              <span class="search_close_btn_icon" (click)="toggleSearch()"><i class="fa fa-times-circle"></i></span>
+            </div>
           </div>
         </form>
       </div>

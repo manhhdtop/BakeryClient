@@ -17,8 +17,10 @@ import { AccessDeniedComponent } from 'src/app/components/error/access-denied/ac
 import { InternalServerErrorComponent } from 'src/app/components/error/internal-server-error/internal-server-error.component';
 import { PageNotFoundComponent } from 'src/app/components/error/page-not-found/page-not-found.component';
 import { ToastComponent } from 'src/app/shared/component/toast/toast.component';
-import { SliderComponent } from './component/slider/slider.component';
+import { SliderImageComponent } from 'src/app/shared/component/slider-image/slider-image.component';
 import { DatetimePickerComponent } from './component/datetime-picker/datetime-picker.component';
+import { SliderNewsComponent } from 'src/app/shared/component/slider-news/slider-news.component';
+import { LayoutRoutingModule } from 'src/app/components/layout/layout-routing.module';
 
 @NgModule({
   imports: [
@@ -29,6 +31,7 @@ import { DatetimePickerComponent } from './component/datetime-picker/datetime-pi
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
+    LayoutRoutingModule,
   ],
   exports: [
     DateFormatPipe,
@@ -44,8 +47,9 @@ import { DatetimePickerComponent } from './component/datetime-picker/datetime-pi
     InternalServerErrorComponent,
     PageNotFoundComponent,
     ToastComponent,
-    SliderComponent,
+    SliderImageComponent,
     DatetimePickerComponent,
+    SliderNewsComponent,
   ],
   declarations: [
     DateFormatPipe,
@@ -59,8 +63,9 @@ import { DatetimePickerComponent } from './component/datetime-picker/datetime-pi
     InternalServerErrorComponent,
     PageNotFoundComponent,
     ToastComponent,
-    SliderComponent,
+    SliderImageComponent,
     DatetimePickerComponent,
+    SliderNewsComponent,
   ],
   providers: [
     {
