@@ -19,6 +19,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
 import { ContactComponent } from './contact/contact.component';
 import { NewsComponent } from './news/news.component';
 import { NewsListComponent } from './news-list/news-list.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { NewsListComponent } from './news-list/news-list.component';
     ContactComponent,
     NewsComponent,
     NewsListComponent,
+    SearchComponent,
   ],
     imports: [
         CommonModule,

@@ -16,6 +16,9 @@
       "name": "English"
     }
   },
+  "header": {
+    "search_placeholder": "Search for product, news..."
+  },
   "status": {
     "deactive": "Deactive",
     "active": "Active",
@@ -113,6 +116,11 @@
       "href": "/contact",
       "title": "Contact us",
       "name": "Contact"
+    },
+    "search": {
+      "href": "/search",
+      "title": "Search",
+      "name": "Search"
     },
     "admin": {
       "home": {

@@ -16,6 +16,9 @@
       "name": "English"
     }
   },
+  "header": {
+    "search_placeholder": "Tìm kiếm sản phẩm, tin tức..."
+  },
   "status": {
     "deactive": "Chưa kích hoạt",
     "active": "Hoạt động",
@@ -128,6 +131,11 @@
       "href": "/lien-he",
       "title": "Liên hệ",
       "name": "Liên hệ"
+    },
+    "search": {
+      "href": "/tim-kiem",
+      "title": "Tìm kiếm",
+      "name": "Tìm kiếm"
     },
     "admin": {
       "login": {
@@ -647,5 +655,13 @@
       "btn_submit": "Lưu",
       "btn_delete": "Xóa"
     }
+  },
+  "search": {
+    "title": "Kết quả tìm kiếm \"{{keyword}}\"",
+    "result_empty": "Không tìm thấy sản phẩm hoặc bài viết nào.",
+    "view_more": "Xem tất cả"
+  },
+  "home": {
+    "news_section": "Tin tức mới nhất"
   }
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProductService } from 'src/app/service/product.service';
 import { ToastService } from 'src/app/service/toast.service';
@@ -38,10 +38,12 @@ export class ProductListComponent implements OnInit {
   maxPrice: number;
   keyword: string;
   categoryIds: number[];
+  private searchEvent: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild('addToCardModal') addToCardModal;
 
   constructor(
+    private activatedRoute: ActivatedRoute,
     private categoryService: CategoryService,
     private configService: AppConfigService,
     private cartService: CartService,
@@ -55,6 +57,14 @@ export class ProductListComponent implements OnInit {
 
   ngOnInit(): void {
     this.baseUrl = this.configService.getConfig().api.baseUrl;
+    this.categoryIds = [];
+    this.searchEvent.subscribe(() => {
+      this.search();
+    });
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.keyword = params.keyword ? params.keyword : '';
+      this.searchEvent.emit();
+    });
     this.minPrice = this.maxPrice = 0;
     this.sliderOptions = {
       floor: 0,
@@ -71,18 +81,10 @@ export class ProductListComponent implements OnInit {
         }
       },
     };
-    this.categoryIds = [];
-    this.getProducts();
     this.getCategories();
   }
 
   private getProducts(): void {
-    if (!this.params) {
-      this.params = {
-        page: this.configService.getConfig().page,
-        size: this.configService.getConfig().defaultPageSize,
-      };
-    }
     this.productService.getProducts(this.params).subscribe(res => {
       if (res.errorCode && res.errorCode === '200') {
         const isInit = this.products === undefined;
@@ -145,6 +147,12 @@ export class ProductListComponent implements OnInit {
   }
 
   search(): void {
+    if (!this.params) {
+      this.params = {
+        page: this.configService.getConfig().page,
+        size: this.configService.getConfig().defaultPageSize,
+      };
+    }
     this.params.name = this.keyword ? this.keyword.trim() : '';
     this.params.fromPrice = this.minPrice ? this.minPrice + '' : '';
     this.params.toPrice = this.maxPrice ? this.maxPrice + '' : '';

@@ -10,6 +10,7 @@ import { CheckoutComponent } from 'src/app/components/layout/checkout/checkout.c
 import { ContactComponent } from 'src/app/components/layout/contact/contact.component';
 import { NewsComponent } from 'src/app/components/layout/news/news.component';
 import { NewsListComponent } from 'src/app/components/layout/news-list/news-list.component';
+import { SearchComponent } from 'src/app/components/layout/search/search.component';
 
 const routes: Routes = [
   {
@@ -154,6 +155,20 @@ const routes: Routes = [
         component: NewsComponent,
         data: {
           page_title: 'menu.news.title',
+        },
+      },
+      {
+        path: 'tim-kiem',
+        component: SearchComponent,
+        data: {
+          page_title: 'menu.search.title',
+        },
+      },
+      {
+        path: 'search',
+        component: SearchComponent,
+        data: {
+          page_title: 'menu.search.title',
         },
       },
     ],

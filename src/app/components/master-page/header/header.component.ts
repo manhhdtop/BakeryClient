@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { CartService } from '../../../service/cart.service';
@@ -32,6 +32,8 @@ export class HeaderComponent implements OnInit {
   baseUrl: string;
   deleteTitle: string;
   deleteContent: string;
+  keyword: string;
+  submit: boolean;
 
   constructor(
     private activeRoute: ActivatedRoute,
@@ -39,6 +41,7 @@ export class HeaderComponent implements OnInit {
     private cartService: CartService,
     private categoryService: CategoryService,
     private modalService: NgbModal,
+    private router: Router,
     private titleService: Title,
     private toast: ToastService,
     private translate: TranslateService,
@@ -47,6 +50,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.searching = false;
+    this.keyword = '';
     this.formSearch = new FormGroup({
       name: new FormControl('', Validators.required),
     });
@@ -68,12 +72,18 @@ export class HeaderComponent implements OnInit {
   }
 
   toggleSearch(): void {
-    console.log('searching: ', !this.searching);
     this.searching = !this.searching;
+    this.submit = false;
   }
 
   onSearch($event): void {
     $event.preventDefault();
+    this.submit = true;
+    console.log('keyword: ', this.keyword);
+    if (!this.keyword || this.keyword.trim().length === 0) {
+      return;
+    }
+    this.router.navigate(['/search'], {queryParams: {keyword: this.keyword}});
   }
 
   checkout(): void {
