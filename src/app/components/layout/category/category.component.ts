@@ -1,4 +1,4 @@
-    import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/service/category.service';
 import { Category } from 'src/app/shared/model/category';
@@ -21,6 +21,11 @@ interface Param {
   size: number;
 }
 
+interface ProductPriceRange {
+  min: number;
+  max: number;
+}
+
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
@@ -36,6 +41,7 @@ export class CategoryComponent implements OnInit {
   currentProduct: Product;
   sliderOptions: Options;
   params: Param;
+  productPriceRange: ProductPriceRange;
   page: number;
   size: number;
   minPrice: number;
@@ -106,6 +112,7 @@ export class CategoryComponent implements OnInit {
       if (res.errorCode && res.errorCode === '200') {
         const isInit = this.products === undefined;
         this.products = [...res.data.content];
+        this.productPriceRange = res.optional;
         this.calculateRangePrice(isInit);
         this.page = res.data.pageable.pageNumber + 1;
         this.size = res.data.pageable.pageSize;
@@ -123,44 +130,14 @@ export class CategoryComponent implements OnInit {
   }
 
   private calculateRangePrice(isInit): void {
-    const arrPrice = this.products.map(({price}) => price);
-    let min: number;
-    let max: number;
-    if (arrPrice && arrPrice.length > 0) {
-      min = Math.min.apply(null, arrPrice);
-      max = Math.max.apply(null, arrPrice);
-      const minLength = min.toString().length - 1;
-      const maxLength = max.toString().length - 1;
-      min = Math.floor(min / Math.pow(10, minLength)) * Math.pow(10, minLength);
-      max = Math.ceil(max / Math.pow(10, maxLength)) * Math.pow(10, maxLength);
-    } else {
-      min = 0;
-      max = 0;
-    }
-    if (min === max) {
-      this.minPrice = null;
-      this.maxPrice = null;
-    } else {
-      if (isInit) {
-        this.minPrice = min ? min : null;
-        this.maxPrice = max ? max : null;
-      } else {
-        if (this.minPrice == null) {
-          this.minPrice = min ? min : null;
-        } else {
-          if (this.minPrice < min) {
-            this.minPrice = min ? min : null;
-          }
-        }
-        if (this.maxPrice == null) {
-          this.maxPrice = max ? max : null;
-        } else {
-          if (this.maxPrice > max) {
-            this.maxPrice = max ? max : null;
-          }
-        }
-      }
-    }
+    let min = this.productPriceRange?.min ? this.productPriceRange.min : 0;
+    let max = this.productPriceRange?.max ? this.productPriceRange.max : 0;
+    const minLength = min.toString().length - 1;
+    const maxLength = max.toString().length - 1;
+    min = Math.floor(min / Math.pow(10, minLength)) * Math.pow(10, minLength);
+    max = Math.ceil(max / Math.pow(10, maxLength)) * Math.pow(10, maxLength);
+    this.minPrice = min;
+    this.maxPrice = max;
     this.updateSliderOptions(min, max);
   }
 

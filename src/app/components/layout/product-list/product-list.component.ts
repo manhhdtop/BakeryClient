@@ -89,40 +89,14 @@ export class ProductListComponent implements OnInit {
       if (res.errorCode && res.errorCode === '200') {
         const isInit = this.products === undefined;
         this.products = [...res.data.content];
-        const arrPrice = this.products.map(({price}) => price);
-        let min: number;
-        let max: number;
-        if (arrPrice && arrPrice.length > 0) {
-          min = Math.min.apply(null, arrPrice);
-          max = Math.max.apply(null, arrPrice);
-        } else {
-          min = 0;
-          max = 0;
-        }
-        if (min === max) {
-          this.minPrice = null;
-          this.maxPrice = null;
-        } else {
-          if (isInit) {
-            this.minPrice = min ? min : null;
-            this.maxPrice = max ? max : null;
-          } else {
-            if (this.minPrice == null) {
-              this.minPrice = min ? min : null;
-            } else {
-              if (this.minPrice < min) {
-                this.minPrice = min ? min : null;
-              }
-            }
-            if (this.maxPrice == null) {
-              this.maxPrice = max ? max : null;
-            } else {
-              if (this.maxPrice > max) {
-                this.maxPrice = max ? max : null;
-              }
-            }
-          }
-        }
+        let min = res.optional?.min ? res.optional.min : 0;
+        let max = res.optional?.max ? res.optional.max : 0;
+        const minLength = min.toString().length - 1;
+        const maxLength = max.toString().length - 1;
+        min = Math.floor(min / Math.pow(10, minLength)) * Math.pow(10, minLength);
+        max = Math.ceil(max / Math.pow(10, maxLength)) * Math.pow(10, maxLength);
+        this.minPrice = min;
+        this.maxPrice = max;
         this.updateSliderOptions(min, max);
         this.page = res.data.pageable.pageNumber + 1;
         this.size = res.data.pageable.pageSize;

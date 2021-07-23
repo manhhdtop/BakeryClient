@@ -58,7 +58,7 @@ export class UrlConstant {
   // Contact
   public static readonly CONTACT = '/contact';
   public static readonly ADMIN_CONTACT = UrlConstant.ADMIN + UrlConstant.CONTACT;
-  public static readonly NEW_CONTACT = UrlConstant.CONTACT + '/news-contact';
+  public static readonly NEW_CONTACT = UrlConstant.CONTACT + '/new-contact';
   public static readonly CONTACT_UPDATE_STATUS = UrlConstant.ADMIN_CONTACT + '/update-status';
   // Action
   public static readonly NEWS = '/news';
