@@ -22,7 +22,7 @@
                      aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-primary">
-                  <i class="fas fa-search fa-sm"></i>
+                  <i class="far fa-search fa-sm"></i>
                 </button>
               </div>
             </div>
@@ -49,7 +49,7 @@
               <td>{{(o.changePrice ? 'can_change_price' : 'not_change_price') | translate}}</td>
               <td>{{getStatusName(o.status) | translate}}</td>
               <td class="min">
-                <a role="button" class="mr-2" (click)="delete(deleteOption, o)"><i class="fa fa-trash-alt"></i></a>
+                <a role="button" class="mr-2" (click)="delete(deleteOption, o)"><i class="far fa-trash-alt"></i></a>
                 <a role="button" class="mr-2" (click)="openModal(option, o)"><i
                   class="fa fa-edit"></i></a>
               </td>

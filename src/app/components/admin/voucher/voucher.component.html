@@ -22,7 +22,7 @@
                      aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-primary">
-                  <i class="fas fa-search fa-sm"></i>
+                  <i class="far fa-search fa-sm"></i>
                 </button>
               </div>
             </div>
@@ -53,15 +53,15 @@
               <td>{{v.endDate | dateFormat: dateDdmmyyHhmmss}}</td>
               <td>{{getStatusName(v.status) | translate}}</td>
               <td class="min">
-                <a role="button" class="mr-2" (click)="delete(deleteVoucher, v)"><i class="fa fa-trash-alt"></i></a>
+                <a role="button" class="mr-2" (click)="delete(deleteVoucher, v)"><i class="far fa-trash-alt"></i></a>
                 <a role="button" class="mr-2" (click)="openModal(voucher, v)" *ngIf="v.status === 0">
-                  <i class="fa fa-edit"></i>
+                  <i class="far fa-edit"></i>
                 </a>
                 <a role="button" class="mr-2" (click)="updateStatus(v)" *ngIf="v.status === 0 || v.status === -1">
-                  <i class="fa fa-toggle-on"></i>
+                  <i class="far fa-toggle-on"></i>
                 </a>
                 <a role="button" class="mr-2" (click)="updateStatus(v)" *ngIf="v.status === 1">
-                  <i class="fa fa-toggle-off"></i>
+                  <i class="far fa-toggle-off"></i>
                 </a>
               </td>
             </tr>

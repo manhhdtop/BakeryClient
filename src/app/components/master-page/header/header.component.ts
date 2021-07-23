@@ -46,6 +46,11 @@ export class HeaderComponent implements OnInit {
     private toast: ToastService,
     private translate: TranslateService,
   ) {
+    router.events.subscribe((val) => {
+      if (this.searching) {
+        this.toggleSearch();
+      }
+    });
   }
 
   ngOnInit(): void {
@@ -74,6 +79,7 @@ export class HeaderComponent implements OnInit {
   toggleSearch(): void {
     this.searching = !this.searching;
     this.submit = false;
+    this.keyword = '';
   }
 
   onSearch($event): void {
@@ -84,6 +90,7 @@ export class HeaderComponent implements OnInit {
       return;
     }
     this.router.navigate(['/search'], {queryParams: {keyword: this.keyword}});
+    this.toggleSearch();
   }
 
   checkout(): void {

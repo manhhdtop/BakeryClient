@@ -22,7 +22,7 @@
                      aria-label="Search" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-primary">
-                  <i class="fas fa-search fa-sm"></i>
+                  <i class="far fa-search fa-sm"></i>
                 </button>
               </div>
             </div>
@@ -53,7 +53,7 @@
               <td>{{a.updatedDate | dateFormat: dateDdmmyyHhmmss}}</td>
               <td>{{getStatusName(a.status) | translate}}</td>
               <td class="min">
-                <a role="button" class="mr-2" (click)="delete(deleteAction, a)"><i class="fa fa-trash-alt"></i></a>
+                <a role="button" class="mr-2" (click)="delete(deleteAction, a)"><i class="far fa-trash-alt"></i></a>
                 <a role="button" class="mr-2" (click)="openModal(action, a)"><i
                   class="fa fa-edit"></i></a>
               </td>

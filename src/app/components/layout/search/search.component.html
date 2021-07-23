@@ -18,7 +18,7 @@
                  aria-label="Search" aria-describedby="basic-addon2">
           <div class="input-group-append">
             <button class="btn btn-primary">
-              <i class="fas fa-search fa-sm"></i>
+              <i class="far fa-search fa-sm"></i>
             </button>
           </div>
         </div>
@@ -33,7 +33,7 @@
             <a routerLink="{{'menu.product.href' | translate}}"
                [queryParams]="{ keyword: this.keyword}"
                *ngIf="totalPageProduct && totalPageProduct > 1">
-              {{'search.view_more' | translate}} <i class="fas fa-angle-right"></i>
+              {{'search.view_more' | translate}} <i class="far fa-angle-right"></i>
             </a>
           </div>
         </div>
@@ -66,7 +66,7 @@
             <a routerLink="{{'menu.news.href' | translate}}"
                [queryParams]="{ keyword: this.keyword}"
                *ngIf="totalPageNews && totalPageNews >= 1">
-              {{'search.view_more' | translate}} <i class="fas fa-angle-right"></i>
+              {{'search.view_more' | translate}} <i class="far fa-angle-right"></i>
             </a>
           </div>
         </div>
@@ -85,7 +85,7 @@
         </div>
       </div>
     </div>
-    <div class="col-12 mb-3 font-italic text-center"
+    <div class="col-12 my-5 font-italic text-center"
          *ngIf="(!products || products.length === 0) && (!newsList || newsList.length === 0)">
       {{'search.result_empty' | translate}}
     </div>
