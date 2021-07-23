@@ -89,8 +89,8 @@ export class HeaderComponent implements OnInit {
     if (!this.keyword || this.keyword.trim().length === 0) {
       return;
     }
-    this.toggleSearch();
     this.router.navigate(['/search'], {queryParams: {keyword: this.keyword}});
+    this.toggleSearch();
   }
 
   checkout(): void {
