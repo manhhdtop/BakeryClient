@@ -164,6 +164,7 @@ export class ProductComponent implements OnInit {
 
   private initForm(): void {
     this.rate = 0;
+    this.submitted = false;
     this.rateForm = this.fb.group({
       productId: [this.product.id],
       name: ['', Validators.required],
