@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { ProductService } from 'src/app/service/product.service';
-import { Product } from 'src/app/shared/model/product';
-import { ToastService } from 'src/app/service/toast.service';
-import { AppConfigService } from 'src/app/service/app-config.service';
-import { OptionType } from 'src/app/shared/model/option-type';
-import { CartService } from 'src/app/service/cart.service';
-import { TranslateService } from '@ngx-translate/core';
-import { Utils } from 'src/app/shared/util/utils';
-import { Title } from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {ProductService} from 'src/app/service/product.service';
+import {Product} from 'src/app/shared/model/product';
+import {ToastService} from 'src/app/service/toast.service';
+import {AppConfigService} from 'src/app/service/app-config.service';
+import {OptionType} from 'src/app/shared/model/option-type';
+import {CartService} from 'src/app/service/cart.service';
+import {TranslateService} from '@ngx-translate/core';
+import {Title} from '@angular/platform-browser';
+import {NgbRatingConfig} from '@ng-bootstrap/ng-bootstrap';
+import {ProductRate} from '../../../shared/model/product-rate';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-product',
@@ -24,24 +26,35 @@ export class ProductComponent implements OnInit {
   quantity: number;
   loaded: boolean;
   optionTypes: OptionType[];
+  rates: ProductRate[];
+  productRate: number;
+  rate: number;
   private options = [];
   private quantityError: string;
   private optionError: string;
   private success: string;
+  rateForm: FormGroup;
+  submitted: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private configService: AppConfigService,
     private cartService: CartService,
+    private fb: FormBuilder,
+    private ratingConfig: NgbRatingConfig,
     private productService: ProductService,
     private router: Router,
     private titleService: Title,
     private toast: ToastService,
     private translate: TranslateService,
   ) {
+    ratingConfig.max = 5;
+    ratingConfig.readonly = true;
   }
 
   ngOnInit(): void {
+    this.productRate = 0;
+    this.rate = 0;
     this.baseUrl = this.configService.getConfig().api.baseUrl;
     this.slug = this.route.snapshot.params.slug;
     this.imageIndex = 0;
@@ -54,6 +67,8 @@ export class ProductComponent implements OnInit {
     if (this.slug) {
       this.productService.getProductBySlug(this.slug).subscribe(res => {
         this.product = res.data;
+        this.initForm();
+        this.getRates();
         this.router.events.subscribe((val) => {
           this.titleService.setTitle(this.product.name);
         });
@@ -123,5 +138,61 @@ export class ProductComponent implements OnInit {
         this.router.navigate([e]);
       });
     }, 200);
+  }
+
+  private calculateRate(): void {
+    if (!this.rates || this.rates.length === 0) {
+      this.productRate = 0;
+      return;
+    }
+    const totalRate = this.rates.map(({rate}) => rate).reduce((a, b) => a + b, 0);
+    this.productRate = totalRate / this.rates.length;
+    this.productRate = Math.round(this.productRate * 10) / 10;
+  }
+
+  private getRates(page?): void {
+    const params = {
+      productId: this.product.id,
+      page: page ? page : 1,
+      size: 10
+    };
+    this.productService.getRates(params).subscribe(res => {
+      this.rates = res.data.content;
+      this.calculateRate();
+    });
+  }
+
+  private initForm(): void {
+    this.rate = 0;
+    this.rateForm = this.fb.group({
+      productId: [this.product.id],
+      name: ['', Validators.required],
+      phoneNumber: ['', Validators.required],
+      email: [''],
+      description: ['', Validators.required],
+    });
+  }
+
+  rateProduct(event): void {
+    event.preventDefault();
+    this.submitted = true;
+    if (this.rateForm.invalid) {
+      return;
+    }
+    if (this.rate === 0) {
+      this.translate.get('product.choose_rate').subscribe(s => {
+        this.toast.showDanger(s);
+      });
+      return;
+    }
+    const body = {
+      ...this.rateForm.value,
+      rate: this.rate
+    };
+    this.productService.rate(body).subscribe(res => {
+      this.initForm();
+      this.toast.showSuccess(res.errorDescription);
+      this.getRates(1);
+    });
   }
 }

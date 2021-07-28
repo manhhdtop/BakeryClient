@@ -292,6 +292,10 @@
     "product_name_placeholder": "Tên sản phẩm...",
     "from_price": "Từ giá",
     "to_price": "Đến giá",
+    "rate_header": "Đánh giá sản phẩm",
+    "rate": "Đánh giá",
+    "choose_rate": "Vui lòng số sao",
+    "no_rates": "Chưa có đánh giá",
     "modal": {
       "title_add": "Thêm mới sản phẩm",
       "title_update": "Cập nhật sản phẩm",
@@ -663,5 +667,15 @@
   },
   "home": {
     "news_section": "Tin tức mới nhất"
+  },
+  "time": {
+    "year": "năm",
+    "month": "tháng",
+    "day": "ngày",
+    "hour": "giờ",
+    "minute": "phút",
+    "second": "giây",
+    "ago": "trước",
+    "later": "sau"
   }
 }
