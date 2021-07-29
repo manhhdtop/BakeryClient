@@ -27,7 +27,6 @@ export class ProductComponent implements OnInit {
   loaded: boolean;
   optionTypes: OptionType[];
   rates: ProductRate[];
-  productRate: number;
   rate: number;
   private options = [];
   private quantityError: string;
@@ -53,7 +52,6 @@ export class ProductComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.productRate = 0;
     this.rate = 0;
     this.baseUrl = this.configService.getConfig().api.baseUrl;
     this.slug = this.route.snapshot.params.slug;
@@ -65,17 +63,7 @@ export class ProductComponent implements OnInit {
       this.success = this.translate.instant('add_to_cart.success');
     });
     if (this.slug) {
-      this.productService.getProductBySlug(this.slug).subscribe(res => {
-        this.product = res.data;
-        this.initForm();
-        this.getRates();
-        this.router.events.subscribe((val) => {
-          this.titleService.setTitle(this.product.name);
-        });
-        this.price = this.product.price;
-        this.optionTypes = this.product.optionTypes;
-        this.loaded = true;
-      });
+      this.getProduct();
     }
   }
 
@@ -140,16 +128,6 @@ export class ProductComponent implements OnInit {
     }, 200);
   }
 
-  private calculateRate(): void {
-    if (!this.rates || this.rates.length === 0) {
-      this.productRate = 0;
-      return;
-    }
-    const totalRate = this.rates.map(({rate}) => rate).reduce((a, b) => a + b, 0);
-    this.productRate = totalRate / this.rates.length;
-    this.productRate = Math.round(this.productRate * 10) / 10;
-  }
-
   private getRates(page?): void {
     const params = {
       productId: this.product.id,
@@ -158,7 +136,6 @@ export class ProductComponent implements OnInit {
     };
     this.productService.getRates(params).subscribe(res => {
       this.rates = res.data.content;
-      this.calculateRate();
     });
   }
 
@@ -193,7 +170,21 @@ export class ProductComponent implements OnInit {
     this.productService.rate(body).subscribe(res => {
       this.initForm();
       this.toast.showSuccess(res.errorDescription);
+      this.getProduct();
+    });
+  }
+
+  private getProduct(): void {
+    this.productService.getProductBySlug(this.slug).subscribe(res => {
+      this.product = res.data;
+      this.initForm();
       this.getRates(1);
+      this.router.events.subscribe((val) => {
+        this.titleService.setTitle(this.product.name);
+      });
+      this.price = this.product.price;
+      this.optionTypes = this.product.optionTypes;
+      this.loaded = true;
     });
   }
 }

@@ -12,7 +12,7 @@ export interface Product {
   description: string;
   category: Category;
   images: UploadResponse[];
-  rates: ProductRate[];
+  rate: number;
   price: number;
   createdDate: Date;
   createdBy: User;

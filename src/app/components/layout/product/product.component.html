@@ -21,8 +21,8 @@
     <div class="col-12 col-sm-6 col-md-6">
       <span class="item-name font-italic">{{product.name}}</span>
       <div>
-        <span class="mr-1 text-decoration-underline full">{{productRate}}</span>
-        <ngb-rating [rate]="productRate"
+        <span class="mr-1 text-decoration-underline full">{{this.product.rate}}</span>
+        <ngb-rating [rate]="this.product.rate"
                     [starTemplate]="t">
         </ngb-rating>
       </div>
