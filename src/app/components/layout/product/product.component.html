@@ -12,16 +12,25 @@
   </nav>
   <div class="row bg-white px-2 py-3">
     <div class="col-12 col-sm-6 col-md-6">
-      <img class="img img-fluid" src="{{baseUrl + product?.images[imageIndex]?.uri}}">
+      <img class="img image-cover" src="{{baseUrl + product?.images[imageIndex]?.uri}}" alt="{{product.name}}">
       <app-slider-image
         [images]="product?.images"
         (changeEvent)="changeImage($event)"
       ></app-slider-image>
     </div>
     <div class="col-12 col-sm-6 col-md-6">
-      <span class="item-name">{{product.name}}</span>
-      <span class="item-price">{{'product.price' | translate}}: <em>{{price | numberFormat}} {{'vnd' | translate}}</em></span>
-      <span class="item-description">{{'product.description' | translate}}</span>
+      <span class="item-name font-italic">{{product.name}}</span>
+      <div>
+        <span class="mr-1 text-decoration-underline full">{{this.product.rate}}</span>
+        <ngb-rating [rate]="this.product.rate"
+                    [starTemplate]="t">
+        </ngb-rating>
+      </div>
+      <span class="item-price mt-2">
+        {{'product.price' | translate}}: <em>{{price | numberFormat}} {{'vnd' | translate}}</em>
+      </span>
+      <span class="item-description mt-2">{{'product.description' | translate}}: <span
+        [innerHTML]="product.description"></span></span>
 
       <div *ngIf="optionTypes && optionTypes.length > 0">
         <div *ngFor="let ot of product?.optionTypes, index as i">
@@ -36,29 +45,107 @@
       <div class="row my-2">
         <span class="col-auto my-auto">{{'cart.quantity' | translate}}</span>
         <div class="col">
-          <div class="row">
-            <span role="button" class="col-auto my-auto" (click)="decreaseQuantity()"><i class="far fa-minus-circle"></i></span>
+          <div class="d-flex flex-row">
+            <span role="button" class="my-auto mr-2" (click)="decreaseQuantity()"><i
+              class="far fa-minus-circle"></i></span>
             <input numberInput class="col form-control" [(ngModel)]="quantity">
-            <span role="button" class="col-auto my-auto" (click)="increaseQuantity()"><i class="far fa-plus-circle"></i></span>
+            <span role="button" class="my-auto ml-2" (click)="increaseQuantity()"><i
+              class="far fa-plus-circle"></i></span>
           </div>
         </div>
       </div>
       <div class="d-flex justify-content-center pt-3">
         <button class="btn btn-outline-info" (click)="addToCart()">
-          {{'product.btn_add_to_cart' | translate}} <i class="far fa-cart-plus"></i>
+          {{'product.btn_add_to_cart' | translate}}
+          <i class="far fa-cart-plus"></i>
         </button>
       </div>
       <div class="d-flex justify-content-center pt-2">
         <button class="btn btn-outline-success" (click)="buyNow()">
-          {{'product.btn_buy_now' | translate}} <i class="far fa-money-bill-wave"></i>
+          {{'product.btn_buy_now' | translate}}
+          <i class="far fa-money-bill-wave"></i>
         </button>
       </div>
     </div>
-    <div class="col-12 bg-white pt-3" [innerHTML]="product?.description">
-
+    <div class="col-12 pt-3" [innerHTML]="product?.description">
+    </div>
+  </div>
+  <div class="row bg-white px-2 py-3 mt-3">
+    <div class="col-12">
+      <h3>{{'product.rate_header' | translate}}</h3>
+      <form [formGroup]="rateForm" (submit)="rateProduct($event)">
+        <div class="row">
+          <div class="col-12 justify-content-center">
+            {{'product.rate' | translate}}:
+            <ngb-rating [(rate)]="rate"
+                        [readonly]="false"
+                        [starTemplate]="t">
+            </ngb-rating>
+          </div>
+          <div class="col-12 col-md-4 mt-md-2 form-group">
+            <input class="form-control"
+                   [ngClass]="{'is-invalid': rateForm.controls.name.invalid && (rateForm.controls.name.touched || rateForm.controls.name.dirty || submitted)}"
+                   placeholder="Họ tên*"
+                   formControlName="name">
+          </div>
+          <div class="col-12 col-md-4 mt-md-2 form-group">
+            <input class="form-control"
+                   [ngClass]="{'is-invalid': rateForm.controls.phoneNumber.invalid && (rateForm.controls.phoneNumber.touched || rateForm.controls.phoneNumber.dirty || submitted)}"
+                   placeholder="Số điện thoại*"
+                   formControlName="phoneNumber">
+          </div>
+          <div class="col-12 col-md-4 mt-md-2 form-group">
+            <input class="form-control" placeholder="Email">
+          </div>
+          <div class="col-12 mt-2 form-group">
+            <textarea class="form-control"
+                      [ngClass]="{'is-invalid': rateForm.controls.description.invalid && (rateForm.controls.description.touched || rateForm.controls.description.dirty || submitted)}"
+                      rows="3"
+                      placeholder="Nội dung, Tối thiểu 15 ký tự*"
+                      formControlName="description">
+            </textarea>
+          </div>
+        </div>
+        <div class="row mt-2 justify-content-end">
+          <div class="col-auto">
+            <button class="btn btn-primary">Đánh giá</button>
+          </div>
+        </div>
+      </form>
+      <hr>
+      <div class="row rates" *ngIf="rates && rates.length > 0">
+        <div class="col-12 rate" *ngFor="let rate of rates">
+          <div class="row">
+            <div class="col-auto">
+              <img class="avatar rounded-circle shadow" src="assets/image/avatar.jpg" alt="Avatar default"/>
+            </div>
+            <div class="col">
+              <p class="name mb-1">{{rate.name}}</p>
+              <div>
+                <ngb-rating [(rate)]="rate.rate"
+                            [readonly]="true"
+                            [starTemplate]="t">
+                </ngb-rating>
+              </div>
+              <p>{{rate.createdDate | countDate | translate}}</p>
+              <p>{{rate.description}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" *ngIf="!rates || rates.length === 0">
+        <div class="col-12 font-italic">
+          {{'product.no_rates' | translate}}
+        </div>
+      </div>
     </div>
   </div>
 </div>
+<ng-template #t let-fill="fill">
+  <span class="star" [class.full]="fill === 100">
+    <span class="half" [style.width.%]="fill"><i class="fas fa-star"></i></span><i class="fas fa-star"></i>
+  </span>
+</ng-template>
 <div *ngIf="loaded && !product" class="mt-3">
   <app-page-not-found></app-page-not-found>
 </div>

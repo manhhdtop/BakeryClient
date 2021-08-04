@@ -31,6 +31,7 @@ export class UrlConstant {
   public static readonly PRODUCT = '/product';
   public static readonly ADMIN_PRODUCT = UrlConstant.ADMIN + UrlConstant.PRODUCT;
   public static readonly CREATE_PRODUCT_SLUG = UrlConstant.ADMIN_PRODUCT + '/create-slug';
+  public static readonly RATE_PRODUCT = UrlConstant.PRODUCT + '/rate';
   // Option
   public static readonly OPTION_TYPE = UrlConstant.ADMIN + '/option-type';
   // Voucher
@@ -58,7 +59,7 @@ export class UrlConstant {
   // Contact
   public static readonly CONTACT = '/contact';
   public static readonly ADMIN_CONTACT = UrlConstant.ADMIN + UrlConstant.CONTACT;
-  public static readonly NEW_CONTACT = UrlConstant.CONTACT + '/news-contact';
+  public static readonly NEW_CONTACT = UrlConstant.CONTACT + '/new-contact';
   public static readonly CONTACT_UPDATE_STATUS = UrlConstant.ADMIN_CONTACT + '/update-status';
   // Action
   public static readonly NEWS = '/news';

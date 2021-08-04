@@ -3,6 +3,7 @@ import { Option } from './option';
 import { UploadResponse } from './upload-response';
 import { User } from './user';
 import { OptionType } from 'src/app/shared/model/option-type';
+import {ProductRate} from './product-rate';
 
 export interface Product {
   id: number;
@@ -11,6 +12,7 @@ export interface Product {
   description: string;
   category: Category;
   images: UploadResponse[];
+  rate: number;
   price: number;
   createdDate: Date;
   createdBy: User;

@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NgbCarouselModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import {NgbCarouselModule, NgbRatingModule, NgbTooltipModule} from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CartComponent } from 'src/app/components/layout/cart/cart.component';
@@ -49,6 +49,7 @@ import { SearchComponent } from './search/search.component';
         NgbTooltipModule,
         NgxSliderModule,
         ReactiveFormsModule,
+        NgbRatingModule,
     ],
 })
 export class LayoutModule {

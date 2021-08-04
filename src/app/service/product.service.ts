@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { BaseService } from '../shared/base-service/base-service.service';
-import { UrlConstant } from '../shared/constants/url.class';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {BaseService} from '../shared/base-service/base-service.service';
+import {UrlConstant} from '../shared/constants/url.class';
 
 @Injectable({
   providedIn: 'root',
@@ -39,5 +39,13 @@ export class ProductService {
 
   getProductBySlug(slug: string): Observable<any> {
     return this.baseService.get(UrlConstant.PRODUCT + '/' + slug);
+  }
+
+  getRates(params): Observable<any> {
+    return this.baseService.get(UrlConstant.RATE_PRODUCT, params);
+  }
+
+  rate(body): Observable<any> {
+    return this.baseService.post(UrlConstant.RATE_PRODUCT, body);
   }
 }
