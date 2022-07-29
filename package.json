@@ -8,7 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "prod": "ng build --prod --base-href / --output-path /var/www/html --delete-output-path true"
+    "prod": "ng build --prod --base-href / --delete-output-path true"
   },
   "private": true,
   "dependencies": {
