@@ -1,8 +1,18 @@
-FROM node:12.18.1
-ENV NODE_ENV=production
-COPY ["package.json", "./"]
-RUN npm install -g @angular/cli
-RUN npm i
+FROM node:latest as build
+ARG APP_DIR=/home/workspace/bakery-client/
+ARG SRC_DIR=/dist/bakery-client
+
+WORKDIR ${APP_DIR}
+
+COPY ./ ${APP_DIR}
+
+# Install all the dependencies
+RUN npm install
 RUN npm run prod
-COPY . .
-EXPOSE 4200
+
+FROM nginx:latest
+# Copy the build output to replace the default nginx contents.
+COPY --from=build ${APP_DIR}${SRC_DIR} /usr/share/nginx/html
+
+# Expose port 80
+EXPOSE 80
