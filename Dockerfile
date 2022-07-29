@@ -6,6 +6,7 @@ WORKDIR ${APP_DIR}
 
 COPY ./ ${APP_DIR}
 
+RUN rm ${APP_DIR}node-modules
 RUN rm ${APP_DIR}package-lock.json
 
 # Install all the dependencies
