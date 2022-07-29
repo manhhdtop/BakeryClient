@@ -1,4 +1,4 @@
-FROM node:latest as build
+FROM node:16.15.1 as build
 ARG APP_DIR=/home/workspace/bakery-client/
 ARG SRC_DIR=/dist/bakery-client/
 
