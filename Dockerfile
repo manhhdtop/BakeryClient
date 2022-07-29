@@ -1,5 +1,6 @@
 FROM node
+COPY ["package.json", "package-lock.json*", "./"]
 RUN npm i
 RUN npm run prod
-COPY dist/bakery-client/ /home/workspace/bakery-client/
+COPY . .
 EXPOSE 4200
