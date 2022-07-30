@@ -20,7 +20,3 @@ COPY --from=build ${APP_DIR}${SRC_DIR} /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
-
-cd /var/lib/jenkins/workspace/bakery-client
-sudo docker build -t bakery-client .
-sudo docker run -d bakery-client
