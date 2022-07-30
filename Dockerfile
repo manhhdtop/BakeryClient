@@ -1,17 +1,16 @@
-FROM node:16.15.1 as build
+FROM node:16.16.0 as build
 ARG APP_DIR=/home/workspace/bakery-client/
-ARG SRC_DIR=/dist/bakery-client/
+ARG SRC_DIR=dist/bakery-client/
 
 WORKDIR ${APP_DIR}
 
-COPY ./ ${APP_DIR}
+RUN rm -rf node_modules
 
-RUN rm -rf ${APP_DIR}node-modules
-RUN rm -rf ${APP_DIR}package-lock.json
+COPY . ${APP_DIR}
 
-# Install all the dependencies
-RUN npm install
-RUN npm run prod
+RUN npm install npm@latest -g
+RUN npm link @angular/cli
+RUN ng build --configuration production --aot --base-href / --delete-output-path true
 
 FROM nginx:latest
 # Copy the build output to replace the default nginx contents.
