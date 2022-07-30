@@ -8,7 +8,7 @@ RUN rm -rf node_modules
 
 COPY . ${APP_DIR}
 
-RUN npm install npm@6.11.0 -g
+RUN npm install -g npm@6.11.0
 RUN npm install -g @angular/cli@latest
 RUN npm install
 RUN npm link @angular/cli
