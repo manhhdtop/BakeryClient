@@ -1,4 +1,4 @@
-FROM node:16.16.0 as build
+FROM node as build
 ARG APP_DIR=/home/workspace/bakery-client/
 ARG SRC_DIR=dist/bakery-client/
 
@@ -8,9 +8,11 @@ RUN rm -rf node_modules
 
 COPY . ${APP_DIR}
 
-RUN npm install npm@latest -g
+RUN npm install npm@6.11.0 -g
+RUN npm install -g @angular/cli@latest
+RUN npm install
 RUN npm link @angular/cli
-RUN ng build --configuration production --aot --base-href / --delete-output-path true
+RUN ng build --configuration production --aot --base-href /bakery-client --delete-output-path true
 
 FROM nginx:latest
 # Copy the build output to replace the default nginx contents.
@@ -18,3 +20,6 @@ COPY --from=build ${APP_DIR}${SRC_DIR} /usr/share/nginx/html
 
 # Expose port 80
 EXPOSE 80
+cd /var/lib/jenkins/workspace/bakery-client
+sudo docker build -t bakery-client .
+sudo docker run -d bakery-client
