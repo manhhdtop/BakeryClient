@@ -1,6 +1,6 @@
 {
   "api": {
-    "baseUrl": "http://140.238.197.160:8001"
+    "baseUrl": "http://140.238.197.160/bakery-api"
   },
   "size": [
     10,
